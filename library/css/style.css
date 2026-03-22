@@ -44,18 +44,9 @@ Author:
 
 Stylesheet: Typography
 
-Need to import a font or set of icons for your site? Drop them in
-here or just use this to establish your typographical grid. Or not.
-Do whatever you want to...GOSH!
-
-Helpful Articles:
-http://trentwalton.com/2012/06/19/fluid-type/
-http://ia.net/blog/responsive-typography-the-basics/
-http://alistapart.com/column/responsive-typography-is-a-physical-discipline
-
 ******************************************************************/
 /*********************
-FONT FACE (IN YOUR FACE)
+FONT FACE
 *********************/
 /*  To embed your own fonts, use this syntax
   and place your fonts inside the
@@ -252,6 +243,19 @@ probably best not to use it. I mean, were you going to anyway? */
     @include box-shadow($right-diffused);
 }
 */
+/*********************
+RESPONSIVE (min-width)
+Match `library/scss/breakpoints/*.scss` so new component partials can use
+nested @include instead of splitting rules across breakpoint files.
+
+Example:
+  .c-widget {
+    padding: 1rem;
+    @include mq-64 {
+      padding: 1.5rem;
+    }
+  }
+*********************/
 /******************************************************************
 Stylesheet: Tokens
 *********************/
@@ -2518,61 +2522,6 @@ article .hero--image img {
   font-style: italic;
 }
 
-.form__description {
-  margin-bottom: 2em;
-}
-
-.forms {
-  -webkit-columns: 2;
-  -moz-columns: 2;
-  columns: 2;
-  padding-top: 2em;
-}
-.forms__sidebar {
-  -webkit-columns: 1;
-  -moz-columns: 1;
-  columns: 1;
-}
-.forms__sidebar .form__link h4 {
-  font-size: 1.2em;
-}
-.forms .form__item {
-  display: block;
-  padding-bottom: 1.25em;
-}
-.forms .form__item .form__link {
-  text-decoration: underline;
-  display: block;
-  color: #606469;
-}
-.forms .form__item .form__link:hover {
-  color: #454f5d;
-}
-.forms .form__item .form__link:hover .h4, .forms .form__item .form__link:hover h4 {
-  border-bottom: 2px solid rgb(166.45, 176.5, 190.75);
-}
-.forms .form__item .form__link .h4, .forms .form__item .form__link h4 {
-  line-height: 1;
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  margin-left: 0.5em;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  display: inline-block;
-  border-bottom: 2px solid #bdc1c7;
-}
-.forms .form__item h2 {
-  margin-top: 1em;
-}
-.forms .form__item .form__description {
-  margin-left: 0.75em;
-  display: inline-block;
-  font-style: italic;
-}
-
-.entry-content .form__description {
-  margin-bottom: 1.25em;
-}
-
 .wpcf7-form .wpcf7-acceptance .wpcf7-list-item {
   margin: 0;
 }
@@ -3039,20 +2988,6 @@ FOOTER STYLES
   margin-top: 2em;
   margin-left: auto;
 }
-.footer__curve {
-  background-size: cover;
-  background-position: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-.footer__curve svg {
-  margin-top: -1em;
-}
 .footer-nav {
   opacity: 1;
   display: -webkit-box;
@@ -3082,10 +3017,6 @@ FOOTER STYLES
   color: rgb(85.35, 96.2, 111.3);
   font-size: 2.5em;
   line-height: 1;
-}
-
-.footer__curve-inner {
-  width: 0;
 }
 
 #inner-footer {
@@ -3505,76 +3436,13 @@ BAND / SECTION WRAPPER
   display: block;
 }
 
-/* Band with top/bottom waves — DOM order Wave / Section / Wave */
-.c-band__wrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  gap: 0;
-  overflow: visible;
-  width: 100vw;
-  margin-left: -webkit-calc(50% - 50vw);
-  margin-left: calc(50% - 50vw);
-  margin-right: -webkit-calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-/* Keep section flush to waves (front end can get block/global margin; override so waves stay attached) */
-.c-band__wrap > .c-band {
-  margin: 0 !important;
-  margin-block: 0 !important;
-}
-
-/* When waves are on, ignore stored background height — background stretches with content */
-.c-band__wrap .c-band__bg-media {
-  height: 100%;
-  top: 0;
-  -webkit-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-}
-
-/* When "Background color contains content" is on (color bg, no waves), background stretches with content */
+/* When "Background color contains content" is on, background stretches with content */
 .c-band--bg-contains .c-band__bg-media {
   height: 100%;
   top: 0;
   -webkit-transform: translate(-50%, 0);
   -ms-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
-}
-
-.c-band__wrap > .c-waveband__wave {
-  display: block;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  margin: 0;
-  width: 100vw;
-  height: -webkit-calc(var(--wave-h) + 2px);
-  height: calc(var(--wave-h) + 2px);
-  background-color: var(--waveband-bg, var(--c-surface-muted));
-  pointer-events: none;
-  -webkit-mask: url("../images/curve.svg") no-repeat center/100% 100%;
-  mask: url("../images/curve.svg") no-repeat center/100% 100%;
-}
-
-.c-band__wrap > .c-waveband__wave--top {
-  -webkit-transform: scaleX(-1);
-  -ms-transform: scaleX(-1);
-  transform: scaleX(-1);
-  -webkit-mask-position: center bottom;
-  mask-position: center bottom;
-}
-
-.c-band__wrap > .c-waveband__wave--bottom {
-  -webkit-transform: scale(-1, -1);
-  -ms-transform: scale(-1, -1);
-  transform: scale(-1, -1);
-  -webkit-mask-position: center top;
-  mask-position: center top;
 }
 
 /* Padding modifiers */
@@ -3618,7 +3486,6 @@ BAND / SECTION WRAPPER
 
 /************************************************
 Content Section block
-- Optional top/bottom curves (color bg only); optional “background contains content”
 - Optional background: image (with overlay choice) or solid color
 - Min height + any inner content via InnerBlocks
 ************************************************/
@@ -3769,73 +3636,12 @@ Content Section block
   margin-block-end: 0;
 }
 
-/* Content Section with waves — DOM order Wave / Section / Wave (same as Band) */
-.c-content-section__wrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  gap: 0;
-  overflow: visible;
-  width: 100vw;
-  margin-left: -webkit-calc(50% - 50vw);
-  margin-left: calc(50% - 50vw);
-  margin-right: -webkit-calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-.c-content-section__wrap > .c-content-section {
-  margin: 0 !important;
-  margin-block: 0 !important;
-}
-
-.c-content-section__wrap .c-content-section__bg-media {
-  height: 100%;
-  top: 0;
-  -webkit-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-}
-
 .c-content-section--bg-contains .c-content-section__bg-media {
   height: 100%;
   top: 0;
   -webkit-transform: translate(-50%, 0);
   -ms-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
-}
-
-.c-content-section__wrap > .c-waveband__wave {
-  display: block;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-  margin: 0;
-  width: 100vw;
-  height: -webkit-calc(var(--wave-h) + 2px);
-  height: calc(var(--wave-h) + 2px);
-  background-color: var(--waveband-bg, var(--c-surface-muted));
-  pointer-events: none;
-  -webkit-mask: url("../images/curve.svg") no-repeat center/100% 100%;
-  mask: url("../images/curve.svg") no-repeat center/100% 100%;
-}
-
-.c-content-section__wrap > .c-waveband__wave--top {
-  -webkit-transform: none;
-  -ms-transform: none;
-  transform: none;
-  -webkit-mask-position: center bottom;
-  mask-position: center bottom;
-}
-
-.c-content-section__wrap > .c-waveband__wave--bottom {
-  -webkit-transform: scale(-1, -1);
-  -ms-transform: scale(-1, -1);
-  transform: scale(-1, -1);
-  -webkit-mask-position: center top;
-  mask-position: center top;
 }
 
 .c-image-grid--two,
@@ -3864,16 +3670,12 @@ Content Section block
   margin-bottom: 0.75em;
 }
 
-:root {
-  --wave-h: 130px;
-  --bg-max-h: 300px;
-  --content-top: 140px; /* how far down content sits from top wave */
-  --hang: 120px; /* how far content hangs past bottom wave */
-}
-
 .c-waveband {
   position: relative;
   overflow: visible;
+  --bg-max-h: 300px;
+  --content-top: 1.5em;
+  --hang: 1.5em;
 }
 
 /* When colored background is on, break out to full viewport width so background and waves span edge-to-edge */
@@ -3916,7 +3718,6 @@ Content Section block
   /* Put content on top of the backdrop */
   margin-top: var(--content-top);
   padding-inline: 1.5rem;
-  /* Make it “break out” past the bottom wave */
   margin-bottom: var(--hang);
 }
 
@@ -4141,44 +3942,6 @@ Content Section block
   line-height: 1.6em;
   text-transform: normal;
   color: #606469;
-}
-
-/* With colored background: slideshow overlaps the bottom wave (same idea as gallery hang) */
-.c-waveband--has-slideshow .c-content-group__slideshow--overlap-wave {
-  margin-bottom: -webkit-calc(-1 * var(--hang, 120px));
-  margin-bottom: calc(-1 * var(--hang, 120px));
-  z-index: 2;
-  position: relative;
-}
-
-/* Full-bleed waves inside the bg layer — use block background so waves match user-selected color */
-.c-waveband__bg .c-waveband__wave {
-  position: absolute;
-  left: 50%;
-  width: 100vw;
-  height: -webkit-calc(var(--wave-h) + 2px);
-  height: calc(var(--wave-h) + 2px); /* overscan prevents seams */
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-  background-color: var(--waveband-bg, var(--c-surface-muted));
-  pointer-events: none;
-  -webkit-mask: url("../images/curve.svg") no-repeat center/100% 100%;
-  mask: url("../images/curve.svg") no-repeat center/100% 100%;
-}
-
-.c-waveband__bg .c-waveband__wave--top {
-  top: 0;
-  -webkit-transform: translateX(-50%) translateY(-100%);
-  -ms-transform: translateX(-50%) translateY(-100%);
-  transform: translateX(-50%) translateY(-100%);
-}
-
-.c-waveband__bg .c-waveband__wave--bottom {
-  bottom: 0;
-  -webkit-transform: translateX(-50%) translateY(100%) scaleY(-1) scaleX(-1);
-  -ms-transform: translateX(-50%) translateY(100%) scaleY(-1) scaleX(-1);
-  transform: translateX(-50%) translateY(100%) scaleY(-1) scaleX(-1);
 }
 
 /* =========================================================
@@ -5171,10 +4934,6 @@ Content Section block
   z-index: 0;
   height: min(var(--posts-bg-max-h));
   max-height: var(--posts-bg-max-h);
-  /* Page background color used for the masked waves */
-  --posts-bg: var(--c-page-bg, #F9FBF3);
-  /* Height of your curve.svg (match what you used before) */
-  --wave-h: 120px;
 }
 
 .c-posts__bgImage {
@@ -5186,7 +4945,7 @@ Content Section block
 }
 
 /* =========================
-Overlays (between image and waves)
+Overlays (decorative gradients on bg image)
 ========================= */
 /* SVG overlays */
 .c-posts__overlaySvg {
@@ -5222,44 +4981,6 @@ Overlays (between image and waves)
   -webkit-transform: translateY(0) scale(1);
   -ms-transform: translateY(0) scale(1);
   transform: translateY(0) scale(1);
-}
-
-/* Waves above overlays */
-.c-posts__wave {
-  z-index: 2;
-}
-
-/* =========================
-Waves (your exact approach, scoped)
-========================= */
-.c-posts__bg .c-posts__wave {
-  position: absolute;
-  left: 50%;
-  width: 100vw;
-  height: -webkit-calc(var(--wave-h) + 2px);
-  height: calc(var(--wave-h) + 2px); /* overscan prevents seams */
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-  background: var(--posts-bg);
-  pointer-events: none;
-  z-index: 2;
-  -webkit-mask: url("../images/curve.svg") no-repeat center/100% 100%;
-  mask: url("../images/curve.svg") no-repeat center/100% 100%;
-}
-
-.c-posts__bg .c-posts__wave--top {
-  top: 120px;
-  -webkit-transform: translateX(-50%) translateY(-100%) scale(-1, -1);
-  -ms-transform: translateX(-50%) translateY(-100%) scale(-1, -1);
-  transform: translateX(-50%) translateY(-100%) scale(-1, -1);
-}
-
-.c-posts__bg .c-posts__wave--bottom {
-  bottom: 120px;
-  -webkit-transform: translateX(-50%) translateY(100%) scale(1, 1);
-  -ms-transform: translateX(-50%) translateY(100%) scale(1, 1);
-  transform: translateX(-50%) translateY(100%) scale(1, 1);
 }
 
 /* =========================
@@ -6201,26 +5922,6 @@ POSTS & CONTENT STYLES
   padding-left: 7%;
   padding-right: 5%;
 }
-.hero__wave--initiative {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 100vw;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-  height: 120px;
-  z-index: 2;
-  pointer-events: none;
-  line-height: 0;
-}
-.hero__wave-svg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 .hero__content--text {
   z-index: 2;
 }
@@ -6233,7 +5934,7 @@ POSTS & CONTENT STYLES
   -ms-flex-direction: column;
   flex-direction: column;
   min-height: 70vh;
-  margin-bottom: -120px;
+  margin-bottom: 0;
 }
 .hero__container--medium .hero__container--inner {
   display: -webkit-box;
@@ -6244,11 +5945,11 @@ POSTS & CONTENT STYLES
   -ms-flex-direction: column;
   flex-direction: column;
   min-height: 65vh;
-  margin-bottom: -120px;
+  margin-bottom: 0;
 }
 .hero__container--small .hero__container--inner {
   min-height: 35vh;
-  margin-bottom: -60px;
+  margin-bottom: 0;
 }
 .hero__container--small .hero__content--bg {
   min-height: 255px;
@@ -6370,9 +6071,6 @@ POSTS & CONTENT STYLES
   color: #151a20;
   text-shadow: none;
 }
-.hero .hero__wave-svg .hero__wave-fill {
-  fill: var(--body-bg, rgb(244.52, 245.88, 247.24));
-}
 .hero__lower-content {
   position: relative;
   z-index: 2;
@@ -6407,11 +6105,6 @@ POSTS & CONTENT STYLES
 .hero__featured-post {
   position: absolute;
   display: none;
-}
-
-/* Hero wave fill: match body background (selector targets hero__container since partial has no .hero wrapper) */
-.hero__container .hero__wave-svg .hero__wave-fill {
-  fill: var(--body-bg, #F9FBF3);
 }
 
 /* Initiative hero: ensure background image displays when no .hero wrapper (partial outputs container only) */
@@ -6455,24 +6148,6 @@ POSTS & CONTENT STYLES
   background-position: center;
   background-repeat: no-repeat;
 }
-.hero__container--single .hero__wave--single {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 140px;
-  pointer-events: none;
-  z-index: 2;
-}
-.hero__container--single .hero__wave-svg--single {
-  display: block;
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
-}
-.hero__container--single .hero__wave-fill--single {
-  fill: var(--body-bg, #F9FBF3);
-}
 .hero__container--single .hero__content--single {
   position: relative;
   z-index: 1;
@@ -6487,7 +6162,7 @@ POSTS & CONTENT STYLES
   max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 0 170px;
+  padding: 0 0 2em;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
@@ -6648,179 +6323,6 @@ POSTS & CONTENT STYLES
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.testimonials {
-  margin-bottom: 2em;
-}
-.testimonials__background--white {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(245, 246, 247, 0.8)), to(rgba(245, 246, 247, 0.5))), url("../images/pattern_circle.png") repeat left top;
-  background: -webkit-linear-gradient(rgba(245, 246, 247, 0.8), rgba(245, 246, 247, 0.5)), url("../images/pattern_circle.png") repeat left top;
-  background: linear-gradient(rgba(245, 246, 247, 0.8), rgba(245, 246, 247, 0.5)), url("../images/pattern_circle.png") repeat left top;
-}
-.testimonials__background--white .attribution {
-  background: -webkit-linear-gradient(45deg, rgb(124, 136.4, 153.4), rgb(85.35, 96.2, 111.3));
-  background: linear-gradient(45deg, rgb(124, 136.4, 153.4), rgb(85.35, 96.2, 111.3));
-  color: rgb(244.52, 245.88, 247.24);
-}
-.testimonials__background--gold {
-  background: url("../images/pattern_circle.png") repeat left top, -webkit-gradient(linear, left top, left bottom, from(rgb(166.45, 176.5, 190.75)), to(rgb(124, 136.4, 153.4)));
-  background: url("../images/pattern_circle.png") repeat left top, -webkit-linear-gradient(rgb(166.45, 176.5, 190.75), rgb(124, 136.4, 153.4));
-  background: url("../images/pattern_circle.png") repeat left top, linear-gradient(rgb(166.45, 176.5, 190.75), rgb(124, 136.4, 153.4));
-  border-top: 2px solid rgb(85.35, 96.2, 111.3);
-  border-bottom: 2px solid #454f5d;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-shadow: inset 0 8px 10px -10px rgba(21, 26, 32, 0.7);
-  box-shadow: inset 0 8px 10px -10px rgba(21, 26, 32, 0.7);
-}
-.testimonials__background--gold .attribution {
-  background: -webkit-linear-gradient(45deg, #a0a7af, #606469);
-  background: linear-gradient(45deg, #a0a7af, #606469);
-  color: #e2e5e7;
-}
-.testimonials__background--gold h3, .testimonials__background--gold h4 {
-  color: #606469;
-}
-.testimonials__background--gold::before {
-  content: "What our clients say";
-  background-color: rgb(244.52, 245.88, 247.24);
-  --body-bg: rgb(244.52, 245.88, 247.24);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 2em;
-  line-height: 1;
-  border-radius: 0 0 20px 20px;
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -5px;
-  padding: 0 1em 0.5em 1em;
-  -webkit-box-shadow: 0px 3px 0px rgb(85.35, 96.2, 111.3), 0 8px 10px -10px rgba(21, 26, 32, 0.7);
-  box-shadow: 0px 3px 0px rgb(85.35, 96.2, 111.3), 0 8px 10px -10px rgba(21, 26, 32, 0.7);
-}
-.testimonials__content {
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding-bottom: 2em;
-}
-.testimonials__content .testimonial {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
-}
-.testimonials__content .testimonial .quote-mark {
-  display: none;
-}
-.testimonials__content .testimonial h3 {
-  text-align: center;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.5em;
-}
-.testimonials__content .testimonial .attribution {
-  display: inline-block;
-  border-radius: 20px;
-  padding: 4px 16px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-weight: 700;
-  font-size: 1.1em;
-  margin: auto;
-  margin-bottom: 2em;
-}
-.testimonials__content > div:nth-last-of-type(2), .testimonials__content > div:nth-last-of-type(2) ~ div, .testimonials__content > div:nth-last-of-type(3), .testimonials__content > div:nth-last-of-type(3) ~ div {
-  width: 90%;
-  background-color: #fff;
-  border-radius: 1em;
-  padding: 0;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  border: 1px solid rgb(85.35, 96.2, 111.3);
-  margin-top: 2em;
-}
-.testimonials__content > div:nth-last-of-type(2) .quote-mark, .testimonials__content > div:nth-last-of-type(2) ~ div .quote-mark, .testimonials__content > div:nth-last-of-type(3) .quote-mark, .testimonials__content > div:nth-last-of-type(3) ~ div .quote-mark {
-  display: inline;
-  width: 25px;
-  position: absolute;
-  margin-top: 1.5em;
-  margin-left: 1.5em;
-}
-.testimonials__content > div:nth-last-of-type(2) h3, .testimonials__content > div:nth-last-of-type(2) ~ div h3, .testimonials__content > div:nth-last-of-type(3) h3, .testimonials__content > div:nth-last-of-type(3) ~ div h3 {
-  font-size: 1.1em;
-  margin: 0;
-  padding: 1.5em;
-  padding-left: 3.5em;
-  text-align: left;
-}
-.testimonials__content > div:nth-last-of-type(2) h3::before, .testimonials__content > div:nth-last-of-type(2) ~ div h3::before, .testimonials__content > div:nth-last-of-type(3) h3::before, .testimonials__content > div:nth-last-of-type(3) ~ div h3::before {
-  display: none;
-}
-.testimonials__content > div:nth-last-of-type(2) h3 p, .testimonials__content > div:nth-last-of-type(2) ~ div h3 p, .testimonials__content > div:nth-last-of-type(3) h3 p, .testimonials__content > div:nth-last-of-type(3) ~ div h3 p {
-  padding: 0;
-  margin: 0;
-}
-.testimonials__content > div:nth-last-of-type(2) .attribution, .testimonials__content > div:nth-last-of-type(2) ~ div .attribution, .testimonials__content > div:nth-last-of-type(3) .attribution, .testimonials__content > div:nth-last-of-type(3) ~ div .attribution {
-  padding: 1em 1.5em;
-  border-radius: 0 0 0.75em 0.75em;
-  font-weight: 700;
-  font-size: 1em;
-  margin: 0;
-}
-.testimonials__sidebar {
-  border-top: 2px solid rgb(85.35, 96.2, 111.3);
-  padding-top: 2em;
-}
-.testimonials__sidebar li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.testimonials__sidebar li .quote-mark {
-  display: none;
-}
-.testimonials__sidebar li h3 {
-  margin-top: 0;
-  font-size: 1.2em;
-  line-height: 1.2;
-}
-.testimonials__sidebar li h3 p {
-  margin-top: 0;
-}
-.testimonials__sidebar li .attribution {
-  background: -webkit-linear-gradient(45deg, #a0a7af, #606469);
-  background: linear-gradient(45deg, #a0a7af, #606469);
-  color: #e2e5e7;
-  display: inline-block;
-  border-radius: 20px;
-  padding: 4px 16px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-weight: 700;
-  font-size: 1em;
-  margin: auto;
-  margin-bottom: 2em;
-}
-
 /* People List block – Person bio layout */
 .c-peopleList {
   margin: 2em 0;
@@ -6876,20 +6378,6 @@ POSTS & CONTENT STYLES
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
-}
-
-.c-personCard__wave {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  pointer-events: none;
-}
-.c-personCard__wave img {
-  display: block;
-  width: 120%;
-  max-width: none;
-  margin-left: -10%;
 }
 
 .c-personCard__social {
@@ -7104,21 +6592,6 @@ POSTS & CONTENT STYLES
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
-}
-
-.c-peopleCard__wave {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -10%;
-  pointer-events: none;
-  color: #e2e5e7;
-}
-.c-peopleCard__wave svg {
-  display: block;
-  width: 120%;
-  max-width: none;
-  margin-left: -10%;
 }
 
 .c-peopleCard__social {
@@ -7737,7 +7210,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 }
 
 /**
- * Single post hero: visual styles live in _base.scss (title size, chips, content padding, wave).
+ * Single post hero: visual styles live in _base.scss (title size, chips, content padding).
  * This file only adds: header transparent over hero, and related-posts section styles.
  */
 /* Header when single hero is shown (transparent, no shadow, light nav) */
@@ -8384,42 +7857,6 @@ IMPORTING PARTIALS
   /*********************
   HERO STYLES
   *********************/
-  @-webkit-keyframes curveIn {
-    to {
-      opacity: 1;
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-    }
-  }
-  @keyframes curveIn {
-    to {
-      opacity: 1;
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-    }
-  }
-  .hero__title--landing {
-    opacity: 0;
-    -webkit-transform: translateY(20px);
-    -ms-transform: translateY(20px);
-    transform: translateY(20px);
-    -webkit-animation: curveIn 1200ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation: curveIn 1200ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    -webkit-animation-delay: 240ms;
-    animation-delay: 240ms;
-  }
-}
-@media only screen and (min-width: 64em) and (prefers-reduced-motion: reduce) {
-  .hero__title--landing {
-    opacity: 1 !important;
-    -webkit-transform: none !important;
-    -ms-transform: none !important;
-    transform: none !important;
-    -webkit-animation: none !important;
-    animation: none !important;
-  }
-}
-@media only screen and (min-width: 64em) {
   .hero__content--text {
     z-index: 2;
   }
@@ -8470,9 +7907,6 @@ IMPORTING PARTIALS
     max-width: 1920px;
     margin: auto;
     position: relative;
-    margin-bottom: -120px;
-  }
-  .hero__container--landing-internal .hero__container--inner {
     margin-bottom: 0;
   }
   .hero__container p {
@@ -8529,8 +7963,6 @@ IMPORTING PARTIALS
   .hero__title--small {
     font-size: 6.5em;
   }
-}
-@media only screen and (min-width: 64em) {
   /***************
   CONTENT BLOCKS
   *****************/
@@ -8913,6 +8345,25 @@ IMPORTING PARTIALS
     padding-right: 0;
   }
 }
+/*********************
+COMPONENT PARTIALS (new work — local @media or mq-* mixins)
+Loaded after legacy breakpoints; `_client.scss` still wins last.
+*********************/
+/******************************************************************
+Component-layer styles (colocated rules + responsive tweaks)
+
+Put **new** UI blocks here as `_your-component.scss`, then add:
+
+  @use "your-component" as *;
+
+below. Use `@use "../globals" as *;` at the top of each partial for
+tokens, variables, and mixins (including `mq-48` … `mq-1440` in
+`partials/_mixins.scss`).
+
+This file loads **after** legacy `breakpoints/*.scss` so migrated
+selectors can override until you delete the old rules.
+
+******************************************************************/
 /*********************
 PER-CLIENT OVERRIDES (after all theme breakpoints)
 *********************/
