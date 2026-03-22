@@ -1,0 +1,256 @@
+{
+    "key": "group_client_post_settings",
+    "title": "Post Settings",
+    "fields": [
+        {
+            "key": "field_client_ps_tab_posts",
+            "label": "Blog Posts",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 1
+        },
+        {
+            "key": "field_client_ps_heading_post",
+            "label": "Related section heading",
+            "name": "related_posts_heading_post",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Heading above the related posts section on single blog posts. Default: Related Posts",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Related Posts",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_client_ps_bg_post",
+            "label": "Related section background image",
+            "name": "background_image_post",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Background for the Related Posts section on single blog posts. Leave empty for the default solid color and gradient.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_client_ps_blog_index_sidebar",
+            "label": "Show sidebar on blog index",
+            "name": "blog_index_show_sidebar",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "When enabled, the stories grid shares the row with the primary widget sidebar (one fewer column of cards).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Show",
+            "ui_off_text": "Hide",
+            "ui": 1
+        },
+        {
+            "key": "field_client_ps_blog_index_sidebar_position",
+            "label": "Blog index sidebar position",
+            "name": "blog_index_sidebar_position",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Whether the sidebar column appears to the left or right of the stories content.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_client_ps_blog_index_sidebar",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "right": "Right",
+                "left": "Left"
+            },
+            "default_value": "right",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_client_ps_tab_events",
+            "label": "Events",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_client_ps_heading_events",
+            "label": "Related section heading",
+            "name": "related_posts_heading_tribe_events",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Heading above the related section on single events. Default: Related Events",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Related Events",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_client_ps_bg_events",
+            "label": "Related section background image",
+            "name": "background_image_tribe_events",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Background for the Related section on single events. Leave empty for the default solid color and gradient.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_client_ps_no_events_message",
+            "label": "No upcoming events message",
+            "name": "no_upcoming_events_message",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Shown in place of the events grid when there are no upcoming events.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "There are currently no upcoming events. Please check back soon.",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_client_ps_events_require_external_url",
+            "label": "Require external event URL",
+            "name": "events_require_external_url",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "When enabled, events should have a custom external URL set before publishing.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Events must have a custom external URL",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Required",
+            "ui_off_text": "Optional",
+            "allow_in_bindings": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "post-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Blog and events settings (related section, blog index sidebar, events messages). Sub-page of Site Settings.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1774000000
+}

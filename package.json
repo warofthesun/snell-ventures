@@ -1,0 +1,32 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "WordPress starter theme (customize per project)",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "gulp": "^5.0.1",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^6.0.0",
+    "lodash": ">=4.17.5",
+    "sass": "^1.69.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp sass",
+    "build:production": "gulp build:production",
+    "watch": "gulp watch",
+    "postinstall": "node scripts/patch-http-proxy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warofthesun/snell.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/warofthesun/snell/issues"
+  },
+  "homepage": "https://github.com/warofthesun/snell#readme"
+}

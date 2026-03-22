@@ -1,0 +1,23 @@
+{
+  "name": "client/content-cards",
+  "title": "Multi-card repeater",
+  "description": "Informational cards with title and brief body copy",
+  "style": ["file:../library/css/style.css"],
+  "category": "theme-blocks",
+  "icon": "admin-comments",
+  "keywords": ["card", "text", "steps"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "card_repeater.php"
+  },
+  "supports": {
+    "jsx": true,
+    "anchor": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {"inserter_preview": true}
+    }
+  } 
+}

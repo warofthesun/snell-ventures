@@ -1,0 +1,24 @@
+@use "../globals" as *;
+
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Gradient Styles
+
+*********************/
+
+// BEM: block .c-gradient, modifier --dark-primary, elements __stop-1, __stop-2 (for SVG <stop> elements)
+.c-gradient {
+  &--dark-primary {
+    .c-gradient__stop-1 {
+      stop-color: $primary-700;
+    }
+
+    .c-gradient__stop-2 {
+      stop-color: $primary-500;
+    }
+  }
+}
+
+

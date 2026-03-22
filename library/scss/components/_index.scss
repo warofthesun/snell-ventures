@@ -1,0 +1,17 @@
+/******************************************************************
+Component-layer styles (colocated rules + responsive tweaks)
+
+Put **new** UI blocks here as `_your-component.scss`, then add:
+
+  @use "your-component" as *;
+
+below. Use `@use "../globals" as *;` at the top of each partial for
+tokens, variables, and mixins (including `mq-48` … `mq-1440` in
+`partials/_mixins.scss`).
+
+This file loads **after** legacy `breakpoints/*.scss` so migrated
+selectors can override until you delete the old rules.
+
+******************************************************************/
+
+// @use "example" as *;

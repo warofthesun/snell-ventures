@@ -1,0 +1,30 @@
+/******************************************************************
+Client / project skin (imported last in style.scss)
+
+Keep the starter neutral; add per-site overrides here so diffs stay
+obvious. Safe patterns:
+
+- Re-assign existing variables only inside rules (use CSS custom props
+  in :root here if you prefer not to touch _variables.scss)
+- Add layout or component tweaks scoped under a body class
+
+This file is intentionally minimal.
+
+******************************************************************/
+
+@use "../globals" as *;
+
+/* Text fallback when no ACF logo (see header.php) */
+#logo .header-logo__text {
+	font-family: $header-font;
+	font-size: 1.125rem;
+	font-weight: 600;
+	line-height: 1.2;
+	color: inherit;
+}
+
+// Example (uncomment and adjust for a new build):
+// :root {
+//   --c-surface-muted: #your-surface;
+//   --c-text-muted: #your-muted-text;
+// }

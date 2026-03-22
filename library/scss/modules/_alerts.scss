@@ -1,0 +1,48 @@
+@use "../globals" as *;
+@use "sass:color";
+
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Alert Styles
+
+If you want to use these alerts in your design, you can. If not,
+you can just remove this stylesheet.
+
+******************************************************************/
+
+
+
+// Alerts: BEM block .alert with modifiers --help, --info, --error, --success
+%alert {
+  margin: 10px;
+  padding: 5px 18px;
+  border: 1px solid;
+}
+
+.alert {
+  &--help {
+    @extend %alert;
+    border-color: color.adjust($alert-yellow, $lightness: -5%);
+    background: $alert-yellow;
+  }
+
+  &--info {
+    @extend %alert;
+    border-color: color.adjust($alert-blue, $lightness: -5%);
+    background: $alert-blue;
+  }
+
+  &--error {
+    @extend %alert;
+    border-color: color.adjust($alert-red, $lightness: -5%);
+    background: $alert-red;
+  }
+
+  &--success {
+    @extend %alert;
+    border-color: color.adjust($alert-green, $lightness: -5%);
+    background: $alert-green;
+  }
+}

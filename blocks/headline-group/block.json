@@ -1,0 +1,26 @@
+{
+    "name": "client/headline-group",
+    "title": "Headline group",
+    "description": "Headline, body copy, and 1 to 2 CTA buttons",
+    "style": [ "file:../library/css/style.css" ],
+    "category": "theme-blocks",
+    "icon": "screenoptions",
+    "keywords": ["headline", "content", "buttons"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "headline_group.php"
+    },
+    "supports": {
+        "jsx": true,
+        "anchor": true
+    },
+    "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {
+        "is_preview": true
+      }
+    }
+  }
+}
+

@@ -1,0 +1,775 @@
+@use "../globals" as *;
+@use "../partials/tokens" as *;
+
+@media only screen and (min-width: 64em) {
+  /*********************
+  GENERAL STYLES
+  *********************/
+
+
+  body {}
+
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+
+  .wrap {
+  	width: 96%;
+  }
+
+  /* Move to 3-up for 3 cards and for "many" (5+) */
+  .c-cardrepeater--count-3 .c-cardrepeater__grid,
+  .c-cardrepeater--count-many .c-cardrepeater__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* 4 cards can still be 2-up here (keeps cards comfortable),
+     the full 4-up happens at 75em. */
+  .c-cardrepeater--count-4 .c-cardrepeater__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .c-posts__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .c-posts__grid--count-1 {
+    grid-template-columns: minmax(0, 400px);
+    justify-content: center;
+  }
+
+  .c-posts__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 400px));
+    justify-content: center;
+  }
+
+  .c-card-block__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .c-card-block__grid--count-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .c-card-block__grid--count-3 .c-card-block__card:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 544px;
+  }
+
+  .c-card-block__grid--count-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .c-card-block__grid--count-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .c-card-block__grid--count-5 .c-card-block__card:nth-child(5) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 544px;
+  }
+
+  .c-posts__blob {
+    width: 1200px;
+    height: 520px;
+  }
+
+  .c-posts__blob--deep {
+    left: 18%;
+    width: 900px;
+    height: 420px;
+  }
+
+  /*********************
+  HEADER STYLES
+  *********************/
+
+  .header {}
+
+  	#logo {}
+
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+
+
+  #mobile-nav {
+  	display: none;
+  }
+
+  .nav {
+  	flex-direction: row;
+  	height: auto;
+  	opacity: 1;
+  	display: flex;
+  	flex-wrap: wrap;
+  	border: 0;
+
+  	ul {
+  		background: $secondary-50_95;
+  		margin-top: 0;
+  	}
+
+  	li {
+  		border-bottom: 0;
+
+  		&:first-child {}
+  		&:last-child {
+			
+		}
+
+  		/*
+  		plan your menus and drop-downs wisely.
+  		*/
+  		ul.sub-menu,
+  		ul.children {
+  			margin-top: 0;
+  			border: 0px solid #ccc;
+  			border-top: 0;
+  			position: absolute;
+  			visibility: hidden;
+  			z-index: 8999;
+			border-radius: $radius-sm;
+
+  			li {
+  				a {
+  					padding-left: 10px;
+  					border-right: 0;
+  					display: block;
+  					width: 180px;
+  					border-bottom: 1px solid #ccc;
+
+  					&:hover,
+  					&:focus {}
+
+  					&:link {}
+  				}
+
+  				&:first-child {}
+
+  				&:last-child {
+  					a {
+  						border-bottom: 0;
+						border-radius: 0 0 $radius-sm $radius-sm;
+  					}
+  				}
+
+  				/*
+  				if you need to go deeper, go nuts
+  				just remember deeper menus suck
+  				for usability. k, bai.
+  				*/
+  				ul {
+  					top: 0;
+  					left: 100%;
+  				}
+  			}
+
+  			/* highlight sub-menu current page */
+  			li.current-menu-item,
+  			li.current_page_item,
+  			li.current_page_ancestor {
+  				a {}
+  			}
+  		}
+
+  		/* showing sub-menus */
+  		&:hover > ul {
+  			top: auto;
+  			visibility: visible;
+  		}
+  	}
+
+  	/* highlight current page */
+  	li.current-menu-item,
+  	li.current_page_item,
+  	li.current_page_ancestor {
+  		a {}
+  	}
+  }
+
+  .header-nav {
+  	width: 100%;
+  	display: flex;
+  	justify-content: flex-start;
+  	flex-direction: row;
+
+  	a {
+  		text-align: left;
+  		margin-left: 1em;
+  	}
+  }
+
+  .header-nav__wrapper {
+  	flex-direction: row;
+  	width: auto;
+  }
+
+  #inner-header {
+  	width: 100%;
+  	max-width: 1440px;
+  	margin-left: auto;
+  	margin-right: auto;
+  	display: grid;
+  	grid-template-columns: 1fr auto 1fr;
+  	align-items: center;
+  	gap: 1em;
+  }
+
+  .header-logo {
+  	order: unset;
+  	justify-self: start;
+  }
+
+  .header-nav {
+  	order: unset;
+  	flex-basis: auto;
+  	width: auto;
+  	justify-self: center;
+  }
+
+  #mobile-nav {
+  	order: unset;
+  }
+
+  .header-widget-area {
+  	order: unset;
+  	justify-self: end;
+	margin: 0;
+
+	.widget {
+		margin: 0;
+
+		input[type=search] {
+			margin-bottom: 0;
+			@include border-radius-sm;
+			border: 0px;
+			box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.1);
+		}
+	}
+  }
+
+  	/* .menu is clearfixed inside mixins.scss */
+  	.menu {
+  		ul {
+  			li {
+  				text-align: left;
+
+  				a {
+					&:hover, &:focus {
+						@include color_text__nav-item_hover;
+					}
+		
+					&:active {
+						@include color_text__nav-item_pressed;
+					}
+  				}
+
+  				&:first-child {}
+  				&:last-child {}
+
+  				/*
+  				plan your menus and drop-downs wisely.
+  				*/
+  				ul.sub-menu,
+  				ul.children {
+					margin-top: 0;
+					border: 1px solid #ccc;
+					border-top: 0;
+					position: absolute;
+					visibility: hidden;
+					z-index: 8999;
+	  
+					li {
+	  
+						a {
+							padding-left: 10px;
+							border-right: 0;
+							display: block;
+							width: 180px;
+							border-bottom: 1px solid #ccc;
+	  
+							&:hover,
+							&:focus {}
+	  
+							&:link {}
+						}
+	  
+						&:first-child {}
+	  
+						&:last-child {
+	  
+							a {
+								border-bottom: 0;
+							}
+						}
+	  
+						/*
+						if you need to go deeper, go nuts
+						just remember deeper menus suck
+						for usability. k, bai.
+						*/
+						ul {
+							top:0;
+							left:100%;
+						}
+					}
+	  
+					/* highlight sub-menu current page */
+					li.current-menu-item,
+					li.current_page_item,
+					li.current_page_ancestor {
+						a {}
+					}
+				}
+	  
+				/* showing sub-menus */
+				&:hover > ul {
+					top: auto;
+					visibility:visible;
+				}
+  			} /* end .menu ul li */
+
+  			/* highlight current page */
+  			li.current-menu-item,
+  			li.current_page_item,
+  			li.current_page_ancestor {
+  				a {}
+  			}  /* end current highlighters */
+  		} /* end .menu ul */
+  	} /* end .menu */
+
+  /*********************
+  HERO STYLES
+  *********************/
+
+  .hero {
+
+	&__content--text {
+		z-index: 2;
+	}
+
+  	&__container {
+		position: relative;
+		top: -76px;
+
+  		h1 {
+  			position: relative;
+			z-index: 2;
+  		}
+
+  		&--landing {
+  			// Match initiative / medium / small hero headline scale; rem avoids parent font-size shrinking em
+  			h1.hero__title--landing {
+  			font-size: 4.5rem;
+  			margin-top: 0;
+  			margin-bottom: 0;
+
+  			span {
+  				display: block;
+  				color: $primary-50;
+  				font-family: $header-font;
+  				text-transform: uppercase;
+  				font-size: 0.4em;
+  				line-height: 1.1;
+  			}
+  			}
+
+  			h3 {
+  				margin-top: 0;
+  				ul {
+  				font-family: $header-font;
+  				margin:0;
+
+  				li {
+  					display: inline-block;
+  					color: $secondary-500;
+  					font-weight: 800;
+
+  					&:nth-child(1), &:nth-child(2) {
+  						&:after {
+  							content: " • ";
+  							color: $primary-200;
+  						}
+  					}
+  				}
+  				}
+  			}
+
+  			p {
+  				font-size: 1.3em;
+  			}
+
+			.hero__content {
+				height: 90vh;
+			}
+
+  		}
+
+  		&--inner {
+  			max-width: 1920px;
+  			margin: auto;
+			position: relative;
+			margin-bottom: 0;
+  		}
+
+  		p {
+  			color: $primary-10;
+  		}
+  	}
+
+  	&__content {
+
+  			&--image {
+  				background-size: cover;
+  				background-position: center;
+  				padding: 0;
+  			}
+
+  			&--text {
+  				position: absolute;
+  				display: flex;
+  				flex-direction: column;
+  				justify-content: center;
+  				padding-left: 7%;
+  				padding-right: 5%;
+  			}
+
+			&--small {
+				justify-content: end;
+				margin-bottom: 3vh;
+				min-height: 255px;
+			}
+  	}
+
+  	&__post {
+  		&--text {
+  			display: flex;
+  			flex-direction: column;
+  			justify-content: center;
+
+  			h1 {
+  			font-size: 3.5em;
+  			}
+  		}
+
+  	}
+  }
+
+  .hero__title--initiative {
+	font-size: 6.5em;
+  }
+
+  .hero__title--medium {
+  	font-size: 6.5em;
+  }
+
+  .hero__title--small {
+  	font-size: 6.5em;
+  }
+
+  /***************
+  CONTENT BLOCKS
+  *****************/
+
+  .c-content-group {
+	margin-bottom: $spacing-md;
+
+    .c-content-group__content {
+		padding-right: $spacing-xxl;
+	}
+
+    .c-image-grid {
+		display: grid;
+		margin: 0;
+
+		li {
+			margin-left: $spacing-lg;
+		}
+
+        &__item {
+			margin: 0;
+		}
+
+        &__img {
+			width: 100%;
+			height: auto;
+			display: block;
+			margin-bottom: 0;
+		}
+	}
+
+    		.c-image-grid--one {
+			
+			padding-right: 6em;
+			padding-left: 0em;
+		
+		li {
+			margin:0;
+
+			img {
+				margin: 0;
+			}
+		}
+	}
+
+    		/* --- 2 images: 50/50 --- */
+    		.c-image-grid--two {
+		grid-template-columns: 1fr 1fr;
+	
+    			.c-image-grid__item--1 { grid-column: 1; }
+    			.c-image-grid__item--2 { grid-column: 2; }
+	}
+	
+    		/* --- 3 images: big left, two stacked right --- */
+    		.c-image-grid--three {
+		grid-template-columns: 2fr 1fr;
+		align-items:start;           
+		grid-template-areas:
+		"big right";
+	
+    			.c-image-grid__item--1 { grid-area: big; align-self: start;}
+    			.c-image-grid__item--2, .c-image-grid__item--3 { grid-area: right; align-self: start; }
+	}
+
+    		.c-image-grid__right {
+		margin: 0;
+		display: grid;
+		align-content: start;
+		gap: $spacing-lg;
+	}
+
+    &--middle {
+        .c-content-group__content {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+
+    &--bottom {
+        .c-content-group__content {
+            margin-top: auto;
+
+            & > :last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &--reverse {
+        flex-direction: row-reverse;
+
+        .c-content-group__content {
+            padding-right: 0em;
+            padding-left: $spacing-xxl;
+        }
+
+        .c-content-group__image {
+            padding-right: 0em;
+            padding-left: 6em;
+        }
+    }
+  }
+
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+
+  .sidebar {
+  	/* margin-top: 2.2em; */
+  }
+
+  	.widgettitle {
+  		border-bottom: 2px solid #444;
+  		margin-bottom: 0.75em;
+  	}
+
+  	.widget {
+  		padding: 0 10px;
+  		margin: 2.2em 0;
+
+  		ul {
+  			li {
+  				margin-bottom: 0.75em;
+
+  				&:first-child {}
+  				&:last-child {}
+  				a {}
+  				/* deep nesting */
+
+  				ul {
+  					margin-top: 0.75em;
+  					padding-left: 1em;
+  				}
+  			}
+  		}
+  	}
+
+
+  	/* links widget */
+  	.widget_links {}
+  	.widget_links ul {}
+  	.widget_links ul li {}
+  	.widget_links ul li a {}
+
+  	/* meta widget */
+  	.widget_meta {}
+  	.widget_meta ul {}
+  	.widget_meta ul li {}
+  	.widget_meta ul li a {}
+
+  	/* pages widget */
+  	.widget_pages {}
+  	.widget_pages ul {}
+  	.widget_pages ul li {}
+  	.widget_pages ul li a {}
+
+  	/* recent-posts widget */
+  	.widget_recent_entries {}
+  	.widget_recent_entries ul {}
+  	.widget_recent_entries ul li {}
+  	.widget_recent_entries ul li a {}
+
+  	/* archives widget */
+  	.widget_archive {}
+  	.widget_archive ul {}
+  	.widget_archive ul li {}
+  	.widget_archive ul li a {}
+  	.widget_archive select {}
+  	.widget_archive option {}
+
+  	/* tag-cloud widget */
+  	.widget_links {}
+  	.widget_links li:after {}
+  	.widget_links li:before {}
+  	.widget_tag_cloud {}
+  	.widget_tag_cloud a {}
+  	.widget_tag_cloud a:after {}
+  	.widget_tag_cloud a:before {}
+
+  	/* calendar widget */
+  	.widget_calendar {}
+  	#calendar_wrap {}
+  	#calendar_wrap th {}
+  	#calendar_wrap td {}
+  	#wp-calendar tr td {}
+  	#wp-calendar caption {}
+  	#wp-calendar a {}
+  	#wp-calendar #today {}
+  	#wp-calendar #prev {}
+  	#wp-calendar #next {}
+  	#wp-calendar #next a {}
+  	#wp-calendar #prev a {}
+
+  	/* category widget */
+  	.widget_categories {}
+  	.widget_categories ul {}
+  	.widget_categories ul li {}
+  	.widget_categories ul ul.children {}
+  	.widget_categories a {}
+  	.widget_categories select{}
+  	.widget_categories select#cat {}
+  	.widget_categories select.postform {}
+  	.widget_categories option {}
+  	.widget_categories .level-0 {}
+  	.widget_categories .level-1 {}
+  	.widget_categories .level-2 {}
+  	.widget_categories .level-3 {}
+
+  	/* recent-comments widget */
+  	.recentcomments {}
+  	#recentcomments {}
+  	#recentcomments li {}
+  	#recentcomments li a {}
+  	.widget_recent_comments {}
+
+  	/* search widget */
+  	#searchform {}
+  	.widget_search {}
+  	.screen-reader-text {}
+
+  	/* text widget */
+  	.textwidget {}
+  	.widget_text {}
+  	.textwidget p {}
+
+
+  /*********************
+  FOOTER STYLES
+  *********************/
+
+  /*
+  you'll probably need to do quite a bit
+  of overriding here if you styled them for
+  mobile. Make sure to double check these!
+  */
+
+  #inner-footer {
+  	flex-direction: row;
+
+  	.footer__right {
+  		text-align: right;
+		align-content: flex-end;
+  	}
+
+  	.footer__contact--left {
+  		text-align: left;
+  	}
+
+	.footer__contact-info {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: $spacing-sm;
+
+		.contact-info__item {
+			&:nth-child(2)::before {
+				content: "•";
+				margin-right: $spacing-sm;
+			}
+		}
+
+		a.contact-info__item {
+			color: $primary-100;
+			text-decoration: none;
+			&:hover,
+			&:focus {
+				color: $primary-100;
+				opacity: 0.85;
+			}
+		}
+	}
+  }
+
+  .footer {
+  	&__logo {
+
+  		#client_logo {
+  			margin-top: 0em;
+  			margin-left: 1em;
+  		}
+  	}
+
+  	&-nav {
+  		justify-content: flex-start;
+  	}
+  }
+  .footer__links {
+  	ul {
+  		li {
+  			a {
+  				&:hover {}
+  			}
+  			ul {}
+  		}
+  	}
+  }
+}

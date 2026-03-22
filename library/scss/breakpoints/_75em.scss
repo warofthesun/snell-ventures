@@ -1,0 +1,107 @@
+@use "../globals" as *;
+@use "../partials/tokens" as *;
+
+@media only screen and (min-width: 75em) {
+  .wrap {
+    width: 1040px;
+  }
+
+	/* 1–4 cards should fit on ONE row at larger widths */
+	.c-cardrepeater--count-1 .c-cardrepeater__grid { grid-template-columns: 1fr; }
+	.c-cardrepeater--count-2 .c-cardrepeater__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.c-cardrepeater--count-3 .c-cardrepeater__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.c-cardrepeater--count-4 .c-cardrepeater__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+	/* 5+ should ALWAYS be 3 per row (so 5 => 3 + 2) */
+	.c-cardrepeater--count-many .c-cardrepeater__grid {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.c-posts {
+		padding: 96px 0;
+		padding-bottom: $spacing-lg;
+	  }
+
+	.c-posts--no-events {
+		padding-top: 0;
+	  }
+	
+	  .c-posts__header {
+		margin-bottom: 32px;
+	  }
+	
+	  .c-postCard__body {
+		padding: 18px 18px 20px;
+	  }
+  /********************
+  HERO STYLES
+  ********************/
+
+  .hero {
+
+  	&__container {
+
+  		&--large {
+  			.hero__content {
+  				height: 650px;
+
+  				&--text {
+  					justify-content: flex-end;
+  					background: transparent;
+  				}
+
+  				&--text-angle {
+  					display: inline;
+  					svg {
+  						width: 650px;
+  						margin-left: 0;
+  						height: 104%;
+  					}
+  				}
+  			}
+  		}
+  	}
+
+  	&__featured-post {
+  		display: flex;
+  		right: $spacing-xxl;
+  		bottom: 80px;
+  		width: 500px;
+  		@include box-shadow($left-diffused);
+
+  		article {
+  			display: flex;
+  			flex-direction: row;
+  			border-radius: $radius-lg;
+  			align-items: center;
+
+
+  			header {
+  				border-bottom: 0;
+  				padding: 0 1.5em;
+  			}
+
+  			.post-category {
+  				color: $secondary-500;
+  				font-family: $header-font;
+  				margin-bottom: $spacing-sm;
+  			}
+
+  			.entry-title {
+  				font-size: 1.3em;
+  				line-height: 1;
+  				font-family: $header-font;
+
+  				a {
+  					text-decoration: none;
+  					color: $primary-600;
+  				}
+  			}
+
+  			.hero--image {
+  				line-height: 0;
+  			}
+  		}
+  	}
+  }
+}

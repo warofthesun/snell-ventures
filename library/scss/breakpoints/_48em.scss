@@ -1,0 +1,279 @@
+@use "../globals" as *;
+
+@media only screen and (min-width: 48em) {
+  .c-card-block__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .c-card-block__grid--count-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .c-card-block__grid--count-3 .c-card-block__card:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 420px;
+  }
+
+  .c-card-block__grid--count-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .c-card-block__grid--count-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .c-card-block__grid--count-5 .c-card-block__card:nth-child(5) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 420px;
+  }
+
+  .c-card-block__card-media {
+    max-width: 200px;
+  }
+
+  /* Slider: two columns (left: headline + body + list, right: image) */
+  .c-slider--table_of_contents .c-slider__content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .c-slider--table_of_contents .c-slider__col-left {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+
+  .c-slider--table_of_contents .c-slider__headline {
+    text-align: left;
+  }
+
+  .c-slider--table_of_contents .c-slider__list-inner {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    column-count: unset;
+    column-gap: unset;
+    gap: 0.5rem;
+
+    > li {
+      margin-bottom: 0;
+    }
+  }
+
+  .c-slider--table_of_contents .c-slider__panel {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Horizontal slider: show arrows on desktop */
+  .c-slider--horizontal .c-slider__arrow {
+    display: flex;
+  }
+
+  .c-slider--horizontal .c-slider__panel {
+	padding: 0 3.5rem 2.5rem;
+}
+
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+
+
+  /*********************
+  HERO STYLES
+  *********************/
+
+  .hero__container--landing {
+	.rectangle {
+		display: none;
+	}
+  }
+
+  .hero {
+
+	&__content--text {
+		z-index: 2;
+	}
+
+  	&__container {
+		position: relative;
+		top: -76px;
+
+  		h1 {
+  			position: relative;
+			z-index: 2;
+  		}
+
+  		&--landing {
+  			h1.hero__title--landing {
+  			font-size: 4.5rem;
+  			margin-top: 0;
+  			margin-bottom: 0;
+
+  			span {
+  				display: block;
+  				color: $primary-50;
+  				font-family: $header-font;
+  				text-transform: uppercase;
+  				font-size: 0.4em;
+  				line-height: 1.1;
+  			}
+  			}
+
+  			h3 {
+  				margin-top: 0;
+  				ul {
+  				font-family: $header-font;
+  				margin:0;
+
+  				li {
+  					display: inline-block;
+  					color: $secondary-500;
+  					font-weight: 800;
+
+  					&:nth-child(1), &:nth-child(2) {
+  						&:after {
+  							content: " • ";
+  							color: $primary-200;
+  						}
+  					}
+  				}
+  				}
+  			}
+
+  			p {
+  				font-size: 1.3em;
+  			}
+
+  		}
+
+  		&--inner {
+  			max-width: 1920px;
+  			margin: auto;
+			position: relative;
+			margin-bottom: -120px;
+  		}
+
+		// Internal pages: no overlap with content below
+		&--landing-internal &--inner {
+			margin-bottom: 0;
+		}
+
+  		p {
+  			color: $primary-10;
+  		}
+  	}
+
+  	&__content {
+
+  			&--image {
+  				background-size: cover;
+  				background-position: center;
+  				padding: 0;
+  			}
+
+  			&--text {
+  				position: absolute;
+  				display: flex;
+  				flex-direction: column;
+  				justify-content: center;
+  				padding-left: 7%;
+  				padding-right: 5%;
+  			}
+  	}
+
+  	&__post {
+  		&--text {
+  			display: flex;
+  			flex-direction: column;
+  			justify-content: center;
+
+  			h1 {
+  			font-size: 3.5em;
+  			}
+  		}
+
+  	}
+  }
+
+  /*********************
+  POSTS & CONTENT STYLES
+  *********************/
+
+  /* entry content */
+  .entry-content {
+
+
+  	/* at this larger size, we can start to align images */
+  	.alignleft, img.alignleft {
+  		margin-right: 1.5em;
+  		display: inline;
+  		float: left;
+  	}
+  	.alignright, img.alignright {
+  		margin-left: 1.5em;
+  		display: inline;
+  		float: right;
+  	}
+  	.aligncenter, img.aligncenter {
+  		margin-right: auto;
+  		margin-left: auto;
+  		display: block;
+  		clear: both;
+		text-align: center;
+  	}
+
+  } /* end .entry-content */
+
+  
+/* At medium widths, allow 2-up where appropriate */
+.c-cardrepeater--count-2 .c-cardrepeater__grid,
+.c-cardrepeater--count-3 .c-cardrepeater__grid,
+.c-cardrepeater--count-4 .c-cardrepeater__grid,
+.c-cardrepeater--count-many .c-cardrepeater__grid {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+  
+.c-posts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .c-posts__grid--count-1 {
+    grid-template-columns: minmax(0, 400px);
+    justify-content: center;
+  }
+
+  .c-posts__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 400px));
+    justify-content: center;
+  }
+
+  .c-posts__blob {
+    width: 1000px;
+    height: 480px;
+  }
+  /*********************
+  FOOTER STYLES
+  *********************/
+
+  .footer__curve-inner {
+  	width: 100%;
+
+  	.footer__curve-inner-bg {
+  		fill: $primary-surface;
+  	}
+  }
+
+  .footer__links {
+  	ul {
+  		li {}
+  	}
+  }
+}

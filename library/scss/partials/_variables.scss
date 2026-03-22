@@ -1,0 +1,121 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Variables
+
+Personal starter: semantic scales keep the same names so existing SCSS
+still compiles; values are neutral grays + one blue accent. Per-client
+skin: edit tokens here and/or override in _client.scss (imported last).
+
+******************************************************************/
+
+@use "sass:color";
+
+
+/*********************
+COLORS
+*********************/
+
+$alert-yellow:      #f5f0c4;
+$alert-red:         #fce8ea;
+$alert-green:       #e8f5e9;
+$alert-blue:        #e3f2fd;
+
+$black:             #000;
+$white:             #fff;
+
+/* Base gray ramp — defined first so primary/secondary can reference it */
+$grey-10:           #f5f6f7;
+$grey-50:           #e2e5e7;
+$grey-100:          #cfd3d7;
+$grey-200:          #c6cacf;
+$grey-300:          #bdc1c7;
+$grey-400:          #b3b9bf;
+$grey-500:          #a0a7af;
+$grey-600:          #70757b;
+$grey-700:          #606469;
+$grey-800:          #404346;
+$grey-900:          #202123;
+
+$light-gray:        $grey-10;
+$gray:              $grey-50;
+$text-color:        $grey-700;
+$meta-gray:         $grey-500;
+$charcoal:          $grey-700;
+
+/* Primary: neutral gray ladder (same keys as before) */
+$primary-10:        $grey-10;
+$primary-50:        $grey-50;
+$primary-50_50:     rgba($grey-50, 0.5);
+$primary-100:       $grey-100;
+$primary-200:       $grey-200;
+$primary-300:       $grey-300;
+$primary-300_20:    rgba($grey-300, 0.2);
+$primary-400:       $grey-400;
+$primary-500:       $grey-500;
+$primary-500_70:    rgba($grey-500, 0.7);
+$primary-600:       $grey-600;
+$primary-700:       $grey-700;
+$primary-800:       $grey-800;
+$primary-900:       $grey-900;
+
+/* Secondary: slightly cool tint toward slate (still keyed for existing partials) */
+$secondary-50:      color.mix($grey-10, #f1f5f9, 88%);
+$secondary-50_50:   rgba($secondary-50, 0.5);
+$secondary-50_80:   rgba($secondary-50, 0.8);
+$secondary-50_95:   rgba($secondary-50, 0.95);
+$secondary-100:     color.mix($grey-100, #e2e8f0, 75%);
+$secondary-200:     color.mix($grey-200, #cbd5e1, 60%);
+$secondary-300:     color.mix($grey-300, #94a3b8, 45%);
+$secondary-400:     color.mix($grey-500, #64748b, 40%);
+$secondary-500:     color.mix($grey-600, #475569, 35%);
+$secondary-500_70:  rgba($grey-600, 0.7);
+$secondary-600:     color.mix($grey-700, #334155, 40%);
+$secondary-700:     color.mix($grey-800, #1e293b, 45%);
+$secondary-800:     color.mix($grey-900, #0f172a, 50%);
+$secondary-900:     #151a20;
+$secondary-950:     #0d0f12;
+
+/* Accent: blue ramp for links, CTAs, focus */
+$accent-50:         #eff6ff;
+$accent-100:        #dbeafe;
+$accent-200:        #bfdbfe;
+$accent-300:        #93c5fd;
+$accent-400:        #60a5fa;
+$accent-500:        #3b82f6;
+$accent-600:        #2563eb;
+$accent-700:        #1d4ed8;
+$accent-800:        #1e40af;
+$accent-900:        #1e3a8a;
+
+$link-color:        $accent-600;
+$link-hover:        color.adjust($link-color, $lightness: -9%);
+
+$border-color:      $grey-200;
+$disabled-gray:     $grey-300;
+
+$primary-surface:   $grey-10;
+
+/* Surface / text tokens for blocks, wavebands, TEC — remap per client in _client.scss */
+:root {
+	--c-surface-muted: #f4f4f5;
+	--c-surface-subtle: #eceff3;
+	--c-text-muted: #64748b;
+	--c-white: #ffffff;
+}
+
+
+$spacing-none: 0em;
+$spacing-xxs: .25em;
+$spacing-xs: .5em;
+$spacing-sm: .75em;
+$spacing-md: 1em;
+$spacing-lg: 1.25em;
+$spacing-xl: 1.5em;
+$spacing-xxl: 2em;
+
+$radius-xs: $spacing-xxs;
+$radius-sm: $spacing-xs;
+$radius-md: $spacing-sm;
+$radius-lg: $spacing-md;
