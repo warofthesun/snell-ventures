@@ -35,7 +35,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   font-size: 1em;
   font-weight: 400;
   padding: $spacing-xs $spacing-md;
-  border-radius: $radius-xs;
+  border-radius: 0;
   border: 2px solid;
   cursor: pointer;
   @include transition(background-color 0.14s ease-in-out);
@@ -162,7 +162,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 
 } // end .button
 
-.navigation-button a {
+.navigation-button a, #mobile-nav {
   @extend %btn;
   @include color_surface__button_primary--default;
   @include color_text__label_primary--default;
@@ -173,6 +173,8 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
     text-decoration: none;
     outline: none;
   }
+  
+  
 }
 /*
 An example button.
