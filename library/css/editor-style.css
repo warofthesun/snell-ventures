@@ -852,7 +852,7 @@ Here's a quick video to show how it works:
 http://www.youtube.com/watch?v=hwdVpKiJzac
 
 *********************/
-.c-button-pair .c-button-pair__button, #menu-login-and-forms.nav li a, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit, .navigation-button a, #mobile-nav {
+.c-button-pair .c-button-pair__button, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit, .navigation-button a, #mobile-nav {
   display: inline-block;
   position: relative;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -867,15 +867,15 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
 }
-.c-button-pair .c-button-pair__button .svg-inline--fa, #menu-login-and-forms.nav li a .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
+.c-button-pair .c-button-pair__button .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
   font-size: 0.9em;
 }
-.c-button-pair .c-button-pair__button:hover, #menu-login-and-forms.nav li a:hover, .gallery-item .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus, #menu-login-and-forms.nav li a:focus, .gallery-item .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
+.c-button-pair .c-button-pair__button:hover, .gallery-item .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus, .gallery-item .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
   color: #fff;
   text-decoration: none;
   outline: none;
 }
-.c-button-pair .c-button-pair__button:active, #menu-login-and-forms.nav li a:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
+.c-button-pair .c-button-pair__button:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
   top: 1px;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
@@ -906,7 +906,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 .c-button-pair.c-button-pair--primary .c-button-pair__button:active {
   background-color: #8b553f;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, input[type=submit], input[type=file], #wp-submit {
   color: #0a0d0c;
   border: 1px solid #69a197;
   background: -webkit-linear-gradient(45deg, #78aaa1, #69a197);
@@ -926,7 +926,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--secondary .c-button-pair__button:hover, #menu-login-and-forms.nav li a:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button:focus, #menu-login-and-forms.nav li a:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
+.c-button-pair.c-button-pair--secondary .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
   color: #78aaa1;
   background: -webkit-linear-gradient(90deg, #5f9188, #507a73);
   background: -webkit-gradient(linear, left top, right top, from(#5f9188), to(#507a73));
@@ -4488,6 +4488,36 @@ the navs on the site so our css is cleaner
 and more scalable.
 
 */
+.header-toolbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  -webkit-box-ordinal-group: 4;
+  -ms-flex-order: 3;
+  order: 3;
+  min-width: 0;
+}
+.header-toolbar .header-widget-area {
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+}
+.header-toolbar .header-nav {
+  -webkit-box-ordinal-group: 3;
+  -ms-flex-order: 2;
+  order: 2;
+}
+
 .header-nav {
   width: 100%;
   display: -webkit-box;
@@ -4500,11 +4530,6 @@ and more scalable.
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-ordinal-group: 5;
-  -ms-flex-order: 4;
-  order: 4;
-  -ms-flex-preferred-size: 100%;
-  flex-basis: 100%;
 }
 
 .header-nav__wrapper {
@@ -4521,23 +4546,6 @@ and more scalable.
   flex-direction: column;
 }
 
-#menu-login-and-forms {
-  margin-top: 1em;
-  margin-left: auto;
-  margin-bottom: auto;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-#menu-login-and-forms.show {
-  width: 100%;
-}
-#menu-login-and-forms.show.nav li, #menu-login-and-forms.show.nav li a {
-  width: 100%;
-}
-#menu-login-and-forms.nav li {
-  border: 0;
-}
 .header-logo {
   -webkit-box-ordinal-group: 2;
   -ms-flex-order: 1;
@@ -4554,9 +4562,6 @@ and more scalable.
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 0.75em;
-  -webkit-box-ordinal-group: 4;
-  -ms-flex-order: 3;
-  order: 3;
   margin-left: 0;
 }
 .header-widget-area .widget {
@@ -4590,15 +4595,10 @@ and more scalable.
   padding-right: 0.5em;
 }
 
-#inner-header:has(#mobile-nav.show) .header-widget-area {
+#inner-header:has(#mobile-nav.show) .header-toolbar {
   -webkit-box-ordinal-group: 3;
   -ms-flex-order: 2;
   order: 2;
-}
-#inner-header:has(#mobile-nav.show) .header-nav {
-  -webkit-box-ordinal-group: 4;
-  -ms-flex-order: 3;
-  order: 3;
 }
 #inner-header:has(#mobile-nav.show) #mobile-nav {
   -webkit-box-ordinal-group: 5;
@@ -4643,10 +4643,10 @@ and more scalable.
   display: block;
   color: #142e48;
   text-decoration: none;
-  padding: 0.75em;
+  padding: 0.5em 1em;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.1em;
-  text-transform: uppercase;
+  text-transform: none;
 }
 .nav li a:hover, .nav li a:focus {
   color: #070a0c;
@@ -4676,7 +4676,7 @@ and more scalable.
 .nav li.current-menu-item a,
 .nav li.current_page_item a,
 .nav li.current_page_ancestor a {
-  color: #8eb9b1;
+  color: #bf7d63;
 }
 .nav {
   /* end current highlighters */
@@ -4690,6 +4690,11 @@ POSTS & CONTENT STYLES
 .hero__container h1 {
   position: relative;
 }
+.hero__container--landing {
+  position: relative;
+  z-index: 1;
+  margin-top: -3.25rem;
+}
 .hero__container--landing .hero__content-curve--up {
   display: inline;
   position: relative;
@@ -4699,43 +4704,141 @@ POSTS & CONTENT STYLES
   margin-top: -90px;
   margin-bottom: 10px;
 }
-.hero__container--landing h1.hero__title--landing {
-  font-size: 2.5rem;
-  margin-top: 0;
-  margin-bottom: 0;
-  color: #f9f9f9;
-  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-weight: 400;
-  line-height: 1.05;
-  text-shadow: 0 0 20px rgba(15, 21, 20, 0.35);
+.hero__container--landing .hero__container--inner {
+  position: relative;
+  min-height: clamp(22rem, 65vh, 62rem);
+  padding-top: 3.25rem;
+  overflow: visible;
 }
-.hero__container--landing h1.hero__title--landing span {
-  display: block;
-  color: #f5f6f6;
-  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  text-transform: uppercase;
-  font-size: 0.4em;
-  line-height: 1.1;
+.hero__container--landing .hero__media {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
 }
-.hero__container--landing h3 {
-  margin-top: 0;
-  font-size: 1.5em;
+.hero__container--landing .hero__content--landing-bg {
+  position: absolute;
+  top: -3.25rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.hero__container--landing h3 ul {
-  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+.hero__container--landing .hero__overlay {
+  position: absolute;
+  top: max(10.02%, 3.25rem);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(7, 10, 12, 0.7);
+  pointer-events: none;
+}
+@media only screen and (min-width: 64em) {
+  .hero__container--landing {
+    margin-top: -4.75rem;
+  }
+  .hero__container--landing .hero__container--inner {
+    padding-top: 4.75rem;
+  }
+  .hero__container--landing .hero__content--landing-bg {
+    top: -4.75rem;
+  }
+  .hero__container--landing .hero__overlay {
+    top: max(9.02%, 4.75rem);
+  }
+  .hero__container--landing .hero__content--landing {
+    top: max(9.02%, 4.75rem);
+  }
+}
+.hero__container--landing h1.hero {
+  margin: 0 0;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+.hero__container--landing h2.hero {
+  color: rgba(255, 255, 255, 0.5);
+}
+.hero__container--landing .hero__content--landing {
+  position: absolute;
+  z-index: 2;
+  top: max(10.02%, 3.25rem);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  text-align: left;
+  padding: clamp(1rem, 3vw, 1.5rem) 7%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.hero__container--landing .hero__text-block--landing {
   margin: 0;
+  width: 100%;
 }
-.hero__container--landing h3 ul li {
-  display: inline-block;
-  color: #69a197;
-  font-weight: 800;
+.hero__container--landing .hero__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 1em;
+  margin-top: 1.5em;
+  /* Keep %btn / c-button-pair--primary colors & surfaces; only tweak layout + Figma label case */
 }
-.hero__container--landing h3 ul li:nth-child(1):after, .hero__container--landing h3 ul li:nth-child(2):after {
-  content: " • ";
-  color: #a2adb9;
+.hero__container--landing .hero__actions .c-button-pair__button {
+  margin-bottom: 0;
+  text-transform: none;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 500;
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
 }
-.hero__container--landing .hero__content {
-  height: 50vh;
+.hero__container--landing .hero__actions .c-button-pair__button:nth-child(2) {
+  margin-left: 0;
+}
+.hero__container--landing .hero__actions a.c-button-pair__button {
+  text-decoration: none;
+}
+.hero__container--landing .hero__actions {
+  /* Global `a, a:hover` link colors override %btn label colors on anchors — restore button tokens */
+}
+.hero__container--landing .hero__actions a.c-button-pair__button--solid, .hero__container--landing .hero__actions a.c-button-pair__button--solid:visited, .hero__container--landing .hero__actions a.c-button-pair__button--solid:hover, .hero__container--landing .hero__actions a.c-button-pair__button--solid:focus {
+  color: #fff !important;
+}
+.hero__container--landing .hero__actions a.c-button-pair__button--outline, .hero__container--landing .hero__actions a.c-button-pair__button--outline:visited, .hero__container--landing .hero__actions a.c-button-pair__button--outline:hover, .hero__container--landing .hero__actions a.c-button-pair__button--outline:focus {
+  color: #16324f;
+}
+@media only screen and (max-width: 47.99em) {
+  .hero__container--landing .hero__actions {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+  .hero__container--landing .hero__actions .c-button-pair__button {
+    width: 100%;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
 }
 .hero__container--landing .hero__content--text {
   font-size: 1rem;
