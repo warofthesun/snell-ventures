@@ -68,11 +68,6 @@ FONT FACE
   }
 */
 /*
-The following is based of Typebase:
-https://github.com/devinhunt/typebase.css
-I've edited it a bit, but it's a nice starting point.
-*/
-/*
 some nice typographical defaults
 more here: http://www.newnet-soft.com/blog/csstypography
 */
@@ -88,38 +83,145 @@ p {
   hyphenate-lines: 3;
 }
 
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
-  text-transform: uppercase;
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+h7, .h8 {
+  text-transform: none;
 }
-h1 p,
-.h1 p,
-h2 p,
-.h2 p,
-h3 p,
-.h3 p,
-h4 p,
-.h4 p,
-h5 p,
-.h5 p,
-h6 p,
-.h6 p {
+h1 p, .h1 p,
+h2 p, .h2 p,
+h3 p, .h3 p,
+h4 p, .h4 p,
+h5 p, .h5 p,
+h6 p, .h6 p,
+h7 p, .h8 p {
   line-height: 1em;
   margin: 0;
 }
 
 h3.wp-block-heading {
   margin-bottom: 0;
+}
+
+/******************************************************************
+H1, H2, H3, H4, H5 STYLES
+******************************************************************/
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, h7, .h7 {
+  text-rendering: optimizelegibility;
+  font-weight: 400;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /*
+  if you're going to use webfonts, be sure to check your weights
+  http://css-tricks.com/watch-your-font-weight/
+  */
+  /* removing text decoration from all headline links */
+}
+h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a, h7 a, .h7 a {
+  text-decoration: none;
+}
+
+h1, .h1 {
+  font-size: 4.1em;
+  font-weight: 900;
+  line-height: 0.9em;
+  color: #16324f;
+}
+h1.medium, .h1.medium {
+  font-weight: 500;
+}
+h1.hero, .h1.hero {
+  font-size: clamp(2.75rem, 6vw + 1.5rem, 6rem);
+  line-height: 1;
+  font-weight: 900;
+  color: #fff;
+}
+h1.light, .h1.light {
+  color: #50657b;
+}
+
+h2, .h2 {
+  font-size: 3.4em;
+  font-weight: 800;
+  line-height: 1em;
+  margin-top: 0;
+  margin-bottom: 0.375em;
+  color: #142e48;
+}
+h2.hero, .h2.hero {
+  font-size: clamp(1.75rem, 3.5vw + 1rem, 3.875rem);
+  line-height: 1;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+h2.light, .h2.light {
+  color: #50657b;
+}
+
+h3, .h3 {
+  font-size: 2.5em;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #12273d;
+}
+h3.light, .h3.light {
+  color: #50657b;
+}
+
+h4, .h4 {
+  font-size: 1.8em;
+  font-weight: 900;
+  color: #12273d;
+}
+h4.bold, .h4.bold {
+  font-weight: 800;
+}
+h4.light, .h4.light {
+  color: #50657b;
+}
+
+h5, .h5 {
+  font-size: 1.4em;
+  font-weight: 900;
+  line-height: 1em;
+  color: #0c1723;
+}
+h5.bold, .h5.bold {
+  font-weight: 800;
+}
+h5.light, .h5.light {
+  color: #a2adb9;
+}
+h5 h6, h5 .h6, .h5 h6, .h5 .h6 {
+  font-size: 1.2em;
+  font-weight: 900;
+  line-height: 1em;
+  color: #0c1723;
+}
+h5 h6.bold, h5 .h6.bold, .h5 h6.bold, .h5 .h6.bold {
+  font-weight: 800;
+}
+h5 h6.light, h5 .h6.light, .h5 h6.light, .h5 .h6.light {
+  color: #a2adb9;
+}
+h5 h6 h7, h5 h6 .h7, h5 .h6 h7, h5 .h6 .h7, .h5 h6 h7, .h5 h6 .h7, .h5 .h6 h7, .h5 .h6 .h7 {
+  font-size: 0.875em;
+  font-weight: 900;
+  line-height: 1em;
+  color: #0c1723;
+}
+h5 h6 h7.bold, h5 h6 .h7.bold, h5 .h6 h7.bold, h5 .h6 .h7.bold, .h5 h6 h7.bold, .h5 h6 .h7.bold, .h5 .h6 h7.bold, .h5 .h6 .h7.bold {
+  font-weight: 800;
+}
+h5 h6 h7.medium, h5 h6 .h7.medium, h5 .h6 h7.medium, h5 .h6 .h7.medium, .h5 h6 h7.medium, .h5 h6 .h7.medium, .h5 .h6 h7.medium, .h5 .h6 .h7.medium {
+  font-weight: 500;
+}
+h5 h6 h7.light, h5 h6 .h7.light, h5 .h6 h7.light, h5 .h6 .h7.light, .h5 h6 h7.light, .h5 h6 .h7.light, .h5 .h6 h7.light, .h5 .h6 .h7.light {
+  color: #a2adb9;
 }
 
 .c-content-group__content ul, .wp-block-list ul {
@@ -136,10 +238,6 @@ ul.wp-block-list {
 ul.wp-block-list li {
   margin-left: 1.5em;
   margin-bottom: 0.5em;
-}
-
-h2.hero {
-  font-size: 4.5em;
 }
 
 /******************************************************************
@@ -1209,7 +1307,7 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 .c-button-pair .c-button-pair__button, #menu-login-and-forms.nav li a, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit, .navigation-button a, #mobile-nav {
   display: inline-block;
   position: relative;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 1em;
@@ -1233,14 +1331,14 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   top: 1px;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
-  background-color: #2d4761;
-  color: #0c1723;
-  border-color: #2d4761;
+  background-color: #b86f52;
+  color: #fff !important;
+  border-color: #bf7d63;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline {
   background-color: rgba(255, 255, 255, 0.8);
   color: #16324f;
-  border-color: #2d4761;
+  border-color: #bf7d63;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text {
   color: #69a197;
@@ -1253,12 +1351,12 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   outline: none;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus {
-  background-color: #50657b;
+  background-color: rgba(184, 111, 82, 0.5);
   text-decoration: none;
   outline: none;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button:active {
-  background-color: #142e48;
+  background-color: #8b553f;
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, #menu-login-and-forms.nav li a, input[type=submit], input[type=file], #wp-submit {
   color: #0a0d0c;
@@ -1319,12 +1417,12 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 }
 
 .navigation-button a, #mobile-nav {
-  background-color: #2d4761;
-  color: #0c1723;
-  border-color: #2d4761;
+  background-color: #b86f52;
+  color: #fff !important;
+  border-color: #bf7d63;
 }
 .navigation-button a:hover, .navigation-button a:focus, #mobile-nav:hover, #mobile-nav:focus {
-  background-color: #50657b;
+  background-color: rgba(184, 111, 82, 0.5);
   text-decoration: none;
   outline: none;
 }
@@ -1413,7 +1511,7 @@ textarea,
   border: 1px solid #69a197;
   width: 100%;
   max-width: 400px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background-color: rgb(237.1622641509, 239.0075471698, 240.2377358491);
   -webkit-transition: background-color 0.24s ease-in-out;
   transition: background-color 0.24s ease-in-out;
@@ -2392,7 +2490,7 @@ article .hero--image img {
   cursor: pointer;
   font-weight: bold;
   display: table;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.3em;
   line-height: 1.1;
 }
@@ -2522,7 +2620,7 @@ article .hero--image img {
   display: inline-block;
   margin-bottom: 0.5em;
   margin-left: 0.5em;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   border-bottom: 2px solid #50657b;
 }
 .resources .resource__item h2 {
@@ -3019,13 +3117,13 @@ FOOTER STYLES
 }
 .footer__tagline em {
   font-style: normal;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 1.5em;
 }
 .footer__tagline strong {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #69a197;
   font-size: 2.5em;
   line-height: 1;
@@ -3152,12 +3250,12 @@ body {
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 100%;
   line-height: 1.5;
   color: #606469;
-  background-color: #f7f8f8;
-  --body-bg: #f7f8f8;
+  background-color: #f9f9f9;
+  --body-bg: #f9f9f9;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -4071,7 +4169,7 @@ Content Section block
 }
 
 .c-card-block__headline {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -4138,7 +4236,7 @@ Content Section block
 }
 
 .c-card-block__card-title {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -4245,7 +4343,7 @@ Content Section block
 }
 
 .c-pickup-sites-map__headline {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -4385,7 +4483,7 @@ Content Section block
 }
 
 .c-slider__headline {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -5270,10 +5368,10 @@ a.c-chip:focus-visible {
   margin-top: auto;
   text-decoration: none;
   border-radius: 0.75em;
-  background-color: #2d4761;
+  background-color: #b86f52;
   font-size: 1.1em;
-  color: #0c1723;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #fff !important;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .c-posts__footer {
@@ -5527,7 +5625,7 @@ H1, H2, H3, H4, H5 STYLES
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   text-rendering: optimizelegibility;
   font-weight: 400;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /*
   if you're going to use webfonts, be sure to check your weights
   http://css-tricks.com/watch-your-font-weight/
@@ -5804,7 +5902,7 @@ and more scalable.
   color: #142e48;
   text-decoration: none;
   padding: 0.75em;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.1em;
   text-transform: uppercase;
 }
@@ -5864,7 +5962,7 @@ POSTS & CONTENT STYLES
   margin-top: 0;
   margin-bottom: 0;
   color: #f9f9f9;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 400;
   line-height: 1.05;
   text-shadow: 0 0 20px rgba(15, 21, 20, 0.35);
@@ -5872,7 +5970,7 @@ POSTS & CONTENT STYLES
 .hero__container--landing h1.hero__title--landing span {
   display: block;
   color: #f5f6f6;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   text-transform: uppercase;
   font-size: 0.4em;
   line-height: 1.1;
@@ -5882,7 +5980,7 @@ POSTS & CONTENT STYLES
   font-size: 1.5em;
 }
 .hero__container--landing h3 ul {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   margin: 0;
 }
 .hero__container--landing h3 ul li {
@@ -6301,7 +6399,7 @@ POSTS & CONTENT STYLES
   display: none;
 }
 .gallery-item .article__header .entry-title a {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 700;
   color: #142e48;
   font-size: 0.9em;
@@ -6332,7 +6430,7 @@ POSTS & CONTENT STYLES
 }
 .post-category a {
   text-decoration: none;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* People List block – Person bio layout */
@@ -6395,7 +6493,7 @@ POSTS & CONTENT STYLES
 .c-personCard__social {
   margin-top: 1.25em;
   text-align: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -6478,7 +6576,7 @@ POSTS & CONTENT STYLES
   list-style: none;
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -6609,7 +6707,7 @@ POSTS & CONTENT STYLES
 .c-peopleCard__social {
   margin-top: 1.25em;
   text-align: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -6692,7 +6790,7 @@ POSTS & CONTENT STYLES
   list-style: none;
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -6829,7 +6927,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 
 .c-storiesFeatured__title {
   margin: 0 0 1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.85rem, 4.2vw, 3.1rem);
   font-weight: 700;
   line-height: 1.08;
@@ -6866,7 +6964,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   align-items: center;
   gap: 0.35rem 0.75rem;
   margin: 0 0 1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.8125rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -6922,7 +7020,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   border: 1px solid #74864a;
   background: transparent;
   color: #5c6d3d;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 600;
   font-size: 0.6875rem;
   letter-spacing: 0.06em;
@@ -6940,7 +7038,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 
 .c-storiesFeatured__excerpt {
   margin: 0 0 1.35rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #3a3d35;
   font-size: 1rem;
   line-height: 1.6;
@@ -6954,7 +7052,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   padding: 12px 28px;
   border-radius: 10px;
   background-color: #f2c94c;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.9375rem;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -7022,7 +7120,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 
 .c-storiesDivider__label {
   display: block;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -7121,7 +7219,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   background: transparent;
 }
 .c-storiesIndex .c-postCard__title {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #5c6d3d;
   font-weight: 700;
   font-size: clamp(1rem, 1.5vw, 1.125rem);
@@ -7144,7 +7242,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   column-gap: 0.65rem;
   row-gap: 0.25rem;
   margin: 0 0 10px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -7177,7 +7275,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   border: 1px solid #74864a;
   background: transparent;
   color: #5c6d3d;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 600;
   font-size: 0.625rem;
   letter-spacing: 0.05em;
@@ -7413,7 +7511,7 @@ IMPORTING PARTIALS
   .hero__container--landing h1.hero__title--landing span {
     display: block;
     color: #f5f6f6;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     text-transform: uppercase;
     font-size: 0.4em;
     line-height: 1.1;
@@ -7422,7 +7520,7 @@ IMPORTING PARTIALS
     margin-top: 0;
   }
   .hero__container--landing h3 ul {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     margin: 0;
   }
   .hero__container--landing h3 ul li {
@@ -7888,7 +7986,7 @@ IMPORTING PARTIALS
   .hero__container--landing h1.hero__title--landing span {
     display: block;
     color: #f5f6f6;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     text-transform: uppercase;
     font-size: 0.4em;
     line-height: 1.1;
@@ -7897,7 +7995,7 @@ IMPORTING PARTIALS
     margin-top: 0;
   }
   .hero__container--landing h3 ul {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     margin: 0;
   }
   .hero__container--landing h3 ul li {
@@ -8262,13 +8360,13 @@ IMPORTING PARTIALS
   }
   .hero__featured-post article .post-category {
     color: #69a197;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     margin-bottom: 0.75em;
   }
   .hero__featured-post article .entry-title {
     font-size: 1.3em;
     line-height: 1;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
   .hero__featured-post article .entry-title a {
     text-decoration: none;
@@ -8407,7 +8505,7 @@ This file is intentionally minimal.
 ******************************************************************/
 /* Text fallback when no ACF logo (see header.php) */
 #logo .header-logo__text {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.2;
