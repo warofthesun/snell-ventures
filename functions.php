@@ -1201,20 +1201,14 @@ function client_comments( $comment, $args, $depth ) {
 } // don't remove this bracket!
 
 
-/*
-This is a modification of a function found in the
-twentythirteen theme where we can declare some
-external fonts. If you're using Google Fonts, you
-can replace these fonts, change it in your scss files
-and be up and running in seconds.
-*/
+
 function custom_fonts() {
-  if ( ! apply_filters( 'client_enqueue_google_fonts', false ) ) {
+  if ( ! apply_filters( 'client_enqueue_adobe_fonts', false ) ) {
     return;
   }
   wp_enqueue_style(
-    'client-google-fonts',
-    'https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap',
+    'client-adobe-fonts',
+    'https://use.typekit.net/vbr4gno.css',
     array(),
     null
   );

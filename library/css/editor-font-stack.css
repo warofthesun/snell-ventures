@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/*
+ * Loaded after library/css/style.css in the block editor only.
+ * style.css asks for "acumin-pro" (Adobe) but Typekit is not loaded in the editor — this forces a sensible
+ * system stack so the canvas does not depend on the kit and matches “no Adobe in admin” behavior.
+ */
+
+.editor-styles-wrapper,
+.editor-styles-wrapper .block-editor-block-list__layout {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6,
+.editor-styles-wrapper p,
+.editor-styles-wrapper li,
+.editor-styles-wrapper blockquote,
+.editor-styles-wrapper .wp-block {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+}
