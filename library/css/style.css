@@ -5985,7 +5985,7 @@ POSTS & CONTENT STYLES
 }
 .hero__container--landing .hero__overlay {
   position: absolute;
-  top: max(10.02%, 3.25rem);
+  top: 3.25rem;
   right: 0;
   bottom: 0;
   left: 0;
@@ -6003,10 +6003,10 @@ POSTS & CONTENT STYLES
     top: -4.75rem;
   }
   .hero__container--landing .hero__overlay {
-    top: max(9.02%, 4.75rem);
+    top: 4.75rem;
   }
   .hero__container--landing .hero__content--landing {
-    top: max(9.02%, 4.75rem);
+    top: 4.75rem;
   }
 }
 .hero__container--landing h1.hero {
@@ -6019,7 +6019,7 @@ POSTS & CONTENT STYLES
 .hero__container--landing .hero__content--landing {
   position: absolute;
   z-index: 2;
-  top: max(10.02%, 3.25rem);
+  top: 3.25rem;
   right: 0;
   bottom: 0;
   left: 0;

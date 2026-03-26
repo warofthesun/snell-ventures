@@ -2467,10 +2467,12 @@ POSTS & CONTENT STYLES
 				background-repeat: no-repeat;
 			}
 
-			// Top inset matches Figma (~10.02%) so the bar/header band stays lighter; bottom runs flush with hero image.
+			// Align overlay + copy with the same fixed offset as header overlap (padding / bg pull). Avoid
+			// percentage-of-height `top`: on tall heroes it pushed the overlay below the header and left a
+			// visible untinted strip between the header and overlay.
 			.hero__overlay {
 				position: absolute;
-				top: max(10.02%, 3.25rem);
+				top: 3.25rem;
 				right: 0;
 				bottom: 0;
 				left: 0;
@@ -2490,11 +2492,11 @@ POSTS & CONTENT STYLES
 				}
 
 				.hero__overlay {
-					top: max(9.02%, 4.75rem);
+					top: 4.75rem;
 				}
 
 				.hero__content--landing {
-					top: max(9.02%, 4.75rem);
+					top: 4.75rem;
 				}
 			}
 
@@ -2511,7 +2513,7 @@ POSTS & CONTENT STYLES
 			.hero__content--landing {
 				position: absolute;
 				z-index: 2;
-				top: max(10.02%, 3.25rem);
+				top: 3.25rem;
 				right: 0;
 				bottom: 0;
 				left: 0;
