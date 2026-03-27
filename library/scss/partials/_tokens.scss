@@ -6,8 +6,8 @@ Stylesheet: Tokens
 
 /* COLOR - SURFACE - PRIMARY */
 @mixin surface_primary__content {
-    background-color: $secondary-50;
-    --body-bg: #{$secondary-50};
+    background-color: $primary-10;
+    --body-bg: #{$primary-10};
 }
 
 @mixin surface_primary__content-95 {
@@ -15,19 +15,19 @@ Stylesheet: Tokens
 }
 
 @mixin color_surface__button_primary--default {
-    background-color: $primary-400;
+    background-color: $accent-500;
 }
 
 @mixin color_surface__button_primary--hover {
-    background-color: $primary-300;
+    background-color: $accent-500_50;
 }
 
 @mixin color_surface__button_primary--is_active {
-    background-color: $primary-600;
+    background-color: $accent-700;
 }
 
 @mixin color_border__button_primary--default {
-    border-color: $primary-400;
+    border-color: $accent-400;
 }
 
 @mixin color_surface__card_primary {
@@ -106,7 +106,7 @@ Stylesheet: Tokens
 }
 
 @mixin color_text__label_primary--default {
-    color: $primary-800;
+    color: $white !important;
 }
 
 @mixin color_text__label_secondary--default {

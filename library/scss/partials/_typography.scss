@@ -32,19 +32,12 @@ FONT FACE
 */
 
 
-/*
-The following is based of Typebase:
-https://github.com/devinhunt/typebase.css
-I've edited it a bit, but it's a nice starting point.
-*/
+@use "variables" as *;
 
-
-
-// Starter: system stack (no webfont requests). For a client build, set stacks here
-// and enable Google Fonts via the `client_enqueue_google_fonts` filter in functions.php,
-// or embed @font-face for files in library/fonts/.
-$header-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-$body-font:   system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+// Adobe Fonts (Typekit): kit CSS is enqueued in functions.php (custom_fonts). Stacks must match
+// the family name from the kit (e.g. acumin-pro). Disable loading via `snell_enqueue_adobe_fonts`.
+$header-font: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$body-font:   "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
 
 /*
@@ -72,19 +65,15 @@ p {
           // font-feature-settings: "liga", "dlig";
 }
 
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
-  text-transform: uppercase;
+h1,.h1,
+h2,.h2,
+h3,.h3,
+h4,.h4,
+h5,.h5,
+h6,.h6,
+h7,.h8
+ {
+  text-transform: none;
 
   p {
     line-height: 1em;
@@ -94,6 +83,137 @@ h6,
 
 h3.wp-block-heading {
   margin-bottom: 0;
+}
+
+/******************************************************************
+H1, H2, H3, H4, H5 STYLES
+******************************************************************/
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, h7, .h7 {
+	text-rendering: optimizelegibility;
+	font-weight: 400;
+	font-family: $header-font;
+	/*
+	if you're going to use webfonts, be sure to check your weights
+	http://css-tricks.com/watch-your-font-weight/
+	*/
+
+	/* removing text decoration from all headline links */
+	a {
+		text-decoration: none;
+	}
+}
+
+h1, .h1 {
+	font-size:         $font-size-xxxxl;
+	font-weight:       $font-weight-black;
+	line-height:       .9em;
+	color:             $primary-500;
+
+  &.medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &.hero {
+    font-size:   clamp(2.75rem, 6vw + 1.5rem, 6rem);
+    line-height: 1;
+    font-weight: $font-weight-black;
+    color:       $white;
+  }
+
+	&.light {
+		color: $primary-300;
+	}
+}
+
+h2, .h2 {
+	font-size:     $font-size-xxxl;
+  font-weight:   $font-weight-bold;
+	line-height:   1em;
+	margin-top:    0;
+	margin-bottom: 0.375em;
+	color:         $primary-600;
+
+  &.hero {
+    font-size:     clamp(1.75rem, 3.5vw + 1rem, 3.875rem);
+    line-height:   1;
+    font-weight:   $font-weight-black;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+
+	&.light {
+		color: $primary-300;
+	}
+}
+
+h3, .h3 {
+	font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+	line-height: 1.1;
+	color: $primary-700;
+	&.light {
+		color: $primary-300;
+	}
+}
+
+h4, .h4 {
+	font-size: $font-size-xl;
+  font-weight: $font-weight-black;
+	color: $primary-700;
+
+  &.bold {
+    font-weight: $font-weight-bold;
+  }
+	&.light {
+		color: $primary-300;
+	}
+}
+
+h5, .h5 {
+	font-size: $font-size-lg;
+  font-weight: $font-weight-black;
+	line-height: 1em;
+	color: $primary-800;
+
+  &.bold {
+    font-weight: $font-weight-bold;
+  }
+	&.light {
+		color: $primary-200;
+	}
+
+  h6, .h6 {
+    font-size: $font-size-md;
+    font-weight: $font-weight-black;
+    line-height: 1em;
+    color: $primary-800;
+  
+    &.bold {
+      font-weight: $font-weight-bold;
+    }
+    &.light {
+      color: $primary-200;
+    }
+
+    h7, .h7 {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-black;
+      line-height: 1em;
+      color: $primary-800;
+    
+      &.bold {
+        font-weight: $font-weight-bold;
+      }
+
+      &.medium {
+        font-weight: $font-weight-medium;
+      }
+      &.light {
+        color: $primary-200;
+      }
+    }
+  }
 }
 
 
@@ -115,8 +235,4 @@ ul.wp-block-list {
       margin-left: 1.5em;
       margin-bottom: 0.5em;
     }
-  }
-
-  h2.hero {
-    font-size: 4.5em;
   }

@@ -2115,73 +2115,6 @@ a, a:visited {
 	}
 }
 
-/******************************************************************
-H1, H2, H3, H4, H5 STYLES
-******************************************************************/
-
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-	text-rendering: optimizelegibility;
-	font-weight: 400;
-	font-family: $header-font;
-	/*
-	if you're going to use webfonts, be sure to check your weights
-	http://css-tricks.com/watch-your-font-weight/
-	*/
-
-	/* removing text decoration from all headline links */
-	a {
-		text-decoration: none;
-	}
-}
-
-h1, .h1 {
-	font-size: 3.5em;
-	line-height: .9em;
-	color: $primary-500;
-
-	&.light {
-		color: $primary-300;
-	}
-}
-
-h2, .h2 {
-	font-size: 2.48em;
-	line-height: 1em;
-	margin-top: 0;
-	margin-bottom: 0.375em;
-	color: $primary-600;
-	&.light {
-		color: $primary-300;
-	}
-}
-
-h3, .h3 {
-	font-size: 2em;
-	line-height: 1.1;
-	color: $primary-700;
-	&.light {
-		color: $primary-300;
-	}
-}
-
-h4, .h4 {
-	font-size: 1.5em;
-	color: $primary-700;
-	&.light {
-		color: $primary-300;
-	}
-}
-
-h5, .h5 {
-	font-size: 1.2em;
-	line-height: 1.6em;
-	text-transform: normal;
-	color: $primary-800;
-	&.light {
-		color: $primary-200;
-	}
-}
-
 
 
 /*********************
@@ -2241,13 +2174,29 @@ and more scalable.
 
 */
 
+.header-toolbar {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	width: 100%;
+	flex-basis: 100%;
+	order: 3;
+	min-width: 0;
+
+	.header-widget-area {
+		order: 1;
+	}
+
+	.header-nav {
+		order: 2;
+	}
+}
+
 .header-nav {
 	width: 100%;
 	display: flex;
 	justify-content: flex-start;
 	flex-direction: column;
-	order: 4;
-	flex-basis: 100%;
 }
 
 .header-nav__wrapper {
@@ -2257,30 +2206,6 @@ and more scalable.
 	flex-direction: column;
 }
 
-#menu-login-and-forms {
-	margin-top: $spacing-md;
-	margin-left: auto;
-	margin-bottom: auto;
-	align-items: center;
-
-	&.show {
-		width: 100%;
-
-		&.nav li, &.nav li a {
-			width: 100%;
-		}
-	}
-
-	&.nav li {
-		border: 0;
-	}
-
-	&.nav li a {
-		@extend %btn;
-		@extend %btn--secondary;
-		@extend %btn--secondary--solid;
-	}
-}
 .header-logo {
 	order: 1;
 }
@@ -2290,7 +2215,6 @@ and more scalable.
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 0.75em;
-	order: 3;
 	margin-left: 0;
 
 	.widget {
@@ -2320,13 +2244,10 @@ and more scalable.
 	}
 }
 
-// When mobile nav is open: put Menu button below the nav (logo | search on row 1, nav links row 2, Menu button row 3)
+// When mobile nav is open: logo first, then widget + nav, then Menu button full width
 #inner-header:has(#mobile-nav.show) {
-	.header-widget-area {
+	.header-toolbar {
 		order: 2;
-	}
-	.header-nav {
-		order: 3;
 	}
 	#mobile-nav {
 		order: 4;
@@ -2362,10 +2283,10 @@ and more scalable.
 			display: block;
 			@include color_text__nav-item_default;
 			text-decoration: none;
-			padding: 0.75em;
+			padding: $spacing-xs $spacing-md;
 			font-family: $header-font;
 			font-size: 1.1em;
-			text-transform: uppercase;
+			text-transform: none;
 
 			&:hover, &:focus {
 				@include color_text__nav-item_hover;
@@ -2418,7 +2339,7 @@ and more scalable.
 	li.current_page_ancestor {
 
 		a {
-			color: $secondary-300;
+			color: $accent-400;
 		}
 
 	}  /* end current highlighters */
@@ -2440,6 +2361,11 @@ POSTS & CONTENT STYLES
 		}
 
 		&--landing {
+			// Image continues behind transparent header; overlay matches Figma — not full-bleed (top + bottom bands clear).
+			position: relative;
+			z-index: 1;
+			margin-top: -3.25rem;
+
 			.hero__content-curve--up {
 				display: inline;
 				position: relative;
@@ -2450,61 +2376,203 @@ POSTS & CONTENT STYLES
 				}
 			}
 
-		}
-
-		&--landing {
-			// rem (not em) so size is not shrunk by parent font-size; h1.hero__title--landing beats generic h1 rules
-			h1.hero__title--landing {
-				font-size: 2.5rem;
-				margin-top: 0;
-				margin-bottom: 0;
-				color: $primary-10;
-				font-family: $header-font;
-				font-weight: 400;
-				line-height: 1.05;
-				text-shadow: 0 0 20px rgba($secondary-900, 0.35);
-
-			span {
-				display: block;
-				color: $primary-50;
-				font-family: $header-font;
-				text-transform: uppercase;
-				font-size: 0.4em;
-				line-height: 1.1;
+			.hero__container--inner {
+				position: relative;
+				min-height: clamp(22rem, 65vh, 62rem);
+				padding-top: 3.25rem;
+				overflow: visible;
 			}
+
+			.hero__media {
+				position: absolute;
+				inset: 0;
+				overflow: visible;
+			}
+
+			.hero__content--landing-bg {
+				position: absolute;
+				top: -3.25rem;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+
+			// Align overlay + copy with the same fixed offset as header overlap (padding / bg pull). Avoid
+			// percentage-of-height `top`: on tall heroes it pushed the overlay below the header and left a
+			// visible untinted strip between the header and overlay.
+			.hero__overlay {
+				position: absolute;
+				top: 3.25rem;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: $overlay-dark;
+				pointer-events: none;
+			}
+
+			@media only screen and (min-width: 64em) {
+				margin-top: -4.75rem;
+
+				.hero__container--inner {
+					padding-top: 4.75rem;
 				}
 
-			h3 {
-				margin-top: 0;
-				font-size: 1.5em;
-				ul {
-				font-family: $header-font;
-				margin:0;
+				.hero__content--landing-bg {
+					top: -4.75rem;
+				}
 
-				li {
-					display: inline-block;
-					color: $secondary-500;
-					font-weight: 800;
+				.hero__overlay {
+					top: 4.75rem;
+				}
 
-					&:nth-child(1), &:nth-child(2) {
-						&:after {
-							content: " • ";
-							color: $primary-200;
-						}
+				.hero__content--landing {
+					top: 4.75rem;
+				}
+			}
+
+			h1.hero {
+				margin: 0 0;
+				text-shadow: 0 4px 12px rgba($black, 0.25);
+			}
+
+			h2.hero {
+				color: rgba($white, 0.5);
+			}
+
+			// Same vertical band as .hero__overlay so copy + CTAs center in the tinted area (not the full inner).
+			.hero__content--landing {
+				position: absolute;
+				z-index: 2;
+				top: 3.25rem;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				text-align: left;
+				padding: clamp(1rem, 3vw, 1.5rem) 7%;
+				box-sizing: border-box;
+			}
+
+			.hero__text-block--landing {
+				margin: 0;
+				width: 100%;
+			}
+
+			.hero__actions {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: $spacing-md;
+				margin-top: $spacing-xl;
+
+				/* Keep %btn / c-button-pair--primary colors & surfaces; only tweak layout + Figma label case */
+				.c-button-pair__button {
+					margin-bottom: 0;
+					text-transform: none;
+					font-family: $body-font;
+					font-weight: $font-weight-medium;
+					box-shadow: 0 4px 4px rgba($black, 0.15);
+
+					&:nth-child(2) {
+						margin-left: 0;
 					}
 				}
+
+				a.c-button-pair__button {
+					text-decoration: none;
+				}
+
+				/* Global `a, a:hover` link colors override %btn label colors on anchors — restore button tokens */
+				a.c-button-pair__button--solid {
+					&,
+					&:visited,
+					&:hover,
+					&:focus {
+						@include color_text__label_primary--default;
+					}
+				}
+
+				a.c-button-pair__button--outline {
+					&,
+					&:visited,
+					&:hover,
+					&:focus {
+						@include color_text__label_secondary--default;
+					}
 				}
 			}
 
-			.hero__content {
-				height: 50vh;
+			@media only screen and (max-width: 47.99em) {
+				.hero__actions {
+					flex-direction: column;
+					align-items: stretch;
+
+					.c-button-pair__button {
+						width: 100%;
+						text-align: center;
+						box-sizing: border-box;
+					}
+				}
 			}
 
-			// Stable root for em-based subtitle lines inside the headline; avoids shrink from inherited sizes
 			.hero__content--text {
 				font-size: 1rem;
 			}
 
+			// Bottom “Page Intro” band (Hero Options); overlaps hero inner upward; centered, max 950px.
+			.hero__page-intro {
+				position: relative;
+				z-index: 4;
+				width: 90%;
+				max-width: 950px;
+				margin: -$font-size-xxxxl auto $spacing-xl;
+				box-sizing: border-box;
+				background-color: $primary-10;
+				padding: $spacing-xl $spacing-lg;
+				text-align: center;
+
+				@media only screen and (min-width: 64em) {
+					width: 100%;
+				}
+
+				/* Figma: heading is h4 — use global h4 / _typography only; class is for layout hook + spacing. */
+				.intro__heading {
+					margin: 0 0 $spacing-md;
+				}
+			}
+
+			.hero__page-intro__body {
+				font-family: $body-font;
+				font-size: $font-size-md;
+				font-weight: $font-weight-regular;
+				line-height: 1.5;
+				color: $primary-900;
+				text-align: center;
+
+				p {
+					margin: 0 0 $spacing-sm;
+					color: $primary-900;
+				}
+
+				p:last-child {
+					margin-bottom: 0;
+				}
+
+				a {
+					color: $link-color;
+
+					&:hover,
+					&:focus {
+						color: $link-hover;
+					}
+				}
+			}
 		}
 
 		&--inner {

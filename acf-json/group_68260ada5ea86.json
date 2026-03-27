@@ -39,7 +39,7 @@
             "label": "Landing Page Hero Options",
             "name": "landing_page_hero_options",
             "aria-label": "",
-            "type": "clone",
+            "type": "group",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -56,15 +56,172 @@
                 "class": "",
                 "id": ""
             },
-            "clone": [
-                "field_68225159eee20",
-                "field_68225191eee21",
-                "field_682251bfeee22"
-            ],
-            "display": "group",
             "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
+            "sub_fields": [
+                {
+                    "key": "field_69c474f65305c",
+                    "label": "Hero Preheader",
+                    "name": "hero_preheader",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_69c46b6cd8778",
+                    "label": "Hero Headline",
+                    "name": "hero_headline",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": "br"
+                },
+                {
+                    "key": "field_69c46b9cd8779",
+                    "label": "Hero CTA",
+                    "name": "hero_cta",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "table",
+                    "pagination": 0,
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Add Row",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_69c46bbbd877a",
+                            "label": "Hero CTA Button",
+                            "name": "hero_cta_button",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "allow_in_bindings": 0,
+                            "parent_repeater": "field_69c46b9cd8779"
+                        }
+                    ]
+                },
+                {
+                    "key": "field_69c46befd877b",
+                    "label": "Include Page Intro Block",
+                    "name": "include_page_intro_block",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "allow_in_bindings": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1
+                },
+                {
+                    "key": "field_69c46c1ad877c",
+                    "label": "Page Intro Header",
+                    "name": "page_intro_header",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_69c46befd877b",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": "br"
+                },
+                {
+                    "key": "field_69c46d13d877d",
+                    "label": "Page Intro",
+                    "name": "page_intro",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_69c46befd877b",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "tabs": "visual",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0
+                }
+            ]
         },
         {
             "key": "field_69b6c5c5e9716",
@@ -333,22 +490,22 @@
             {
                 "param": "post_type",
                 "operator": "!=",
-                "value": "testimonials"
+                "value": "post"
             },
             {
                 "param": "post_type",
                 "operator": "!=",
-                "value": "form"
+                "value": "post"
             },
             {
                 "param": "post_type",
                 "operator": "!=",
-                "value": "tribe_events"
+                "value": "post"
             }
         ]
     ],
     "menu_order": 0,
-    "position": "side",
+    "position": "normal",
     "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
@@ -357,5 +514,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773883733
+    "modified": 1774568117
 }
