@@ -2115,73 +2115,6 @@ a, a:visited {
 	}
 }
 
-/******************************************************************
-H1, H2, H3, H4, H5 STYLES
-******************************************************************/
-
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-	text-rendering: optimizelegibility;
-	font-weight: 400;
-	font-family: $header-font;
-	/*
-	if you're going to use webfonts, be sure to check your weights
-	http://css-tricks.com/watch-your-font-weight/
-	*/
-
-	/* removing text decoration from all headline links */
-	a {
-		text-decoration: none;
-	}
-}
-
-h1, .h1 {
-	font-size: 3.5em;
-	line-height: .9em;
-	color: $primary-500;
-
-	&.light {
-		color: $primary-300;
-	}
-}
-
-h2, .h2 {
-	font-size: 2.48em;
-	line-height: 1em;
-	margin-top: 0;
-	margin-bottom: 0.375em;
-	color: $primary-600;
-	&.light {
-		color: $primary-300;
-	}
-}
-
-h3, .h3 {
-	font-size: 2em;
-	line-height: 1.1;
-	color: $primary-700;
-	&.light {
-		color: $primary-300;
-	}
-}
-
-h4, .h4 {
-	font-size: 1.5em;
-	color: $primary-700;
-	&.light {
-		color: $primary-300;
-	}
-}
-
-h5, .h5 {
-	font-size: 1.2em;
-	line-height: 1.6em;
-	text-transform: normal;
-	color: $primary-800;
-	&.light {
-		color: $primary-200;
-	}
-}
-
 
 
 /*********************
@@ -2590,6 +2523,55 @@ POSTS & CONTENT STYLES
 
 			.hero__content--text {
 				font-size: 1rem;
+			}
+
+			// Bottom “Page Intro” band (Hero Options); overlaps hero inner upward; centered, max 950px.
+			.hero__page-intro {
+				position: relative;
+				z-index: 4;
+				width: 90%;
+				max-width: 950px;
+				margin: -$font-size-xxxxl auto $spacing-xl;
+				box-sizing: border-box;
+				background-color: $primary-10;
+				padding: $spacing-xl $spacing-lg;
+				text-align: center;
+
+				@media only screen and (min-width: 64em) {
+					width: 100%;
+				}
+
+				/* Figma: heading is h4 — use global h4 / _typography only; class is for layout hook + spacing. */
+				.intro__heading {
+					margin: 0 0 $spacing-md;
+				}
+			}
+
+			.hero__page-intro__body {
+				font-family: $body-font;
+				font-size: $font-size-md;
+				font-weight: $font-weight-regular;
+				line-height: 1.5;
+				color: $primary-900;
+				text-align: center;
+
+				p {
+					margin: 0 0 $spacing-sm;
+					color: $primary-900;
+				}
+
+				p:last-child {
+					margin-bottom: 0;
+				}
+
+				a {
+					color: $link-color;
+
+					&:hover,
+					&:focus {
+						color: $link-hover;
+					}
+				}
 			}
 		}
 

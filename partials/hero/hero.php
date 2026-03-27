@@ -296,5 +296,24 @@ $d = isset( $hero['data'] ) ? $hero['data'] : array();
         </div>
       </div>
     </div>
+    <?php
+    // ACF (acf-json/group_68260ada5ea86.json): Landing Page Hero Options — Include Page Intro Block, Page Intro Header, Page Intro.
+    $include_page_intro = ! empty( $lpho['include_page_intro_block'] );
+    $page_intro_header  = isset( $lpho['page_intro_header'] ) ? $lpho['page_intro_header'] : '';
+    $page_intro_header  = is_string( $page_intro_header ) ? trim( $page_intro_header ) : '';
+    $page_intro_body    = isset( $lpho['page_intro'] ) ? $lpho['page_intro'] : '';
+    $page_intro_body    = is_string( $page_intro_body ) ? trim( $page_intro_body ) : '';
+    $show_page_intro    = $include_page_intro && ( $page_intro_header !== '' || $page_intro_body !== '' );
+    if ( $show_page_intro ) :
+      ?>
+    <div class="hero__page-intro">
+      <?php if ( $page_intro_header !== '' ) : ?>
+        <h4 class="intro__heading"><?php echo wp_kses_post( $page_intro_header ); ?></h4>
+      <?php endif; ?>
+      <?php if ( $page_intro_body !== '' ) : ?>
+        <div class="hero__page-intro__body"><?php echo wp_kses_post( $page_intro_body ); ?></div>
+      <?php endif; ?>
+    </div>
+    <?php endif; ?>
   </div>
 <?php endif; ?>
