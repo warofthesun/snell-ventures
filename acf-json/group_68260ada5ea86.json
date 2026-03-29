@@ -490,17 +490,7 @@
             {
                 "param": "post_type",
                 "operator": "!=",
-                "value": "post"
-            },
-            {
-                "param": "post_type",
-                "operator": "!=",
-                "value": "post"
-            },
-            {
-                "param": "post_type",
-                "operator": "!=",
-                "value": "post"
+                "value": "people"
             }
         ]
     ],
@@ -514,5 +504,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774568117
+    "modified": 1774798811
 }
