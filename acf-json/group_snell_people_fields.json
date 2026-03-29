@@ -3,28 +3,7 @@
     "title": "Personal Details",
     "fields": [
         {
-            "key": "field_snell_people_email",
-            "label": "Email",
-            "name": "email",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "30",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_snell_people_title",
+            "key": "field_69c999c54d3d9",
             "label": "Title",
             "name": "title",
             "aria-label": "",
@@ -45,7 +24,7 @@
             "append": ""
         },
         {
-            "key": "field_69c9483dd490d",
+            "key": "field_69c997fe441a2",
             "label": "Bio Excerpt",
             "name": "bio_excerpt",
             "aria-label": "",
@@ -54,7 +33,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "70",
                 "class": "",
                 "id": ""
             },
@@ -195,5 +174,5 @@
     "description": "Email, role, and title for Person (people) posts.",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774798972
+    "modified": 1774819837
 }

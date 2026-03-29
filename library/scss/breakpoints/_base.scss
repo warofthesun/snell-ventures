@@ -3014,178 +3014,10 @@ POSTS & CONTENT STYLES
 	gap: $spacing-xl;
 }
 
-.c-personCard {
-	display: flex;
-	flex-direction: column;
-	gap: $spacing-xl;
-	align-items: stretch;
-	background-color: $secondary-50;
-	border-radius: $radius-lg;
-	padding: $spacing-xl;
-	color: $secondary-900;
-}
-
-.c-personCard__media {
-	position: relative;
-	max-width: 420px;
-	margin: 0 auto;
-}
-
-.c-personCard__photo {
-	position: relative;
-	overflow: hidden;
-	border-radius: $radius-lg;
-	aspect-ratio: 1 / 1;
-	img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-}
-
-.c-personCard__social {
-	margin-top: $spacing-lg;
-	text-align: center;
-	font-family: $header-font;
-	font-size: 0.9rem;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: $secondary-700;
-}
-
-.c-personCard__socialLabel {
-	display: block;
-	margin-bottom: $spacing-sm;
-}
-
-.c-personCard__socialList {
-	display: inline-flex;
-	gap: $spacing-md;
-	align-items: center;
-	justify-content: center;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.c-personCard__socialLink {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 32px;
-	height: 32px;
-	border-radius: 999px;
-	background-color: $secondary-50;
-	color: $accent-500;
-	text-decoration: none;
-	transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-
-	i {
-		font-size: 1rem;
-	}
-
-	&:hover,
-	&:focus-visible {
-		background-color: $accent-500;
-		color: $secondary-50;
-		transform: translateY(-1px);
-	}
-}
-
-.c-personCard__content {
-	max-width: 720px;
-	margin: 0 auto;
-}
-
-.c-personCard__name {
-	// size comes from .hero; we only tweak color/spacing
-	color: $primary-700;
-	margin: 0 0 $spacing-sm;
-}
-
-.c-personCard__meta {
-	display: flex;
-	flex-wrap: wrap;
-	gap: $spacing-sm;
-	align-items: center;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	font-family: $header-font;
-	font-size: 0.9rem;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: $secondary-700;
-}
-
-.c-personCard__metaItem {
-	position: relative;
-	padding-right: $spacing-md;
-
-	&::after {
-		content: "•";
-		position: absolute;
-		right: 0;
-		color: $secondary-500;
-	}
-
-	&:last-child::after {
-		content: "";
-	}
-}
-
-.c-personCard__email {
-	color: $accent-500;
-}
-
-.c-personCard__bio {
-	font-size: 1rem;
-	line-height: 1.7;
-	color: $secondary-900;
-
-	p:last-child {
-		margin-bottom: 0;
-	}
-}
-
-@media (min-width: 768px) {
-	.c-personCard {
-		flex-direction: row;
-		align-items: stretch;
-		padding: $spacing-xxl;
-	}
-
-	.c-personCard__media {
-		flex: 0 0 360px;
-		margin: 0;
-	}
-
-	.c-personCard__content {
-		flex: 1 1 auto;
-		padding-left: $spacing-xxl;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-}
-
-/* People List block — bio cards */
-.c-peopleList {
-	margin: $spacing-xxl 0;
-}
-
-.c-peopleList__items {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: $spacing-xl;
-}
-
 .c-peopleList__item {
 	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 .c-peopleCard {
@@ -3193,7 +3025,7 @@ POSTS & CONTENT STYLES
 	flex-direction: column;
 	gap: $spacing-xl;
 	align-items: stretch;
-	background-color: $primary-50;
+	background-color: $secondary-50;
 	border-radius: $radius-lg;
 	padding: $spacing-xl;
 	color: $secondary-900;
@@ -3208,6 +3040,7 @@ POSTS & CONTENT STYLES
 .c-peopleCard__photo {
 	position: relative;
 	overflow: hidden;
+	border-radius: $radius-lg;
 	aspect-ratio: 1 / 1;
 	img {
 		display: block;
@@ -3250,16 +3083,18 @@ POSTS & CONTENT STYLES
 	height: 32px;
 	border-radius: 999px;
 	background-color: $secondary-50;
-	color: $secondary-700;
+	color: $accent-500;
 	text-decoration: none;
 	transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+
 	i {
 		font-size: 1rem;
 	}
+
 	&:hover,
 	&:focus-visible {
-		background-color: $secondary-500;
-		color: $primary-50;
+		background-color: $accent-500;
+		color: $secondary-50;
 		transform: translateY(-1px);
 	}
 }
@@ -3269,10 +3104,19 @@ POSTS & CONTENT STYLES
 	margin: 0 auto;
 }
 
+.c-peopleCard__heading {
+	display: flex;
+	flex-direction: column;
+	gap: $spacing-xs;
+	margin-bottom: $spacing-sm;
+}
+
 .c-peopleCard__name {
-	// Uses .hero heading styles for size; only adjust spacing/color here.
-	color: $primary-700;
-	margin-bottom:0;
+	margin: 0;
+}
+
+.c-peopleCard__personalTitle {
+	margin: 0;
 }
 
 .c-peopleCard__meta {
@@ -3293,19 +3137,23 @@ POSTS & CONTENT STYLES
 .c-peopleCard__metaItem {
 	position: relative;
 	padding-right: $spacing-md;
+
 	&::after {
 		content: "•";
 		position: absolute;
 		right: 0;
 		color: $secondary-500;
 	}
+
 	&:last-child::after {
 		content: "";
 	}
+
 	a {
 		color: inherit;
 		text-decoration: none;
 		border-bottom: 1px solid transparent;
+
 		&:hover,
 		&:focus-visible {
 			border-color: currentColor;
@@ -3313,17 +3161,22 @@ POSTS & CONTENT STYLES
 	}
 }
 
-.c-peopleCard__bio {
-	font-size: 1rem;
-	line-height: 1.7;
-	color: $secondary-900;
-	p:last-child {
-		margin-bottom: 0;
-	}
+.c-peopleCard__email {
+	color: $accent-500;
 }
 
 a.c-peopleCard__email {
 	color: $accent-500;
+}
+
+.c-peopleCard__bio {
+	font-size: 1rem;
+	line-height: 1.7;
+	color: $secondary-900;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
 }
 
 @media (min-width: 768px) {
@@ -3332,10 +3185,12 @@ a.c-peopleCard__email {
 		align-items: stretch;
 		padding: $spacing-xxl;
 	}
+
 	.c-peopleCard__media {
 		flex: 0 0 360px;
 		margin: 0;
 	}
+
 	.c-peopleCard__content {
 		flex: 1 1 auto;
 		padding-left: $spacing-xxl;
@@ -3345,3 +3200,401 @@ a.c-peopleCard__email {
 	}
 }
 
+/*
+ * People List — single person
+ * Desktop: Figma Bio/Single/Desktop. Mobile: Bio/Single/Mobile 665:860 (layer order from file).
+ */
+.c-peopleList--single .c-peopleList__items {
+	gap: 0;
+}
+
+.c-peopleList--single .c-peopleList__item {
+	/* Allow full-bleed hero; avoid clipping from list/grid parents. */
+	overflow-x: visible;
+}
+
+.c-peopleBio {
+	position: relative;
+	background: transparent;
+	margin: 0;
+	padding: 0;
+	overflow-x: visible;
+}
+
+.c-peopleBio__hero {
+	--people-bio-stage-min: clamp(17.5rem, 100vw, 26.6875rem);
+	position: relative;
+	overflow: hidden;
+	/* Full-bleed gradient angle to viewport width (escape content column). */
+	width: 100vw;
+	max-width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	box-sizing: border-box;
+	/* Figma frame ~500px at desktop */
+	min-height: clamp(17.5rem, 42vw, 31.25rem);
+}
+
+/* Stage: decorative layers + photo. Desktop fills hero; mobile gets min height from photo aspect (428/430). */
+.c-peopleBio__stage {
+	position: absolute;
+	inset: 0;
+	box-sizing: border-box;
+}
+
+.c-peopleBio__stage .c-peopleBio__angle,
+.c-peopleBio__stage .c-peopleBio__solid {
+	position: absolute;
+	inset: 0;
+}
+
+/* Rearmost decorative layer (lowest in Figma stack). */
+.c-peopleBio__angle {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+}
+
+.c-peopleBio__angleSvg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+/* Solid navy in front of gradient; $primary-700 only. */
+.c-peopleBio__solid {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.c-peopleBio__solidSvg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.c-peopleBio__solidPath {
+	fill: $primary-700;
+}
+
+.c-peopleBio__solidPath--mobile {
+	display: none;
+}
+
+/* Figma 665:864 — Rectangle 36 above portrait; gradient Primary 135°; desktop hidden. */
+.c-peopleBio__mobileBand {
+	display: none;
+	position: absolute;
+	z-index: 3;
+	left: 0;
+	top: 61.05%;
+	height: 39.14%;
+	pointer-events: none;
+}
+
+.c-peopleBio__mobileBandSvg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.c-peopleBio__photo {
+	position: absolute;
+	z-index: 2;
+	left: 6.28%;
+	width: 34.48%;
+	bottom: 0;
+	aspect-ratio: 1 / 1;
+	max-height: 100%;
+	border-radius: 48px 0 0 0;
+	overflow: hidden;
+	box-sizing: border-box;
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: center bottom;
+		border-radius: inherit;
+	}
+}
+
+.c-peopleBio__intro {
+	position: absolute;
+	z-index: 3;
+	/* Figma node 198:180 */
+	left: 30.21%;
+	right: 47.72%;
+	top: 38%;
+	bottom: 48.2%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.35rem;
+	color: $white;
+	pointer-events: none;
+
+	a {
+		pointer-events: auto;
+	}
+}
+
+.c-peopleBio__heading {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Mobile name on white plate (Figma Frame 1); desktop wrapper is neutral. */
+.c-peopleBio__nameplate {
+	display: contents;
+}
+
+/* Typography: global .h4 / .h5.bold (_typography.scss). White stack inherits from .c-peopleBio__intro. */
+.c-peopleBio__intro .h4,
+.c-peopleBio__intro .h5 {
+	color: inherit;
+}
+
+.c-peopleBio__name {
+	margin: 0;
+}
+
+.c-peopleBio__personalTitle {
+	margin: 0;
+	opacity: 0.95;
+}
+
+/* Figma 198:181 — body/md on white over blue stack; ACF bio_excerpt (new_lines: br). */
+.c-peopleBio__excerpt {
+	position: absolute;
+	z-index: 3;
+	left: 43.38%;
+	right: 7.38%;
+	top: 60.2%;
+	bottom: 7.2%;
+	margin: 0;
+	overflow: hidden;
+	font-family: $body-font;
+	font-size: $font-size-md;
+	font-weight: $font-weight-regular;
+	line-height: normal;
+	color: $white;
+	pointer-events: auto;
+	max-width: 600px;
+
+	p {
+		margin: 0 0 0.65em;
+		font-size: inherit;
+		line-height: inherit;
+		color: inherit;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.c-peopleBio__details {
+	position: relative;
+	z-index: 1;
+	max-width: 42.5rem;
+	margin-top: $spacing-xxl;
+	padding: 0 $spacing-md;
+	color: $secondary-900;
+}
+
+.c-peopleBio__emailWrap {
+	margin: 0 0 $spacing-md;
+}
+
+a.c-peopleBio__email {
+	color: $accent-600;
+	text-decoration: none;
+
+	&:hover,
+	&:focus-visible {
+		text-decoration: underline;
+	}
+}
+
+.c-peopleBio__bio {
+	font-size: $font-size-md;
+	line-height: 1.65;
+	color: $secondary-900;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.c-peopleBio__social {
+	margin-top: $spacing-xl;
+	font-family: $header-font;
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: $secondary-700;
+}
+
+.c-peopleBio__socialLabel {
+	display: block;
+	margin-bottom: $spacing-sm;
+}
+
+.c-peopleBio__socialList {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: $spacing-md;
+	align-items: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.c-peopleBio__socialLink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 999px;
+	background-color: $secondary-50;
+	color: $accent-500;
+	text-decoration: none;
+	transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+
+	i {
+		font-size: 1rem;
+	}
+
+	&:hover,
+	&:focus-visible {
+		background-color: $accent-500;
+		color: $secondary-50;
+		transform: translateY(-1px);
+	}
+}
+
+@media (max-width: 767px) {
+	.c-peopleBio__hero {
+		min-height: 0;
+		overflow: visible;
+		padding-bottom: $spacing-md;
+	}
+
+	.c-peopleBio__stage {
+		position: relative;
+		inset: auto;
+		min-height: var(--people-bio-stage-min);
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.c-peopleBio__mobileBand {
+		display: block;
+	}
+
+	/* Mobile: no gradient facet; solid navy only, horizontal top; slab height 56% of stage (70% then −20% more). */
+	.c-peopleBio__angle {
+		display: none;
+	}
+
+	.c-peopleBio__stage .c-peopleBio__solid {
+		inset: auto 0 0 0;
+		height: 56%;
+	}
+
+	.c-peopleBio__solidPath--desktop {
+		display: none;
+	}
+
+	.c-peopleBio__solidPath--mobile {
+		display: block;
+	}
+
+	.c-peopleBio__photo {
+		left: 0.29%;
+		right: 0.15%;
+		width: auto;
+		top: 0;
+		bottom: auto;
+		max-height: none;
+		aspect-ratio: 1 / 1;
+		border-radius: 0;
+		margin: 0;
+	}
+
+	.c-peopleBio__intro {
+		position: absolute;
+		z-index: 4;
+		left: 0;
+		right: $spacing-md;
+		top: calc(var(--people-bio-stage-min) * 0.8);
+		width: auto;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+		text-align: left;
+		color: $primary-900;
+		pointer-events: none;
+		justify-content: flex-start;
+
+		a {
+			pointer-events: auto;
+		}
+	}
+
+	.c-peopleBio__heading {
+		align-items: flex-start;
+	}
+
+	.c-peopleBio__nameplate {
+		display: block;
+		width: fit-content;
+		max-width: 100%;
+		padding: $spacing-sm $spacing-md;
+		box-sizing: border-box;
+		background-color: $white;
+	}
+
+	.c-peopleBio__intro .c-peopleBio__name {
+		margin: 0;
+		font-size: $font-size-lg;
+		font-weight: $font-weight-black;
+		line-height: normal;
+		color: $primary-400;
+		text-transform: none;
+	}
+
+	.c-peopleBio__intro .c-peopleBio__personalTitle {
+		margin: 0;
+		padding: 0;
+		padding-left: $spacing-sm;
+		line-height: normal;
+		color: $white;
+		text-transform: uppercase;
+		opacity: 1;
+		text-shadow: 0 2px 4px rgba($black, 0.25);
+	}
+
+	.c-peopleBio__excerpt {
+		position: relative;
+		z-index: 1;
+		left: auto;
+		right: auto;
+		top: auto;
+		bottom: auto;
+		margin-top: $spacing-sm;
+		padding: $spacing-md 4.65% 0;
+		color: $primary-900;
+		overflow: visible;
+	}
+
+	.c-peopleBio__details {
+		margin-top: $spacing-xl;
+	}
+}

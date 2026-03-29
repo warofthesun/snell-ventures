@@ -1,9 +1,15 @@
 ---
-description: Match reference images and designs exactly; do not substitute variants
+description: Match reference designs exactly; no silent geometry/stacking guesses; token discipline
 alwaysApply: true
 ---
 
 # Match Reference Design Exactly
+
+**Hard requirements (do not skip):**
+
+- **No silent assumptions** about layout geometry, decorative shapes, or **layer / stacking order**. If the reference does not give enough detail, **stop and ask** or use **exported SVG / Figma layer list / coordinates**—do **not** substitute a simpler shape (e.g. axis-aligned rectangle, flat top/bottom) “because it’s close.”
+- **Stacking:** Treat **Figma layer panel order** as authoritative: the **lowest** listed layer is **rearmost** (painted first); higher layers sit **in front**. State that order when implementing `z-index` / DOM order, then match it.
+- **Vector shapes:** Trace **each edge** of filled shapes in the comp. Angled or irregular edges must appear in the path—not a default box. Prefer **copying** `d=` from a Figma SVG export or MCP output over hand-authoring coordinates unless the user supplied numbers.
 
 When the user provides a reference image, mockup, or design:
 
