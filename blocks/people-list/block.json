@@ -3,6 +3,7 @@
   "title": "People List",
   "description": "Select and display People entries (Person post type) in a simple list.",
   "style": ["file:../library/css/style.css"],
+  "viewScript": "file:./people-list.js",
   "category": "theme-blocks",
   "icon": "groups",
   "supports": {

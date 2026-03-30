@@ -3014,6 +3014,23 @@ POSTS & CONTENT STYLES
 	gap: $spacing-xl;
 }
 
+/* Multi-person grid: Figma 669:969 (2-up / 4-up) vs 666:900 (3-up). */
+.c-peopleList--multi .c-peopleList__items {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: $spacing-xl;
+}
+
+@media (min-width: 768px) {
+	.c-peopleList--cols-2 .c-peopleList__items {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.c-peopleList--cols-3 .c-peopleList__items {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
 .c-peopleList__item {
 	margin: 0;
 	padding: 0;
@@ -3180,24 +3197,509 @@ a.c-peopleCard__email {
 }
 
 @media (min-width: 768px) {
-	.c-peopleCard {
+	.c-peopleCard:not(.c-peopleCard--tile) {
 		flex-direction: row;
 		align-items: stretch;
 		padding: $spacing-xxl;
 	}
 
-	.c-peopleCard__media {
+	.c-peopleCard:not(.c-peopleCard--tile) .c-peopleCard__media {
 		flex: 0 0 360px;
 		margin: 0;
 	}
 
-	.c-peopleCard__content {
+	.c-peopleCard:not(.c-peopleCard--tile) .c-peopleCard__content {
 		flex: 1 1 auto;
 		padding-left: $spacing-xxl;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 	}
+}
+
+/*
+ * Headshot tile (Figma component Headshot — multi list). Solid rear, gradient band, photo, nameplate + role.
+ */
+.c-peopleCard--tile {
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	color: inherit;
+	text-align: left;
+	cursor: pointer;
+	font: inherit;
+	-webkit-tap-highlight-color: transparent;
+	box-sizing: border-box;
+
+	&:focus-visible {
+		outline: 2px solid $accent-500;
+		outline-offset: 4px;
+	}
+
+	&:focus:not(:focus-visible) {
+		outline: none;
+	}
+}
+
+.c-peopleCard__tileStage {
+	position: relative;
+	display: block;
+	width: 100%;
+	aspect-ratio: 344 / 342;
+	overflow: hidden;
+}
+
+.c-peopleCard__tileSolid {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+}
+
+.c-peopleCard__tileSolidSvg {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 60%;
+	transition: height 0.28s ease;
+}
+
+.c-peopleCard--tile:hover .c-peopleCard__tileSolidSvg,
+.c-peopleCard--tile:focus-visible .c-peopleCard__tileSolidSvg {
+	height: 100%;
+}
+
+.c-peopleCard__tileSolidPath {
+	fill: $primary-700;
+}
+
+.c-peopleCard__tileBand {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	width: 60%;
+	top: 60%;
+	height: 140%;
+	pointer-events: none;
+}
+
+.c-peopleCard__tileBandSvg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.c-peopleCard__tilePhoto {
+	position: absolute;
+	z-index: 1;
+	left: 0.29%;
+	right: 0.15%;
+	top: 0;
+	bottom: auto;
+	height: auto;
+	aspect-ratio: 1 / 1;
+	overflow: hidden;
+	pointer-events: none;
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center bottom;
+	}
+}
+
+.c-peopleCard__tileFoot {
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-end;
+	padding: 0 0 2% 0;
+	pointer-events: none;
+	box-sizing: border-box;
+}
+
+.c-peopleCard__tileNameplate {
+	width: fit-content;
+	max-width: 90%;
+	margin-top: auto;
+	margin-bottom: 0.12em;
+	padding: 0.625em 0.625em 0.125em $spacing-sm;
+	box-sizing: border-box;
+	background-color: $white;
+}
+
+.c-peopleCard__tileName {
+	display: block;
+	font-family: $header-font;
+	font-size: $font-size-lg;
+	font-weight: $font-weight-black;
+	line-height: normal;
+	color: $accent-700;
+}
+
+.c-peopleCard__tileRole {
+	margin: 0 0 0 4.07%;
+	align-self: stretch;
+	padding-right: 2.62%;
+	font-family: $header-font;
+	font-size: $font-size-md;
+	font-weight: $font-weight-semibold;
+	line-height: normal;
+	color: $white;
+	text-transform: uppercase;
+	text-shadow: 0 2px 4px rgba($black, 0.25);
+	text-align: left;
+}
+
+/* Hero overlay token ($overlay-dark); grows from bottom on hover/focus. */
+.c-peopleCard__tileHover {
+	position: absolute;
+	inset: 0;
+	z-index: 4;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $overlay-dark;
+	transform: scaleY(0);
+	transform-origin: bottom center;
+	transition: transform 0.28s ease;
+	pointer-events: none;
+}
+
+.c-peopleCard--tile:hover .c-peopleCard__tileHover,
+.c-peopleCard--tile:focus-visible .c-peopleCard__tileHover {
+	transform: scaleY(1);
+}
+
+.c-peopleCard__tileHoverInner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	padding: $spacing-md;
+	box-sizing: border-box;
+}
+
+.c-peopleCard__tileCta {
+	display: inline-block;
+	position: relative;
+	/* Receives hover for primary “pill” state; overlay parent stays pointer-events: none so rest of tile stays one clickable <button>. */
+	pointer-events: auto;
+	font-family: $header-font;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 1em;
+	font-weight: 400;
+	padding: $spacing-xs $spacing-md;
+	border-radius: 0;
+	border: 2px solid;
+	cursor: pointer;
+	@include transition(background-color 0.14s ease-in-out, border-color 0.14s ease-in-out, color 0.14s ease-in-out);
+	@include color_surface__button_primary--default;
+	@include color_text__label_primary--default;
+	@include color_border__button_primary--default;
+}
+
+.c-peopleCard__tileCta:hover {
+	@include color_surface__button_primary--hover;
+	color: $white !important;
+}
+
+/* Figma Overlay/Content/Bio — full-viewport semi-transparent gradient; shell dismiss; two-column layout. */
+.c-peopleList__dialog {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	max-width: none;
+	height: 100%;
+	max-height: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: $white;
+	overflow: auto;
+	box-sizing: border-box;
+
+	&::backdrop {
+		background: transparent;
+	}
+}
+
+.c-peopleList__dialogShell {
+	/* Top: semi-transparent dark; bottom: solid-ish #131e3c (Figma gradient dark-200). */
+	min-height: 100%;
+	min-height: 100dvh;
+	width: 100%;
+	box-sizing: border-box;
+	padding: clamp(#{$spacing-lg}, 5vw, #{$spacing-xxl});
+	background: linear-gradient(180deg, rgba(5, 13, 35, 0.85) 23.12%, #131e3c 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.c-peopleList__dialogPanel {
+	position: relative;
+	width: 100%;
+	max-width: 90rem;
+	margin: 0 auto;
+	cursor: default;
+	pointer-events: auto;
+	box-sizing: border-box;
+}
+
+.c-peopleList__dialogClose {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 5;
+	width: 2.5rem;
+	height: 2.5rem;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 999px;
+	background: $secondary-100;
+	color: $primary-700;
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:hover,
+	&:focus-visible {
+		background: $secondary-200;
+	}
+}
+
+.c-peopleList__dialogGrid {
+	display: grid;
+	grid-template-columns: 1fr;
+	align-items: start;
+	gap: clamp(#{$spacing-xl}, 4vw, #{$spacing-xxl} * 1.5);
+	padding-top: 2.75rem;
+	padding-right: $spacing-xs;
+	box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+	.c-peopleList__dialogGrid {
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+		align-items: start;
+	}
+}
+
+.c-peopleList__dialogVisual {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: $spacing-md;
+	width: 100%;
+	max-width: 35.5rem;
+	margin: 0 auto;
+}
+
+/* Shape + image only; overflow clips gradient so it cannot paint over social row below. */
+.c-peopleList__dialogPhotoStack {
+	position: relative;
+	width: 88%;
+	max-width: 28rem;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.c-peopleList__dialogPhotoStack:not(:has(.c-peopleList__dialogPhotoWrap)) {
+	min-height: 15rem;
+	aspect-ratio: 1 / 1;
+}
+
+.c-peopleList__dialogShape {
+	position: absolute;
+	z-index: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 68%;
+	pointer-events: none;
+}
+
+.c-peopleList__dialogShapeSvg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.c-peopleList__dialogPhotoWrap {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	margin: 0;
+	aspect-ratio: 1 / 1;
+	overflow: hidden;
+	pointer-events: auto;
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center bottom;
+	}
+}
+
+.c-peopleList__dialogSocialOuter {
+	width: 88%;
+	max-width: 28rem;
+	margin: 0 auto;
+	flex-shrink: 0;
+	position: relative;
+	z-index: 1;
+}
+
+.c-peopleList__dialogSocialRow {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: $spacing-md;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	pointer-events: auto;
+}
+
+.c-peopleList__dialogSocialItem {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Anchor qualifier + :visited beat global `a, a:visited { color: $link-color }`; children inherit for FA. */
+a.c-peopleList__dialogSocialLink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	font-size: clamp(1.5rem, 3.5vw, 2.125rem);
+	transition: color 0.15s ease, fill 0.15s ease;
+	color: $primary-300;
+	fill: $primary-300;
+
+	&:visited {
+		color: $primary-300;
+		fill: $primary-300;
+	}
+
+	i,
+	svg,
+	.svg-inline--fa,
+	.fa-brands {
+		color: inherit;
+		fill: currentColor;
+	}
+
+	&:hover,
+	&:hover:visited,
+	&:focus-visible {
+		color: $primary-500;
+		fill: $primary-500;
+	}
+}
+
+.c-peopleList__dialogMain {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: $spacing-md;
+	min-width: 0;
+	max-height: min(78vh, 52rem);
+	overflow-y: auto;
+	padding-bottom: $spacing-sm;
+	pointer-events: auto;
+}
+
+.c-peopleList__dialogHead {
+	filter: drop-shadow(1px 6px 10px rgba(2, 56, 68, 0.3));
+}
+
+.c-peopleList__dialogName {
+	margin: 0;
+	font-family: $header-font;
+	font-size: clamp(2.25rem, 5vw, 4.65rem);
+	font-weight: $font-weight-medium;
+	line-height: 1.05;
+	color: rgba($white, 0.9);
+}
+
+.c-peopleList__dialogRole {
+	margin: $spacing-xs 0 0;
+	font-family: $header-font;
+	font-size: $font-size-xl;
+	font-weight: $font-weight-bold;
+	line-height: 1.15;
+	text-transform: uppercase;
+	color: $white;
+}
+
+.c-peopleList__dialogEmail {
+	margin: 0;
+	font-size: $font-size-md;
+}
+
+.c-peopleList__dialogEmailLink {
+	color: rgba($white, 0.85);
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+
+	&:hover,
+	&:focus-visible {
+		color: $white;
+	}
+}
+
+.c-peopleList__dialogCopy {
+	flex: 1 1 auto;
+	min-height: 0;
+	font-family: $body-font;
+	font-size: $font-size-md;
+	line-height: 1.6;
+	color: $white;
+	width: 100%;
+
+	p {
+		margin: 0 0 1em;
+		color: inherit;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.c-peopleList__dialogExcerpt {
+	margin-bottom: $spacing-md;
+	color: inherit;
+}
+
+.c-peopleList__dialogBio {
+	color: inherit;
 }
 
 /*

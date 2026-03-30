@@ -4,7 +4,7 @@
  *
  * Single selection: Bio/Single/Desktop (gradient rear, solid facet, photo, copy) and
  * Bio/Single/Mobile (665:860) — same field stack; mobile adds Figma Rectangle 36 band + name plate.
- * Multiple selections use the stacked card layout.
+ * Multiple selections: Figma Headshot tiles in a 2- or 3-column grid + dialog bio (666:900 / 669:969).
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -30,10 +30,15 @@ foreach ( $people as $person ) {
 	}
 }
 
-$is_single = ( 1 === count( $person_ids ) );
+$people_count = count( $person_ids );
+$is_single    = ( 1 === $people_count );
 
 if ( $is_single ) {
 	$classes[] = 'c-peopleList--single';
+} elseif ( $people_count > 0 ) {
+	$classes[] = 'c-peopleList--multi';
+	// Figma: "Multiple People List 2up or 4up" vs "3up, 6 and over".
+	$classes[] = ( 2 === $people_count || 4 === $people_count ) ? 'c-peopleList--cols-2' : 'c-peopleList--cols-3';
 }
 
 /**
@@ -196,75 +201,146 @@ $client_people_bio_surfaces = static function ( $gradient_id ) {
 							</div>
 						</article>
 					<?php else : ?>
-						<div class="c-peopleCard">
-							<div class="c-peopleCard__media">
+						<?php
+						$dialog_id    = $block_id . '-dlg-' . $person_id;
+						$dialog_id    = sanitize_title( $dialog_id );
+						$dialog_title = 'people-list-dlg-title-' . $person_id;
+						$tile_band    = wp_unique_id( 'people-tile-band-' );
+						?>
+						<button
+							type="button"
+							class="c-peopleCard c-peopleCard--tile"
+							data-people-list-dialog-open
+							aria-haspopup="dialog"
+							aria-controls="<?php echo esc_attr( $dialog_id ); ?>"
+							aria-label="<?php echo esc_attr( sprintf( __( 'Open bio for %s', 'client_theme' ), $name ) ); ?>"
+						>
+							<span class="c-peopleCard__tileStage">
+								<span class="c-peopleCard__tileSolid" aria-hidden="true">
+									<svg class="c-peopleCard__tileSolidSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
+										<path class="c-peopleCard__tileSolidPath" d="M0 0 L100 0 L100 100 L0 100 Z"/>
+									</svg>
+								</span>
+								<span class="c-peopleCard__tileBand" aria-hidden="true">
+									<svg class="c-peopleCard__tileBandSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342 168" preserveAspectRatio="none" focusable="false">
+										<defs>
+											<linearGradient id="<?php echo esc_attr( $tile_band ); ?>" gradientUnits="userSpaceOnUse" x1="0" y1="168" x2="342" y2="0">
+												<stop offset="0%" stop-color="#12273d"/>
+												<stop offset="100%" stop-color="#507a73"/>
+											</linearGradient>
+										</defs>
+										<path fill="url(#<?php echo esc_attr( $tile_band ); ?>)" d="M0 0 L342 48 L342 168 L0 168 Z"/>
+									</svg>
+								</span>
 								<?php if ( has_post_thumbnail( $person_id ) ) : ?>
-									<div class="c-peopleCard__photo">
-										<?php echo get_the_post_thumbnail( $person_id, 'client_slider_square' ); ?>
-									</div>
+									<span class="c-peopleCard__tilePhoto">
+										<?php echo get_the_post_thumbnail( $person_id, 'client_slider_square', array( 'alt' => '' ) ); ?>
+									</span>
 								<?php endif; ?>
-
-								<?php if ( ! empty( $social_rows ) ) : ?>
-									<div class="c-peopleCard__social">
-										<span class="c-peopleCard__socialLabel"><?php esc_html_e( 'Find me on', 'client_theme' ); ?></span>
-										<ul class="c-peopleCard__socialList" aria-label="<?php esc_attr_e( 'Social profiles', 'client_theme' ); ?>">
-											<?php foreach ( $social_rows as $row ) : ?>
-												<?php
-												$network = isset( $row['network'] ) ? $row['network'] : '';
-												$url     = isset( $row['url'] ) ? $row['url'] : '';
-												$icon    = isset( $row['icon'] ) ? $row['icon'] : '';
-
-												if ( ! $url ) {
-													continue;
-												}
-
-												$icon_html = '';
-												if ( 'twitter' === $network ) {
-													$icon_html = '<i class="fa-brands fa-x-twitter" aria-hidden="true"></i>';
-												} elseif ( 'linkedin' === $network ) {
-													$icon_html = '<i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>';
-												} elseif ( 'facebook' === $network ) {
-													$icon_html = '<i class="fa-brands fa-facebook-f" aria-hidden="true"></i>';
-												} elseif ( $icon ) {
-													$icon_html = $icon;
-												}
-
-												if ( ! $icon_html ) {
-													continue;
-												}
-												?>
-												<li class="c-peopleCard__socialItem">
-													<a href="<?php echo esc_url( $url ); ?>" class="c-peopleCard__socialLink" target="_blank" rel="noopener noreferrer">
-														<?php echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-													</a>
-												</li>
-											<?php endforeach; ?>
-										</ul>
-									</div>
-								<?php endif; ?>
-							</div>
-
-							<div class="c-peopleCard__content">
-								<div class="c-peopleCard__heading">
-									<h4 class="h4 c-peopleCard__name"><?php echo esc_html( $name ); ?></h4>
+								<span class="c-peopleCard__tileFoot">
+									<span class="c-peopleCard__tileNameplate">
+										<span class="c-peopleCard__tileName"><?php echo esc_html( $name ); ?></span>
+									</span>
 									<?php if ( $acf_title !== '' ) : ?>
-										<h5 class="h5 bold c-peopleCard__personalTitle"><?php echo esc_html( $acf_title ); ?></h5>
+										<span class="c-peopleCard__tileRole"><?php echo esc_html( $acf_title ); ?></span>
 									<?php endif; ?>
-								</div>
-								<ul class="c-peopleCard__meta">
-									<?php if ( $email ) : ?>
-										<li class="c-peopleCard__metaItem c-peopleCard__metaItem--email">
-											<a href="mailto:<?php echo esc_attr( $email ); ?>" class="c-peopleCard__email"><?php echo esc_html( $email ); ?></a>
-										</li>
-									<?php endif; ?>
-								</ul>
-								<?php if ( $bio ) : ?>
-									<div class="c-peopleCard__bio">
-										<?php echo wp_kses_post( wpautop( $bio ) ); ?>
+								</span>
+								<span class="c-peopleCard__tileHover" aria-hidden="true">
+									<span class="c-peopleCard__tileHoverInner">
+										<span class="btn btn--primary--solid c-peopleCard__tileCta"><?php esc_html_e( 'Read Bio', 'client_theme' ); ?></span>
+									</span>
+								</span>
+							</span>
+						</button>
+
+						<?php $people_dlg_shape_grad = wp_unique_id( 'people-dlg-shape-' ); ?>
+						<dialog id="<?php echo esc_attr( $dialog_id ); ?>" class="c-peopleList__dialog" aria-labelledby="<?php echo esc_attr( $dialog_title ); ?>">
+							<div class="c-peopleList__dialogShell">
+								<div class="c-peopleList__dialogPanel">
+									<button type="button" class="c-peopleList__dialogClose" data-people-list-dialog-close aria-label="<?php esc_attr_e( 'Close', 'client_theme' ); ?>">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<div class="c-peopleList__dialogGrid">
+										<div class="c-peopleList__dialogVisual">
+											<div class="c-peopleList__dialogPhotoStack">
+												<div class="c-peopleList__dialogShape" aria-hidden="true">
+													<svg class="c-peopleList__dialogShapeSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
+														<defs>
+															<linearGradient id="<?php echo esc_attr( $people_dlg_shape_grad ); ?>" gradientUnits="userSpaceOnUse" x1="8" y1="92" x2="92" y2="8">
+																<stop offset="0%" stop-color="#12273d"/>
+																<stop offset="100%" stop-color="#507a73"/>
+															</linearGradient>
+														</defs>
+														<path class="c-peopleList__dialogShapePath" fill="url(#<?php echo esc_attr( $people_dlg_shape_grad ); ?>)" d="M0 100 L0 42 Q0 34 8 30 Q11 28 16 28 L84 16 Q92 14 96 18 Q100 22 100 30 L100 100 Z"/>
+													</svg>
+												</div>
+												<?php if ( has_post_thumbnail( $person_id ) ) : ?>
+													<div class="c-peopleList__dialogPhotoWrap">
+														<?php echo get_the_post_thumbnail( $person_id, 'client_slider_square', array( 'alt' => wp_strip_all_tags( $name ) ) ); ?>
+													</div>
+												<?php endif; ?>
+											</div>
+											<?php if ( ! empty( $social_rows ) ) : ?>
+												<div class="c-peopleList__dialogSocialOuter">
+													<ul class="c-peopleList__dialogSocialRow" aria-label="<?php esc_attr_e( 'Social profiles', 'client_theme' ); ?>">
+														<?php foreach ( $social_rows as $row ) : ?>
+															<?php
+															$network = isset( $row['network'] ) ? $row['network'] : '';
+															$url     = isset( $row['url'] ) ? $row['url'] : '';
+															$icon    = isset( $row['icon'] ) ? $row['icon'] : '';
+															if ( ! $url ) {
+																continue;
+															}
+															$icon_html = '';
+															if ( 'twitter' === $network ) {
+																$icon_html = '<i class="fa-brands fa-x-twitter" aria-hidden="true"></i>';
+															} elseif ( 'linkedin' === $network ) {
+																$icon_html = '<i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>';
+															} elseif ( 'facebook' === $network ) {
+																$icon_html = '<i class="fa-brands fa-facebook-f" aria-hidden="true"></i>';
+															} elseif ( $icon ) {
+																$icon_html = $icon;
+															}
+															if ( ! $icon_html ) {
+																continue;
+															}
+															?>
+															<li class="c-peopleList__dialogSocialItem">
+																<a href="<?php echo esc_url( $url ); ?>" class="c-peopleList__dialogSocialLink" target="_blank" rel="noopener noreferrer">
+																	<?php echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+																	<span class="screen-reader-text"><?php echo esc_html( $network ? ucfirst( $network ) : __( 'Social profile', 'client_theme' ) ); ?></span>
+																</a>
+															</li>
+														<?php endforeach; ?>
+													</ul>
+												</div>
+											<?php endif; ?>
+										</div>
+										<div class="c-peopleList__dialogMain">
+											<div class="c-peopleList__dialogHead">
+												<h2 id="<?php echo esc_attr( $dialog_title ); ?>" class="c-peopleList__dialogName"><?php echo esc_html( $name ); ?></h2>
+												<?php if ( $acf_title !== '' ) : ?>
+													<p class="c-peopleList__dialogRole"><?php echo esc_html( $acf_title ); ?></p>
+												<?php endif; ?>
+											</div>
+											<?php if ( $email ) : ?>
+												<p class="c-peopleList__dialogEmail">
+													<a href="mailto:<?php echo esc_attr( $email ); ?>" class="c-peopleList__dialogEmailLink"><?php echo esc_html( $email ); ?></a>
+												</p>
+											<?php endif; ?>
+											<div class="c-peopleList__dialogCopy">
+												<?php if ( $bio_excerpt !== '' ) : ?>
+													<div class="c-peopleList__dialogExcerpt"><?php echo wp_kses_post( $bio_excerpt ); ?></div>
+												<?php endif; ?>
+												<?php if ( $bio ) : ?>
+													<div class="c-peopleCard__bio c-peopleList__dialogBio"><?php echo wp_kses_post( wpautop( $bio ) ); ?></div>
+												<?php endif; ?>
+											</div>
+										</div>
 									</div>
-								<?php endif; ?>
+								</div>
 							</div>
-						</div>
+						</dialog>
 					<?php endif; ?>
 				</li>
 			<?php endforeach; ?>

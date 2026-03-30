@@ -5277,6 +5277,21 @@ POSTS & CONTENT STYLES
   gap: 1.5em;
 }
 
+/* Multi-person grid: Figma 669:969 (2-up / 4-up) vs 666:900 (3-up). */
+.c-peopleList--multi .c-peopleList__items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5em;
+}
+
+@media (min-width: 768px) {
+  .c-peopleList--cols-2 .c-peopleList__items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .c-peopleList--cols-3 .c-peopleList__items {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 .c-peopleList__item {
   margin: 0;
   padding: 0;
@@ -5469,7 +5484,7 @@ a.c-peopleCard__email {
 }
 
 @media (min-width: 768px) {
-  .c-peopleCard {
+  .c-peopleCard:not(.c-peopleCard--tile) {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
@@ -5479,13 +5494,13 @@ a.c-peopleCard__email {
     align-items: stretch;
     padding: 2em;
   }
-  .c-peopleCard__media {
+  .c-peopleCard:not(.c-peopleCard--tile) .c-peopleCard__media {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 360px;
     flex: 0 0 360px;
     margin: 0;
   }
-  .c-peopleCard__content {
+  .c-peopleCard:not(.c-peopleCard--tile) .c-peopleCard__content {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
@@ -5502,6 +5517,572 @@ a.c-peopleCard__email {
     justify-content: center;
   }
 }
+/*
+ * Headshot tile (Figma component Headshot — multi list). Solid rear, gradient band, photo, nameplate + role.
+ */
+.c-peopleCard--tile {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.c-peopleCard--tile:focus-visible {
+  outline: 2px solid #b86f52;
+  outline-offset: 4px;
+}
+.c-peopleCard--tile:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.c-peopleCard__tileStage {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 344/342;
+  overflow: hidden;
+}
+
+.c-peopleCard__tileSolid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.c-peopleCard__tileSolidSvg {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  -webkit-transition: height 0.28s ease;
+  transition: height 0.28s ease;
+}
+
+.c-peopleCard--tile:hover .c-peopleCard__tileSolidSvg,
+.c-peopleCard--tile:focus-visible .c-peopleCard__tileSolidSvg {
+  height: 100%;
+}
+
+.c-peopleCard__tileSolidPath {
+  fill: #12273d;
+}
+
+.c-peopleCard__tileBand {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  width: 60%;
+  top: 60%;
+  height: 140%;
+  pointer-events: none;
+}
+
+.c-peopleCard__tileBandSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.c-peopleCard__tilePhoto {
+  position: absolute;
+  z-index: 1;
+  left: 0.29%;
+  right: 0.15%;
+  top: 0;
+  bottom: auto;
+  height: auto;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.c-peopleCard__tilePhoto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center bottom;
+  object-position: center bottom;
+}
+
+.c-peopleCard__tileFoot {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 0 0 2% 0;
+  pointer-events: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.c-peopleCard__tileNameplate {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 90%;
+  margin-top: auto;
+  margin-bottom: 0.12em;
+  padding: 0.625em 0.625em 0.125em 0.75em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.c-peopleCard__tileName {
+  display: block;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.4em;
+  font-weight: 900;
+  line-height: normal;
+  color: #8b553f;
+}
+
+.c-peopleCard__tileRole {
+  margin: 0 0 0 4.07%;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  padding-right: 2.62%;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+  line-height: normal;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+/* Hero overlay token ($overlay-dark); grows from bottom on hover/focus. */
+.c-peopleCard__tileHover {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: rgba(7, 10, 12, 0.7);
+  -webkit-transform: scaleY(0);
+  -ms-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transform-origin: bottom center;
+  -ms-transform-origin: bottom center;
+  transform-origin: bottom center;
+  -webkit-transition: -webkit-transform 0.28s ease;
+  transition: -webkit-transform 0.28s ease;
+  transition: transform 0.28s ease;
+  transition: transform 0.28s ease, -webkit-transform 0.28s ease;
+  pointer-events: none;
+}
+
+.c-peopleCard--tile:hover .c-peopleCard__tileHover,
+.c-peopleCard--tile:focus-visible .c-peopleCard__tileHover {
+  -webkit-transform: scaleY(1);
+  -ms-transform: scaleY(1);
+  transform: scaleY(1);
+}
+
+.c-peopleCard__tileHoverInner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.c-peopleCard__tileCta {
+  display: inline-block;
+  position: relative;
+  /* Receives hover for primary “pill” state; overlay parent stays pointer-events: none so rest of tile stays one clickable <button>. */
+  pointer-events: auto;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: 400;
+  padding: 0.5em 1em;
+  border-radius: 0;
+  border: 2px solid;
+  cursor: pointer;
+  -webkit-transition: background-color 0.14s ease-in-out, border-color 0.14s ease-in-out, color 0.14s ease-in-out;
+  transition: background-color 0.14s ease-in-out, border-color 0.14s ease-in-out, color 0.14s ease-in-out;
+  background-color: #b86f52;
+  color: #fff !important;
+  border-color: #bf7d63;
+}
+
+.c-peopleCard__tileCta:hover {
+  background-color: rgba(184, 111, 82, 0.5);
+  color: #fff !important;
+}
+
+/* Figma Overlay/Content/Bio — full-viewport semi-transparent gradient; shell dismiss; two-column layout. */
+.c-peopleList__dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  overflow: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.c-peopleList__dialog::-ms-backdrop {
+  background: transparent;
+}
+.c-peopleList__dialog::backdrop {
+  background: transparent;
+}
+
+.c-peopleList__dialogShell {
+  /* Top: semi-transparent dark; bottom: solid-ish #131e3c (Figma gradient dark-200). */
+  min-height: 100%;
+  min-height: 100dvh;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: clamp(1.25em, 5vw, 2em);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(23.12%, rgba(5, 13, 35, 0.85)), to(#131e3c));
+  background: -webkit-linear-gradient(top, rgba(5, 13, 35, 0.85) 23.12%, #131e3c 100%);
+  background: linear-gradient(180deg, rgba(5, 13, 35, 0.85) 23.12%, #131e3c 100%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.c-peopleList__dialogPanel {
+  position: relative;
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  cursor: default;
+  pointer-events: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.c-peopleList__dialogClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #f0f6f5;
+  color: #12273d;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.c-peopleList__dialogClose:hover, .c-peopleList__dialogClose:focus-visible {
+  background: #c3d9d5;
+}
+
+.c-peopleList__dialogGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  gap: clamp(1.5em, 4vw, 2em * 1.5);
+  padding-top: 2.75rem;
+  padding-right: 0.5em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .c-peopleList__dialogGrid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+  }
+}
+.c-peopleList__dialogVisual {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  gap: 1em;
+  width: 100%;
+  max-width: 35.5rem;
+  margin: 0 auto;
+}
+
+/* Shape + image only; overflow clips gradient so it cannot paint over social row below. */
+.c-peopleList__dialogPhotoStack {
+  position: relative;
+  width: 88%;
+  max-width: 28rem;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.c-peopleList__dialogPhotoStack:not(:has(.c-peopleList__dialogPhotoWrap)) {
+  min-height: 15rem;
+  aspect-ratio: 1/1;
+}
+
+.c-peopleList__dialogShape {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 68%;
+  pointer-events: none;
+}
+
+.c-peopleList__dialogShapeSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.c-peopleList__dialogPhotoWrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  pointer-events: auto;
+}
+.c-peopleList__dialogPhotoWrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center bottom;
+  object-position: center bottom;
+}
+
+.c-peopleList__dialogSocialOuter {
+  width: 88%;
+  max-width: 28rem;
+  margin: 0 auto;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.c-peopleList__dialogSocialRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 1em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  pointer-events: auto;
+}
+
+.c-peopleList__dialogSocialItem {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Anchor qualifier + :visited beat global `a, a:visited { color: $link-color }`; children inherit for FA. */
+a.c-peopleList__dialogSocialLink {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: clamp(1.5rem, 3.5vw, 2.125rem);
+  -webkit-transition: color 0.15s ease, fill 0.15s ease;
+  transition: color 0.15s ease, fill 0.15s ease;
+  color: #50657b;
+  fill: #50657b;
+}
+a.c-peopleList__dialogSocialLink:visited {
+  color: #50657b;
+  fill: #50657b;
+}
+a.c-peopleList__dialogSocialLink i,
+a.c-peopleList__dialogSocialLink svg,
+a.c-peopleList__dialogSocialLink .svg-inline--fa,
+a.c-peopleList__dialogSocialLink .fa-brands {
+  color: inherit;
+  fill: currentColor;
+}
+a.c-peopleList__dialogSocialLink:hover, a.c-peopleList__dialogSocialLink:hover:visited, a.c-peopleList__dialogSocialLink:focus-visible {
+  color: #16324f;
+  fill: #16324f;
+}
+
+.c-peopleList__dialogMain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: 1em;
+  min-width: 0;
+  max-height: min(78vh, 52rem);
+  overflow-y: auto;
+  padding-bottom: 0.75em;
+  pointer-events: auto;
+}
+
+.c-peopleList__dialogHead {
+  -webkit-filter: drop-shadow(1px 6px 10px rgba(2, 56, 68, 0.3));
+  filter: drop-shadow(1px 6px 10px rgba(2, 56, 68, 0.3));
+}
+
+.c-peopleList__dialogName {
+  margin: 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2.25rem, 5vw, 4.65rem);
+  font-weight: 500;
+  line-height: 1.05;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.c-peopleList__dialogRole {
+  margin: 0.5em 0 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.8em;
+  font-weight: 800;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.c-peopleList__dialogEmail {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.c-peopleList__dialogEmailLink {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+.c-peopleList__dialogEmailLink:hover, .c-peopleList__dialogEmailLink:focus-visible {
+  color: #fff;
+}
+
+.c-peopleList__dialogCopy {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #fff;
+  width: 100%;
+}
+.c-peopleList__dialogCopy p {
+  margin: 0 0 1em;
+  color: inherit;
+}
+.c-peopleList__dialogCopy p:last-child {
+  margin-bottom: 0;
+}
+
+.c-peopleList__dialogExcerpt {
+  margin-bottom: 1em;
+  color: inherit;
+}
+
+.c-peopleList__dialogBio {
+  color: inherit;
+}
+
 /*
  * People List — single person
  * Desktop: Figma Bio/Single/Desktop. Mobile: Bio/Single/Mobile 665:860 (layer order from file).
