@@ -648,31 +648,32 @@ h5.bold, .h5.bold {
 h5.light, .h5.light {
   color: #a2adb9;
 }
-h5 h6, h5 .h6, .h5 h6, .h5 .h6 {
+
+h6, .h6 {
   font-size: 1.2em;
   font-weight: 900;
   line-height: 1em;
   color: #0c1723;
 }
-h5 h6.bold, h5 .h6.bold, .h5 h6.bold, .h5 .h6.bold {
+h6.bold, .h6.bold {
   font-weight: 800;
 }
-h5 h6.light, h5 .h6.light, .h5 h6.light, .h5 .h6.light {
+h6.light, .h6.light {
   color: #a2adb9;
 }
-h5 h6 h7, h5 h6 .h7, h5 .h6 h7, h5 .h6 .h7, .h5 h6 h7, .h5 h6 .h7, .h5 .h6 h7, .h5 .h6 .h7 {
+h6 h7, h6 .h7, .h6 h7, .h6 .h7 {
   font-size: 0.875em;
   font-weight: 900;
   line-height: 1em;
   color: #0c1723;
 }
-h5 h6 h7.bold, h5 h6 .h7.bold, h5 .h6 h7.bold, h5 .h6 .h7.bold, .h5 h6 h7.bold, .h5 h6 .h7.bold, .h5 .h6 h7.bold, .h5 .h6 .h7.bold {
+h6 h7.bold, h6 .h7.bold, .h6 h7.bold, .h6 .h7.bold {
   font-weight: 800;
 }
-h5 h6 h7.medium, h5 h6 .h7.medium, h5 .h6 h7.medium, h5 .h6 .h7.medium, .h5 h6 h7.medium, .h5 h6 .h7.medium, .h5 .h6 h7.medium, .h5 .h6 .h7.medium {
+h6 h7.medium, h6 .h7.medium, .h6 h7.medium, .h6 .h7.medium {
   font-weight: 500;
 }
-h5 h6 h7.light, h5 h6 .h7.light, h5 .h6 h7.light, h5 .h6 .h7.light, .h5 h6 h7.light, .h5 h6 .h7.light, .h5 .h6 h7.light, .h5 .h6 .h7.light {
+h6 h7.light, h6 .h7.light, .h6 h7.light, .h6 .h7.light {
   color: #a2adb9;
 }
 
@@ -1114,7 +1115,6 @@ article .hero--image img {
   margin: 0 0 1.5em 0;
   max-width: 100%;
   height: auto;
-  border-radius: 0.75em;
 }
 .entry-content {
   /*
@@ -2787,13 +2787,187 @@ Content Section block
   position: relative;
 }
 
-/* Preheader: shared pattern (headline-group, text-image, sponsorships, slider). Markup: <h5 class="c-headline-group__preheader"> */
-.c-headline-group__preheader {
+/* Text + Image — Figma “Text + Image” frames; single-image angled gradient field + mirrored by image/text side */
+.c-content-group__visual {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.c-content-group__visual-shape {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1em;
+  top: auto;
+  height: 80.45%;
+  pointer-events: none;
+}
+
+.c-content-group__visual-shape-inner {
+  position: absolute;
+  inset: 0;
+}
+
+.c-content-group__visual-shape-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.c-content-group__visual--mirror .c-content-group__visual-shape-inner {
+  -webkit-transform: scaleY(-1) rotate(180deg);
+  -ms-transform: scaleY(-1) rotate(180deg);
+  transform: scaleY(-1) rotate(180deg);
+}
+
+.c-content-group__visual-frame {
+  position: absolute;
+  bottom: 0;
+  top: auto;
+  left: 3.18%;
+  right: 3.34%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  -webkit-filter: drop-shadow(1px 6px 5px rgba(20, 46, 72, 0.3));
+  filter: drop-shadow(1px 6px 5px rgba(20, 46, 72, 0.3));
+  z-index: 1;
+}
+
+.c-content-group__visual-frame .c-image-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 100%;
+}
+
+.c-content-group__visual-frame .c-image-grid--one {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.c-content-group__visual-frame .c-image-grid__item {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.c-content-group__visual-frame .c-image-grid__item--1 {
+  aspect-ratio: 1/1;
+  width: 100%;
+  max-width: 100%;
+}
+
+.c-content-group__visual-frame .c-image-grid__img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  display: block;
+  position: relative;
+  left: 0;
+}
+
+/* Full-width text-image row uses flex on .c-image-grid — keep the framed single-image stack as block + square */
+.c-waveband__content--full .c-content-group__visual-frame .c-image-grid,
+.c-text-image__content--full .c-content-group__visual-frame .c-image-grid {
+  display: block;
+  -webkit-box-orient: unset;
+  -webkit-box-direction: unset;
+  -ms-flex-direction: unset;
+  flex-direction: unset;
+  -ms-flex-wrap: unset;
+  flex-wrap: unset;
+  -webkit-box-align: unset;
+  -ms-flex-align: unset;
+  align-items: unset;
+  gap: 0;
+  margin-top: 0;
+  height: 100%;
+}
+
+.c-waveband__content--full .c-content-group__visual-frame .c-image-grid > li,
+.c-text-image__content--full .c-content-group__visual-frame .c-image-grid > li {
+  -webkit-box-flex: unset;
+  -ms-flex: unset;
+  flex: unset;
+  height: 100%;
+}
+
+.c-waveband__content--full .c-content-group__visual-frame .c-image-grid > li:only-child,
+.c-text-image__content--full .c-content-group__visual-frame .c-image-grid > li:only-child {
+  -webkit-box-flex: unset;
+  -ms-flex: unset;
+  flex: unset;
+}
+
+.c-waveband__content--full .c-content-group__visual-frame .c-image-grid > li:only-child .c-image-grid__img,
+.c-text-image__content--full .c-content-group__visual-frame .c-image-grid > li:only-child .c-image-grid__img,
+.c-waveband__content--full .c-content-group__visual-frame .c-image-grid .c-image-grid__img,
+.c-text-image__content--full .c-content-group__visual-frame .c-image-grid .c-image-grid__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+/* Figma type: Font/Size/h6/black, h4/black, body/rg — scoped to ACF text-image block only */
+.c-text-image.c-content-group .c-content-group__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1em;
+}
+.c-text-image.c-content-group .c-content-group__content .c-text-image__titles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0;
+}
+.c-text-image.c-content-group .c-content-group__content .c-headline-group__preheader {
   margin: 0;
   font-size: 1.2em;
-  line-height: 1.6em;
-  text-transform: normal;
-  color: #12273d;
+  font-weight: 900;
+  line-height: 1;
+  color: #16324f;
+}
+.c-text-image.c-content-group .c-content-group__content .c-headline-group__preheader.light {
+  color: #a2adb9;
+}
+.c-text-image.c-content-group .c-content-group__content .c-text-image__titles :is(h1, h2, h3, h4, h5, h6).c-text-image__heading {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.c-text-image.c-content-group .c-content-group__content p {
+  margin: 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #070a0c;
+}
+.c-text-image.c-content-group .c-content-group__content p + p {
+  margin-top: 0.75em;
+}
+
+.c-text-image .c-text-image__heading:not(.light):not(.hero) {
+  color: #142e48;
+}
+
+.c-text-image .c-text-image__heading.light {
+  color: #50657b;
 }
 
 /* =========================================================

@@ -182,9 +182,23 @@ h5, .h5 {
 	&.light {
 		color: $primary-200;
 	}
+}
 
-  h6, .h6 {
-    font-size: $font-size-md;
+h6, .h6 {
+  font-size: $font-size-md;
+  font-weight: $font-weight-black;
+  line-height: 1em;
+  color: $primary-800;
+
+  &.bold {
+    font-weight: $font-weight-bold;
+  }
+  &.light {
+    color: $primary-200;
+  }
+
+  h7, .h7 {
+    font-size: $font-size-sm;
     font-weight: $font-weight-black;
     line-height: 1em;
     color: $primary-800;
@@ -192,26 +206,12 @@ h5, .h5 {
     &.bold {
       font-weight: $font-weight-bold;
     }
+
+    &.medium {
+      font-weight: $font-weight-medium;
+    }
     &.light {
       color: $primary-200;
-    }
-
-    h7, .h7 {
-      font-size: $font-size-sm;
-      font-weight: $font-weight-black;
-      line-height: 1em;
-      color: $primary-800;
-    
-      &.bold {
-        font-weight: $font-weight-bold;
-      }
-
-      &.medium {
-        font-weight: $font-weight-medium;
-      }
-      &.light {
-        color: $primary-200;
-      }
     }
   }
 }

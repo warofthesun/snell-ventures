@@ -106,6 +106,33 @@ function client_content_group_classes( $args = array() ) {
 }
 
 /**
+ * Gallery image URL: prefer the theme’s square crop (`client_slider_square`) when an attachment ID is known.
+ *
+ * @param array|int $img ACF image field value (array with ID) or attachment ID.
+ * @return string URL or empty string.
+ */
+function client_acf_image_src_square( $img ) {
+	$id = 0;
+	if ( is_array( $img ) ) {
+		$id = isset( $img['ID'] ) ? (int) $img['ID'] : ( isset( $img['id'] ) ? (int) $img['id'] : 0 );
+	} elseif ( is_numeric( $img ) ) {
+		$id = (int) $img;
+	}
+	if ( $id > 0 ) {
+		$src = wp_get_attachment_image_url( $id, 'client_slider_square' );
+		if ( is_string( $src ) && $src !== '' ) {
+			return $src;
+		}
+		$fallback = wp_get_attachment_url( $id );
+		return is_string( $fallback ) ? $fallback : '';
+	}
+	if ( is_array( $img ) && ! empty( $img['url'] ) && is_string( $img['url'] ) ) {
+		return $img['url'];
+	}
+	return '';
+}
+
+/**
  * Resolve the blog index “featured” post: newest sticky post, else newest published post.
  * Cached per request. Does not check is_home() — safe for pre_get_posts.
  *

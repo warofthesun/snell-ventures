@@ -26,6 +26,8 @@
     $headline_size    = get_field('headline_size');
     $on_dark          = (bool) get_field('on_dark_background');
     $headline_parsed  = function_exists( 'client_headline_tag_and_class' ) ? client_headline_tag_and_class( $headline_size, '' ) : array( 'tag' => 'h2', 'class' => '' );
+    // Figma: Font/Size/h4/black — use existing utility `.h4` for size/weight; `c-text-image__heading` scopes color only.
+    $headline_class   = trim( $headline_parsed['class'] . ' h4 c-text-image__heading' );
     $body             = get_field('body_copy');
     $content_position = get_field('content_vertical');
     $image_position  = get_field('image_horizontal');
@@ -67,7 +69,7 @@
     $buttons     = get_field('buttons');
 
     // Build classes for the content group using BEM naming
-    $classes_cg = ['c-content-group'];
+    $classes_cg = ['c-content-group', 'c-text-image'];
     if ($content_position === 'middle') {
         $classes_cg[] = 'c-content-group--middle';
     }
@@ -159,8 +161,14 @@
 
         <div class="<?php echo esc_attr(implode(' ', $classes_cg)); ?> row<?php echo $has_video ? ' c-content-group__row--has-video' : ''; ?><?php echo ($has_slideshow || $media_type === 'slideshow') ? ' c-content-group__row--has-slideshow' : ''; ?>">
             <div class="<?= esc_attr($text_col); ?> c-content-group__content">
-                <?php if ( $preheader ) : ?><h5 class="c-headline-group__preheader<?php echo $on_dark ? ' light' : ''; ?>"><?php echo esc_html( $preheader ); ?></h5><?php endif; ?>
-                <?php if ( $headline ) : ?><<?php echo esc_attr( $headline_parsed['tag'] ); ?> class="<?php echo esc_attr( trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) ) ); ?>"><?php echo esc_html( $headline ); ?></<?php echo esc_attr( $headline_parsed['tag'] ); ?>><?php endif; ?>
+                <?php if ( $preheader || $headline ) : ?>
+                <div class="c-text-image__titles">
+                <?php endif; ?>
+                <?php if ( $preheader ) : ?><h6 class="c-headline-group__preheader<?php echo $on_dark ? ' light' : ''; ?>"><?php echo esc_html( $preheader ); ?></h6><?php endif; ?>
+                <?php if ( $headline ) : ?><<?php echo esc_attr( $headline_parsed['tag'] ); ?> class="<?php echo esc_attr( trim( $headline_class . ( $on_dark ? ' light' : '' ) ) ); ?>"><?php echo esc_html( $headline ); ?></<?php echo esc_attr( $headline_parsed['tag'] ); ?>><?php endif; ?>
+                <?php if ( $preheader || $headline ) : ?>
+                </div>
+                <?php endif; ?>
                 <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
                     <?php $partial_path = get_theme_file_path('/partials/button_pair.php'); ?>
                     <?php include $partial_path; ?>
@@ -253,13 +261,34 @@
                     </div>
                 </div>
             <?php elseif ( $images ) : ?>
+                <?php
+                $ti_shape_mirror = ( $image_position === 'left' );
+                $ti_grad_id      = 'ti-grad-' . ( ! empty( $block['id'] ) ? (string) (int) $block['id'] : wp_unique_id() );
+                ?>
+                <?php if ( $count === 1 ) : ?>
+                <div class="c-content-group__visual<?php echo $ti_shape_mirror ? ' c-content-group__visual--mirror' : ''; ?>">
+                    <div class="c-content-group__visual-shape" aria-hidden="true">
+                        <div class="c-content-group__visual-shape-inner">
+                            <svg class="c-content-group__visual-shape-svg" viewBox="0 0 629 449" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                <defs>
+                                    <linearGradient id="<?php echo esc_attr( $ti_grad_id ); ?>" x1="401.422" y1="-78.1841" x2="401.422" y2="449" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0" stop-color="#12273D"/>
+                                        <stop offset="1" stop-color="#507A73"/>
+                                    </linearGradient>
+                                </defs>
+                                <path fill="url(#<?php echo esc_attr( $ti_grad_id ); ?>)" d="M0 256.037L629 0V449H0V256.037Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="c-content-group__visual-frame">
+                <?php endif; ?>
                 <ul class="<?= esc_attr($grid_class); ?>">
                     <?php if ($count === 3): ?>
 
                         <li class="c-image-grid__item c-image-grid__item--1">
                         <?php
                         $img = $images[0];
-                        $url = is_array($img) ? $img['url'] : wp_get_attachment_url($img);
+                        $url = client_acf_image_src_square( $img );
                         $alt = is_array($img) ? ($img['alt'] ?? '') : get_post_meta($img, '_wp_attachment_image_alt', true);
                         ?>
                         <img class="c-image-grid__img" src="<?= esc_url($url); ?>" alt="<?= esc_attr($alt); ?>">
@@ -268,7 +297,7 @@
                         <li class="c-image-grid__right">
                         <?php for ($i = 1; $i < 3; $i++):
                             $img = $images[$i];
-                            $url = is_array($img) ? $img['url'] : wp_get_attachment_url($img);
+                            $url = client_acf_image_src_square( $img );
                             $alt = is_array($img) ? ($img['alt'] ?? '') : get_post_meta($img, '_wp_attachment_image_alt', true);
                         ?>
                             <div class="c-image-grid__right-item c-image-grid__right-item--<?= $i+1; ?>">
@@ -279,7 +308,7 @@
 
                     <?php else: ?>
                         <?php foreach ($images as $i => $img):
-                        $url = is_array($img) ? $img['url'] : wp_get_attachment_url($img);
+                        $url = client_acf_image_src_square( $img );
                         $alt = is_array($img) ? ($img['alt'] ?? '') : get_post_meta($img, '_wp_attachment_image_alt', true);
                         ?>
                         <li class="c-image-grid__item c-image-grid__item--<?= $i+1; ?>">
@@ -288,6 +317,10 @@
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </ul>
+                <?php if ( $count === 1 ) : ?>
+                    </div>
+                </div>
+                <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>
