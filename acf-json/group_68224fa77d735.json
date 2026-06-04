@@ -1,13 +1,13 @@
 {
     "key": "group_68224fa77d735",
-    "title": "0. Hero - client Hero Settings",
+    "title": "0. Hero - Snell Hero Settings",
     "fields": [
         {
             "key": "field_68225159eee20",
             "label": "Hero Headline",
             "name": "hero_headline",
             "aria-label": "",
-            "type": "wysiwyg",
+            "type": "textarea",
             "instructions": "Leave blank to use page title",
             "required": 0,
             "conditional_logic": 0,
@@ -17,29 +17,21 @@
                 "id": ""
             },
             "default_value": "",
+            "maxlength": "",
             "allow_in_bindings": 0,
-            "tabs": "text",
-            "media_upload": 0,
-            "toolbar": "full",
-            "delay": 0
+            "rows": 2,
+            "placeholder": "",
+            "new_lines": "br"
         },
         {
             "key": "field_68225191eee21",
-            "label": "Hero Paragraph",
+            "label": "Hero Subheader",
             "name": "hero_paragraph",
             "aria-label": "",
-            "type": "textarea",
+            "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_697fe85af2201",
-                        "operator": "==",
-                        "value": "headline"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -47,10 +39,10 @@
             },
             "default_value": "",
             "maxlength": "",
-            "allow_in_bindings": 1,
-            "rows": 3,
+            "allow_in_bindings": 0,
             "placeholder": "",
-            "new_lines": ""
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_682251bfeee22",
@@ -107,12 +99,12 @@
             {
                 "param": "page",
                 "operator": "==",
-                "value": "10"
+                "value": "3"
             },
             {
                 "param": "page",
                 "operator": "!=",
-                "value": "10"
+                "value": "3"
             }
         ]
     ],
@@ -128,5 +120,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773590442
+    "modified": 1774895463
 }

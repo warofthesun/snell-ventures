@@ -1,0 +1,17 @@
+{
+  "name": "client/people-highlight",
+  "title": "People Highlight",
+  "description": "Highlight one person with headshot, name, role, and excerpt.",
+  "style": ["file:../library/css/style.css"],
+  "category": "theme-blocks",
+  "icon": "id-alt",
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  },
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "people_highlight.php"
+  },
+  "textdomain": "client_theme"
+}

@@ -435,10 +435,10 @@
                 "id": ""
             },
             "clone": [
-                "group_6826202d5b036",
-                "field_68225159eee20"
+                "field_68225159eee20",
+                "field_68225191eee21"
             ],
-            "display": "group",
+            "display": "seamless",
             "layout": "block",
             "prefix_label": 0,
             "prefix_name": 0
@@ -491,6 +491,11 @@
                 "param": "post_type",
                 "operator": "!=",
                 "value": "people"
+            },
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "company"
             }
         ]
     ],
@@ -504,5 +509,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774798811
+    "modified": 1774895131
 }

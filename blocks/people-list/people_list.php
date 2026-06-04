@@ -328,14 +328,11 @@ $client_people_bio_surfaces = static function ( $gradient_id ) {
 													<a href="mailto:<?php echo esc_attr( $email ); ?>" class="c-peopleList__dialogEmailLink"><?php echo esc_html( $email ); ?></a>
 												</p>
 											<?php endif; ?>
-											<div class="c-peopleList__dialogCopy">
-												<?php if ( $bio_excerpt !== '' ) : ?>
-													<div class="c-peopleList__dialogExcerpt"><?php echo wp_kses_post( $bio_excerpt ); ?></div>
-												<?php endif; ?>
-												<?php if ( $bio ) : ?>
+											<?php if ( $bio ) : ?>
+												<div class="c-peopleList__dialogCopy">
 													<div class="c-peopleCard__bio c-peopleList__dialogBio"><?php echo wp_kses_post( wpautop( $bio ) ); ?></div>
-												<?php endif; ?>
-											</div>
+												</div>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>

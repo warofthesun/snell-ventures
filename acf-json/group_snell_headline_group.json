@@ -1,7 +1,119 @@
 {
-    "key": "group_69910166eac11",
-    "title": "2. Buttons - client Block Piece",
+    "key": "group_snell_headline_group",
+    "title": "Headline group",
     "fields": [
+        {
+            "key": "field_6992657b779d0",
+            "label": "Header",
+            "name": "headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_69ac51d510833",
+            "label": "Subheader Optional",
+            "name": "preheader",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6992657b77c7f",
+            "label": "Header size",
+            "name": "headline_size",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "hero": "Hero",
+                "h1": "H1",
+                "h2": "H2",
+                "h3": "H3",
+                "h4": "H4",
+                "h5": "H5"
+            },
+            "default_value": "h1",
+            "return_format": "value",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_6992657b_on_dark_bg",
+            "label": "On a dark background",
+            "name": "on_dark_background",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "When checked, adds the class \"light\" to the header and subheader for use on dark backgrounds.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_699273428bd0c",
+            "label": "Body",
+            "name": "body_copy",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
         {
             "key": "field_69910167d0290",
             "label": "Buttons (Optional)",
@@ -111,18 +223,11 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "client\/text-image"
-            }
-        ],
-        [
-            {
-                "param": "block",
-                "operator": "==",
-                "value": "client\/posts-grid"
+                "value": "client\/headline-group"
             }
         ]
     ],
-    "menu_order": 10,
+    "menu_order": 0,
     "position": "normal",
     "style": "seamless",
     "label_placement": "top",
@@ -132,5 +237,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771701892
+    "modified": 1780531200
 }

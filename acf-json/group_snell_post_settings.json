@@ -1,9 +1,9 @@
 {
-    "key": "group_client_post_settings",
+    "key": "group_snell_post_settings",
     "title": "Post Settings",
     "fields": [
         {
-            "key": "field_client_ps_tab_posts",
+            "key": "field_snell_ps_tab_posts",
             "label": "Blog Posts",
             "name": "",
             "aria-label": "",
@@ -21,7 +21,7 @@
             "selected": 1
         },
         {
-            "key": "field_client_ps_heading_post",
+            "key": "field_snell_ps_heading_post",
             "label": "Related section heading",
             "name": "related_posts_heading_post",
             "aria-label": "",
@@ -42,7 +42,7 @@
             "allow_in_bindings": 0
         },
         {
-            "key": "field_client_ps_bg_post",
+            "key": "field_snell_ps_bg_post",
             "label": "Related section background image",
             "name": "background_image_post",
             "aria-label": "",
@@ -68,7 +68,7 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_client_ps_blog_index_sidebar",
+            "key": "field_snell_ps_blog_index_sidebar",
             "label": "Show sidebar on blog index",
             "name": "blog_index_show_sidebar",
             "aria-label": "",
@@ -89,7 +89,7 @@
             "ui": 1
         },
         {
-            "key": "field_client_ps_blog_index_sidebar_position",
+            "key": "field_snell_ps_blog_index_sidebar_position",
             "label": "Blog index sidebar position",
             "name": "blog_index_sidebar_position",
             "aria-label": "",
@@ -99,7 +99,7 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_client_ps_blog_index_sidebar",
+                        "field": "field_snell_ps_blog_index_sidebar",
                         "operator": "==",
                         "value": "1"
                     }
@@ -126,7 +126,7 @@
             "save_options": 0
         },
         {
-            "key": "field_client_ps_tab_events",
+            "key": "field_snell_ps_tab_events",
             "label": "Events",
             "name": "",
             "aria-label": "",
@@ -144,7 +144,7 @@
             "selected": 0
         },
         {
-            "key": "field_client_ps_heading_events",
+            "key": "field_snell_ps_heading_events",
             "label": "Related section heading",
             "name": "related_posts_heading_tribe_events",
             "aria-label": "",
@@ -165,7 +165,7 @@
             "allow_in_bindings": 0
         },
         {
-            "key": "field_client_ps_bg_events",
+            "key": "field_snell_ps_bg_events",
             "label": "Related section background image",
             "name": "background_image_tribe_events",
             "aria-label": "",
@@ -191,7 +191,7 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_client_ps_no_events_message",
+            "key": "field_snell_ps_no_events_message",
             "label": "No upcoming events message",
             "name": "no_upcoming_events_message",
             "aria-label": "",
@@ -212,7 +212,7 @@
             "new_lines": "br"
         },
         {
-            "key": "field_client_ps_events_require_external_url",
+            "key": "field_snell_ps_events_require_external_url",
             "label": "Require external event URL",
             "name": "events_require_external_url",
             "aria-label": "",

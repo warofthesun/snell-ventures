@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_69ac51d510833",
-            "label": "Preheader (Optional)",
+            "label": "Subheader Optional",
             "name": "preheader",
             "aria-label": "",
             "type": "text",
@@ -95,13 +95,6 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "client\/headline-group"
-            }
-        ],
-        [
-            {
-                "param": "block",
-                "operator": "==",
                 "value": "client\/text-image"
             }
         ],
@@ -123,5 +116,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773609200
+    "modified": 1780531200
 }

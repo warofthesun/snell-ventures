@@ -2510,16 +2510,85 @@ Content Section block
   grid-area: auto;
 }
 
-.c-headline-group h5 {
-  margin: 0;
-}
 .c-headline-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 1em;
   text-align: center;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 1.25em;
   margin-bottom: 0.75em;
+}
+.c-headline-group__titles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+.c-headline-group__header {
+  margin: 0;
+  margin-bottom: -12px;
+  width: 100%;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 4.1em;
+  font-weight: 500;
+  line-height: 1;
+  color: #142e48;
+}
+.c-headline-group__header.light {
+  color: #50657b;
+}
+.c-headline-group__header.hero {
+  font-size: clamp(2.75rem, 6vw + 1.5rem, 6rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.c-headline-group__subheader {
+  margin: 0;
+  width: 100%;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.8em;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #16324f;
+}
+.c-headline-group__subheader.light {
+  color: #50657b;
+}
+.c-headline-group__body {
+  width: 100%;
+}
+.c-headline-group__body p {
+  margin: 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #070a0c;
+}
+.c-headline-group__body p + p {
+  margin-top: 0.75em;
+}
+.c-headline-group .c-button-pair {
+  margin-top: 0;
 }
 
 .c-waveband {
@@ -6255,6 +6324,22 @@ a.c-peopleList__dialogSocialLink:hover, a.c-peopleList__dialogSocialLink:hover:v
 
 .c-peopleList__dialogBio {
   color: inherit;
+}
+
+/*
+ * People Highlight — single person feature (Figma Bio/Single/Desktop 461:5671).
+ * Reuses .c-peopleBio layout tokens defined below.
+ */
+.c-peopleHighlight {
+  overflow-x: visible;
+  margin: 0;
+  padding: 0;
+}
+
+.c-peopleHighlight__empty {
+  margin: 0;
+  text-align: center;
+  color: #142e48;
 }
 
 /*

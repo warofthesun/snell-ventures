@@ -2,7 +2,7 @@
 /**
  * Reusable hero partial. Uses client_get_hero_config() for context (page, post, blog, archive).
  * Editor choice on pages via ACF "Hero Style"; automatic type on single post, blog index, archive.
- * Hero Medium is used for the Medium style on pages and for the Events archive (same markup/CSS).
+ * Hero Medium is used for the Medium style on pages, the Events archive, and single Company (same markup/CSS).
  *
  * Markup for each variant lives in `partials/hero/inc/hero-{type}.php`.
  */

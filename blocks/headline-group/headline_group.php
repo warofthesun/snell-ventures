@@ -1,32 +1,63 @@
-<?php 
-    /**
-     * Headline group template, headline, body copy, CTAs
-     *
-     * @param array $block The block settings and attributes.
-     */
+<?php
+/**
+ * Headline group template: header, subheader, body copy, CTAs
+ *
+ * @param array $block The block settings and attributes.
+ */
 
-    $preheader         = get_field('preheader');
-    $headline          = get_field('headline');
-    $headline_size     = get_field('headline_size');
-    $on_dark           = (bool) get_field('on_dark_background');
-    $headline_parsed   = function_exists('client_headline_tag_and_class') ? client_headline_tag_and_class( $headline_size, '' ) : array( 'tag' => 'h2', 'class' => '' );
-    $body              = get_field('body_copy');
+$preheader       = get_field( 'preheader' );
+$headline        = get_field( 'headline' );
+$headline_size   = get_field( 'headline_size' );
+$on_dark         = (bool) get_field( 'on_dark_background' );
+$headline_parsed = function_exists( 'client_headline_tag_and_class' )
+	? client_headline_tag_and_class( $headline_size, 'c-headline-group__header h1 medium' )
+	: array(
+		'tag'   => 'h1',
+		'class' => 'c-headline-group__header h1 medium',
+	);
+$body = get_field( 'body_copy' );
 
-    $is_preview = !empty($block['data']['is_preview']);
+$is_editor  = is_admin();
+$body_plain = is_string( $body ) ? trim( wp_strip_all_tags( $body ) ) : '';
+$is_empty   = empty( $preheader ) && empty( $headline ) && empty( $body_plain ) && ! have_rows( 'buttons' );
 
-    if ($is_preview) {
-    $preview = get_template_directory_uri() . '/blocks/headline-group/preview.png';
-    echo '<img src="' . esc_url($preview) . '" style="width:100%;height:auto;display:block;" alt="">';
-    return;
-    }
+if ( $is_editor && $is_empty ) :
+	?>
+	<div class="block-placeholder" style="border: 1px dashed #cfd3d7; padding: 1rem; border-radius: .5rem; background: rgba(255,255,255,.8);">
+		<strong style="display:block; margin-bottom:.25rem;">Headline group</strong>
+		<p style="margin:0;">Add a header, subheader, body copy, or buttons.</p>
+	</div>
+	<?php
+	return;
+endif;
+
+$wrapper_classes = array( 'c-headline-group' );
+if ( $on_dark ) {
+	$wrapper_classes[] = 'c-headline-group--on-dark';
+}
+
+$header_class    = trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) );
+$subheader_class = trim( 'c-headline-group__subheader h4 bold' . ( $on_dark ? ' light' : '' ) );
 ?>
 
 <div class="row">
-    <div class="col-xs-12 c-headline-group">
-    <?php if ( $preheader ) : ?><h5 class="c-headline-group__preheader<?php echo $on_dark ? ' light' : ''; ?>"><?php echo esc_html( $preheader ); ?></h5><?php endif; ?>
-    <?php if ( $headline ) : ?><<?php echo esc_attr( $headline_parsed['tag'] ); ?> class="<?php echo esc_attr( trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) ) ); ?>"><?php echo esc_html( $headline ); ?></<?php echo esc_attr( $headline_parsed['tag'] ); ?>><?php endif; ?>
-    <?php if($body) : ?><?php echo wp_kses_post($body); ?><?php endif; ?>
-        <?php $partial_path = get_theme_file_path('/partials/button_pair.php'); ?>
-        <?php include $partial_path; ?>
-    </div>
+	<div class="col-xs-12 <?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>">
+		<?php if ( $headline || $preheader ) : ?>
+		<div class="c-headline-group__titles">
+			<?php if ( $headline ) : ?>
+				<<?php echo esc_attr( $headline_parsed['tag'] ); ?> class="<?php echo esc_attr( $header_class ); ?>"><?php echo esc_html( $headline ); ?></<?php echo esc_attr( $headline_parsed['tag'] ); ?>>
+			<?php endif; ?>
+			<?php if ( $preheader ) : ?>
+				<p class="<?php echo esc_attr( $subheader_class ); ?>"><?php echo esc_html( $preheader ); ?></p>
+			<?php endif; ?>
+		</div>
+		<?php endif; ?>
+		<?php if ( $body ) : ?>
+			<div class="c-headline-group__body"><?php echo wp_kses_post( $body ); ?></div>
+		<?php endif; ?>
+		<?php
+		$partial_path = get_theme_file_path( '/partials/button_pair.php' );
+		include $partial_path;
+		?>
+	</div>
 </div>
