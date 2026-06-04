@@ -415,7 +415,7 @@ function client_render_blog_post_card( $p, $args = array() ) {
  *
  * - Pages (incl. front): editor chooses via ACF "Hero Style" (show hero when not "none"); data from ACF + featured image.
  * - Single post: hero shown automatically with post title, meta, featured image.
- * - Single company: always Hero Medium (same markup as page medium / events archive); no Hero Style picker on CPT.
+ * - Single company: dedicated company hero (Figma Hero/Companies/Post Type/Single); sidebar fields + Industries taxonomy.
  * - Blog index: hero off; stories layout in index.php (featured post + grid) replaces the old title band.
  * - Archive: hero shown automatically with archive title and description.
  *
@@ -454,40 +454,36 @@ function client_get_hero_config() {
     return $config;
   }
 
-  // Single company: always Hero Medium (hero-medium.php). Optional `medium_hero_options` / `hero_headline` if added to CPT later.
+  // Single company: Figma company hero (featured image, title, Industries, sidebar stats).
   if ( is_singular( 'company' ) ) {
     $post = get_queried_object();
     if ( ! $post || ! isset( $post->ID ) ) {
       $config = $default;
       return $config;
     }
-    $post_id       = (int) $post->ID;
-    $page_title    = get_the_title( $post_id );
-    $headline_wys  = function_exists( 'get_field' ) ? get_field( 'hero_headline', $post_id ) : '';
-    $headline_wys  = is_string( $headline_wys ) ? trim( $headline_wys ) : '';
-    $headline_text = $headline_wys !== '' ? $headline_wys : $page_title;
-
-    $medium = function_exists( 'get_field' ) ? get_field( 'medium_hero_options', $post_id ) : null;
-    if ( ! is_array( $medium ) ) {
-      $medium = array();
+    $post_id    = (int) $post->ID;
+    $image_id   = (int) get_post_thumbnail_id( $post_id );
+    $industry   = '';
+    $terms      = get_the_terms( $post_id, 'industry' );
+    if ( $terms && ! is_wp_error( $terms ) ) {
+      $industry = implode( ', ', wp_list_pluck( $terms, 'name' ) );
     }
-    $use_solid_color  = ! empty( $medium['use_solid_color'] );
-    $background_color = isset( $medium['background_color'] ) && $medium['background_color'] ? $medium['background_color'] : '#238c55';
-    $page_image_id    = (int) get_post_thumbnail_id( $post_id );
 
-    // Pages hide medium hero without image + solid; company always shows medium (solid fallback when no featured image).
-    if ( ! $use_solid_color && $page_image_id <= 0 ) {
-      $use_solid_color = true;
-    }
+    $years_in_business     = function_exists( 'get_field' ) ? get_field( 'years_in_business', $post_id ) : '';
+    $years_in_stewardship  = function_exists( 'get_field' ) ? get_field( 'years_in_stewardship', $post_id ) : '';
+    $total_employees       = function_exists( 'get_field' ) ? get_field( 'total_employees', $post_id ) : '';
 
     $config = array(
       'show' => true,
-      'type' => 'medium',
+      'type' => 'company',
       'data' => array(
-        'background_type'  => $use_solid_color ? 'color' : 'image',
-        'background_image' => $use_solid_color ? 0 : $page_image_id,
-        'background_color' => $background_color,
-        'headline_text'    => $headline_text,
+        'image_id'             => $image_id,
+        'background_color'     => '#142e48',
+        'title'                => get_the_title( $post_id ),
+        'industry'             => $industry,
+        'years_in_business'    => $years_in_business,
+        'years_in_stewardship' => $years_in_stewardship,
+        'total_employees'      => $total_employees,
       ),
     );
     return $config;

@@ -1,0 +1,18 @@
+{
+  "name": "client/gallery",
+  "title": "Gallery",
+  "description": "Image gallery on a gradient background. Layout adjusts automatically for any number of photos.",
+  "style": ["file:../library/css/style.css"],
+  "category": "theme-blocks",
+  "icon": "format-gallery",
+  "keywords": ["gallery", "images", "photos"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "gallery.php"
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  },
+  "textdomain": "client_theme"
+}

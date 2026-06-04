@@ -6561,6 +6561,313 @@ POSTS & CONTENT STYLES
   background-repeat: no-repeat;
 }
 
+/* Single Company hero — Figma Hero/Companies/Post Type/Single (435:1631) */
+.hero__container--company {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  margin-top: -3.25rem;
+  margin-left: -webkit-calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
+  margin-right: -webkit-calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+}
+
+.hero__container--company-inner {
+  --company-hero-below-nav: 450px;
+  position: relative;
+  min-height: -webkit-calc(var(--company-hero-below-nav) + 3.25rem);
+  min-height: calc(var(--company-hero-below-nav) + 3.25rem);
+  padding-top: 3.25rem;
+  overflow: visible;
+}
+
+.hero__content--company-bg {
+  position: absolute;
+  top: -3.25rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #12273d;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Same as landing: image behind header; overlay begins below nav band. */
+.hero__content--company-overlay {
+  position: absolute;
+  top: 3.25rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background: rgba(7, 10, 12, 0.7);
+  pointer-events: none;
+}
+
+@media only screen and (min-width: 64em) {
+  .hero__container--company {
+    margin-top: -4.75rem;
+  }
+  .hero__container--company-inner {
+    min-height: -webkit-calc(var(--company-hero-below-nav) + 4.75rem);
+    min-height: calc(var(--company-hero-below-nav) + 4.75rem);
+    padding-top: 4.75rem;
+  }
+  .hero__content--company-bg {
+    top: -4.75rem;
+  }
+  .hero__content--company-overlay {
+    top: 4.75rem;
+  }
+  .hero__content--company-text {
+    top: 4.75rem;
+    height: var(--company-hero-below-nav);
+  }
+  .hero__container--company-inner--no-stats .hero__content--company-text {
+    top: 4.75rem;
+    height: auto;
+  }
+}
+.hero__content--company-text {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 3.25rem;
+  height: var(--company-hero-below-nav);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 90%;
+  max-width: 52rem;
+  text-align: center;
+  pointer-events: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* No stats: title + industry centered in full below-nav band */
+.hero__container--company-inner--no-stats .hero__content--company-text {
+  top: 3.25rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+
+.hero__title--company {
+  margin: 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2.75rem, 6.5vw, 6rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Figma Subhead (350:847): 56px / 50px lh, Ultra Black, uppercase, Neutral/White_50 */
+.hero__container--company .hero__industry--company {
+  margin: 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(1.75rem, 3.89vw, 3.5rem);
+  font-weight: 900;
+  line-height: 0.8928571429;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Figma stats group (435:1675): value 64px Bold, label 20px Black, two Title Case lines */
+.hero__stats--company {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  gap: 1.5em 4rem;
+  padding: 0 7% 1.25em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.hero__stat--company {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.hero__container--company .hero__stat-value {
+  margin: 0 0 0.2rem;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2.25rem, 3.996vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+}
+
+.hero__stat-label {
+  margin: 0;
+  max-width: 10rem;
+}
+
+.hero__container--company .hero__stat-label-line {
+  margin: 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: #fff;
+  text-transform: none;
+}
+
+@media (max-width: 767px) {
+  .hero__stats--company {
+    gap: 1em 1.25em;
+    padding: 0 5% 1em;
+  }
+  .hero__stat-label {
+    max-width: 10rem;
+  }
+}
+/* Gallery block — Figma Gallery (715:891)
+   Layer order (rear → front): gradient slab, then photos.
+   Top row sits above gradient start (61px @ 1440); bottom row on gradient. */
+.c-gallery {
+  --gallery-gap: 1.25em;
+  --gallery-bg-offset: clamp(2rem, 4.236vw, 3.8125rem);
+  --gallery-pad-bottom: clamp(2rem, 3.611vw, 3.25rem);
+  position: relative;
+  overflow: visible;
+  width: 100vw;
+  margin-top: 2em;
+  margin-left: -webkit-calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
+  margin-right: -webkit-calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-bottom: var(--gallery-pad-bottom);
+}
+
+.c-gallery__bg {
+  position: absolute;
+  top: var(--gallery-bg-offset);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(17.413%, #12273d), to(#507a73));
+  background: -webkit-linear-gradient(top, #12273d 17.413%, #507a73 100%);
+  background: linear-gradient(180deg, #12273d 17.413%, #507a73 100%);
+}
+
+.c-gallery__inner {
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: var(--gallery-gap);
+}
+
+.c-gallery__row {
+  display: grid;
+  gap: var(--gallery-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-gallery__item {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  -webkit-filter: drop-shadow(1px 6px 10px rgba(2, 56, 68, 0.3));
+  filter: drop-shadow(1px 6px 10px rgba(2, 56, 68, 0.3));
+}
+
+.c-gallery__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 382/283;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.entry-content .c-gallery img,
+.entry-content img.c-gallery__img {
+  margin-bottom: 0;
+}
+
+.c-gallery__row--count-1 {
+  grid-template-columns: 1fr;
+}
+
+.c-gallery__row--count-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.c-gallery__row--count-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 767px) {
+  .c-gallery {
+    --gallery-bg-offset: 1.5rem;
+  }
+  .c-gallery__row {
+    grid-template-columns: 1fr !important;
+  }
+}
 /* Single post hero: all rules namespaced under .hero__container--single */
 .hero__container--single {
   position: relative;

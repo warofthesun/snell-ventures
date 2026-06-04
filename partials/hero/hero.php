@@ -2,7 +2,8 @@
 /**
  * Reusable hero partial. Uses client_get_hero_config() for context (page, post, blog, archive).
  * Editor choice on pages via ACF "Hero Style"; automatic type on single post, blog index, archive.
- * Hero Medium is used for the Medium style on pages, the Events archive, and single Company (same markup/CSS).
+ * Hero Medium is used for the Medium style on pages and the Events archive.
+ * Single Company uses hero-company.php (Figma Hero/Companies/Post Type/Single).
  *
  * Markup for each variant lives in `partials/hero/inc/hero-{type}.php`.
  */
@@ -26,6 +27,8 @@ if ( $hero_type === 'single' ) {
 	include $hero_inc_dir . '/hero-blog-archive.php';
 } elseif ( $hero_type === 'medium' ) {
 	include $hero_inc_dir . '/hero-medium.php';
+} elseif ( $hero_type === 'company' ) {
+	include $hero_inc_dir . '/hero-company.php';
 } elseif ( $hero_type === 'initiative' ) {
 	include $hero_inc_dir . '/hero-initiative.php';
 } else {
