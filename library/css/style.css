@@ -1305,7 +1305,8 @@ Here's a quick video to show how it works:
 http://www.youtube.com/watch?v=hwdVpKiJzac
 
 *********************/
-.c-button-pair .c-button-pair__button, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit, .navigation-button a, #mobile-nav {
+.c-button-pair .c-button-pair__button, .c-contactForm__formWrap input[type=submit],
+.c-contactForm__formWrap .wpcf7-submit, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit, .navigation-button a, #mobile-nav {
   display: inline-block;
   position: relative;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -1320,15 +1321,19 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
 }
-.c-button-pair .c-button-pair__button .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
+.c-button-pair .c-button-pair__button .svg-inline--fa,
+.c-contactForm__formWrap .wpcf7-submit .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
   font-size: 0.9em;
 }
-.c-button-pair .c-button-pair__button:hover, .gallery-item .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus, .gallery-item .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
+.c-button-pair .c-button-pair__button:hover,
+.c-contactForm__formWrap .wpcf7-submit:hover, .gallery-item .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus,
+.c-contactForm__formWrap .wpcf7-submit:focus, .gallery-item .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
   color: #fff;
   text-decoration: none;
   outline: none;
 }
-.c-button-pair .c-button-pair__button:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
+.c-button-pair .c-button-pair__button:active,
+.c-contactForm__formWrap .wpcf7-submit:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
   top: 1px;
 }
 .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
@@ -1388,7 +1393,8 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid {
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid, .c-contactForm__formWrap input[type=submit],
+.c-contactForm__formWrap .wpcf7-submit {
   background-color: #bf7d63;
   color: #17100d;
   border-color: #bf7d63;
@@ -1408,12 +1414,15 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button:focus {
+.c-button-pair.c-button-pair--accent .c-button-pair__button:hover, .c-contactForm__formWrap input[type=submit]:hover,
+.c-contactForm__formWrap .wpcf7-submit:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button:focus, .c-contactForm__formWrap input[type=submit]:focus,
+.c-contactForm__formWrap .wpcf7-submit:focus {
   background-color: #ca937d;
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--accent .c-button-pair__button:active {
+.c-button-pair.c-button-pair--accent .c-button-pair__button:active, .c-contactForm__formWrap input[type=submit]:active,
+.c-contactForm__formWrap .wpcf7-submit:active {
   background-color: #a6644a;
 }
 
@@ -7059,71 +7068,105 @@ POSTS & CONTENT STYLES
   inset: 0;
 }
 
-/* Contact Form block — Figma Contact Form/Block (718:569) */
+/* Contact Form block — Figma Contact Form/Block (206:439) */
 .c-contactForm {
+  position: relative;
+  overflow-x: visible;
+  margin: 0;
+  padding: 0;
+}
+
+.c-contactForm__hero {
   position: relative;
   overflow: hidden;
   width: 100vw;
+  max-width: 100vw;
   margin-left: -webkit-calc(50% - 50vw);
   margin-left: calc(50% - 50vw);
   margin-right: -webkit-calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding: clamp(3rem, 8vw, 5rem) 0 clamp(3rem, 7vw, 4rem);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* Figma frame 1438×1013 */
+  min-height: clamp(36rem, 70.4vw, 63.3125rem);
 }
 
-.c-contactForm--embed {
-  width: auto;
-  margin-left: 0;
-  margin-right: 0;
-  padding: 0 0 clamp(3rem, 7vw, 4rem);
-}
-
-.c-contactForm__accent {
+.c-contactForm__stage {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 41%;
+  inset: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.c-contactForm__stage .c-contactForm__angle,
+.c-contactForm__stage .c-contactForm__solid {
+  position: absolute;
+  inset: 0;
+}
+
+/* Rearmost decorative layer (Accent Angle). */
+.c-contactForm__angle {
+  z-index: 0;
+  pointer-events: none;
+}
+
+.c-contactForm__angleSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Solid navy in front of gradient; $primary-700 only (Rectangle 16). */
+.c-contactForm__solid {
   z-index: 1;
   pointer-events: none;
 }
 
-.c-contactForm__accentImg {
+.c-contactForm__solidSvg {
   display: block;
   width: 100%;
   height: 100%;
-  -o-object-fit: fill;
-  object-fit: fill;
-}
-
-.c-contactForm__panel {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: -webkit-linear-gradient(315deg, #12273d 0%, #507a73 100%);
-  background: linear-gradient(135deg, #12273d 0%, #507a73 100%);
+  /* Figma Rectangle 16 is authored flipped (-scale-x-100); mirror so top edge slopes like People Highlight. */
   -webkit-transform: scaleX(-1);
   -ms-transform: scaleX(-1);
   transform: scaleX(-1);
 }
 
-.c-contactForm__inner {
+.c-contactForm__solidPath {
+  fill: #12273d;
+}
+
+.c-contactForm__solidPath--mobile {
+  display: none;
+}
+
+.c-contactForm__content {
   position: relative;
   z-index: 2;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .c-contactForm__intro {
-  max-width: 46rem;
-  margin-bottom: 1.5em;
+  position: absolute;
+  left: 25.66%;
+  right: 17.39%;
+  top: 22.7%;
+  bottom: 53.8%;
+  margin: 0;
   color: #fff;
+  overflow: hidden;
 }
 
 .c-contactForm__headline {
   margin: 0 0 1em;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: 900;
-  line-height: 1.2;
+  line-height: normal;
   color: #fff;
 }
 
@@ -7131,36 +7174,93 @@ POSTS & CONTENT STYLES
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.2em;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: normal;
   color: #fff;
 }
 .c-contactForm__body p {
   margin: 0 0 1em;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
 }
 .c-contactForm__body p:last-child {
   margin-bottom: 0;
 }
 
 .c-contactForm__formWrap {
-  max-width: 52rem;
+  position: absolute;
+  left: 24.97%;
+  right: 23.02%;
+  top: 47.38%;
+  bottom: 8.79%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .c-contactForm__formWrap .wpcf7-form {
   color: #fff;
 }
 .c-contactForm__formWrap label {
-  color: #fff;
+  display: block;
+  margin-bottom: 0.5em;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.2em;
   font-weight: 700;
+  line-height: normal;
+  color: #fff;
+}
+.c-contactForm__formWrap .form__fields--two-up p {
+  width: 48%;
 }
 .c-contactForm__formWrap input[type=text],
 .c-contactForm__formWrap input[type=email],
 .c-contactForm__formWrap input[type=tel],
 .c-contactForm__formWrap textarea {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 0;
   border-radius: 0.5em;
+  background: #fff;
+}
+.c-contactForm__formWrap textarea {
+  min-height: 8rem;
+}
+.c-contactForm__formWrap input[type=submit],
+.c-contactForm__formWrap .wpcf7-submit {
+  margin-top: 1em;
+  -webkit-box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
 }
 
 .c-contactForm__placeholder {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
+}
+
+.c-contactForm--embed {
+  width: auto;
+  margin: 0;
+  padding: 0 0 clamp(3rem, 7vw, 4rem);
+}
+
+.c-contactForm--embed .c-contactForm__content {
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+}
+
+.c-contactForm--embed .c-contactForm__intro,
+.c-contactForm--embed .c-contactForm__formWrap {
+  position: relative;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  max-width: 52rem;
+}
+
+.c-contactForm--embed .c-contactForm__intro {
+  margin-bottom: 1.5em;
 }
 
 /* Combined Quote + Contact — Figma Group 27 (718:591) */
@@ -7188,14 +7288,36 @@ POSTS & CONTENT STYLES
   z-index: 1;
 }
 
-.c-quoteContact .c-contactForm__panel {
-  background: -webkit-linear-gradient(315deg, rgba(18, 39, 61, 0.95) 0%, rgba(80, 122, 115, 0.98) 100%);
-  background: linear-gradient(135deg, rgba(18, 39, 61, 0.95) 0%, rgba(80, 122, 115, 0.98) 100%);
-}
-
 @media (max-width: 767px) {
-  .c-contactForm__accent {
-    height: 28%;
+  .c-contactForm__hero {
+    min-height: 0;
+    padding: 2em 1em;
+  }
+  .c-contactForm__stage {
+    position: absolute;
+    inset: 0;
+  }
+  .c-contactForm__solidPath--desktop {
+    display: none;
+  }
+  .c-contactForm__solidPath--mobile {
+    display: inline;
+  }
+  .c-contactForm__intro,
+  .c-contactForm__formWrap {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    max-width: none;
+  }
+  .c-contactForm__intro {
+    margin-bottom: 1.5em;
+    overflow: visible;
+  }
+  .c-contactForm__formWrap .form__fields--two-up p {
+    width: 100%;
   }
 }
 /* Single post hero: all rules namespaced under .hero__container--single */

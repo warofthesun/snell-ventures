@@ -3459,65 +3459,98 @@ POSTS & CONTENT STYLES
 	inset: 0;
 }
 
-/* Contact Form block — Figma Contact Form/Block (718:569) */
+/* Contact Form block — Figma Contact Form/Block (206:439) */
 .c-contactForm {
+	position: relative;
+	overflow-x: visible;
+	margin: 0;
+	padding: 0;
+}
+
+.c-contactForm__hero {
 	position: relative;
 	overflow: hidden;
 	width: 100vw;
+	max-width: 100vw;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
-	padding: clamp(3rem, 8vw, 5rem) 0 clamp(3rem, 7vw, 4rem);
+	box-sizing: border-box;
+	/* Figma frame 1438×1013 */
+	min-height: clamp(36rem, 70.4vw, 63.3125rem);
 }
 
-.c-contactForm--embed {
-	width: auto;
-	margin-left: 0;
-	margin-right: 0;
-	padding: 0 0 clamp(3rem, 7vw, 4rem);
-}
-
-.c-contactForm__accent {
+.c-contactForm__stage {
 	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 41%;
+	inset: 0;
+	box-sizing: border-box;
+}
+
+.c-contactForm__stage .c-contactForm__angle,
+.c-contactForm__stage .c-contactForm__solid {
+	position: absolute;
+	inset: 0;
+}
+
+/* Rearmost decorative layer (Accent Angle). */
+.c-contactForm__angle {
+	z-index: 0;
+	pointer-events: none;
+}
+
+.c-contactForm__angleSvg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+/* Solid navy in front of gradient; $primary-700 only (Rectangle 16). */
+.c-contactForm__solid {
 	z-index: 1;
 	pointer-events: none;
 }
 
-.c-contactForm__accentImg {
+.c-contactForm__solidSvg {
 	display: block;
 	width: 100%;
 	height: 100%;
-	object-fit: fill;
-}
-
-.c-contactForm__panel {
-	position: absolute;
-	inset: 0;
-	z-index: 0;
-	background: linear-gradient(135deg, $primary-700 0%, $secondary-700 100%);
+	/* Figma Rectangle 16 is authored flipped (-scale-x-100); mirror so top edge slopes like People Highlight. */
 	transform: scaleX(-1);
 }
 
-.c-contactForm__inner {
+.c-contactForm__solidPath {
+	fill: $primary-700;
+}
+
+.c-contactForm__solidPath--mobile {
+	display: none;
+}
+
+.c-contactForm__content {
 	position: relative;
 	z-index: 2;
+	width: 100%;
+	height: 100%;
+	min-height: inherit;
+	box-sizing: border-box;
 }
 
 .c-contactForm__intro {
-	max-width: 46rem;
-	margin-bottom: $spacing-xl;
+	position: absolute;
+	left: 25.66%;
+	right: 17.39%;
+	top: 22.7%;
+	bottom: 53.8%;
+	margin: 0;
 	color: $white;
+	overflow: hidden;
 }
 
 .c-contactForm__headline {
 	margin: 0 0 $spacing-md;
 	font-family: $header-font;
-	font-size: $font-size-md;
+	font-size: $font-size-lg;
 	font-weight: $font-weight-black;
-	line-height: 1.2;
+	line-height: normal;
 	color: $white;
 }
 
@@ -3525,11 +3558,14 @@ POSTS & CONTENT STYLES
 	font-family: $body-font;
 	font-size: $font-size-md;
 	font-weight: $font-weight-regular;
-	line-height: 1.45;
+	line-height: normal;
 	color: $white;
 
 	p {
 		margin: 0 0 $spacing-md;
+		font-size: inherit;
+		line-height: inherit;
+		color: inherit;
 
 		&:last-child {
 			margin-bottom: 0;
@@ -3538,28 +3574,85 @@ POSTS & CONTENT STYLES
 }
 
 .c-contactForm__formWrap {
-	max-width: 52rem;
+	position: absolute;
+	left: 24.97%;
+	right: 23.02%;
+	top: 47.38%;
+	bottom: 8.79%;
+	box-sizing: border-box;
 
 	.wpcf7-form {
 		color: $white;
 	}
 
 	label {
-		color: $white;
+		display: block;
+		margin-bottom: $spacing-xs;
+		font-family: $body-font;
+		font-size: $font-size-md;
 		font-weight: $font-weight-semibold;
+		line-height: normal;
+		color: $white;
+	}
+
+	.form__fields--two-up p {
+		width: 48%;
 	}
 
 	input[type="text"],
 	input[type="email"],
 	input[type="tel"],
 	textarea {
+		width: 100%;
+		box-sizing: border-box;
+		border: 0;
 		border-radius: $radius-sm;
+		background: $white;
+	}
+
+	textarea {
+		min-height: 8rem;
+	}
+
+	input[type="submit"],
+	.wpcf7-submit {
+		@extend %btn;
+		@extend %btn--accent;
+		@extend %btn--accent--solid;
+		margin-top: $spacing-md;
+		box-shadow: 0 4px 2px rgba($black, 0.15);
 	}
 }
 
 .c-contactForm__placeholder {
 	margin: 0;
 	color: rgba($white, 0.85);
+}
+
+.c-contactForm--embed {
+	width: auto;
+	margin: 0;
+	padding: 0 0 clamp(3rem, 7vw, 4rem);
+}
+
+.c-contactForm--embed .c-contactForm__content {
+	position: relative;
+	z-index: 1;
+	min-height: 0;
+}
+
+.c-contactForm--embed .c-contactForm__intro,
+.c-contactForm--embed .c-contactForm__formWrap {
+	position: relative;
+	left: auto;
+	right: auto;
+	top: auto;
+	bottom: auto;
+	max-width: 52rem;
+}
+
+.c-contactForm--embed .c-contactForm__intro {
+	margin-bottom: $spacing-xl;
 }
 
 /* Combined Quote + Contact — Figma Group 27 (718:591) */
@@ -3583,13 +3676,42 @@ POSTS & CONTENT STYLES
 	z-index: 1;
 }
 
-.c-quoteContact .c-contactForm__panel {
-	background: linear-gradient(135deg, rgba($primary-700, 0.95) 0%, rgba($secondary-700, 0.98) 100%);
-}
-
 @media (max-width: 767px) {
-	.c-contactForm__accent {
-		height: 28%;
+	.c-contactForm__hero {
+		min-height: 0;
+		padding: $spacing-xxl $spacing-md;
+	}
+
+	.c-contactForm__stage {
+		position: absolute;
+		inset: 0;
+	}
+
+	.c-contactForm__solidPath--desktop {
+		display: none;
+	}
+
+	.c-contactForm__solidPath--mobile {
+		display: inline;
+	}
+
+	.c-contactForm__intro,
+	.c-contactForm__formWrap {
+		position: relative;
+		left: auto;
+		right: auto;
+		top: auto;
+		bottom: auto;
+		max-width: none;
+	}
+
+	.c-contactForm__intro {
+		margin-bottom: $spacing-xl;
+		overflow: visible;
+	}
+
+	.c-contactForm__formWrap .form__fields--two-up p {
+		width: 100%;
 	}
 }
 
