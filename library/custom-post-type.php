@@ -47,6 +47,41 @@ function custom_post() {
 		)
 	);
 
+	// Quotes: reusable quote copy for Quote blocks.
+	register_post_type(
+		'quotes',
+		array(
+			'labels'              => array(
+				'name'               => __( 'Quotes', 'client_theme' ),
+				'singular_name'      => __( 'Quote', 'client_theme' ),
+				'all_items'          => __( 'All Quotes', 'client_theme' ),
+				'add_new'            => __( 'Add New', 'client_theme' ),
+				'add_new_item'       => __( 'Add New Quote', 'client_theme' ),
+				'edit_item'          => __( 'Edit Quote', 'client_theme' ),
+				'new_item'           => __( 'New Quote', 'client_theme' ),
+				'view_item'          => __( 'View Quote', 'client_theme' ),
+				'search_items'       => __( 'Search Quotes', 'client_theme' ),
+				'not_found'          => __( 'No quotes found.', 'client_theme' ),
+				'not_found_in_trash' => __( 'No quotes found in Trash', 'client_theme' ),
+				'parent_item_colon'  => '',
+			),
+			'description'         => __( 'Reusable quotes for Quote blocks.', 'client_theme' ),
+			'public'              => false,
+			'publicly_queryable'  => false,
+			'exclude_from_search' => true,
+			'show_ui'             => true,
+			'show_in_rest'        => true,
+			'query_var'           => true,
+			'menu_position'       => 11,
+			'menu_icon'           => 'dashicons-format-quote',
+			'rewrite'             => false,
+			'has_archive'         => false,
+			'capability_type'     => 'post',
+			'hierarchical'        => false,
+			'supports'            => array( 'title', 'editor' ),
+		)
+	);
+
 	register_taxonomy(
 		'person_category',
 		array( 'people' ),

@@ -1,0 +1,18 @@
+{
+  "name": "client/contact-form",
+  "title": "Contact Form",
+  "description": "Contact Form 7 block with intro copy on a gradient panel.",
+  "style": ["file:../library/css/style.css"],
+  "category": "theme-blocks",
+  "icon": "email",
+  "keywords": ["contact", "form", "cf7"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "contact_form.php"
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  },
+  "textdomain": "client_theme"
+}

@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" viewBox="0 0 1440 814" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M0 185.5L1440 0V710.5L0 814V507V185.5Z" fill="url(#quoteBlockGradient)"/>
+<defs>
+<linearGradient id="quoteBlockGradient" x1="1440" y1="0" x2="0" y2="814" gradientUnits="userSpaceOnUse">
+<stop offset="0%" stop-color="#12273D"/>
+<stop offset="100%" stop-color="#507A73"/>
+</linearGradient>
+</defs>
+</svg>

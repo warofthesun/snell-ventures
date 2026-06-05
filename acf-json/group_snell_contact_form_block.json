@@ -1,0 +1,127 @@
+{
+    "key": "group_snell_contact_form_block",
+    "title": "Contact Form Block",
+    "fields": [
+        {
+            "key": "field_snell_contact_headline",
+            "label": "Headline",
+            "name": "headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Our Experts are Ready to Help",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_snell_contact_intro",
+            "label": "Intro",
+            "name": "intro",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_snell_contact_cf7_form",
+            "label": "Contact Form 7 form",
+            "name": "cf7_form",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Select a Contact Form 7 form. Use theme form classes in CF7 markup: form__fields--two-up, form__label--stacked.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {},
+            "default_value": "",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "Select a form"
+        },
+        {
+            "key": "field_snell_contact_cf7_reference",
+            "label": "CF7 markup reference",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<pre>&lt;div class=\"form__fields form__fields--two-up\"&gt;\r\n  &lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;First Name [text* first-name]&lt;/label&gt;&lt;/p&gt;\r\n  &lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;Last Name [text* last-name]&lt;/label&gt;&lt;/p&gt;\r\n  &lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;Email [email* your-email]&lt;/label&gt;&lt;/p&gt;\r\n  &lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;Phone [tel phone]&lt;/label&gt;&lt;/p&gt;\r\n&lt;/div&gt;\r\n&lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;Message [textarea* your-message]&lt;/label&gt;&lt;/p&gt;\r\n[submit \"Submit\"]",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_snell_contact_show_accent",
+            "label": "Show accent angle",
+            "name": "show_accent_angle",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Top accent wedge (standalone Contact Form block). Off when combined with a quote.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "client\/contact-form"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1780540800
+}

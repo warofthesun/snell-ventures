@@ -1,0 +1,19 @@
+{
+  "name": "client/quote",
+  "title": "Quote",
+  "description": "Quote band with optional background photo and slideshow.",
+  "style": ["file:../library/css/style.css"],
+  "category": "theme-blocks",
+  "icon": "format-quote",
+  "keywords": ["quote", "testimonial", "slideshow"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "quote.php"
+  },
+  "viewScript": ["file:./view.js"],
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  },
+  "textdomain": "client_theme"
+}

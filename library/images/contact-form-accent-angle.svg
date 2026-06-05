@@ -1,0 +1,9 @@
+<svg viewBox="0 0 1440 420" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+<path d="M0 0H1440V420L0 280V0Z" fill="url(#contactFormAccentGradient)"/>
+<defs>
+<linearGradient id="contactFormAccentGradient" x1="0" y1="0" x2="1440" y2="420" gradientUnits="userSpaceOnUse">
+<stop stop-color="#12273d"/>
+<stop offset="1" stop-color="#507a73"/>
+</linearGradient>
+</defs>
+</svg>
