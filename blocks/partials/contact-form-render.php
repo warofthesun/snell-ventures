@@ -10,6 +10,7 @@
  *   @type int    $form_id
  *   @type bool   $show_accent_angle
  *   @type bool   $embed
+ *   @type string $context     standalone|embed|combined
  *   @type string $section_id
  * }
  */
@@ -23,14 +24,22 @@ $intro             = isset( $args['intro'] ) ? (string) $args['intro'] : '';
 $form_id           = isset( $args['form_id'] ) ? (int) $args['form_id'] : 0;
 $show_accent_angle = array_key_exists( 'show_accent_angle', $args ) ? (bool) $args['show_accent_angle'] : true;
 $embed             = ! empty( $args['embed'] );
+$context           = isset( $args['context'] ) ? (string) $args['context'] : '';
 $section_id        = isset( $args['section_id'] ) ? (string) $args['section_id'] : '';
+
+if ( $context === '' ) {
+	$context = $embed ? 'embed' : 'standalone';
+}
 
 $classes = array( 'c-contactForm' );
 if ( $show_accent_angle ) {
 	$classes[] = 'c-contactForm--has-accent';
 }
-if ( $embed ) {
+if ( $context === 'embed' ) {
 	$classes[] = 'c-contactForm--embed';
+}
+if ( $context === 'combined' ) {
+	$classes[] = 'c-contactForm--combined';
 }
 
 /**
@@ -66,7 +75,8 @@ $snell_contact_form_surfaces = static function ( $gradient_id, $show_angle ) {
 };
 
 $contact_grad_id = wp_unique_id( 'contact-form-grad-' );
-$tag             = $embed ? 'div' : 'section';
+$tag             = ( $context === 'embed' || $context === 'combined' ) ? 'div' : 'section';
+$use_hero        = ( $context === 'standalone' || $context === 'combined' );
 ?>
 
 <<?php echo esc_attr( $tag ); ?>
@@ -75,7 +85,7 @@ $tag             = $embed ? 'div' : 'section';
 	<?php endif; ?>
 	class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
 >
-	<?php if ( ! $embed ) : ?>
+	<?php if ( $use_hero ) : ?>
 		<div class="c-contactForm__hero">
 			<div class="c-contactForm__stage">
 				<?php $snell_contact_form_surfaces( $contact_grad_id, $show_accent_angle ); ?>
