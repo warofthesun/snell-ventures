@@ -76,6 +76,27 @@
             "append": ""
         },
         {
+            "key": "field_6a25dc22d2cc8",
+            "label": "Company synopsis",
+            "name": "company_synopsis",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "A brief synopsis of the company. This will be used at the top of the company page and in the Company Text Image block.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "text",
+            "media_upload": 0,
+            "toolbar": "full",
+            "delay": 0
+        },
+        {
             "key": "field_69caaa53a1d63",
             "label": "Years in business",
             "name": "years_in_business",
@@ -232,5 +253,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1780842000
+    "modified": 1780866184
 }

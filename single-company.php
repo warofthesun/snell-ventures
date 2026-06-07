@@ -3,22 +3,33 @@
 <?php if ( client_get_hero_config()['show'] ) { include get_template_directory() . '/partials/hero/hero.php'; } ?>
 
 <?php
-$company_post_id = get_queried_object_id();
-$company_tagline = '';
+$company_post_id   = get_queried_object_id();
+$company_tagline   = '';
+$company_synopsis  = '';
 
 if ( function_exists( 'get_field' ) && is_singular( 'company' ) ) {
 	$tagline = get_field( 'company_tagline', $company_post_id );
 	if ( is_string( $tagline ) ) {
 		$company_tagline = trim( $tagline );
 	}
+
+	$synopsis = get_field( 'company_synopsis', $company_post_id );
+	if ( is_string( $synopsis ) && trim( wp_strip_all_tags( $synopsis ) ) !== '' ) {
+		$company_synopsis = $synopsis;
+	}
 }
 
-if ( $company_tagline !== '' ) :
+if ( $company_tagline !== '' || $company_synopsis !== '' ) :
 	?>
 	<div class="c-companyIntro wrap">
 		<div class="c-companyIntro__grid row">
 			<div class="c-companyIntro__text col-xs-12">
-				<h4 class="h4 medium c-companyIntro__heading"><?php echo esc_html( $company_tagline ); ?></h4>
+				<?php if ( $company_tagline !== '' ) : ?>
+					<h4 class="h4 medium c-companyIntro__heading<?php echo $company_synopsis !== '' ? ' c-companyIntro__heading--hasSynopsis' : ''; ?>"><?php echo esc_html( $company_tagline ); ?></h4>
+				<?php endif; ?>
+				<?php if ( $company_synopsis !== '' ) : ?>
+					<div class="c-companyIntro__synopsis"><?php echo wp_kses_post( $company_synopsis ); ?></div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

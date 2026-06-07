@@ -3491,7 +3491,32 @@ POSTS & CONTENT STYLES
 .c-companyIntro__heading {
 	margin: 0;
 	max-width: none;
+}
+
+.c-companyIntro__heading--hasSynopsis {
 	margin-bottom: $spacing-md;
+}
+
+.c-companyIntro__synopsis {
+	margin: 0 auto $spacing-md;
+	max-width: 40rem;
+	font-family: $body-font;
+	font-size: $font-size-md;
+	font-weight: $font-weight-regular;
+	line-height: 1.5;
+	color: $text-color;
+	text-align: center;
+
+	p {
+		margin: 0;
+		font-size: inherit;
+		line-height: inherit;
+		color: inherit;
+	}
+
+	p + p {
+		margin-top: 0.75em;
+	}
 }
 
 /* Gallery block — Figma Gallery (715:891)
@@ -3900,12 +3925,8 @@ POSTS & CONTENT STYLES
 	}
 
 	input[type="submit"],
-	.wpcf7-submit {
-		@extend %btn;
-		@extend %btn--accent;
-		@extend %btn--accent--solid;
+	.wpcf7-form-control.wpcf7-submit {
 		margin-top: $spacing-md;
-		box-shadow: 0 4px 2px rgba($black, 0.15);
 	}
 }
 

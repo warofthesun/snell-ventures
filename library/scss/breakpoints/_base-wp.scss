@@ -23,8 +23,6 @@ article {
 			}
 
 			.article__footer {
-				padding: 1.5em;
-				border-top: 1px solid $secondary-500;
 				width: 100%;
 
 				p {
@@ -473,10 +471,18 @@ article {
 	}
 }
 
-input[type="submit"], input[type="file"], #wp-submit {
+input[type="submit"],
+.wpcf7-form-control.wpcf7-submit {
 	@extend %btn;
-		@extend %btn--secondary;
-		@extend %btn--secondary--solid;
+	@extend %btn--primary;
+	@extend %btn--primary--solid;
+}
+
+input[type="file"],
+#wp-submit {
+	@extend %btn;
+	@extend %btn--secondary;
+	@extend %btn--secondary--solid;
 }
 
 .wpcf7-form {
