@@ -133,6 +133,33 @@ function client_acf_image_src_square( $img ) {
 }
 
 /**
+ * Text + Image gallery URL: square center crop (`client_text_image_square`) when an attachment ID is known.
+ *
+ * @param array|int $img ACF image field value (array with ID) or attachment ID.
+ * @return string URL or empty string.
+ */
+function client_acf_image_src_text_image( $img ) {
+	$id = 0;
+	if ( is_array( $img ) ) {
+		$id = isset( $img['ID'] ) ? (int) $img['ID'] : ( isset( $img['id'] ) ? (int) $img['id'] : 0 );
+	} elseif ( is_numeric( $img ) ) {
+		$id = (int) $img;
+	}
+	if ( $id > 0 ) {
+		$src = wp_get_attachment_image_url( $id, 'client_text_image_square' );
+		if ( is_string( $src ) && $src !== '' ) {
+			return $src;
+		}
+		$fallback = wp_get_attachment_url( $id );
+		return is_string( $fallback ) ? $fallback : '';
+	}
+	if ( is_array( $img ) && ! empty( $img['url'] ) && is_string( $img['url'] ) ) {
+		return $img['url'];
+	}
+	return '';
+}
+
+/**
  * Resolve the blog index “featured” post: newest sticky post, else newest published post.
  * Cached per request. Does not check is_home() — safe for pre_get_posts.
  *
@@ -1052,6 +1079,7 @@ add_image_size( 'hero-bg', 1920, 1080, true ); // Hero background; use instead o
 add_image_size( 'post-card', 800, 600, true ); // Post cards loop: 4:3 aspect-ratio to match .c-postCard__media
 add_image_size( 'card-block', 400, 400, true ); // Card block: square for .c-card-block__card-media
 add_image_size( 'client_slider_square', 800, 800, true ); // Slider slideshow: square crop
+add_image_size( 'client_text_image_square', 800, 800, true ); // Text + Image: square crop
 
 /*
 to add more sizes, simply copy a line from above

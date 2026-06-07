@@ -3979,11 +3979,13 @@ Content Section block
 
 .c-waveband__content--full .c-image-grid > li,
 .c-text-image__content--full .c-image-grid > li {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 0px;
+  flex: 1 1 0;
+  min-width: 0;
   margin: 0;
-  height: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
 }
 
 /* Single image: fill container width */
@@ -3993,23 +3995,28 @@ Content Section block
   -ms-flex: 1 1 0px;
   flex: 1 1 0;
   min-width: 0;
+  aspect-ratio: 1/1;
 }
 
 .c-waveband__content--full .c-image-grid > li:only-child .c-image-grid__img,
 .c-text-image__content--full .c-image-grid > li:only-child .c-image-grid__img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  -o-object-fit: contain;
-  object-fit: contain;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
 }
 
 .c-waveband__content--full .c-image-grid .c-image-grid__img,
 .c-text-image__content--full .c-image-grid .c-image-grid__img {
+  width: 100%;
   height: 100%;
-  width: auto;
   -o-object-fit: cover;
   object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
   display: block;
 }
 
@@ -4023,28 +4030,32 @@ Content Section block
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 0px;
+  flex: 1 1 0;
+  min-width: 0;
   gap: 1rem;
   margin: 0;
-  height: 100%;
 }
 
 .c-waveband__content--full .c-image-grid__right-item,
 .c-text-image__content--full .c-image-grid__right-item {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  height: 100%;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 0px;
+  flex: 1 1 0;
+  min-width: 0;
+  aspect-ratio: 1/1;
+  overflow: hidden;
 }
 
 .c-waveband__content--full .c-image-grid__right-item .c-image-grid__img,
 .c-text-image__content--full .c-image-grid__right-item .c-image-grid__img {
+  width: 100%;
   height: 100%;
-  width: auto;
   -o-object-fit: cover;
   object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
 }
 
 /* When block has no colored background, content wrapper matches waveband layout */
@@ -4228,6 +4239,65 @@ Content Section block
   left: 0;
 }
 
+.c-content-group__visual-frame .c-content-group__slideshow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.c-content-group__visual-frame .c-content-group__slideshow--square {
+  aspect-ratio: auto;
+  max-width: none;
+}
+
+.c-content-group__visual-frame .c-slider.c-slider--slideshow {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+.c-content-group__visual-frame .c-slider--slideshow .c-slider__panel {
+  position: relative;
+  height: 100%;
+  padding: 0;
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  flex: none;
+  min-height: 0;
+}
+
+.c-content-group__visual-frame .c-slider--slideshow .c-slider__image-wrap,
+.c-content-group__visual-frame .c-slider--slideshow .c-slider__image-wrap--square {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.c-content-group__visual-frame .c-slider--slideshow .c-slider__slide {
+  inset: 0;
+}
+
+.c-content-group__visual-frame .c-slider--slideshow .c-slider__image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  border-radius: 0;
+}
+
 /* Full-width text-image row uses flex on .c-image-grid — keep the framed single-image stack as block + square */
 .c-waveband__content--full .c-content-group__visual-frame .c-image-grid,
 .c-text-image__content--full .c-content-group__visual-frame .c-image-grid {
@@ -4269,6 +4339,32 @@ Content Section block
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+}
+
+.c-waveband__content--full .c-content-group__visual-frame .c-content-group__slideshow--square,
+.c-text-image__content--full .c-content-group__visual-frame .c-content-group__slideshow--square {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+/* Text + Image gallery: 1:1 cells; images fill each square */
+.c-text-image.c-content-group .c-image-grid__item,
+.c-text-image.c-content-group .c-image-grid__right-item {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+.c-text-image.c-content-group .c-image-grid__img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  display: block;
 }
 
 /* Figma type: Font/Size/h6/black, h4/black, body/rg — scoped to ACF text-image block only */
@@ -6872,7 +6968,7 @@ POSTS & CONTENT STYLES
 .hero__title--company {
   margin: 0;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(2.75rem, 5.5vw, 6rem);
+  font-size: clamp(2.75rem, 5vw, 5rem);
   font-weight: 900;
   line-height: 1;
   color: #fff;
@@ -6888,7 +6984,7 @@ POSTS & CONTENT STYLES
 .hero__container--company .hero__industry--company {
   margin: 0;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(1.75rem, 3.29vw, 3.5rem);
+  font-size: clamp(1.75rem, 3vw, 3.5rem);
   font-weight: 900;
   line-height: 0.8928571429;
   letter-spacing: 0;
@@ -6972,7 +7068,7 @@ POSTS & CONTENT STYLES
     max-width: 10rem;
   }
 }
-/* Company single — logo + tagline intro below hero. */
+/* Company single — tagline intro below hero. */
 .c-companyIntro {
   padding: 1em 0 1.25em;
 }
@@ -6981,44 +7077,21 @@ POSTS & CONTENT STYLES
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-.c-companyIntro__logo {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-
-.c-companyIntro__logoImg {
-  display: block;
-  width: auto;
-  max-width: 100%;
-  max-height: 8rem;
-  height: auto;
-  -o-object-fit: contain;
-  object-fit: contain;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .c-companyIntro__text {
-  text-align: left;
+  text-align: center;
 }
 
 .c-companyIntro__heading {
   margin: 0;
   max-width: none;
+  margin-bottom: 1em;
 }
 
-@media (max-width: 767px) {
-  .c-companyIntro__logo {
-    margin-bottom: 1em;
-  }
-}
 /* Gallery block — Figma Gallery (715:891)
    Layer order (rear → front): gradient slab, then photos.
    Top row sits above gradient start (61px @ 1440); bottom row on gradient. */
@@ -10667,12 +10740,18 @@ Add new breakpoints, components, and modules here — not in one file only.
   }
   .c-content-group .c-image-grid__item {
     margin: 0;
+    aspect-ratio: 1/1;
+    overflow: hidden;
   }
   .c-content-group .c-image-grid__img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     margin-bottom: 0;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
   }
   .c-content-group .c-image-grid--one {
     padding: 0;
@@ -10719,6 +10798,10 @@ Add new breakpoints, components, and modules here — not in one file only.
     -ms-flex-line-pack: start;
     align-content: start;
     gap: 1.25em;
+  }
+  .c-content-group .c-image-grid__right-item {
+    aspect-ratio: 1/1;
+    overflow: hidden;
   }
   .c-content-group--middle .c-content-group__content {
     margin-top: auto;

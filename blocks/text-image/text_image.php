@@ -174,6 +174,10 @@
                     <?php include $partial_path; ?>
             </div>
             <div class="<?= esc_attr($image_col); ?><?php echo $has_video ? ' c-content-group__media-col--video' : ''; ?>">
+            <?php
+            $ti_shape_mirror = ( $image_position === 'left' );
+            $ti_grad_id      = 'ti-grad-' . ( ! empty( $block['id'] ) ? (string) (int) $block['id'] : wp_unique_id() );
+            ?>
             <?php if ( $has_video ) :
                 $video_embed = wp_oembed_get( $video_url );
                 if ( $video_embed ) : ?>
@@ -208,6 +212,21 @@
                 $first = $slideshow_items[0];
                 $first_has_caption = $show_captions && ( (string) $first['caption'] !== '' || (string) $first['author'] !== '' );
                 ?>
+                <div class="c-content-group__visual<?php echo $ti_shape_mirror ? ' c-content-group__visual--mirror' : ''; ?>">
+                    <div class="c-content-group__visual-shape" aria-hidden="true">
+                        <div class="c-content-group__visual-shape-inner">
+                            <svg class="c-content-group__visual-shape-svg" viewBox="0 0 629 449" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                <defs>
+                                    <linearGradient id="<?php echo esc_attr( $ti_grad_id ); ?>" x1="401.422" y1="-78.1841" x2="401.422" y2="449" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0" stop-color="#12273D"/>
+                                        <stop offset="1" stop-color="#507A73"/>
+                                    </linearGradient>
+                                </defs>
+                                <path fill="url(#<?php echo esc_attr( $ti_grad_id ); ?>)" d="M0 256.037L629 0V449H0V256.037Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="c-content-group__visual-frame">
                 <div class="c-content-group__slideshow c-content-group__slideshow--square">
                 <div class="c-slider c-slider--slideshow"
                     id="<?php echo esc_attr( $slideshow_id ); ?>"
@@ -254,17 +273,32 @@
                     </div>
                 </div>
                 </div>
+                    </div>
+                </div>
             <?php elseif ( $media_type === 'slideshow' ) : ?>
+                <div class="c-content-group__visual<?php echo $ti_shape_mirror ? ' c-content-group__visual--mirror' : ''; ?>">
+                    <div class="c-content-group__visual-shape" aria-hidden="true">
+                        <div class="c-content-group__visual-shape-inner">
+                            <svg class="c-content-group__visual-shape-svg" viewBox="0 0 629 449" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                <defs>
+                                    <linearGradient id="<?php echo esc_attr( $ti_grad_id ); ?>" x1="401.422" y1="-78.1841" x2="401.422" y2="449" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0" stop-color="#12273D"/>
+                                        <stop offset="1" stop-color="#507A73"/>
+                                    </linearGradient>
+                                </defs>
+                                <path fill="url(#<?php echo esc_attr( $ti_grad_id ); ?>)" d="M0 256.037L629 0V449H0V256.037Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="c-content-group__visual-frame">
                 <div class="c-content-group__slideshow c-content-group__slideshow--square">
                     <div class="block-placeholder" style="border: 1px dashed #cfd3d7; padding: 2rem; border-radius: .5rem; background: rgba(255,255,255,.8); min-height: 200px; display: flex; align-items: center; justify-content: center;">
                         <p style="margin: 0; color: #666;">Add images to the slideshow gallery above.</p>
                     </div>
                 </div>
+                    </div>
+                </div>
             <?php elseif ( $images ) : ?>
-                <?php
-                $ti_shape_mirror = ( $image_position === 'left' );
-                $ti_grad_id      = 'ti-grad-' . ( ! empty( $block['id'] ) ? (string) (int) $block['id'] : wp_unique_id() );
-                ?>
                 <?php if ( $count === 1 ) : ?>
                 <div class="c-content-group__visual<?php echo $ti_shape_mirror ? ' c-content-group__visual--mirror' : ''; ?>">
                     <div class="c-content-group__visual-shape" aria-hidden="true">
@@ -288,7 +322,7 @@
                         <li class="c-image-grid__item c-image-grid__item--1">
                         <?php
                         $img = $images[0];
-                        $url = client_acf_image_src_square( $img );
+                        $url = client_acf_image_src_text_image( $img );
                         $alt = is_array($img) ? ($img['alt'] ?? '') : get_post_meta($img, '_wp_attachment_image_alt', true);
                         ?>
                         <img class="c-image-grid__img" src="<?= esc_url($url); ?>" alt="<?= esc_attr($alt); ?>">
@@ -297,7 +331,7 @@
                         <li class="c-image-grid__right">
                         <?php for ($i = 1; $i < 3; $i++):
                             $img = $images[$i];
-                            $url = client_acf_image_src_square( $img );
+                            $url = client_acf_image_src_text_image( $img );
                             $alt = is_array($img) ? ($img['alt'] ?? '') : get_post_meta($img, '_wp_attachment_image_alt', true);
                         ?>
                             <div class="c-image-grid__right-item c-image-grid__right-item--<?= $i+1; ?>">
@@ -308,7 +342,7 @@
 
                     <?php else: ?>
                         <?php foreach ($images as $i => $img):
-                        $url = client_acf_image_src_square( $img );
+                        $url = client_acf_image_src_text_image( $img );
                         $alt = is_array($img) ? ($img['alt'] ?? '') : get_post_meta($img, '_wp_attachment_image_alt', true);
                         ?>
                         <li class="c-image-grid__item c-image-grid__item--<?= $i+1; ?>">

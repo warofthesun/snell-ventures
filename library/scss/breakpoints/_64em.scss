@@ -482,13 +482,17 @@
 
         &__item {
 			margin: 0;
+			aspect-ratio: 1 / 1;
+			overflow: hidden;
 		}
 
         &__img {
 			width: 100%;
-			height: auto;
+			height: 100%;
 			display: block;
 			margin-bottom: 0;
+			object-fit: cover;
+			object-position: center;
 		}
 	}
 
@@ -530,6 +534,11 @@
 		align-content: start;
 		gap: $spacing-lg;
 	}
+
+		.c-image-grid__right-item {
+			aspect-ratio: 1 / 1;
+			overflow: hidden;
+		}
 
     &--middle {
         .c-content-group__content {

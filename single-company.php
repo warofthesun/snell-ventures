@@ -3,52 +3,23 @@
 <?php if ( client_get_hero_config()['show'] ) { include get_template_directory() . '/partials/hero/hero.php'; } ?>
 
 <?php
-$company_post_id   = get_queried_object_id();
-$company_tagline   = '';
-$company_logo_id   = 0;
-$company_logo_alt  = '';
+$company_post_id = get_queried_object_id();
+$company_tagline = '';
 
 if ( function_exists( 'get_field' ) && is_singular( 'company' ) ) {
 	$tagline = get_field( 'company_tagline', $company_post_id );
 	if ( is_string( $tagline ) ) {
 		$company_tagline = trim( $tagline );
 	}
-
-	$logo = get_field( 'company_logo', $company_post_id );
-	if ( is_array( $logo ) && ! empty( $logo['ID'] ) ) {
-		$company_logo_id  = (int) $logo['ID'];
-		$company_logo_alt = ! empty( $logo['alt'] ) ? (string) $logo['alt'] : get_the_title( $company_post_id );
-	} elseif ( is_numeric( $logo ) ) {
-		$company_logo_id  = (int) $logo;
-		$company_logo_alt = get_the_title( $company_post_id );
-	}
 }
 
-if ( $company_tagline !== '' || $company_logo_id > 0 ) :
-	$intro_text_cols = $company_logo_id > 0 ? '7' : '12';
+if ( $company_tagline !== '' ) :
 	?>
 	<div class="c-companyIntro wrap">
 		<div class="c-companyIntro__grid row">
-			<?php if ( $company_logo_id > 0 ) : ?>
-				<div class="c-companyIntro__logo col-xs-12 col-sm-5">
-					<?php
-					echo wp_get_attachment_image(
-						$company_logo_id,
-						'medium',
-						false,
-						array(
-							'class' => 'c-companyIntro__logoImg',
-							'alt'   => $company_logo_alt,
-						)
-					);
-					?>
-				</div>
-			<?php endif; ?>
-			<?php if ( $company_tagline !== '' ) : ?>
-				<div class="c-companyIntro__text col-xs-12 col-sm-<?php echo esc_attr( $intro_text_cols ); ?>">
-					<h4 class="h4 medium c-companyIntro__heading"><?php echo esc_html( $company_tagline ); ?></h3>
-				</div>
-			<?php endif; ?>
+			<div class="c-companyIntro__text col-xs-12">
+				<h4 class="h4 medium c-companyIntro__heading"><?php echo esc_html( $company_tagline ); ?></h4>
+			</div>
 		</div>
 	</div>
 	<?php
