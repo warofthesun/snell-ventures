@@ -5712,3 +5712,255 @@ a.c-peopleBio__email {
 		}
 	}
 }
+
+/* Company Bio — Figma Company/Bio (733:1039) */
+.c-companyBio {
+	margin: 0 0 $spacing-xxl;
+	padding: 0;
+}
+
+.c-companyBio__empty {
+	margin: 0;
+	text-align: center;
+	color: $primary-600;
+}
+
+.c-companyBio__layout {
+	align-items: center;
+}
+
+.c-companyBio__visual {
+	position: relative;
+	width: 100%;
+	max-width: 100%;
+	aspect-ratio: 1 / 1;
+}
+
+.c-companyBio__visualShape {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: auto;
+	height: 80.45%;
+	pointer-events: none;
+	margin-bottom: -1em;
+}
+
+.c-companyBio__visualShapeInner {
+	position: absolute;
+	inset: 0;
+}
+
+.c-companyBio__visualShapeSvg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.c-companyBio__visual--mirror .c-companyBio__visualShapeInner {
+	transform: scaleY(-1) rotate(180deg);
+}
+
+.c-companyBio__visualFrame {
+	position: absolute;
+	bottom: 0;
+	top: auto;
+	left: 3.18%;
+	right: 3.34%;
+	aspect-ratio: 1 / 1;
+	overflow: hidden;
+	filter: drop-shadow(1px 6px 5px rgba($primary-600, 0.3));
+	z-index: 1;
+}
+
+.c-companyBio__photo {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+
+	img,
+	.c-companyBio__photoImg {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+}
+
+.c-companyBio__logoPlate {
+	position: absolute;
+	z-index: 2;
+	left: 10px;
+	bottom: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	min-width: 42%;
+	max-width: 72%;
+	height: 100px;
+	padding: $spacing-sm $spacing-md;
+	background: rgba($white, 0.78);
+	backdrop-filter: blur(8px);
+
+	img,
+	.c-companyBio__logoImg {
+		display: block;
+		width: auto;
+		max-width: 100%;
+		max-height: 3.5rem;
+		height: auto;
+		margin-bottom: 0;
+		object-fit: contain;
+	}
+}
+
+.c-companyBio__content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: $spacing-md;
+	padding: $spacing-md 0;
+
+	p {
+		margin-bottom: 0;
+	}
+}
+
+.c-companyBio__header {
+	display: flex;
+	align-items: stretch;
+	gap: $spacing-sm;
+	width: 100%;
+}
+
+.c-companyBio__accent {
+	flex: 0 0 0.4375rem;
+	width: 0.4375rem;
+	min-height: 5.3125rem;
+	background-color: $primary-500;
+}
+
+.c-companyBio__titles {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	min-width: 0;
+}
+
+.c-companyBio__name {
+	margin: 0;
+	color: $accent-700;
+}
+
+.c-companyBio__tagline {
+	margin: 0;
+	color: $primary-500;
+}
+
+.c-companyBio__synopsis {
+	width: 100%;
+	max-width: 27.5rem;
+	font-family: $body-font;
+	font-size: 1rem;
+	font-weight: $font-weight-regular;
+	line-height: normal;
+	color: $text-color;
+
+	p {
+		margin: 0;
+		font-size: inherit;
+		line-height: inherit;
+		color: inherit;
+		padding-left: $spacing-lg;
+	}
+
+	p + p {
+		margin-top: 0.75em;
+	}
+}
+
+.c-companyBio__stats {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: $spacing-xl clamp(2rem, 4vw, 3.5625rem);
+	width: 100%;
+	padding-left: $spacing-lg;
+	margin: $spacing-lg 0;
+}
+
+.c-companyBio__stat {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 0 1 auto;
+	min-width: 0;
+	text-align: center;
+	color: $secondary-900;
+}
+
+.c-companyBio__statValue {
+	margin: 0 0 0.2rem;
+	font-family: $header-font;
+	font-size: clamp(2.25rem, 3vw, 43rem);
+	font-weight: $font-weight-bold;
+	line-height: 1;
+	color: $secondary-900;
+}
+
+.c-companyBio__statLabel {
+	margin: 0;
+	max-width: 10rem;
+}
+
+.c-companyBio__statLabelLine {
+	margin: 0;
+	font-family: $header-font;
+	font-size: 1.15rem;
+	font-weight: $font-weight-black;
+	line-height: 1.15;
+	color: $black;
+}
+
+.c-companyBio__cta {
+	@extend %btn;
+	@extend %btn--primary;
+	@extend %btn--primary--solid;
+	box-shadow: 0 4px 2px rgba($black, 0.15);
+	margin-left: $spacing-lg;
+}
+
+@media only screen and (min-width: 64em) {
+	.c-companyBio__layout {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.c-companyBio--imageRight .c-companyBio__layout {
+		flex-direction: row-reverse;
+	}
+
+	.c-companyBio__visualCol,
+	.c-companyBio__contentCol {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.c-companyBio__content {
+		padding: $spacing-md $spacing-lg $spacing-md 0;
+	}
+
+	.c-companyBio--imageRight .c-companyBio__content {
+		padding: $spacing-md 0 $spacing-md $spacing-lg;
+	}
+}
+
+@media (max-width: 63.99em) {
+	.c-companyBio__visualCol + .c-companyBio__contentCol {
+		margin-top: $spacing-lg;
+	}
+}

@@ -160,6 +160,173 @@ function client_acf_image_src_text_image( $img ) {
 }
 
 /**
+ * Whether a company stat field has a displayable numeric value.
+ *
+ * @param mixed $value Field value.
+ * @return bool
+ */
+function client_company_stat_has_value( $value ) {
+	if ( $value === null || $value === '' || $value === false ) {
+		return false;
+	}
+	if ( is_string( $value ) && trim( $value ) === '' ) {
+		return false;
+	}
+	return is_numeric( $value );
+}
+
+/**
+ * Company stat columns for hero and Company Bio block.
+ *
+ * @param int $company_id Company post ID.
+ * @return array<int, array{ value: int|string, lines: string[] }>
+ */
+function client_get_company_stats( $company_id ) {
+	$company_id = (int) $company_id;
+	if ( $company_id <= 0 || ! function_exists( 'get_field' ) ) {
+		return array();
+	}
+
+	$stat_defs = array(
+		array(
+			'value' => get_field( 'years_in_business', $company_id ),
+			'lines' => array(
+				__( 'Total Years', 'client_theme' ),
+				__( 'in Business', 'client_theme' ),
+			),
+		),
+		array(
+			'value' => get_field( 'years_in_stewardship', $company_id ),
+			'lines' => array(
+				__( 'Years in Our', 'client_theme' ),
+				__( 'Stewardship', 'client_theme' ),
+			),
+		),
+		array(
+			'value' => get_field( 'total_employees', $company_id ),
+			'lines' => array(
+				__( 'Total', 'client_theme' ),
+				__( 'Employees', 'client_theme' ),
+			),
+		),
+	);
+
+	$stats = array();
+	foreach ( $stat_defs as $stat_def ) {
+		if ( client_company_stat_has_value( $stat_def['value'] ) ) {
+			$stats[] = $stat_def;
+		}
+	}
+
+	return $stats;
+}
+
+/**
+ * Resolve ACF image field to attachment ID.
+ *
+ * @param mixed $image ACF image value.
+ * @return int
+ */
+function client_resolve_acf_image_id( $image ) {
+	if ( is_array( $image ) && ! empty( $image['ID'] ) ) {
+		return (int) $image['ID'];
+	}
+	if ( is_numeric( $image ) ) {
+		return (int) $image;
+	}
+	return 0;
+}
+
+/**
+ * Resolve alt text from an ACF image field.
+ *
+ * @param mixed  $image        ACF image value.
+ * @param string $fallback_alt Fallback alt string.
+ * @return string
+ */
+function client_resolve_acf_image_alt( $image, $fallback_alt ) {
+	if ( is_array( $image ) && ! empty( $image['alt'] ) ) {
+		return (string) $image['alt'];
+	}
+	return $fallback_alt;
+}
+
+/**
+ * Company Bio block data from a company post.
+ *
+ * @param int $company_id Company post ID.
+ * @return array<string, mixed>|null Null when company is invalid.
+ */
+function client_get_company_bio_data( $company_id ) {
+	$company_id = (int) $company_id;
+	if ( $company_id <= 0 || get_post_type( $company_id ) !== 'company' ) {
+		return null;
+	}
+
+	$name = get_the_title( $company_id );
+	$data = array(
+		'id'         => $company_id,
+		'name'       => is_string( $name ) ? $name : '',
+		'tagline'    => '',
+		'synopsis'   => '',
+		'permalink'  => get_permalink( $company_id ) ?: '',
+		'stats'      => client_get_company_stats( $company_id ),
+		'rep_image'  => array(
+			'id'  => 0,
+			'alt' => '',
+		),
+		'rep_name'   => '',
+		'rep_role'   => '',
+		'logo'       => array(
+			'id'  => 0,
+			'alt' => '',
+		),
+	);
+
+	if ( function_exists( 'get_field' ) ) {
+		$tagline = get_field( 'company_tagline', $company_id );
+		if ( is_string( $tagline ) ) {
+			$data['tagline'] = trim( $tagline );
+		}
+
+		$synopsis = get_field( 'company_synopsis', $company_id );
+		if ( is_string( $synopsis ) && trim( wp_strip_all_tags( $synopsis ) ) !== '' ) {
+			$data['synopsis'] = $synopsis;
+		}
+
+		$rep_name = get_field( 'representative_name', $company_id );
+		if ( is_string( $rep_name ) ) {
+			$data['rep_name'] = trim( $rep_name );
+		}
+
+		$rep_role = get_field( 'representative_role', $company_id );
+		if ( is_string( $rep_role ) ) {
+			$data['rep_role'] = trim( $rep_role );
+		}
+
+		$rep_image = get_field( 'company_representative', $company_id );
+		$rep_id    = client_resolve_acf_image_id( $rep_image );
+		if ( $rep_id > 0 ) {
+			$data['rep_image'] = array(
+				'id'  => $rep_id,
+				'alt' => client_resolve_acf_image_alt( $rep_image, $data['rep_name'] !== '' ? $data['rep_name'] : $data['name'] ),
+			);
+		}
+
+		$logo = get_field( 'company_logo', $company_id );
+		$logo_id = client_resolve_acf_image_id( $logo );
+		if ( $logo_id > 0 ) {
+			$data['logo'] = array(
+				'id'  => $logo_id,
+				'alt' => client_resolve_acf_image_alt( $logo, $data['name'] ),
+			);
+		}
+	}
+
+	return $data;
+}
+
+/**
  * Resolve the blog index “featured” post: newest sticky post, else newest published post.
  * Cached per request. Does not check is_home() — safe for pre_get_posts.
  *

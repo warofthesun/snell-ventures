@@ -1,0 +1,18 @@
+{
+  "name": "client/company-bio",
+  "title": "Company Bio",
+  "description": "Feature a portfolio company with representative image, logo, tagline, synopsis, and stats.",
+  "style": ["file:../library/css/style.css"],
+  "category": "theme-blocks",
+  "icon": "building",
+  "keywords": ["company", "bio", "portfolio"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "company_bio.php"
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true
+  },
+  "textdomain": "client_theme"
+}

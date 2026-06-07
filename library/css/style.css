@@ -1301,7 +1301,7 @@ Here's a quick video to show how it works:
 http://www.youtube.com/watch?v=hwdVpKiJzac
 
 *********************/
-.c-button-pair .c-button-pair__button, .gallery-item .c-button-pair__button, .c-companyCard__cta, input[type=submit],
+.c-button-pair .c-button-pair__button, .gallery-item .c-button-pair__button, .c-companyCard__cta, .c-companyBio__cta, input[type=submit],
 .wpcf7-form-control.wpcf7-submit, input[type=file],
 #wp-submit, .navigation-button a, #mobile-nav {
   display: inline-block;
@@ -1318,26 +1318,26 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
 }
-.c-button-pair .c-button-pair__button .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, .c-companyCard__cta .svg-inline--fa, input[type=submit] .svg-inline--fa,
+.c-button-pair .c-button-pair__button .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, .c-companyCard__cta .svg-inline--fa, .c-companyBio__cta .svg-inline--fa, input[type=submit] .svg-inline--fa,
 .wpcf7-form-control.wpcf7-submit .svg-inline--fa, input[type=file] .svg-inline--fa,
 #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
   font-size: 0.9em;
 }
-.c-button-pair .c-button-pair__button:hover, .gallery-item .c-button-pair__button:hover, .c-companyCard__cta:hover, input[type=submit]:hover,
+.c-button-pair .c-button-pair__button:hover, .gallery-item .c-button-pair__button:hover, .c-companyCard__cta:hover, .c-companyBio__cta:hover, input[type=submit]:hover,
 .wpcf7-form-control.wpcf7-submit:hover, input[type=file]:hover,
-#wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus, .gallery-item .c-button-pair__button:focus, .c-companyCard__cta:focus, input[type=submit]:focus,
+#wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus, .gallery-item .c-button-pair__button:focus, .c-companyCard__cta:focus, .c-companyBio__cta:focus, input[type=submit]:focus,
 .wpcf7-form-control.wpcf7-submit:focus, input[type=file]:focus,
 #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
   color: #fff;
   text-decoration: none;
   outline: none;
 }
-.c-button-pair .c-button-pair__button:active, .gallery-item .c-button-pair__button:active, .c-companyCard__cta:active, input[type=submit]:active,
+.c-button-pair .c-button-pair__button:active, .gallery-item .c-button-pair__button:active, .c-companyCard__cta:active, .c-companyBio__cta:active, input[type=submit]:active,
 .wpcf7-form-control.wpcf7-submit:active, input[type=file]:active,
 #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
   top: 1px;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid, .c-companyCard__cta, input[type=submit],
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid, .c-companyCard__cta, .c-companyBio__cta, input[type=submit],
 .wpcf7-form-control.wpcf7-submit {
   background-color: #b86f52;
   color: #fff !important;
@@ -1358,14 +1358,14 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-companyCard__cta:hover, input[type=submit]:hover,
-.wpcf7-form-control.wpcf7-submit:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus, .c-companyCard__cta:focus, input[type=submit]:focus,
+.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-companyCard__cta:hover, .c-companyBio__cta:hover, input[type=submit]:hover,
+.wpcf7-form-control.wpcf7-submit:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus, .c-companyCard__cta:focus, .c-companyBio__cta:focus, input[type=submit]:focus,
 .wpcf7-form-control.wpcf7-submit:focus {
   background-color: rgba(184, 111, 82, 0.5);
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button:active, .c-companyCard__cta:active, input[type=submit]:active,
+.c-button-pair.c-button-pair--primary .c-button-pair__button:active, .c-companyCard__cta:active, .c-companyBio__cta:active, input[type=submit]:active,
 .wpcf7-form-control.wpcf7-submit:active {
   background-color: #8b553f;
 }
@@ -9542,6 +9542,305 @@ a.c-peopleBio__email:hover, a.c-peopleBio__email:focus-visible {
     transform: translateX(-50%);
     margin: 0;
     max-width: 88%;
+  }
+}
+/* Company Bio — Figma Company/Bio (733:1039) */
+.c-companyBio {
+  margin: 0 0 2em;
+  padding: 0;
+}
+
+.c-companyBio__empty {
+  margin: 0;
+  text-align: center;
+  color: #142e48;
+}
+
+.c-companyBio__layout {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c-companyBio__visual {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.c-companyBio__visualShape {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  height: 80.45%;
+  pointer-events: none;
+  margin-bottom: -1em;
+}
+
+.c-companyBio__visualShapeInner {
+  position: absolute;
+  inset: 0;
+}
+
+.c-companyBio__visualShapeSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.c-companyBio__visual--mirror .c-companyBio__visualShapeInner {
+  -webkit-transform: scaleY(-1) rotate(180deg);
+  -ms-transform: scaleY(-1) rotate(180deg);
+  transform: scaleY(-1) rotate(180deg);
+}
+
+.c-companyBio__visualFrame {
+  position: absolute;
+  bottom: 0;
+  top: auto;
+  left: 3.18%;
+  right: 3.34%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  -webkit-filter: drop-shadow(1px 6px 5px rgba(20, 46, 72, 0.3));
+  filter: drop-shadow(1px 6px 5px rgba(20, 46, 72, 0.3));
+  z-index: 1;
+}
+
+.c-companyBio__photo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.c-companyBio__photo img,
+.c-companyBio__photo .c-companyBio__photoImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+}
+
+.c-companyBio__logoPlate {
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-width: 42%;
+  max-width: 72%;
+  height: 100px;
+  padding: 0.75em 1em;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(8px);
+}
+.c-companyBio__logoPlate img,
+.c-companyBio__logoPlate .c-companyBio__logoImg {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 3.5rem;
+  height: auto;
+  margin-bottom: 0;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.c-companyBio__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: 1em;
+  padding: 1em 0;
+}
+.c-companyBio__content p {
+  margin-bottom: 0;
+}
+
+.c-companyBio__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  gap: 0.75em;
+  width: 100%;
+}
+
+.c-companyBio__accent {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 0.4375rem;
+  flex: 0 0 0.4375rem;
+  width: 0.4375rem;
+  min-height: 5.3125rem;
+  background-color: #16324f;
+}
+
+.c-companyBio__titles {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.c-companyBio__name {
+  margin: 0;
+  color: #8b553f;
+}
+
+.c-companyBio__tagline {
+  margin: 0;
+  color: #16324f;
+}
+
+.c-companyBio__synopsis {
+  width: 100%;
+  max-width: 27.5rem;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: normal;
+  color: #606469;
+}
+.c-companyBio__synopsis p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  padding-left: 1.25em;
+}
+.c-companyBio__synopsis p + p {
+  margin-top: 0.75em;
+}
+
+.c-companyBio__stats {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: 1.5em clamp(2rem, 4vw, 3.5625rem);
+  width: 100%;
+  padding-left: 1.25em;
+  margin: 1.25em 0;
+}
+
+.c-companyBio__stat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  text-align: center;
+  color: #0f1514;
+}
+
+.c-companyBio__statValue {
+  margin: 0 0 0.2rem;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2.25rem, 3vw, 43rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #0f1514;
+}
+
+.c-companyBio__statLabel {
+  margin: 0;
+  max-width: 10rem;
+}
+
+.c-companyBio__statLabelLine {
+  margin: 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: #000;
+}
+
+.c-companyBio__cta {
+  -webkit-box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
+  margin-left: 1.25em;
+}
+
+@media only screen and (min-width: 64em) {
+  .c-companyBio__layout {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .c-companyBio--imageRight .c-companyBio__layout {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+  .c-companyBio__visualCol,
+  .c-companyBio__contentCol {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .c-companyBio__content {
+    padding: 1em 1.25em 1em 0;
+  }
+  .c-companyBio--imageRight .c-companyBio__content {
+    padding: 1em 0 1em 1.25em;
+  }
+}
+@media (max-width: 63.99em) {
+  .c-companyBio__visualCol + .c-companyBio__contentCol {
+    margin-top: 1.25em;
   }
 }
 /******************************************************************
