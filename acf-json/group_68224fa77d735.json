@@ -3,6 +3,27 @@
     "title": "0. Hero - Snell Hero Settings",
     "fields": [
         {
+            "key": "field_snell_medium_hero_preheader",
+            "label": "Hero Preheader",
+            "name": "hero_preheader",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Optional line above the headline (Hero Medium).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68225159eee20",
             "label": "Hero Headline",
             "name": "hero_headline",
@@ -120,5 +141,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774895463
+    "modified": 1780845600
 }

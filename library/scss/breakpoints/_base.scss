@@ -563,7 +563,7 @@ Content Section block
 
 	&__header {
 		margin: 0;
-		margin-bottom: -12px;
+		margin-bottom: 2px;
 		width: 100%;
 		font-family: $header-font;
 		font-size: $font-size-xxxxl;
@@ -2856,7 +2856,7 @@ POSTS & CONTENT STYLES
 		.hero__container--inner {
 			display: flex;
 			flex-direction: column;
-			min-height: 65vh;
+			min-height: clamp(28rem, 49vw, 44.125rem);
 			margin-bottom: 0;
 		}
 	}
@@ -2896,13 +2896,11 @@ POSTS & CONTENT STYLES
 	&__content--medium {
 		position: absolute;
 		inset: 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
 		z-index: 2;
-		padding: 2rem 7%;
+		display: block;
+		padding: 0;
+		overflow: visible;
+		pointer-events: none;
 	}
 
 	// Hero Small uses its own content modifier (so we don't rely on initiative/medium classes).
@@ -3027,12 +3025,171 @@ POSTS & CONTENT STYLES
 }
 
 /* Hero Medium: ensure background image displays when no .hero wrapper */
+.hero__container--medium {
+	--hero-nav-height: 3.25rem;
+	position: relative;
+	z-index: 1;
+	margin-top: 0;
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	overflow: visible;
+
+	.hero__container--inner {
+		padding-top: 3.25rem;
+		overflow: visible;
+	}
+}
+
 .hero__container--medium .hero__content--bg {
 	position: absolute;
-	inset: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 	background-size: cover;
-	background-position: center;
+	background-position: top;
 	background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 64em) {
+	.hero__container--medium {
+		--hero-nav-height: 4.75rem;
+		margin-top: -4.75rem;
+
+		.hero__container--inner {
+			padding-top: 4.75rem;
+		}
+	}
+
+	.hero__container--medium .hero__content--bg {
+		top: 0rem;
+	}
+}
+
+/* Hero Medium — Figma Hero/Medium (288:508). */
+.hero__mediumPanel {
+	position: absolute;
+	top: var(--hero-nav-height, 3.25rem);
+	bottom: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	min-width: min(46.39%, 41.75rem);
+	width: max-content;
+	max-width: min(95vw, 56rem);
+	padding-right: $spacing-lg;
+	overflow: visible;
+}
+
+.hero__mediumPanelShape {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	color: $primary-900_70;
+	transform: rotate(180deg);
+	transform-origin: center;
+	pointer-events: none;
+}
+
+.hero__mediumPanelShapeSvg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.hero__mediumCopy {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.875rem;
+	align-items: flex-start;
+	width: max-content;
+	min-width: 100%;
+	overflow: visible;
+	z-index: 1;
+}
+
+.hero__mediumPreheader {
+	margin: 0;
+	padding: 0.625rem 10px 0 13.02%;
+	max-width: 66.47%;
+	font-family: $header-font;
+	font-size: clamp(2rem, 4.3vw, $font-size-xxxl);
+	font-weight: $font-weight-black;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.hero__mediumHeadline {
+	margin: 0;
+	padding: 0 10px 0.625rem 12.43%;
+	width: max-content;
+	max-width: none;
+	font-family: $header-font;
+	font-size: clamp(2.75rem, 6.67vw, 6rem);
+	font-weight: $font-weight-black;
+	line-height: 1;
+	color: $white;
+	text-shadow: 0 4px 12px rgba($black, 0.25);
+
+	p {
+		margin: 0;
+		line-height: 1;
+	}
+
+	p + p {
+		margin-top: 0;
+	}
+}
+
+.hero__mediumSubheader {
+	margin: 0;
+	padding: 0.375rem 4.34% 0.375rem 12.43%;
+	max-width: 75%;
+	font-family: $body-font;
+	font-size: $font-size-md;
+	font-weight: $font-weight-regular;
+	line-height: normal;
+	background-color: $white;
+}
+
+.hero__container .hero__mediumSubheader {
+	color: $text-color;
+}
+
+@media only screen and (max-width: 63.99em) {
+	.hero__mediumPanel {
+		top: 0;
+		right: 0;
+		left: 0;
+		width: 100%;
+		max-width: none;
+		min-width: 0;
+		padding-right: $spacing-md;
+		background-color: $primary-900_70;
+	}
+
+	.hero__mediumPanelShape {
+		display: none;
+	}
+
+	.hero__mediumCopy {
+		min-width: 0;
+		width: 82%;
+	}
+
+	.hero__mediumPreheader,
+	.hero__mediumSubheader {
+		max-width: 100%;
+		padding-left: 12%;
+	}
+
+	.hero__mediumHeadline {
+		max-width: 100%;
+		padding-left: 12%;
+	}
 }
 
 /* Single Company hero — Figma Hero/Companies/Post Type/Single (435:1631) */
@@ -3152,6 +3309,11 @@ POSTS & CONTENT STYLES
 }
 
 /* Figma Subhead (350:847): 56px / 50px lh, Ultra Black, uppercase, Neutral/White_50 */
+.hero__container--company .hero__industry--company,
+.hero__container .hero__mediumPreheader {
+	color: rgba($white, 0.5);
+}
+
 .hero__container--company .hero__industry--company {
 	margin: 0;
 	font-family: $header-font;
@@ -3159,7 +3321,6 @@ POSTS & CONTENT STYLES
 	font-weight: $font-weight-black;
 	line-height: 0.8928571429;
 	letter-spacing: 0;
-	color: rgba($white, 0.5);
 	text-transform: uppercase;
 	text-align: center;
 }

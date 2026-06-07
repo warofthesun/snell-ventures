@@ -435,6 +435,7 @@
                 "id": ""
             },
             "clone": [
+                "field_snell_medium_hero_preheader",
                 "field_68225159eee20",
                 "field_68225191eee21"
             ],
@@ -509,5 +510,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1774895131
+    "modified": 1780845600
 }

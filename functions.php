@@ -648,6 +648,12 @@ function client_get_hero_config() {
       $headline_wys = is_string( $headline_wys ) ? trim( $headline_wys ) : '';
       $headline_text = $headline_wys !== '' ? $headline_wys : $page_title;
 
+      $preheader_text = function_exists( 'get_field' ) ? get_field( 'hero_preheader', $post->ID ) : '';
+      $preheader_text = is_string( $preheader_text ) ? trim( $preheader_text ) : '';
+
+      $subheader_text = function_exists( 'get_field' ) ? get_field( 'hero_paragraph', $post->ID ) : '';
+      $subheader_text = is_string( $subheader_text ) ? trim( $subheader_text ) : '';
+
       $use_solid_color   = ! empty( $medium['use_solid_color'] );
       $background_color  = isset( $medium['background_color'] ) && $medium['background_color'] ? $medium['background_color'] : '#238c55';
       $page_image_id     = (int) get_post_thumbnail_id( $post->ID );
@@ -665,6 +671,8 @@ function client_get_hero_config() {
           'background_image'  => $use_solid_color ? 0 : $page_image_id,
           'background_color'  => $background_color,
           'headline_text'     => $headline_text,
+          'preheader_text'    => $preheader_text,
+          'subheader_text'    => $subheader_text,
         ),
       );
       return $config;
