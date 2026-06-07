@@ -182,6 +182,7 @@ h3.medium, .h3.medium {
 
 h4, .h4 {
   font-size: 1.8em;
+  line-height: 1.2;
   font-weight: 900;
   color: #12273d;
 }
@@ -190,6 +191,9 @@ h4.bold, .h4.bold {
 }
 h4.light, .h4.light {
   color: #50657b;
+}
+h4.medium, .h4.medium {
+  font-weight: 500;
 }
 
 h5, .h5 {
@@ -1297,12 +1301,12 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
 
 *********************/
 .c-button-pair .c-button-pair__button, .c-contactForm__formWrap input[type=submit],
-.c-contactForm__formWrap .wpcf7-submit, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit, .navigation-button a, #mobile-nav {
+.c-contactForm__formWrap .wpcf7-submit, .gallery-item .c-button-pair__button, .c-companyCard__cta, input[type=submit], input[type=file], #wp-submit, .navigation-button a, #mobile-nav {
   display: inline-block;
   position: relative;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   font-size: 1em;
   font-weight: 400;
   padding: 0.5em 1em;
@@ -1313,21 +1317,21 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   transition: background-color 0.14s ease-in-out;
 }
 .c-button-pair .c-button-pair__button .svg-inline--fa,
-.c-contactForm__formWrap .wpcf7-submit .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
+.c-contactForm__formWrap .wpcf7-submit .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, .c-companyCard__cta .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
   font-size: 0.9em;
 }
 .c-button-pair .c-button-pair__button:hover,
-.c-contactForm__formWrap .wpcf7-submit:hover, .gallery-item .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus,
-.c-contactForm__formWrap .wpcf7-submit:focus, .gallery-item .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
+.c-contactForm__formWrap .wpcf7-submit:hover, .gallery-item .c-button-pair__button:hover, .c-companyCard__cta:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus,
+.c-contactForm__formWrap .wpcf7-submit:focus, .gallery-item .c-button-pair__button:focus, .c-companyCard__cta:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
   color: #fff;
   text-decoration: none;
   outline: none;
 }
 .c-button-pair .c-button-pair__button:active,
-.c-contactForm__formWrap .wpcf7-submit:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
+.c-contactForm__formWrap .wpcf7-submit:active, .gallery-item .c-button-pair__button:active, .c-companyCard__cta:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
   top: 1px;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid, .c-companyCard__cta {
   background-color: #b86f52;
   color: #fff !important;
   border-color: #bf7d63;
@@ -1347,12 +1351,12 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus {
+.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-companyCard__cta:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus, .c-companyCard__cta:focus {
   background-color: rgba(184, 111, 82, 0.5);
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button:active {
+.c-button-pair.c-button-pair--primary .c-button-pair__button:active, .c-companyCard__cta:active {
   background-color: #8b553f;
 }
 .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, input[type=submit], input[type=file], #wp-submit {
@@ -9036,6 +9040,242 @@ a.c-peopleBio__email:hover, a.c-peopleBio__email:focus-visible {
   }
   .c-peopleBio__details {
     margin-top: 1.5em;
+  }
+}
+/* Company Grid — Figma Card/Portfolio Company (234:619). */
+@property --company-card-overlay-end-alpha {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0.7;
+}
+.c-companyGrid__items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c-companyGrid__item {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .c-companyGrid--cols-2 .c-companyGrid__items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .c-companyGrid--cols-3 .c-companyGrid__items {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.164rem; /* Figma 728:957 — 18.625px column gutter */
+  }
+}
+.c-companyCard {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 706/479;
+  min-height: 18rem;
+  color: #fff;
+  container-type: inline-size;
+  cursor: default;
+}
+
+.c-companyCard__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.c-companyCard__bg {
+  position: absolute;
+  inset: 0;
+}
+.c-companyCard__bg .c-companyCard__bgImg,
+.c-companyCard__bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.c-companyCard__overlay {
+  position: absolute;
+  inset: 0;
+  --company-card-overlay-end-alpha: 0.7;
+  transition: --company-card-overlay-end-alpha 0.35s ease;
+}
+
+.c-companyCard--overlay-primary .c-companyCard__overlay {
+  background: -webkit-gradient(linear, left top, left bottom, from(#142e48), to(rgba(7, 10, 12, var(--company-card-overlay-end-alpha))));
+  background: -webkit-linear-gradient(top, #142e48 0%, rgba(7, 10, 12, var(--company-card-overlay-end-alpha)) 100%);
+  background: linear-gradient(180deg, #142e48 0%, rgba(7, 10, 12, var(--company-card-overlay-end-alpha)) 100%);
+}
+
+.c-companyCard--overlay-secondary .c-companyCard__overlay {
+  background: -webkit-gradient(linear, left top, left bottom, from(#5f9188), to(rgba(95, 145, 136, var(--company-card-overlay-end-alpha))));
+  background: -webkit-linear-gradient(top, #5f9188 0%, rgba(95, 145, 136, var(--company-card-overlay-end-alpha)) 100%);
+  background: linear-gradient(180deg, #5f9188 0%, rgba(95, 145, 136, var(--company-card-overlay-end-alpha)) 100%);
+}
+
+@media (hover: hover) {
+  .c-companyCard--overlay-primary:hover .c-companyCard__overlay,
+  .c-companyCard--overlay-primary:focus-within .c-companyCard__overlay,
+  .c-companyCard--overlay-secondary:hover .c-companyCard__overlay,
+  .c-companyCard--overlay-secondary:focus-within .c-companyCard__overlay {
+    --company-card-overlay-end-alpha: 0.9;
+  }
+}
+.c-companyCard__inner {
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: clamp(4rem, 5%, 6rem) 0.75em 1.5em;
+  text-align: center;
+}
+
+.c-companyCard__logo {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  max-width: 85%;
+  max-height: 9.5rem;
+  margin-bottom: auto;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.c-companyCard__logo .c-companyCard__logoImg,
+.c-companyCard__logo img {
+  display: block;
+  max-width: 100%;
+  max-height: 9.5rem;
+  width: auto;
+  height: auto;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.c-companyCard__tagline {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 1em 0;
+  color: #fff;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 1.5rem;
+  max-width: 90%;
+}
+
+.c-companyCard__cta {
+  position: relative;
+  z-index: 2;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin-top: auto;
+  cursor: pointer;
+  text-transform: none;
+}
+
+/* 3-column — Figma Company Grid/3 Column (728:957), card 469.584×318.599px. */
+@media (min-width: 768px) {
+  .c-companyGrid--cols-3 .c-companyCard {
+    min-height: 0;
+  }
+  .c-companyGrid--cols-3 .c-companyCard__inner {
+    position: absolute;
+    inset: 0;
+    display: block;
+    padding: 0;
+  }
+  .c-companyGrid--cols-3 .c-companyCard__logo {
+    position: absolute;
+    top: 20.04%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 63.45%;
+    max-width: 63.45%;
+    max-height: 31.74%;
+    margin: 0;
+  }
+  .c-companyGrid--cols-3 .c-companyCard__logo .c-companyCard__logoImg,
+  .c-companyGrid--cols-3 .c-companyCard__logo img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    margin: 0 auto;
+    -o-object-fit: contain;
+    object-fit: contain;
+  }
+  .c-companyGrid--cols-3 .c-companyCard__tagline {
+    position: absolute;
+    top: 52.61%;
+    right: 10.48%;
+    bottom: 26.3%;
+    left: 12.75%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0;
+    max-width: none;
+    font-size: 5.094cqw;
+    line-height: normal;
+    text-shadow: 0 0.567cqw 0.567cqw rgba(0, 0, 0, 0.25);
+  }
+  .c-companyGrid--cols-3 .c-companyCard__cta {
+    position: absolute;
+    top: 75.37%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    margin: 0;
+    max-width: 88%;
   }
 }
 /******************************************************************

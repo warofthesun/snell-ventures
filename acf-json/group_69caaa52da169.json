@@ -8,7 +8,33 @@
             "name": "company_logo",
             "aria-label": "",
             "type": "image",
-            "instructions": "Appears in the company page hero and on cards",
+            "instructions": "Primary logo for the company page intro (light background). On grid cards, used only when no dark-background logo is provided.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_snell_company_logo_on_dark",
+            "label": "Logo for dark backgrounds",
+            "name": "company_logo_on_dark",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Optional reversed or light logo for Company Grid cards (dark gradient overlay). When set, this is used on cards instead of the primary logo.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -206,5 +232,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1780836593
+    "modified": 1780842000
 }

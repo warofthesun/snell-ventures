@@ -46,7 +46,7 @@ if ( $company_tagline !== '' || $company_logo_id > 0 ) :
 			<?php endif; ?>
 			<?php if ( $company_tagline !== '' ) : ?>
 				<div class="c-companyIntro__text col-xs-12 col-sm-<?php echo esc_attr( $intro_text_cols ); ?>">
-					<h3 class="h3 medium c-companyIntro__heading"><?php echo esc_html( $company_tagline ); ?></h3>
+					<h4 class="h4 medium c-companyIntro__heading"><?php echo esc_html( $company_tagline ); ?></h3>
 				</div>
 			<?php endif; ?>
 		</div>

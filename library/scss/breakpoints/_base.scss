@@ -5245,3 +5245,219 @@ a.c-peopleBio__email {
 		margin-top: $spacing-xl;
 	}
 }
+
+/* Company Grid — Figma Card/Portfolio Company (234:619). */
+@property --company-card-overlay-end-alpha {
+	syntax: "<number>";
+	inherits: false;
+	initial-value: 0.7;
+}
+
+.c-companyGrid__items {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: $spacing-xl;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.c-companyGrid__item {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+@media (min-width: 768px) {
+	.c-companyGrid--cols-2 .c-companyGrid__items {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.c-companyGrid--cols-3 .c-companyGrid__items {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.164rem; /* Figma 728:957 — 18.625px column gutter */
+	}
+}
+
+.c-companyCard {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	aspect-ratio: 706 / 479;
+	min-height: 18rem;
+	color: $white;
+	container-type: inline-size;
+	cursor: default;
+}
+
+.c-companyCard__media {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+}
+
+.c-companyCard__bg {
+	position: absolute;
+	inset: 0;
+
+	.c-companyCard__bgImg,
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+.c-companyCard__overlay {
+	position: absolute;
+	inset: 0;
+	--company-card-overlay-end-alpha: 0.7;
+	transition: --company-card-overlay-end-alpha 0.35s ease;
+}
+
+.c-companyCard--overlay-primary .c-companyCard__overlay {
+	background: linear-gradient(
+		180deg,
+		$primary-600 0%,
+		rgba($primary-900, var(--company-card-overlay-end-alpha)) 100%
+	);
+}
+
+.c-companyCard--overlay-secondary .c-companyCard__overlay {
+	background: linear-gradient(
+		180deg,
+		$secondary-600 0%,
+		rgba($secondary-600, var(--company-card-overlay-end-alpha)) 100%
+	);
+}
+
+@media (hover: hover) {
+	.c-companyCard--overlay-primary:hover .c-companyCard__overlay,
+	.c-companyCard--overlay-primary:focus-within .c-companyCard__overlay,
+	.c-companyCard--overlay-secondary:hover .c-companyCard__overlay,
+	.c-companyCard--overlay-secondary:focus-within .c-companyCard__overlay {
+		--company-card-overlay-end-alpha: 0.9;
+	}
+}
+
+.c-companyCard__inner {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	height: 100%;
+	box-sizing: border-box;
+	padding: clamp(4rem, 5%, 6rem) $spacing-sm $spacing-xl;
+	text-align: center;
+}
+
+.c-companyCard__logo {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 85%;
+	max-height: 9.5rem;
+	margin-bottom: auto;
+	box-sizing: border-box;
+
+	.c-companyCard__logoImg,
+	img {
+		display: block;
+		max-width: 100%;
+		max-height: 9.5rem;
+		width: auto;
+		height: auto;
+		object-fit: contain;
+	}
+}
+
+.c-companyCard__tagline {
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: $spacing-md 0;
+	color: $white;
+	text-shadow: 0 4px 4px rgba($black, 0.25);
+	font-size: 1.5rem;
+	max-width: 90%;
+}
+
+.c-companyCard__cta {
+	@extend %btn;
+	@extend %btn--primary;
+	@extend %btn--primary--solid;
+	position: relative;
+	z-index: 2;
+	flex-shrink: 0;
+	margin-top: auto;
+	cursor: pointer;
+	text-transform: none;
+}
+
+/* 3-column — Figma Company Grid/3 Column (728:957), card 469.584×318.599px. */
+@media (min-width: 768px) {
+	.c-companyGrid--cols-3 {
+		.c-companyCard {
+			min-height: 0;
+		}
+
+		.c-companyCard__inner {
+			position: absolute;
+			inset: 0;
+			display: block;
+			padding: 0;
+		}
+
+		.c-companyCard__logo {
+			position: absolute;
+			top: 20.04%;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 63.45%;
+			max-width: 63.45%;
+			max-height: 31.74%;
+			margin: 0;
+
+			.c-companyCard__logoImg,
+			img {
+				display: block;
+				width: auto;
+				max-width: 100%;
+				height: auto;
+				max-height: 100%;
+				margin: 0 auto;
+				object-fit: contain;
+			}
+		}
+
+		.c-companyCard__tagline {
+			position: absolute;
+			top: 52.61%;
+			right: 10.48%;
+			bottom: 26.3%;
+			left: 12.75%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0;
+			max-width: none;
+			font-size: 5.094cqw;
+			line-height: normal;
+			text-shadow: 0 0.567cqw 0.567cqw rgba($black, 0.25);
+		}
+
+		.c-companyCard__cta {
+			position: absolute;
+			top: 75.37%;
+			left: 50%;
+			transform: translateX(-50%);
+			margin: 0;
+			max-width: 88%;
+		}
+	}
+}

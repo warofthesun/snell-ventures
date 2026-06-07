@@ -1,0 +1,80 @@
+{
+    "key": "group_snell_company_grid_block",
+    "title": "Company Grid Block",
+    "fields": [
+        {
+            "key": "field_snell_company_grid_companies",
+            "label": "Companies",
+            "name": "companies",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "Select one or more companies to display in this grid.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "company"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "min": 0,
+            "max": 0,
+            "return_format": "object",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_snell_company_grid_columns",
+            "label": "Columns",
+            "name": "columns",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "Choose how many columns to use on larger screens.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "2": "Two columns",
+                "3": "Three columns"
+            },
+            "default_value": "2",
+            "return_format": "value",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "client\/company-grid"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Block for selecting and displaying company portfolio cards.",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1780837200
+}
