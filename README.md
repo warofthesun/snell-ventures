@@ -5,7 +5,7 @@ Personal WordPress starter: ACF blocks, The Events Calendar integration, BEM-sty
 ## Development & build
 
 - **SCSS pipeline:** Gulp (Compass/config.rb is deprecated; do not use it).
-- **Compile SCSS:** `npm run build` or `gulp sass` — compiles only entry files: `style.scss`, `editor-style.scss`, `login.scss`, `admin.scss`.
+- **Compile SCSS:** `npm run build` or `gulp sass` — compiles `style.scss` and `editor-style.scss` from shared `_theme-styles.scss` (keep them in sync). Editor-only canvas fixes: `partials/_editor-context.scss`. Content wrapper selectors: `partials/_content-area.scss`.
 - **Production CSS (minified):** `gulp build:production` — compressed output for deployment.
 - **Watch + live reload:** `npm run watch` or `gulp watch`.
 

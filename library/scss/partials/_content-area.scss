@@ -1,0 +1,22 @@
+/******************************************************************
+Post / page content wrapper — front-end .entry-content and block editor canvas.
+
+Use @include root { } for rules on the wrapper itself.
+Use @include nested { } for descendant rules (.entry-content .component).
+******************************************************************/
+
+@mixin root {
+	.entry-content,
+	.editor-styles-wrapper .block-editor-block-list__layout.is-root-container,
+	.editor-styles-wrapper .is-root-container.block-editor-block-list__layout {
+		@content;
+	}
+}
+
+@mixin nested {
+	.entry-content,
+	.editor-styles-wrapper .block-editor-block-list__layout,
+	.editor-styles-wrapper .is-root-container {
+		@content;
+	}
+}

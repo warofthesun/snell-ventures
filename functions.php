@@ -980,8 +980,8 @@ function client_setup() {
   // Add theme support for editor styles
   add_theme_support( 'editor-styles' );
 
-  //Allow editor style.
-  add_editor_style( '/library/css/style.css' );
+  //Allow editor style (shared SCSS stack + editor canvas fixes in editor-style.scss).
+  add_editor_style( 'library/css/editor-style.css' );
 
   add_theme_support( 'align-wide' );
 

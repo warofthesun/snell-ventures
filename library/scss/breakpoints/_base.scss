@@ -1,6 +1,7 @@
 @use "../globals" as *;
 @use "../partials/normalize";
 @use "../partials/tokens" as *;
+@use "../partials/content-area" as content-area;
 @use "../modules/buttons" as *;
 @use "base-wp";
 
@@ -670,6 +671,17 @@ Content Section block
 }
 
 /* Text-image block: Content full width = stacked column inside the same container (header, body+CTAs, image group) */
+
+.c-text-image__content {
+	.c-content-group {
+		margin-bottom: 6em;
+	}
+
+	.c-content-group__visual {
+		margin-top: -3em;
+	}
+}
+
 .c-waveband__content--full .row,
 .c-text-image__content--full .row {
   flex-direction: column;
@@ -3029,6 +3041,8 @@ POSTS & CONTENT STYLES
 	z-index: 1;
 	width: 100vw;
 	margin-top: -3.25rem;
+	/* Pull following content up by half the nav overlap (hero position unchanged). */
+	margin-bottom: -1.625rem;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
 	overflow: hidden;
@@ -3069,6 +3083,7 @@ POSTS & CONTENT STYLES
 @media only screen and (min-width: 64em) {
 	.hero__container--company {
 		margin-top: -4.75rem;
+		margin-bottom: -2.375rem;
 	}
 
 	.hero__container--company-inner {
@@ -3129,7 +3144,7 @@ POSTS & CONTENT STYLES
 .hero__title--company {
 	margin: 0;
 	font-family: $header-font;
-	font-size: clamp(2.75rem, 6.5vw, 6rem);
+	font-size: clamp(2.75rem, 5.5vw, 6rem);
 	font-weight: $font-weight-black;
 	line-height: 1;
 	color: $white;
@@ -3140,7 +3155,7 @@ POSTS & CONTENT STYLES
 .hero__container--company .hero__industry--company {
 	margin: 0;
 	font-family: $header-font;
-	font-size: clamp(1.75rem, 3.89vw, 3.5rem);
+	font-size: clamp(1.75rem, 3.29vw, 3.5rem);
 	font-weight: $font-weight-black;
 	line-height: 0.8928571429;
 	letter-spacing: 0;
@@ -3210,6 +3225,45 @@ POSTS & CONTENT STYLES
 	}
 }
 
+/* Company single — logo + tagline intro below hero. */
+.c-companyIntro {
+	padding: calc($spacing-xxl / 2) 0 $spacing-lg;
+}
+
+.c-companyIntro__grid {
+	align-items: center;
+}
+
+.c-companyIntro__logo {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.c-companyIntro__logoImg {
+	display: block;
+	width: auto;
+	max-width: 100%;
+	max-height: 8rem;
+	height: auto;
+	object-fit: contain;
+}
+
+.c-companyIntro__text {
+	text-align: left;
+}
+
+.c-companyIntro__heading {
+	margin: 0;
+	max-width: none;
+}
+
+@media (max-width: 767px) {
+	.c-companyIntro__logo {
+		margin-bottom: $spacing-md;
+	}
+}
+
 /* Gallery block — Figma Gallery (715:891)
    Layer order (rear → front): gradient slab, then photos.
    Top row sits above gradient start (61px @ 1440); bottom row on gradient. */
@@ -3267,9 +3321,11 @@ POSTS & CONTENT STYLES
 	object-fit: cover;
 }
 
-.entry-content .c-gallery img,
-.entry-content img.c-gallery__img {
-	margin-bottom: 0;
+@include content-area.nested {
+	.c-gallery img,
+	img.c-gallery__img {
+		margin-bottom: 0;
+	}
 }
 
 .c-gallery__row--count-1 {
@@ -3395,39 +3451,42 @@ POSTS & CONTENT STYLES
 	height: 100%;
 }
 
-.c-quote__text,
-.entry-content .c-quote .c-quote__text,
-.entry-content .c-quote .c-quote__text p,
-.entry-content .c-quote .c-quote__text blockquote {
-	margin: 0;
-	border: 0;
-	border-left: 0;
-	font-family: $header-font;
-	font-style: normal;
-	font-weight: $font-weight-bold;
-	color: $white;
-	text-shadow: 0 4px 4px rgba($black, 0.25);
-	line-height: 1.12;
-	background: transparent;
+@include content-area.nested {
+	.c-quote .c-quote__text,
+	.c-quote .c-quote__text p,
+	.c-quote .c-quote__text blockquote {
+		margin: 0;
+		border: 0;
+		border-left: 0;
+		font-family: $header-font;
+		font-style: normal;
+		font-weight: $font-weight-bold;
+		color: $white;
+		text-shadow: 0 4px 4px rgba($black, 0.25);
+		line-height: 1.12;
+		background: transparent;
+	}
 }
 
-.entry-content .c-quote--standalone .c-quote__text,
-.c-quote--standalone .c-quote__text {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-	min-height: 500px;
-	font-size: 2rem;
-	padding-top: 3rem;
-	padding-bottom: 3rem;
+@include content-area.nested {
+	.c-quote--standalone .c-quote__text {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+		min-height: 500px;
+		font-size: 2rem;
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+	}
 }
 
-.entry-content .c-quote--standalone .c-quote__text p,
-.c-quote--standalone .c-quote__text p {
-	font-size: 2rem;
-	padding: 0;
+@include content-area.nested {
+	.c-quote--standalone .c-quote__text p {
+		font-size: 2rem;
+		padding: 0;
+	}
 }
 
 .c-quote--compact .c-quote__text,

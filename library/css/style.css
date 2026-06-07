@@ -9,9 +9,12 @@ Helpful articles on Sass file organization:
 http://thesassway.com/advanced/modular-css-naming-conventions
 
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
 /******************************************************************
 Site Name:
 Author:
@@ -161,6 +164,9 @@ h2.hero, .h2.hero {
 h2.light, .h2.light {
   color: #50657b;
 }
+h2.medium, .h2.medium {
+  font-weight: 500;
+}
 
 h3, .h3 {
   font-size: 2.5em;
@@ -170,6 +176,9 @@ h3, .h3 {
 }
 h3.light, .h3.light {
   color: #50657b;
+}
+h3.medium, .h3.medium {
+  font-weight: 500;
 }
 
 h4, .h4 {
@@ -1219,22 +1228,12 @@ Stylesheet: Tokens
     order: 1;
   }
 }
-/*********************
-IMPORTING MODULES
-*********************/
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 /******************************************************************
 Site Name:
 Author:
@@ -1269,18 +1268,11 @@ you can just remove this stylesheet.
 }
 
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 /******************************************************************
 Site Name:
 Author:
@@ -1458,18 +1450,11 @@ and it will create a button dependant on those variables.
 } // end blue button
 */
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 /******************************************************************
 Site Name:
 Author:
@@ -1769,18 +1754,11 @@ select {
 }
 
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 /******************************************************************
 Site Name:
 Author:
@@ -1795,22 +1773,12 @@ Stylesheet: Gradient Styles
   stop-color: #16324f;
 }
 
-/*********************
-BASE (MOBILE) SIZE
-*********************/
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 /* normalize.css 2012-07-07T09:50 UTC - http://github.com/necolas/normalize.css */
 /* ==========================================================================
    HTML5 display definitions
@@ -2264,18 +2232,17 @@ span.amp {
 }
 
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Post / page content wrapper — front-end .entry-content and block editor canvas.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Use @include root { } for rules on the wrapper itself.
+Use @include nested { } for descendant rules (.entry-content .component).
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
 article {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
@@ -2326,64 +2293,92 @@ article .hero--image img {
   margin: 0;
 }
 /* entry content */
-.entry-content {
+.entry-content,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout {
   padding: 1.5em 1.5em 0;
 }
-.entry-content p {
+.entry-content p,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container p,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout p {
   margin: 0 0 1.5em;
 }
-.entry-content table {
+.entry-content table,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container table,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout table {
   width: 100%;
   border: 1px solid #e2e5e7;
   margin-bottom: 1.5em;
 }
-.entry-content table caption {
+.entry-content table caption,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container table caption,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout table caption {
   margin: 0 0 7px;
   font-size: 0.75em;
   color: #a0a7af;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.entry-content tr {
+.entry-content tr,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container tr,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout tr {
   border-bottom: 1px solid #e2e5e7;
 }
-.entry-content tr:nth-child(even) {
+.entry-content tr:nth-child(even),
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container tr:nth-child(even),
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout tr:nth-child(even) {
   background-color: #f5f6f7;
 }
-.entry-content td {
+.entry-content td,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container td,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout td {
   padding: 7px;
   border-right: 1px solid #e2e5e7;
 }
-.entry-content td:last-child {
+.entry-content td:last-child,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container td:last-child,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout td:last-child {
   border-right: 0;
 }
-.entry-content th {
+.entry-content th,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container th,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout th {
   background-color: #f5f6f7;
   border-bottom: 1px solid #e2e5e7;
   border-right: 1px solid #e2e5e7;
 }
-.entry-content th:last-child {
+.entry-content th:last-child,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container th:last-child,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout th:last-child {
   border-right: 0;
 }
-.entry-content blockquote {
+.entry-content blockquote,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container blockquote,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout blockquote {
   margin: 0 0 1.5em 0.75em;
   padding: 0 0 0 0.75em;
   border-left: 3px solid #69a197;
   font-style: italic;
   color: #a0a7af;
 }
-.entry-content dd {
+.entry-content dd,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container dd,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout dd {
   margin-left: 0;
   font-size: 0.9em;
   color: #787878;
   margin-bottom: 1.5em;
 }
-.entry-content img {
+.entry-content img,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container img,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout img {
   margin: 0 0 1.5em 0;
   max-width: 100%;
   height: auto;
 }
-.entry-content {
+.entry-content,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout {
   /*
   image alignment on a screen this size may be
   a bit difficult. It's set to start aligning
@@ -2395,11 +2390,23 @@ article .hero--image img {
 .entry-content .size-full,
 .entry-content .size-large,
 .entry-content .size-medium,
-.entry-content .size-thumbnail {
+.entry-content .size-thumbnail,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-auto,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-full,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-large,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-medium,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-thumbnail,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-auto,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-full,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-large,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-medium,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-thumbnail {
   max-width: 100%;
   height: auto;
 }
-.entry-content pre {
+.entry-content pre,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container pre,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout pre {
   background: #000;
   color: #f5f6f7;
   font-size: 0.9em;
@@ -2408,7 +2415,7 @@ article .hero--image img {
   border-radius: 3px;
 }
 
-/* end .entry-content */
+/* end content area */
 .wp-caption {
   max-width: 100%;
   background: #eee;
@@ -3102,6 +3109,9 @@ FOOTER STYLES
   -webkit-box-align: end;
   -ms-flex-align: end;
   align-items: flex-end;
+}
+.footer__logo img {
+  max-width: 120px;
 }
 .footer__logo #client_logo {
   margin-top: 2em;
@@ -3910,6 +3920,13 @@ Content Section block
 }
 
 /* Text-image block: Content full width = stacked column inside the same container (header, body+CTAs, image group) */
+.c-text-image__content .c-content-group {
+  margin-bottom: 6em;
+}
+.c-text-image__content .c-content-group__visual {
+  margin-top: -3em;
+}
+
 .c-waveband__content--full .row,
 .c-text-image__content--full .row {
   -webkit-box-orient: vertical;
@@ -6576,6 +6593,8 @@ POSTS & CONTENT STYLES
   z-index: 1;
   width: 100vw;
   margin-top: -3.25rem;
+  /* Pull following content up by half the nav overlap (hero position unchanged). */
+  margin-bottom: -1.625rem;
   margin-left: -webkit-calc(50% - 50vw);
   margin-left: calc(50% - 50vw);
   margin-right: -webkit-calc(50% - 50vw);
@@ -6619,6 +6638,7 @@ POSTS & CONTENT STYLES
 @media only screen and (min-width: 64em) {
   .hero__container--company {
     margin-top: -4.75rem;
+    margin-bottom: -2.375rem;
   }
   .hero__container--company-inner {
     min-height: -webkit-calc(var(--company-hero-below-nav) + 4.75rem);
@@ -6688,7 +6708,7 @@ POSTS & CONTENT STYLES
 .hero__title--company {
   margin: 0;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(2.75rem, 6.5vw, 6rem);
+  font-size: clamp(2.75rem, 5.5vw, 6rem);
   font-weight: 900;
   line-height: 1;
   color: #fff;
@@ -6699,7 +6719,7 @@ POSTS & CONTENT STYLES
 .hero__container--company .hero__industry--company {
   margin: 0;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(1.75rem, 3.89vw, 3.5rem);
+  font-size: clamp(1.75rem, 3.29vw, 3.5rem);
   font-weight: 900;
   line-height: 0.8928571429;
   letter-spacing: 0;
@@ -6784,6 +6804,53 @@ POSTS & CONTENT STYLES
     max-width: 10rem;
   }
 }
+/* Company single — logo + tagline intro below hero. */
+.c-companyIntro {
+  padding: 1em 0 1.25em;
+}
+
+.c-companyIntro__grid {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c-companyIntro__logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c-companyIntro__logoImg {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 8rem;
+  height: auto;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.c-companyIntro__text {
+  text-align: left;
+}
+
+.c-companyIntro__heading {
+  margin: 0;
+  max-width: none;
+}
+
+@media (max-width: 767px) {
+  .c-companyIntro__logo {
+    margin-bottom: 1em;
+  }
+}
 /* Gallery block — Figma Gallery (715:891)
    Layer order (rear → front): gradient slab, then photos.
    Top row sits above gradient start (61px @ 1440); bottom row on gradient. */
@@ -6853,7 +6920,11 @@ POSTS & CONTENT STYLES
 }
 
 .entry-content .c-gallery img,
-.entry-content img.c-gallery__img {
+.entry-content img.c-gallery__img,
+.editor-styles-wrapper .block-editor-block-list__layout .c-gallery img,
+.editor-styles-wrapper .block-editor-block-list__layout img.c-gallery__img,
+.editor-styles-wrapper .is-root-container .c-gallery img,
+.editor-styles-wrapper .is-root-container img.c-gallery__img {
   margin-bottom: 0;
 }
 
@@ -6993,10 +7064,15 @@ POSTS & CONTENT STYLES
   height: 100%;
 }
 
-.c-quote__text,
 .entry-content .c-quote .c-quote__text,
 .entry-content .c-quote .c-quote__text p,
-.entry-content .c-quote .c-quote__text blockquote {
+.entry-content .c-quote .c-quote__text blockquote,
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote .c-quote__text,
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote .c-quote__text p,
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote .c-quote__text blockquote,
+.editor-styles-wrapper .is-root-container .c-quote .c-quote__text,
+.editor-styles-wrapper .is-root-container .c-quote .c-quote__text p,
+.editor-styles-wrapper .is-root-container .c-quote .c-quote__text blockquote {
   margin: 0;
   border: 0;
   border-left: 0;
@@ -7010,7 +7086,8 @@ POSTS & CONTENT STYLES
 }
 
 .entry-content .c-quote--standalone .c-quote__text,
-.c-quote--standalone .c-quote__text {
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote--standalone .c-quote__text,
+.editor-styles-wrapper .is-root-container .c-quote--standalone .c-quote__text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7033,7 +7110,8 @@ POSTS & CONTENT STYLES
 }
 
 .entry-content .c-quote--standalone .c-quote__text p,
-.c-quote--standalone .c-quote__text p {
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote--standalone .c-quote__text p,
+.editor-styles-wrapper .is-root-container .c-quote--standalone .c-quote__text p {
   font-size: 2rem;
   padding: 0;
 }
@@ -8962,18 +9040,11 @@ a.c-peopleBio__email:hover, a.c-peopleBio__email:focus-visible {
   }
 }
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 /* =========================
    Blog index — Stories (reference comp)
 ========================= */
@@ -9474,22 +9545,12 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   pointer-events: none;
 }
 
-/*********************
-LARGER MOBILE DEVICES
-*********************/
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 @media only screen and (min-width: 48em) {
   .c-card-block__grid--count-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -9681,27 +9742,41 @@ IMPORTING PARTIALS
   POSTS & CONTENT STYLES
   *********************/
   /* entry content */
-  .entry-content {
+  .entry-content,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout {
     /* at this larger size, we can start to align images */
   }
-  .entry-content .alignleft, .entry-content img.alignleft {
+  .entry-content .alignleft, .entry-content img.alignleft,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .alignleft,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container img.alignleft,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout .alignleft,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout img.alignleft {
     margin-right: 1.5em;
     display: inline;
     float: left;
   }
-  .entry-content .alignright, .entry-content img.alignright {
+  .entry-content .alignright, .entry-content img.alignright,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .alignright,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container img.alignright,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout .alignright,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout img.alignright {
     margin-left: 1.5em;
     display: inline;
     float: right;
   }
-  .entry-content .aligncenter, .entry-content img.aligncenter {
+  .entry-content .aligncenter, .entry-content img.aligncenter,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .aligncenter,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container img.aligncenter,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout .aligncenter,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout img.aligncenter {
     margin-right: auto;
     margin-left: auto;
     display: block;
     clear: both;
     text-align: center;
   }
-  /* end .entry-content */
+  /* end content area */
   /* At medium widths, allow 2-up where appropriate */
   .c-cardrepeater--count-2 .c-cardrepeater__grid,
   .c-cardrepeater--count-3 .c-cardrepeater__grid,
@@ -9739,22 +9814,12 @@ IMPORTING PARTIALS
     fill: #f9f9f9;
   }
 }
-/*********************
-TABLET & SMALLER LAPTOPS
-*********************/
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 @media only screen and (min-width: 64em) {
   /*********************
   GENERAL STYLES
@@ -10367,22 +10432,12 @@ IMPORTING PARTIALS
     justify-content: flex-start;
   }
 }
-/*********************
-DESKTOP
-*********************/
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 @media only screen and (min-width: 75em) {
   .wrap {
     width: 1040px;
@@ -10482,22 +10537,12 @@ IMPORTING PARTIALS
     line-height: 0;
   }
 }
-/*********************
-LARGE VIEWING SIZE
-*********************/
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 @media only screen and (min-width: 1240px) {
   /******************************************************************
   Site Name: 
@@ -10534,18 +10579,11 @@ IMPORTING PARTIALS
   }
 }
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 @media only screen and (min-width: 1440px) {
   /******************************************************************
   Site Name: 
@@ -10561,10 +10599,6 @@ IMPORTING PARTIALS
     padding-right: 0;
   }
 }
-/*********************
-COMPONENT PARTIALS (new work — local @media or mq-* mixins)
-Loaded after legacy breakpoints; `_client.scss` still wins last.
-*********************/
 /******************************************************************
 Component-layer styles (colocated rules + responsive tweaks)
 
@@ -10580,22 +10614,12 @@ This file loads **after** legacy `breakpoints/*.scss` so migrated
 selectors can override until you delete the old rules.
 
 ******************************************************************/
-/*********************
-PER-CLIENT OVERRIDES (after all theme breakpoints)
-*********************/
 /******************************************************************
-Site Name:
-Author: The SplitPixel
+Shared front-end + block editor styles.
 
-Stylesheet: Main Stylesheet
-
-Helpful articles on Sass file organization:
-http://thesassway.com/advanced/modular-css-naming-conventions
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
-/*********************
-IMPORTING PARTIALS
-*********************/
 /******************************************************************
 Client / project skin (imported last in style.scss)
 

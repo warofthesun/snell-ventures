@@ -1,6 +1,7 @@
 @use "../globals" as *;
 @use "../partials/normalize";
 @use "../partials/tokens" as *;
+@use "../partials/content-area" as content-area;
 @use "../modules/buttons" as *;
 
 article {
@@ -72,7 +73,7 @@ article {
 
 
 		/* entry content */
-		.entry-content {
+		@include content-area.root {
 			padding: 1.5em 1.5em 0;
 
 			p {
@@ -197,7 +198,7 @@ article {
 				border-radius: 3px;
 			}
 
-		} /* end .entry-content */
+		} /* end content area */
 
 		.wp-caption {
 			max-width: 100%;
@@ -1086,6 +1087,8 @@ FOOTER STYLES
 	&__logo {
 		display: flex;
 		align-items: flex-end;
+
+		img{max-width: 120px;}
 
 		#client_logo {
 			margin-top: 2em;

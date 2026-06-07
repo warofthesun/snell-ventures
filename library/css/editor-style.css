@@ -1,16 +1,1782 @@
 @charset "UTF-8";
 /******************************************************************
+Block editor stylesheet
+
+Loads the same SCSS stack as the front end (via _theme-styles.scss),
+plus editor-only canvas fixes (_editor-context.scss).
+
+Compiled to library/css/editor-style.css — enqueued in functions.php.
+Keep in sync: run `npm run build` after SCSS changes (builds style + editor).
+******************************************************************/
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+/******************************************************************
 Site Name:
 Author:
 
-Stylesheet: TinyMCE Editor
+Stylesheet: Variables
 
-This stylesheet is loaded automatically by Wordpress when compiled
-and placed in the root theme directory folder as editor-style.css
+Personal starter: semantic scales keep the same names so existing SCSS
+still compiles; values are neutral grays + one blue accent. Per-snell
+skin: edit tokens here and/or override in _snell.scss (imported last).
 
-For more info, check out the codex:
-http://codex.wordpress.org/Editor_Style
+******************************************************************/
+/*********************
+COLORS
+*********************/
+/* Base gray ramp — defined first so primary/secondary can reference it */
+/* Primary: Figma Color/Primary */
+/* Secondary: Figma Color/Secondary */
+/* Accent: Figma Color/Tertiary (action / warmth) */
+/* Figma Surface / Overlay (semantic) */
+/* Surface / text tokens for blocks, wavebands, TEC — remap per snell in _snell.scss */
+:root {
+  --c-surface-muted: #f4f4f5;
+  --c-surface-subtle: #eceff3;
+  --c-text-muted: #64748b;
+  --c-white: #ffffff;
+}
 
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Typography
+
+******************************************************************/
+/*********************
+FONT FACE
+*********************/
+/*  To embed your own fonts, use this syntax
+  and place your fonts inside the
+  library/fonts folder. For more information
+  on embedding fonts, go to:
+  http://www.fontsquirrel.com/
+  Be sure to remove the comment brackets.
+*/
+/*  @font-face {
+      font-family: 'Font Name';
+      src: url('library/fonts/font-name.eot');
+      src: url('library/fonts/font-name.eot?#iefix') format('embedded-opentype'),
+             url('library/fonts/font-name.woff') format('woff'),
+             url('library/fonts/font-name.ttf') format('truetype'),
+             url('library/fonts/font-name.svg#font-name') format('svg');
+      font-weight: normal;
+      font-style: normal;
+  }
+*/
+/*
+some nice typographical defaults
+more here: http://www.newnet-soft.com/blog/csstypography
+*/
+p {
+  -ms-word-wrap: normal;
+  word-break: normal;
+  word-wrap: normal;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  -webkit-hyphenate-before: 2;
+  -webkit-hyphenate-after: 3;
+  hyphenate-lines: 3;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+h7, .h8 {
+  text-transform: none;
+}
+h1 p, .h1 p,
+h2 p, .h2 p,
+h3 p, .h3 p,
+h4 p, .h4 p,
+h5 p, .h5 p,
+h6 p, .h6 p,
+h7 p, .h8 p {
+  line-height: 1em;
+  margin: 0;
+}
+
+h3.wp-block-heading {
+  margin-bottom: 0;
+}
+
+/******************************************************************
+H1, H2, H3, H4, H5 STYLES
+******************************************************************/
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, h7, .h7 {
+  text-rendering: optimizelegibility;
+  font-weight: 400;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /*
+  if you're going to use webfonts, be sure to check your weights
+  http://css-tricks.com/watch-your-font-weight/
+  */
+  /* removing text decoration from all headline links */
+}
+h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a, h7 a, .h7 a {
+  text-decoration: none;
+}
+
+h1, .h1 {
+  font-size: 4.1em;
+  font-weight: 900;
+  line-height: 0.9em;
+  color: #16324f;
+}
+h1.medium, .h1.medium {
+  font-weight: 500;
+}
+h1.hero, .h1.hero {
+  font-size: clamp(2.75rem, 6vw + 1.5rem, 6rem);
+  line-height: 1;
+  font-weight: 900;
+  color: #fff;
+}
+h1.light, .h1.light {
+  color: #50657b;
+}
+
+h2, .h2 {
+  font-size: 3.4em;
+  font-weight: 800;
+  line-height: 1em;
+  margin-top: 0;
+  margin-bottom: 0.375em;
+  color: #142e48;
+}
+h2.hero, .h2.hero {
+  font-size: clamp(1.75rem, 3.5vw + 1rem, 3.875rem);
+  line-height: 1;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+h2.light, .h2.light {
+  color: #50657b;
+}
+h2.medium, .h2.medium {
+  font-weight: 500;
+}
+
+h3, .h3 {
+  font-size: 2.5em;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #12273d;
+}
+h3.light, .h3.light {
+  color: #50657b;
+}
+h3.medium, .h3.medium {
+  font-weight: 500;
+}
+
+h4, .h4 {
+  font-size: 1.8em;
+  font-weight: 900;
+  color: #12273d;
+}
+h4.bold, .h4.bold {
+  font-weight: 800;
+}
+h4.light, .h4.light {
+  color: #50657b;
+}
+
+h5, .h5 {
+  font-size: 1.4em;
+  font-weight: 900;
+  line-height: 1em;
+  color: #0c1723;
+}
+h5.bold, .h5.bold {
+  font-weight: 800;
+}
+h5.light, .h5.light {
+  color: #a2adb9;
+}
+
+h6, .h6 {
+  font-size: 1.2em;
+  font-weight: 900;
+  line-height: 1em;
+  color: #0c1723;
+}
+h6.bold, .h6.bold {
+  font-weight: 800;
+}
+h6.light, .h6.light {
+  color: #a2adb9;
+}
+h6 h7, h6 .h7, .h6 h7, .h6 .h7 {
+  font-size: 0.875em;
+  font-weight: 900;
+  line-height: 1em;
+  color: #0c1723;
+}
+h6 h7.bold, h6 .h7.bold, .h6 h7.bold, .h6 .h7.bold {
+  font-weight: 800;
+}
+h6 h7.medium, h6 .h7.medium, .h6 h7.medium, .h6 .h7.medium {
+  font-weight: 500;
+}
+h6 h7.light, h6 .h7.light, .h6 h7.light, .h6 .h7.light {
+  color: #a2adb9;
+}
+
+.c-content-group__content ul, .wp-block-list ul {
+  list-style-type: disc;
+}
+.c-content-group__content ul li, .wp-block-list ul li {
+  margin-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+ul.wp-block-list {
+  list-style-type: disc;
+}
+ul.wp-block-list li {
+  margin-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Sass Functions
+
+You can do a lot of really cool things in Sass. Functions help you
+make repeated actions a lot easier. They are really similar to mixins,
+but can be used for so much more.
+
+Anyway, keep them all in here so it's easier to find when you're
+looking for one.
+
+For more info on functions, go here:
+http://sass-lang.com/documentation/Sass/Script/Functions.html
+
+******************************************************************/
+/*********************
+COLOR FUNCTIONS
+These are helpful when you're working
+with shadows and such things. It's essentially
+a quicker way to write RGBA.
+
+Example:
+box-shadow: 0 0 4px black(0.3);
+compiles to:
+box-shadow: 0 0 4px rgba(0,0,0,0.3);
+*********************/
+/*********************
+RESPONSIVE HELPER FUNCTION
+If you're creating a responsive site, then
+you've probably already read
+Responsive Web Design: http://www.abookapart.com/products/responsive-web-design
+
+Here's a nice little helper function for calculating
+target / context
+as mentioned in that book.
+
+Example:
+width: cp(650px, 1000px);
+or
+width: calc-percent(650px, 1000px);
+both compile to:
+width: 65%;
+*********************/
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Mixins Stylesheet
+
+This is where you can take advantage of Sass' great features: Mixins.
+I won't go in-depth on how they work exactly,
+there are a few articles below that will help do that. What I will
+tell you is that this will help speed up simple changes like
+changing a color or adding CSS3 techniques gradients.
+
+A WORD OF WARNING: It's very easy to overdo it here. Be careful and
+remember less is more.
+
+Helpful:
+http://sachagreif.com/useful-sass-mixins/
+http://thesassway.com/intermediate/leveraging-sass-mixins-for-cleaner-code
+http://web-design-weekly.com/blog/2013/05/12/handy-sass-mixins/
+
+******************************************************************/
+/*********************
+TRANSITION
+*********************/
+/*
+I totally rewrote this to be cleaner and easier to use.
+You'll need to be using Sass 3.2+ for these to work.
+Thanks to @anthonyshort for the inspiration on these.
+USAGE: @include transition(all 0.2s ease-in-out);
+*/
+/*********************
+CSS3 GRADIENTS
+Be careful with these since they can
+really slow down your CSS. Don't overdo it.
+*********************/
+/* @include css-gradient(#dfdfdf,#f8f8f8); */
+/*********************
+BOX SIZING
+*********************/
+/* @include box-sizing(border-box); */
+/* NOTE: value of "padding-box" is only supported in Gecko. So
+probably best not to use it. I mean, were you going to anyway? */
+/* Set 3 variables w/ different styles */
+/* Create our super simple mixin */
+/* Putting it all together in our classes 
+.bottom-box {
+    @include box-shadow($bottom-diffused);
+}
+
+.left-box {
+    @include box-shadow($left-diffused);
+}
+
+.right-box {
+    @include box-shadow($right-diffused);
+}
+*/
+/*********************
+RESPONSIVE (min-width)
+Match `library/scss/breakpoints/*.scss` so new component partials can use
+nested @include instead of splitting rules across breakpoint files.
+
+Example:
+  .c-widget {
+    padding: 1rem;
+    @include mq-64 {
+      padding: 1.5rem;
+    }
+  }
+*********************/
+/******************************************************************
+Stylesheet: Tokens
+*********************/
+/* COLOR - SURFACE - PRIMARY */
+/* COLOR - SURFACE - SECONDARY */
+/* COLOR - SURFACE - ACCENT */
+/* COLOR - TEXT */
+/* COLOR - BORDER */
+.container-fluid,
+.container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container-fluid {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.row {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+}
+
+.row.reverse {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+
+.col.reverse {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+}
+
+.col-xs,
+.col-xs-1,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-offset-0,
+.col-xs-offset-1,
+.col-xs-offset-2,
+.col-xs-offset-3,
+.col-xs-offset-4,
+.col-xs-offset-5,
+.col-xs-offset-6,
+.col-xs-offset-7,
+.col-xs-offset-8,
+.col-xs-offset-9,
+.col-xs-offset-10,
+.col-xs-offset-11,
+.col-xs-offset-12 {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.col-xs {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  max-width: 100%;
+}
+
+.col-xs-1 {
+  -ms-flex-preferred-size: 8.33333333%;
+  flex-basis: 8.33333333%;
+  max-width: 8.33333333%;
+}
+
+.col-xs-2 {
+  -ms-flex-preferred-size: 16.66666667%;
+  flex-basis: 16.66666667%;
+  max-width: 16.66666667%;
+}
+
+.col-xs-3 {
+  -ms-flex-preferred-size: 25%;
+  flex-basis: 25%;
+  max-width: 25%;
+}
+
+.col-xs-4 {
+  -ms-flex-preferred-size: 33.33333333%;
+  flex-basis: 33.33333333%;
+  max-width: 33.33333333%;
+}
+
+.col-xs-5 {
+  -ms-flex-preferred-size: 41.66666667%;
+  flex-basis: 41.66666667%;
+  max-width: 41.66666667%;
+}
+
+.col-xs-6 {
+  -ms-flex-preferred-size: 50%;
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
+.col-xs-7 {
+  -ms-flex-preferred-size: 58.33333333%;
+  flex-basis: 58.33333333%;
+  max-width: 58.33333333%;
+}
+
+.col-xs-8 {
+  -ms-flex-preferred-size: 66.66666667%;
+  flex-basis: 66.66666667%;
+  max-width: 66.66666667%;
+}
+
+.col-xs-9 {
+  -ms-flex-preferred-size: 75%;
+  flex-basis: 75%;
+  max-width: 75%;
+}
+
+.col-xs-10 {
+  -ms-flex-preferred-size: 83.33333333%;
+  flex-basis: 83.33333333%;
+  max-width: 83.33333333%;
+}
+
+.col-xs-11 {
+  -ms-flex-preferred-size: 91.66666667%;
+  flex-basis: 91.66666667%;
+  max-width: 91.66666667%;
+}
+
+.col-xs-12 {
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+.col-xs-offset-0 {
+  margin-left: 0;
+}
+
+.col-xs-offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.col-xs-offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.col-xs-offset-3 {
+  margin-left: 25%;
+}
+
+.col-xs-offset-4 {
+  margin-left: 33.33333333%;
+}
+
+.col-xs-offset-5 {
+  margin-left: 41.66666667%;
+}
+
+.col-xs-offset-6 {
+  margin-left: 50%;
+}
+
+.col-xs-offset-7 {
+  margin-left: 58.33333333%;
+}
+
+.col-xs-offset-8 {
+  margin-left: 66.66666667%;
+}
+
+.col-xs-offset-9 {
+  margin-left: 75%;
+}
+
+.col-xs-offset-10 {
+  margin-left: 83.33333333%;
+}
+
+.col-xs-offset-11 {
+  margin-left: 91.66666667%;
+}
+
+.start-xs {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  text-align: start;
+}
+
+.center-xs {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.end-xs {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  text-align: end;
+}
+
+.top-xs {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.middle-xs {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.bottom-xs {
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+}
+
+.around-xs {
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+.between-xs {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.first-xs {
+  -webkit-box-ordinal-group: 0;
+  -ms-flex-order: -1;
+  order: -1;
+}
+
+.last-xs {
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+@media only screen and (min-width: 48em) {
+  .container {
+    width: 49rem;
+  }
+  .col-sm,
+  .col-sm-1,
+  .col-sm-2,
+  .col-sm-3,
+  .col-sm-4,
+  .col-sm-5,
+  .col-sm-6,
+  .col-sm-7,
+  .col-sm-8,
+  .col-sm-9,
+  .col-sm-10,
+  .col-sm-11,
+  .col-sm-12,
+  .col-sm-offset-0,
+  .col-sm-offset-1,
+  .col-sm-offset-2,
+  .col-sm-offset-3,
+  .col-sm-offset-4,
+  .col-sm-offset-5,
+  .col-sm-offset-6,
+  .col-sm-offset-7,
+  .col-sm-offset-8,
+  .col-sm-offset-9,
+  .col-sm-offset-10,
+  .col-sm-offset-11,
+  .col-sm-offset-12 {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .col-sm {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+  .col-sm-1 {
+    -ms-flex-preferred-size: 8.33333333%;
+    flex-basis: 8.33333333%;
+    max-width: 8.33333333%;
+  }
+  .col-sm-2 {
+    -ms-flex-preferred-size: 16.66666667%;
+    flex-basis: 16.66666667%;
+    max-width: 16.66666667%;
+  }
+  .col-sm-3 {
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+  .col-sm-4 {
+    -ms-flex-preferred-size: 33.33333333%;
+    flex-basis: 33.33333333%;
+    max-width: 33.33333333%;
+  }
+  .col-sm-5 {
+    -ms-flex-preferred-size: 41.66666667%;
+    flex-basis: 41.66666667%;
+    max-width: 41.66666667%;
+  }
+  .col-sm-6 {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .col-sm-7 {
+    -ms-flex-preferred-size: 58.33333333%;
+    flex-basis: 58.33333333%;
+    max-width: 58.33333333%;
+  }
+  .col-sm-8 {
+    -ms-flex-preferred-size: 66.66666667%;
+    flex-basis: 66.66666667%;
+    max-width: 66.66666667%;
+  }
+  .col-sm-9 {
+    -ms-flex-preferred-size: 75%;
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+  .col-sm-10 {
+    -ms-flex-preferred-size: 83.33333333%;
+    flex-basis: 83.33333333%;
+    max-width: 83.33333333%;
+  }
+  .col-sm-11 {
+    -ms-flex-preferred-size: 91.66666667%;
+    flex-basis: 91.66666667%;
+    max-width: 91.66666667%;
+  }
+  .col-sm-12 {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+  .col-sm-offset-0 {
+    margin-left: 0;
+  }
+  .col-sm-offset-1 {
+    margin-left: 8.33333333%;
+  }
+  .col-sm-offset-2 {
+    margin-left: 16.66666667%;
+  }
+  .col-sm-offset-3 {
+    margin-left: 25%;
+  }
+  .col-sm-offset-4 {
+    margin-left: 33.33333333%;
+  }
+  .col-sm-offset-5 {
+    margin-left: 41.66666667%;
+  }
+  .col-sm-offset-6 {
+    margin-left: 50%;
+  }
+  .col-sm-offset-7 {
+    margin-left: 58.33333333%;
+  }
+  .col-sm-offset-8 {
+    margin-left: 66.66666667%;
+  }
+  .col-sm-offset-9 {
+    margin-left: 75%;
+  }
+  .col-sm-offset-10 {
+    margin-left: 83.33333333%;
+  }
+  .col-sm-offset-11 {
+    margin-left: 91.66666667%;
+  }
+  .start-sm {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+  .center-sm {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .end-sm {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    text-align: end;
+  }
+  .top-sm {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  .middle-sm {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .bottom-sm {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+  }
+  .around-sm {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+  }
+  .between-sm {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  .first-sm {
+    -webkit-box-ordinal-group: 0;
+    -ms-flex-order: -1;
+    order: -1;
+  }
+  .last-sm {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+  }
+}
+@media only screen and (min-width: 64em) {
+  .container {
+    width: 65rem;
+  }
+  .col-md,
+  .col-md-1,
+  .col-md-2,
+  .col-md-3,
+  .col-md-4,
+  .col-md-5,
+  .col-md-6,
+  .col-md-7,
+  .col-md-8,
+  .col-md-9,
+  .col-md-10,
+  .col-md-11,
+  .col-md-12,
+  .col-md-offset-0,
+  .col-md-offset-1,
+  .col-md-offset-2,
+  .col-md-offset-3,
+  .col-md-offset-4,
+  .col-md-offset-5,
+  .col-md-offset-6,
+  .col-md-offset-7,
+  .col-md-offset-8,
+  .col-md-offset-9,
+  .col-md-offset-10,
+  .col-md-offset-11,
+  .col-md-offset-12 {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .col-md {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+  .col-md-1 {
+    -ms-flex-preferred-size: 8.33333333%;
+    flex-basis: 8.33333333%;
+    max-width: 8.33333333%;
+  }
+  .col-md-2 {
+    -ms-flex-preferred-size: 16.66666667%;
+    flex-basis: 16.66666667%;
+    max-width: 16.66666667%;
+  }
+  .col-md-3 {
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+  .col-md-4 {
+    -ms-flex-preferred-size: 33.33333333%;
+    flex-basis: 33.33333333%;
+    max-width: 33.33333333%;
+  }
+  .col-md-5 {
+    -ms-flex-preferred-size: 41.66666667%;
+    flex-basis: 41.66666667%;
+    max-width: 41.66666667%;
+  }
+  .col-md-6 {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .col-md-7 {
+    -ms-flex-preferred-size: 58.33333333%;
+    flex-basis: 58.33333333%;
+    max-width: 58.33333333%;
+  }
+  .col-md-8 {
+    -ms-flex-preferred-size: 66.66666667%;
+    flex-basis: 66.66666667%;
+    max-width: 66.66666667%;
+  }
+  .col-md-9 {
+    -ms-flex-preferred-size: 75%;
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+  .col-md-10 {
+    -ms-flex-preferred-size: 83.33333333%;
+    flex-basis: 83.33333333%;
+    max-width: 83.33333333%;
+  }
+  .col-md-11 {
+    -ms-flex-preferred-size: 91.66666667%;
+    flex-basis: 91.66666667%;
+    max-width: 91.66666667%;
+  }
+  .col-md-12 {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+  .col-md-offset-0 {
+    margin-left: 0;
+  }
+  .col-md-offset-1 {
+    margin-left: 8.33333333%;
+  }
+  .col-md-offset-2 {
+    margin-left: 16.66666667%;
+  }
+  .col-md-offset-3 {
+    margin-left: 25%;
+  }
+  .col-md-offset-4 {
+    margin-left: 33.33333333%;
+  }
+  .col-md-offset-5 {
+    margin-left: 41.66666667%;
+  }
+  .col-md-offset-6 {
+    margin-left: 50%;
+  }
+  .col-md-offset-7 {
+    margin-left: 58.33333333%;
+  }
+  .col-md-offset-8 {
+    margin-left: 66.66666667%;
+  }
+  .col-md-offset-9 {
+    margin-left: 75%;
+  }
+  .col-md-offset-10 {
+    margin-left: 83.33333333%;
+  }
+  .col-md-offset-11 {
+    margin-left: 91.66666667%;
+  }
+  .start-md {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+  .center-md {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .end-md {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    text-align: end;
+  }
+  .top-md {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  .middle-md {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .bottom-md {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+  }
+  .around-md {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+  }
+  .between-md {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  .first-md {
+    -webkit-box-ordinal-group: 0;
+    -ms-flex-order: -1;
+    order: -1;
+  }
+  .last-md {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+  }
+}
+@media only screen and (min-width: 75em) {
+  .container {
+    width: 76rem;
+  }
+  .col-lg,
+  .col-lg-1,
+  .col-lg-2,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-8,
+  .col-lg-9,
+  .col-lg-10,
+  .col-lg-11,
+  .col-lg-12,
+  .col-lg-offset-0,
+  .col-lg-offset-1,
+  .col-lg-offset-2,
+  .col-lg-offset-3,
+  .col-lg-offset-4,
+  .col-lg-offset-5,
+  .col-lg-offset-6,
+  .col-lg-offset-7,
+  .col-lg-offset-8,
+  .col-lg-offset-9,
+  .col-lg-offset-10,
+  .col-lg-offset-11,
+  .col-lg-offset-12 {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .col-lg {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+  .col-lg-1 {
+    -ms-flex-preferred-size: 8.33333333%;
+    flex-basis: 8.33333333%;
+    max-width: 8.33333333%;
+  }
+  .col-lg-2 {
+    -ms-flex-preferred-size: 16.66666667%;
+    flex-basis: 16.66666667%;
+    max-width: 16.66666667%;
+  }
+  .col-lg-3 {
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+  .col-lg-4 {
+    -ms-flex-preferred-size: 33.33333333%;
+    flex-basis: 33.33333333%;
+    max-width: 33.33333333%;
+  }
+  .col-lg-5 {
+    -ms-flex-preferred-size: 41.66666667%;
+    flex-basis: 41.66666667%;
+    max-width: 41.66666667%;
+  }
+  .col-lg-6 {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .col-lg-7 {
+    -ms-flex-preferred-size: 58.33333333%;
+    flex-basis: 58.33333333%;
+    max-width: 58.33333333%;
+  }
+  .col-lg-8 {
+    -ms-flex-preferred-size: 66.66666667%;
+    flex-basis: 66.66666667%;
+    max-width: 66.66666667%;
+  }
+  .col-lg-9 {
+    -ms-flex-preferred-size: 75%;
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+  .col-lg-10 {
+    -ms-flex-preferred-size: 83.33333333%;
+    flex-basis: 83.33333333%;
+    max-width: 83.33333333%;
+  }
+  .col-lg-11 {
+    -ms-flex-preferred-size: 91.66666667%;
+    flex-basis: 91.66666667%;
+    max-width: 91.66666667%;
+  }
+  .col-lg-12 {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+  .col-lg-offset-0 {
+    margin-left: 0;
+  }
+  .col-lg-offset-1 {
+    margin-left: 8.33333333%;
+  }
+  .col-lg-offset-2 {
+    margin-left: 16.66666667%;
+  }
+  .col-lg-offset-3 {
+    margin-left: 25%;
+  }
+  .col-lg-offset-4 {
+    margin-left: 33.33333333%;
+  }
+  .col-lg-offset-5 {
+    margin-left: 41.66666667%;
+  }
+  .col-lg-offset-6 {
+    margin-left: 50%;
+  }
+  .col-lg-offset-7 {
+    margin-left: 58.33333333%;
+  }
+  .col-lg-offset-8 {
+    margin-left: 66.66666667%;
+  }
+  .col-lg-offset-9 {
+    margin-left: 75%;
+  }
+  .col-lg-offset-10 {
+    margin-left: 83.33333333%;
+  }
+  .col-lg-offset-11 {
+    margin-left: 91.66666667%;
+  }
+  .start-lg {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+  .center-lg {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .end-lg {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    text-align: end;
+  }
+  .top-lg {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  .middle-lg {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .bottom-lg {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+  }
+  .around-lg {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+  }
+  .between-lg {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  .first-lg {
+    -webkit-box-ordinal-group: 0;
+    -ms-flex-order: -1;
+    order: -1;
+  }
+  .last-lg {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+  }
+}
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Alert Styles
+
+If you want to use these alerts in your design, you can. If not,
+you can just remove this stylesheet.
+
+******************************************************************/
+.alert--success, .alert--error, .alert--info, .alert--help {
+  margin: 10px;
+  padding: 5px 18px;
+  border: 1px solid;
+}
+
+.alert--help {
+  border-color: rgb(241.3043478261, 234.4565217391, 174.1956521739);
+  background: #f5f0c4;
+}
+.alert--info {
+  border-color: rgb(203.2, 230.95, 251.3);
+  background: #e3f2fd;
+}
+.alert--error {
+  border-color: rgb(249.0576923077, 209.4423076923, 213.4038461538);
+  background: #fce8ea;
+}
+.alert--success {
+  border-color: rgb(214.2272727273, 237.2727272727, 216);
+  background: #e8f5e9;
+}
+
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Button Styles
+
+Buttons are a pretty important part of your site's style, so it's
+important to have a consistent baseline for them. Use this stylesheet
+to create all kinds of buttons.
+
+Helpful Links:
+http://galp.in/blog/2011/08/02/the-ui-guide-part-1-buttons/
+
+******************************************************************/
+/*********************
+BUTTON DEFAULTS
+We're gonna use a placeholder selector here
+so we can use common styles. We then use this
+to load up the defaults in all our buttons.
+
+Here's a quick video to show how it works:
+http://www.youtube.com/watch?v=hwdVpKiJzac
+
+*********************/
+.c-button-pair .c-button-pair__button, .c-contactForm__formWrap input[type=submit],
+.c-contactForm__formWrap .wpcf7-submit, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit, .navigation-button a, #mobile-nav {
+  display: inline-block;
+  position: relative;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: 400;
+  padding: 0.5em 1em;
+  border-radius: 0;
+  border: 2px solid;
+  cursor: pointer;
+  -webkit-transition: background-color 0.14s ease-in-out;
+  transition: background-color 0.14s ease-in-out;
+}
+.c-button-pair .c-button-pair__button .svg-inline--fa,
+.c-contactForm__formWrap .wpcf7-submit .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
+  font-size: 0.9em;
+}
+.c-button-pair .c-button-pair__button:hover,
+.c-contactForm__formWrap .wpcf7-submit:hover, .gallery-item .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus,
+.c-contactForm__formWrap .wpcf7-submit:focus, .gallery-item .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+}
+.c-button-pair .c-button-pair__button:active,
+.c-contactForm__formWrap .wpcf7-submit:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
+  top: 1px;
+}
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
+  background-color: #b86f52;
+  color: #fff !important;
+  border-color: #bf7d63;
+}
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #16324f;
+  border-color: #bf7d63;
+}
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text {
+  color: #69a197;
+  border: 0px;
+  display: block;
+}
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:focus {
+  color: #5f9188;
+  text-decoration: none;
+  outline: none;
+}
+.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus {
+  background-color: rgba(184, 111, 82, 0.5);
+  text-decoration: none;
+  outline: none;
+}
+.c-button-pair.c-button-pair--primary .c-button-pair__button:active {
+  background-color: #8b553f;
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, input[type=submit], input[type=file], #wp-submit {
+  color: #0a0d0c;
+  border: 1px solid #69a197;
+  background: -webkit-linear-gradient(45deg, #78aaa1, #69a197);
+  background: linear-gradient(45deg, #78aaa1, #69a197);
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline {
+  color: #69a197;
+  border: 2px solid #69a197;
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text, .gallery-item .c-button-pair__button {
+  color: #69a197;
+  border: 0px;
+  display: block;
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:hover, .gallery-item .c-button-pair__button:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:focus, .gallery-item .c-button-pair__button:focus {
+  color: #5f9188;
+  text-decoration: none;
+  outline: none;
+}
+.c-button-pair.c-button-pair--secondary .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
+  color: #78aaa1;
+  background: -webkit-linear-gradient(90deg, #5f9188, #507a73);
+  background: -webkit-gradient(linear, left top, right top, from(#5f9188), to(#507a73));
+  background: -webkit-linear-gradient(left, #5f9188, #507a73);
+  background: linear-gradient(90deg, #5f9188, #507a73);
+  text-decoration: none;
+  outline: none;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid, .c-contactForm__formWrap input[type=submit],
+.c-contactForm__formWrap .wpcf7-submit {
+  background-color: #bf7d63;
+  color: #17100d;
+  border-color: #bf7d63;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #17100d;
+  border-color: #bf7d63;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text {
+  color: #8b553f;
+  border: 0px;
+  display: block;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:focus {
+  color: #4d2f24;
+  text-decoration: none;
+  outline: none;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button:hover, .c-contactForm__formWrap input[type=submit]:hover,
+.c-contactForm__formWrap .wpcf7-submit:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button:focus, .c-contactForm__formWrap input[type=submit]:focus,
+.c-contactForm__formWrap .wpcf7-submit:focus {
+  background-color: #ca937d;
+  text-decoration: none;
+  outline: none;
+}
+.c-button-pair.c-button-pair--accent .c-button-pair__button:active, .c-contactForm__formWrap input[type=submit]:active,
+.c-contactForm__formWrap .wpcf7-submit:active {
+  background-color: #a6644a;
+}
+
+.navigation-button a, #mobile-nav {
+  background-color: #b86f52;
+  color: #fff !important;
+  border-color: #bf7d63;
+}
+.navigation-button a:hover, .navigation-button a:focus, #mobile-nav:hover, #mobile-nav:focus {
+  background-color: rgba(184, 111, 82, 0.5);
+  text-decoration: none;
+  outline: none;
+}
+
+/*
+An example button.
+You can use this example if you want. Just replace all the variables
+and it will create a button dependant on those variables.
+
+.accent-btn {
+  @extend %btn; // here we load the btn defaults
+  background-color: $secondary-500;
+
+  &:hover,
+  &:focus {
+    background-color: darken($secondary-500, 4%);
+  } // end hover
+
+  &:active {
+    background-color: darken($secondary-500, 5%);
+  } // end active
+
+} // end blue button
+*/
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Form Styles
+
+We put all the form and button styles in here to setup a consistent
+look. If we need to customize them, we can do this in the main
+stylesheets and just override them. Easy Peasy.
+
+You're gonna see a few data-uri thingies down there. If you're not
+sure what they are, check this link out:
+http://css-tricks.com/data-uris/
+If you want to create your own, use this helpful link:
+http://websemantics.co.uk/online_tools/image_to_data_uri_convertor/
+
+******************************************************************/
+/*********************
+INPUTS
+*********************/
+input[type=text],
+input[type=password],
+input[type=datetime],
+input[type=datetime-local],
+input[type=date],
+input[type=month],
+input[type=time],
+input[type=week],
+input[type=number],
+input[type=email],
+input[type=url],
+input[type=search],
+input[type=tel],
+input[type=color],
+select,
+textarea,
+.field {
+  display: block;
+  height: 40px;
+  line-height: 1em;
+  padding: 0 12px;
+  margin-bottom: 14px;
+  font-size: 1em;
+  color: #606469;
+  border-radius: 3px;
+  vertical-align: middle;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #69a197;
+  width: 100%;
+  max-width: 400px;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: rgb(237.1622641509, 239.0075471698, 240.2377358491);
+  -webkit-transition: background-color 0.24s ease-in-out;
+  transition: background-color 0.24s ease-in-out;
+}
+input[type=text]:focus, input[type=text]:active,
+input[type=password]:focus,
+input[type=password]:active,
+input[type=datetime]:focus,
+input[type=datetime]:active,
+input[type=datetime-local]:focus,
+input[type=datetime-local]:active,
+input[type=date]:focus,
+input[type=date]:active,
+input[type=month]:focus,
+input[type=month]:active,
+input[type=time]:focus,
+input[type=time]:active,
+input[type=week]:focus,
+input[type=week]:active,
+input[type=number]:focus,
+input[type=number]:active,
+input[type=email]:focus,
+input[type=email]:active,
+input[type=url]:focus,
+input[type=url]:active,
+input[type=search]:focus,
+input[type=search]:active,
+input[type=tel]:focus,
+input[type=tel]:active,
+input[type=color]:focus,
+input[type=color]:active,
+select:focus,
+select:active,
+textarea:focus,
+textarea:active,
+.field:focus,
+.field:active {
+  background-color: #fff;
+  outline: none;
+}
+input[type=text].error, input[type=text].is-invalid,
+input[type=password].error,
+input[type=password].is-invalid,
+input[type=datetime].error,
+input[type=datetime].is-invalid,
+input[type=datetime-local].error,
+input[type=datetime-local].is-invalid,
+input[type=date].error,
+input[type=date].is-invalid,
+input[type=month].error,
+input[type=month].is-invalid,
+input[type=time].error,
+input[type=time].is-invalid,
+input[type=week].error,
+input[type=week].is-invalid,
+input[type=number].error,
+input[type=number].is-invalid,
+input[type=email].error,
+input[type=email].is-invalid,
+input[type=url].error,
+input[type=url].is-invalid,
+input[type=search].error,
+input[type=search].is-invalid,
+input[type=tel].error,
+input[type=tel].is-invalid,
+input[type=color].error,
+input[type=color].is-invalid,
+select.error,
+select.is-invalid,
+textarea.error,
+textarea.is-invalid,
+.field.error,
+.field.is-invalid {
+  color: #fce8ea;
+  border-color: #fce8ea;
+  background-color: #fff;
+  background-position: 99% center;
+  background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2NDM0NDREQkYwNEIxMUUyOTI4REZGQTEzMzA2MDcyNiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2NDM0NDREQ0YwNEIxMUUyOTI4REZGQTEzMzA2MDcyNiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjQ3ODRGRkE2RjA0QTExRTI5MjhERkZBMTMzMDYwNzI2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjY0MzQ0NERBRjA0QjExRTI5MjhERkZBMTMzMDYwNzI2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+U8iT5wAAAedJREFUeNqk1U9I02Ecx/HtV3aIFAc1hcRDUoGXRAq0oNLA2CrsEFmHbikZu0iQYIFGYAiegkCpLipBxPpDEBMUzB0EhSG2LhG7hMR2GviPgUTvB57Bw8P3+U23B16HPX8+e/b8nt93wezZSMCnhXETF3AcB5BDCnH8Dq98ExcGHcFn8Ah3cdDni+fxnPDv9oAnTB7CKu6VCFXtChZy56LxUjt+jfuB8toSOth9wd7xWAWhqrUjYR/FRTwWJm+iIPT/w7bQf5ljiZnBg45dtKFX6H+LU8gIY8OEV6vgTkStwXWE8BPTGDHGPqNPz2mCfSOOYkA99TvCt1bhGPL68zMcwmncMuape10jrI+q4BbHi/FLn31S9z2x5tRhTc+1W506ipM+T3oRD4X+8+qtc4SqFvL0z/Fr14S+Szjis8bz9Lvvaq8cwS/wwGfdlqfPSWqTiFlX77o13u9Ym1PBs8JAytpRoy44X9Ft9E/gvbA+rYKn8NcaaMVc8UHgBw4b9/iqUQZ6hOAJFbyDcUflmsEX4a6+wTtHGfhAIUqa1U29Zc2BytouThD8x6xuN5CtMPi2CrXLZkZf/HyZoRFCP7n+QVR4PV7uI/AjGghN7OU/r1ilnqILtfpNC+o6vIFljBKYlhb/F2AAgaBsWR5wRiIAAAAASUVORK5CYII=);
+  outline-color: #fce8ea;
+}
+input[type=text].success, input[type=text].is-valid,
+input[type=password].success,
+input[type=password].is-valid,
+input[type=datetime].success,
+input[type=datetime].is-valid,
+input[type=datetime-local].success,
+input[type=datetime-local].is-valid,
+input[type=date].success,
+input[type=date].is-valid,
+input[type=month].success,
+input[type=month].is-valid,
+input[type=time].success,
+input[type=time].is-valid,
+input[type=week].success,
+input[type=week].is-valid,
+input[type=number].success,
+input[type=number].is-valid,
+input[type=email].success,
+input[type=email].is-valid,
+input[type=url].success,
+input[type=url].is-valid,
+input[type=search].success,
+input[type=search].is-valid,
+input[type=tel].success,
+input[type=tel].is-valid,
+input[type=color].success,
+input[type=color].is-valid,
+select.success,
+select.is-valid,
+textarea.success,
+textarea.is-valid,
+.field.success,
+.field.is-valid {
+  color: #e8f5e9;
+  border-color: #e8f5e9;
+  background-color: #fff;
+  background-position: 99% center;
+  background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2NDM0NDRERkYwNEIxMUUyOTI4REZGQTEzMzA2MDcyNiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2NDM0NDRFMEYwNEIxMUUyOTI4REZGQTEzMzA2MDcyNiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjY0MzQ0NERERjA0QjExRTI5MjhERkZBMTMzMDYwNzI2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjY0MzQ0NERFRjA0QjExRTI5MjhERkZBMTMzMDYwNzI2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+7olkTQAAAfhJREFUeNqklU9oE0EUhzdroWjw0tBeWlDxkEaIp55TsCU9VKIgCrHBelA8CQ1Kr1WPbZrQ3gqtQqvGqxpQc2jBk6BIIaAGD4qNCKURpDSKiPi98gLDsJt//uBjsztvfnk7895sIPAw6/joGMThFJyAXn2+A+9gA57/TaY/eU0OeBgfhGm4DiGnsb7DAszxBz/NAdcKjMJLuNWCqagHbsscN5+L+hmH4QkMOe1L5jzFfNA2PgT34ajTuY7AGuZB0/hmh5m+gS0r8xv1zRvg+gGCHZiOwnF4DP3iB3sQkYxPd2C6CWfhB9Xwlus5+K1j4jXuaq3a+gM1H9OPcAa+7q9lPidZJqHbiIm7Wg22rsEI7FrPSzAMX/T+ADyAKSsu7Fr1KplehLvwCs5DvfBf65p+MypqRbO1FXK9utH4/QKuaqYTsG3E3INJv00Q46px3+XxanJ/Ute2/vqP4FKDza2KcdljIKdnhS0xXYULTaqmLMZFn8FFSFtvt6x70ExFCS5oUXspq2ssa7oEl1swFa+CGFdgtkHgPDyDKy02zyxNU6lXRUZb1EuHYayNNs+Yh5B0WQo+/8fpJnNTZFuzz2OpjoQ2QruSOQlMy35fEGmEGMxY9e1brxobw7TkWA1h6xfckUPb+JhGoE/Hpfvew7qUld/H9J8AAwDpw3WYrxcZ3QAAAABJRU5ErkJggg==);
+  outline-color: #e8f5e9;
+}
+input[type=text][disabled], input[type=text].is-disabled,
+input[type=password][disabled],
+input[type=password].is-disabled,
+input[type=datetime][disabled],
+input[type=datetime].is-disabled,
+input[type=datetime-local][disabled],
+input[type=datetime-local].is-disabled,
+input[type=date][disabled],
+input[type=date].is-disabled,
+input[type=month][disabled],
+input[type=month].is-disabled,
+input[type=time][disabled],
+input[type=time].is-disabled,
+input[type=week][disabled],
+input[type=week].is-disabled,
+input[type=number][disabled],
+input[type=number].is-disabled,
+input[type=email][disabled],
+input[type=email].is-disabled,
+input[type=url][disabled],
+input[type=url].is-disabled,
+input[type=search][disabled],
+input[type=search].is-disabled,
+input[type=tel][disabled],
+input[type=tel].is-disabled,
+input[type=color][disabled],
+input[type=color].is-disabled,
+select[disabled],
+select.is-disabled,
+textarea[disabled],
+textarea.is-disabled,
+.field[disabled],
+.field.is-disabled {
+  cursor: not-allowed;
+  border-color: #bdc1c7;
+  opacity: 0.6;
+}
+input[type=text][disabled]:focus, input[type=text][disabled]:active, input[type=text].is-disabled:focus, input[type=text].is-disabled:active,
+input[type=password][disabled]:focus,
+input[type=password][disabled]:active,
+input[type=password].is-disabled:focus,
+input[type=password].is-disabled:active,
+input[type=datetime][disabled]:focus,
+input[type=datetime][disabled]:active,
+input[type=datetime].is-disabled:focus,
+input[type=datetime].is-disabled:active,
+input[type=datetime-local][disabled]:focus,
+input[type=datetime-local][disabled]:active,
+input[type=datetime-local].is-disabled:focus,
+input[type=datetime-local].is-disabled:active,
+input[type=date][disabled]:focus,
+input[type=date][disabled]:active,
+input[type=date].is-disabled:focus,
+input[type=date].is-disabled:active,
+input[type=month][disabled]:focus,
+input[type=month][disabled]:active,
+input[type=month].is-disabled:focus,
+input[type=month].is-disabled:active,
+input[type=time][disabled]:focus,
+input[type=time][disabled]:active,
+input[type=time].is-disabled:focus,
+input[type=time].is-disabled:active,
+input[type=week][disabled]:focus,
+input[type=week][disabled]:active,
+input[type=week].is-disabled:focus,
+input[type=week].is-disabled:active,
+input[type=number][disabled]:focus,
+input[type=number][disabled]:active,
+input[type=number].is-disabled:focus,
+input[type=number].is-disabled:active,
+input[type=email][disabled]:focus,
+input[type=email][disabled]:active,
+input[type=email].is-disabled:focus,
+input[type=email].is-disabled:active,
+input[type=url][disabled]:focus,
+input[type=url][disabled]:active,
+input[type=url].is-disabled:focus,
+input[type=url].is-disabled:active,
+input[type=search][disabled]:focus,
+input[type=search][disabled]:active,
+input[type=search].is-disabled:focus,
+input[type=search].is-disabled:active,
+input[type=tel][disabled]:focus,
+input[type=tel][disabled]:active,
+input[type=tel].is-disabled:focus,
+input[type=tel].is-disabled:active,
+input[type=color][disabled]:focus,
+input[type=color][disabled]:active,
+input[type=color].is-disabled:focus,
+input[type=color].is-disabled:active,
+select[disabled]:focus,
+select[disabled]:active,
+select.is-disabled:focus,
+select.is-disabled:active,
+textarea[disabled]:focus,
+textarea[disabled]:active,
+textarea.is-disabled:focus,
+textarea.is-disabled:active,
+.field[disabled]:focus,
+.field[disabled]:active,
+.field.is-disabled:focus,
+.field.is-disabled:active {
+  background-color: #e3f2fd;
+}
+
+input[type=password] {
+  letter-spacing: 0.3em;
+}
+
+textarea {
+  max-width: 100%;
+  min-height: 120px;
+  line-height: 1.5em;
+}
+
+select {
+  -webkit-appearance: none; /* 1 */
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAHCAYAAADXhRcnAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpEOEZCMjYxMEYwNUUxMUUyOTI4REZGQTEzMzA2MDcyNiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpEOEZCMjYxMUYwNUUxMUUyOTI4REZGQTEzMzA2MDcyNiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkQ4RkIyNjBFRjA1RTExRTI5MjhERkZBMTMzMDYwNzI2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkQ4RkIyNjBGRjA1RTExRTI5MjhERkZBMTMzMDYwNzI2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Vxkp9gAAAI9JREFUeNpidHFxucHAwKAOxE+AmJmBMPgLxDJAfJMFSKwD4kqoAClgA+P///8ZXF1dPaCGcBKh6QcQB+3evXs7WDMIAA2QB1I7gFgDj0aQFz2BGh+AOEwwUaDAQyBlCMR7cGjcC5KHaQQBuM3IAOiKTiBVhiTUDdRUhq4Oq2aoAelAahIQ5wM1zsCmBiDAADhYMJXVZ9u9AAAAAElFTkSuQmCC);
+  background-repeat: no-repeat;
+  background-position: 97.5% center;
+}
+
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Gradient Styles
+
+*********************/
+.c-gradient--dark-primary .c-gradient__stop-1 {
+  stop-color: #12273d;
+}
+.c-gradient--dark-primary .c-gradient__stop-2 {
+  stop-color: #16324f;
+}
+
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
 /* normalize.css 2012-07-07T09:50 UTC - http://github.com/necolas/normalize.css */
 /* ==========================================================================
@@ -465,558 +2231,16 @@ span.amp {
 }
 
 /******************************************************************
-Site Name:
-Author:
+Post / page content wrapper — front-end .entry-content and block editor canvas.
 
-Stylesheet: Variables
-
-Personal starter: semantic scales keep the same names so existing SCSS
-still compiles; values are neutral grays + one blue accent. Per-snell
-skin: edit tokens here and/or override in _snell.scss (imported last).
-
-******************************************************************/
-/*********************
-COLORS
-*********************/
-/* Base gray ramp — defined first so primary/secondary can reference it */
-/* Primary: Figma Color/Primary */
-/* Secondary: Figma Color/Secondary */
-/* Accent: Figma Color/Tertiary (action / warmth) */
-/* Figma Surface / Overlay (semantic) */
-/* Surface / text tokens for blocks, wavebands, TEC — remap per snell in _snell.scss */
-:root {
-  --c-surface-muted: #f4f4f5;
-  --c-surface-subtle: #eceff3;
-  --c-text-muted: #64748b;
-  --c-white: #ffffff;
-}
-
-/******************************************************************
-Site Name:
-Author:
-
-Stylesheet: Typography
-
-******************************************************************/
-/*********************
-FONT FACE
-*********************/
-/*  To embed your own fonts, use this syntax
-  and place your fonts inside the
-  library/fonts folder. For more information
-  on embedding fonts, go to:
-  http://www.fontsquirrel.com/
-  Be sure to remove the comment brackets.
-*/
-/*  @font-face {
-      font-family: 'Font Name';
-      src: url('library/fonts/font-name.eot');
-      src: url('library/fonts/font-name.eot?#iefix') format('embedded-opentype'),
-             url('library/fonts/font-name.woff') format('woff'),
-             url('library/fonts/font-name.ttf') format('truetype'),
-             url('library/fonts/font-name.svg#font-name') format('svg');
-      font-weight: normal;
-      font-style: normal;
-  }
-*/
-/*
-some nice typographical defaults
-more here: http://www.newnet-soft.com/blog/csstypography
-*/
-p {
-  -ms-word-wrap: normal;
-  word-break: normal;
-  word-wrap: normal;
-  -webkit-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-  -webkit-hyphenate-before: 2;
-  -webkit-hyphenate-after: 3;
-  hyphenate-lines: 3;
-}
-
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-h5, .h5,
-h6, .h6,
-h7, .h8 {
-  text-transform: none;
-}
-h1 p, .h1 p,
-h2 p, .h2 p,
-h3 p, .h3 p,
-h4 p, .h4 p,
-h5 p, .h5 p,
-h6 p, .h6 p,
-h7 p, .h8 p {
-  line-height: 1em;
-  margin: 0;
-}
-
-h3.wp-block-heading {
-  margin-bottom: 0;
-}
-
-/******************************************************************
-H1, H2, H3, H4, H5 STYLES
-******************************************************************/
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, h7, .h7 {
-  text-rendering: optimizelegibility;
-  font-weight: 400;
-  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  /*
-  if you're going to use webfonts, be sure to check your weights
-  http://css-tricks.com/watch-your-font-weight/
-  */
-  /* removing text decoration from all headline links */
-}
-h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a, h7 a, .h7 a {
-  text-decoration: none;
-}
-
-h1, .h1 {
-  font-size: 4.1em;
-  font-weight: 900;
-  line-height: 0.9em;
-  color: #16324f;
-}
-h1.medium, .h1.medium {
-  font-weight: 500;
-}
-h1.hero, .h1.hero {
-  font-size: clamp(2.75rem, 6vw + 1.5rem, 6rem);
-  line-height: 1;
-  font-weight: 900;
-  color: #fff;
-}
-h1.light, .h1.light {
-  color: #50657b;
-}
-
-h2, .h2 {
-  font-size: 3.4em;
-  font-weight: 800;
-  line-height: 1em;
-  margin-top: 0;
-  margin-bottom: 0.375em;
-  color: #142e48;
-}
-h2.hero, .h2.hero {
-  font-size: clamp(1.75rem, 3.5vw + 1rem, 3.875rem);
-  line-height: 1;
-  font-weight: 900;
-  text-transform: uppercase;
-  margin-bottom: 0;
-}
-h2.light, .h2.light {
-  color: #50657b;
-}
-
-h3, .h3 {
-  font-size: 2.5em;
-  font-weight: 800;
-  line-height: 1.1;
-  color: #12273d;
-}
-h3.light, .h3.light {
-  color: #50657b;
-}
-
-h4, .h4 {
-  font-size: 1.8em;
-  font-weight: 900;
-  color: #12273d;
-}
-h4.bold, .h4.bold {
-  font-weight: 800;
-}
-h4.light, .h4.light {
-  color: #50657b;
-}
-
-h5, .h5 {
-  font-size: 1.4em;
-  font-weight: 900;
-  line-height: 1em;
-  color: #0c1723;
-}
-h5.bold, .h5.bold {
-  font-weight: 800;
-}
-h5.light, .h5.light {
-  color: #a2adb9;
-}
-
-h6, .h6 {
-  font-size: 1.2em;
-  font-weight: 900;
-  line-height: 1em;
-  color: #0c1723;
-}
-h6.bold, .h6.bold {
-  font-weight: 800;
-}
-h6.light, .h6.light {
-  color: #a2adb9;
-}
-h6 h7, h6 .h7, .h6 h7, .h6 .h7 {
-  font-size: 0.875em;
-  font-weight: 900;
-  line-height: 1em;
-  color: #0c1723;
-}
-h6 h7.bold, h6 .h7.bold, .h6 h7.bold, .h6 .h7.bold {
-  font-weight: 800;
-}
-h6 h7.medium, h6 .h7.medium, .h6 h7.medium, .h6 .h7.medium {
-  font-weight: 500;
-}
-h6 h7.light, h6 .h7.light, .h6 h7.light, .h6 .h7.light {
-  color: #a2adb9;
-}
-
-.c-content-group__content ul, .wp-block-list ul {
-  list-style-type: disc;
-}
-.c-content-group__content ul li, .wp-block-list ul li {
-  margin-left: 1.5em;
-  margin-bottom: 0.5em;
-}
-
-ul.wp-block-list {
-  list-style-type: disc;
-}
-ul.wp-block-list li {
-  margin-left: 1.5em;
-  margin-bottom: 0.5em;
-}
-
-/******************************************************************
-Site Name:
-Author:
-
-Stylesheet: Sass Functions
-
-You can do a lot of really cool things in Sass. Functions help you
-make repeated actions a lot easier. They are really similar to mixins,
-but can be used for so much more.
-
-Anyway, keep them all in here so it's easier to find when you're
-looking for one.
-
-For more info on functions, go here:
-http://sass-lang.com/documentation/Sass/Script/Functions.html
-
-******************************************************************/
-/*********************
-COLOR FUNCTIONS
-These are helpful when you're working
-with shadows and such things. It's essentially
-a quicker way to write RGBA.
-
-Example:
-box-shadow: 0 0 4px black(0.3);
-compiles to:
-box-shadow: 0 0 4px rgba(0,0,0,0.3);
-*********************/
-/*********************
-RESPONSIVE HELPER FUNCTION
-If you're creating a responsive site, then
-you've probably already read
-Responsive Web Design: http://www.abookapart.com/products/responsive-web-design
-
-Here's a nice little helper function for calculating
-target / context
-as mentioned in that book.
-
-Example:
-width: cp(650px, 1000px);
-or
-width: calc-percent(650px, 1000px);
-both compile to:
-width: 65%;
-*********************/
-/******************************************************************
-Site Name:
-Author:
-
-Stylesheet: Mixins Stylesheet
-
-This is where you can take advantage of Sass' great features: Mixins.
-I won't go in-depth on how they work exactly,
-there are a few articles below that will help do that. What I will
-tell you is that this will help speed up simple changes like
-changing a color or adding CSS3 techniques gradients.
-
-A WORD OF WARNING: It's very easy to overdo it here. Be careful and
-remember less is more.
-
-Helpful:
-http://sachagreif.com/useful-sass-mixins/
-http://thesassway.com/intermediate/leveraging-sass-mixins-for-cleaner-code
-http://web-design-weekly.com/blog/2013/05/12/handy-sass-mixins/
-
-******************************************************************/
-/*********************
-TRANSITION
-*********************/
-/*
-I totally rewrote this to be cleaner and easier to use.
-You'll need to be using Sass 3.2+ for these to work.
-Thanks to @anthonyshort for the inspiration on these.
-USAGE: @include transition(all 0.2s ease-in-out);
-*/
-/*********************
-CSS3 GRADIENTS
-Be careful with these since they can
-really slow down your CSS. Don't overdo it.
-*********************/
-/* @include css-gradient(#dfdfdf,#f8f8f8); */
-/*********************
-BOX SIZING
-*********************/
-/* @include box-sizing(border-box); */
-/* NOTE: value of "padding-box" is only supported in Gecko. So
-probably best not to use it. I mean, were you going to anyway? */
-/* Set 3 variables w/ different styles */
-/* Create our super simple mixin */
-/* Putting it all together in our classes 
-.bottom-box {
-    @include box-shadow($bottom-diffused);
-}
-
-.left-box {
-    @include box-shadow($left-diffused);
-}
-
-.right-box {
-    @include box-shadow($right-diffused);
-}
-*/
-/*********************
-RESPONSIVE (min-width)
-Match `library/scss/breakpoints/*.scss` so new component partials can use
-nested @include instead of splitting rules across breakpoint files.
-
-Example:
-  .c-widget {
-    padding: 1rem;
-    @include mq-64 {
-      padding: 1.5rem;
-    }
-  }
-*********************/
-/******************************************************************
-Stylesheet: Tokens
-*********************/
-/* COLOR - SURFACE - PRIMARY */
-/* COLOR - SURFACE - SECONDARY */
-/* COLOR - SURFACE - ACCENT */
-/* COLOR - TEXT */
-/* COLOR - BORDER */
-/******************************************************************
-Site Name:
-Author:
-
-Stylesheet: TinyMCE Editor
-
-This stylesheet is loaded automatically by Wordpress when compiled
-and placed in the root theme directory folder as editor-style.css
-
-For more info, check out the codex:
-http://codex.wordpress.org/Editor_Style
-
+Use @include root { } for rules on the wrapper itself.
+Use @include nested { } for descendant rules (.entry-content .component).
 ******************************************************************/
 /******************************************************************
-Site Name:
-Author:
+Shared front-end + block editor styles.
 
-Stylesheet: Button Styles
-
-Buttons are a pretty important part of your site's style, so it's
-important to have a consistent baseline for them. Use this stylesheet
-to create all kinds of buttons.
-
-Helpful Links:
-http://galp.in/blog/2011/08/02/the-ui-guide-part-1-buttons/
-
-******************************************************************/
-/*********************
-BUTTON DEFAULTS
-We're gonna use a placeholder selector here
-so we can use common styles. We then use this
-to load up the defaults in all our buttons.
-
-Here's a quick video to show how it works:
-http://www.youtube.com/watch?v=hwdVpKiJzac
-
-*********************/
-.c-button-pair .c-button-pair__button, .c-contactForm__formWrap input[type=submit],
-.c-contactForm__formWrap .wpcf7-submit, .gallery-item .c-button-pair__button, input[type=submit], input[type=file], #wp-submit, .navigation-button a, #mobile-nav {
-  display: inline-block;
-  position: relative;
-  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 1em;
-  font-weight: 400;
-  padding: 0.5em 1em;
-  border-radius: 0;
-  border: 2px solid;
-  cursor: pointer;
-  -webkit-transition: background-color 0.14s ease-in-out;
-  transition: background-color 0.14s ease-in-out;
-}
-.c-button-pair .c-button-pair__button .svg-inline--fa,
-.c-contactForm__formWrap .wpcf7-submit .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, input[type=submit] .svg-inline--fa, input[type=file] .svg-inline--fa, #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
-  font-size: 0.9em;
-}
-.c-button-pair .c-button-pair__button:hover,
-.c-contactForm__formWrap .wpcf7-submit:hover, .gallery-item .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus,
-.c-contactForm__formWrap .wpcf7-submit:focus, .gallery-item .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
-  color: #fff;
-  text-decoration: none;
-  outline: none;
-}
-.c-button-pair .c-button-pair__button:active,
-.c-contactForm__formWrap .wpcf7-submit:active, .gallery-item .c-button-pair__button:active, input[type=submit]:active, input[type=file]:active, #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
-  top: 1px;
-}
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid {
-  background-color: #b86f52;
-  color: #fff !important;
-  border-color: #bf7d63;
-}
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline {
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #16324f;
-  border-color: #bf7d63;
-}
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text {
-  color: #69a197;
-  border: 0px;
-  display: block;
-}
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--text:focus {
-  color: #5f9188;
-  text-decoration: none;
-  outline: none;
-}
-.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus {
-  background-color: rgba(184, 111, 82, 0.5);
-  text-decoration: none;
-  outline: none;
-}
-.c-button-pair.c-button-pair--primary .c-button-pair__button:active {
-  background-color: #8b553f;
-}
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--solid, input[type=submit], input[type=file], #wp-submit {
-  color: #0a0d0c;
-  border: 1px solid #69a197;
-  background: -webkit-linear-gradient(45deg, #78aaa1, #69a197);
-  background: linear-gradient(45deg, #78aaa1, #69a197);
-}
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--outline {
-  color: #69a197;
-  border: 2px solid #69a197;
-}
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text, .gallery-item .c-button-pair__button {
-  color: #69a197;
-  border: 0px;
-  display: block;
-}
-.c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:hover, .gallery-item .c-button-pair__button:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button.c-button-pair__button--text:focus, .gallery-item .c-button-pair__button:focus {
-  color: #5f9188;
-  text-decoration: none;
-  outline: none;
-}
-.c-button-pair.c-button-pair--secondary .c-button-pair__button:hover, input[type=submit]:hover, input[type=file]:hover, #wp-submit:hover, .c-button-pair.c-button-pair--secondary .c-button-pair__button:focus, input[type=submit]:focus, input[type=file]:focus, #wp-submit:focus {
-  color: #78aaa1;
-  background: -webkit-linear-gradient(90deg, #5f9188, #507a73);
-  background: -webkit-gradient(linear, left top, right top, from(#5f9188), to(#507a73));
-  background: -webkit-linear-gradient(left, #5f9188, #507a73);
-  background: linear-gradient(90deg, #5f9188, #507a73);
-  text-decoration: none;
-  outline: none;
-}
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--solid, .c-contactForm__formWrap input[type=submit],
-.c-contactForm__formWrap .wpcf7-submit {
-  background-color: #bf7d63;
-  color: #17100d;
-  border-color: #bf7d63;
-}
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--outline {
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #17100d;
-  border-color: #bf7d63;
-}
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text {
-  color: #8b553f;
-  border: 0px;
-  display: block;
-}
-.c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button.c-button-pair__button--text:focus {
-  color: #4d2f24;
-  text-decoration: none;
-  outline: none;
-}
-.c-button-pair.c-button-pair--accent .c-button-pair__button:hover, .c-contactForm__formWrap input[type=submit]:hover,
-.c-contactForm__formWrap .wpcf7-submit:hover, .c-button-pair.c-button-pair--accent .c-button-pair__button:focus, .c-contactForm__formWrap input[type=submit]:focus,
-.c-contactForm__formWrap .wpcf7-submit:focus {
-  background-color: #ca937d;
-  text-decoration: none;
-  outline: none;
-}
-.c-button-pair.c-button-pair--accent .c-button-pair__button:active, .c-contactForm__formWrap input[type=submit]:active,
-.c-contactForm__formWrap .wpcf7-submit:active {
-  background-color: #a6644a;
-}
-
-.navigation-button a, #mobile-nav {
-  background-color: #b86f52;
-  color: #fff !important;
-  border-color: #bf7d63;
-}
-.navigation-button a:hover, .navigation-button a:focus, #mobile-nav:hover, #mobile-nav:focus {
-  background-color: rgba(184, 111, 82, 0.5);
-  text-decoration: none;
-  outline: none;
-}
-
-/*
-An example button.
-You can use this example if you want. Just replace all the variables
-and it will create a button dependant on those variables.
-
-.accent-btn {
-  @extend %btn; // here we load the btn defaults
-  background-color: $secondary-500;
-
-  &:hover,
-  &:focus {
-    background-color: darken($secondary-500, 4%);
-  } // end hover
-
-  &:active {
-    background-color: darken($secondary-500, 5%);
-  } // end active
-
-} // end blue button
-*/
-/******************************************************************
-Site Name:
-Author:
-
-Stylesheet: TinyMCE Editor
-
-This stylesheet is loaded automatically by Wordpress when compiled
-and placed in the root theme directory folder as editor-style.css
-
-For more info, check out the codex:
-http://codex.wordpress.org/Editor_Style
-
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
 ******************************************************************/
 article {
   -webkit-box-pack: center;
@@ -1068,64 +2292,92 @@ article .hero--image img {
   margin: 0;
 }
 /* entry content */
-.entry-content {
+.entry-content,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout {
   padding: 1.5em 1.5em 0;
 }
-.entry-content p {
+.entry-content p,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container p,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout p {
   margin: 0 0 1.5em;
 }
-.entry-content table {
+.entry-content table,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container table,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout table {
   width: 100%;
   border: 1px solid #e2e5e7;
   margin-bottom: 1.5em;
 }
-.entry-content table caption {
+.entry-content table caption,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container table caption,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout table caption {
   margin: 0 0 7px;
   font-size: 0.75em;
   color: #a0a7af;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.entry-content tr {
+.entry-content tr,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container tr,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout tr {
   border-bottom: 1px solid #e2e5e7;
 }
-.entry-content tr:nth-child(even) {
+.entry-content tr:nth-child(even),
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container tr:nth-child(even),
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout tr:nth-child(even) {
   background-color: #f5f6f7;
 }
-.entry-content td {
+.entry-content td,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container td,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout td {
   padding: 7px;
   border-right: 1px solid #e2e5e7;
 }
-.entry-content td:last-child {
+.entry-content td:last-child,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container td:last-child,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout td:last-child {
   border-right: 0;
 }
-.entry-content th {
+.entry-content th,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container th,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout th {
   background-color: #f5f6f7;
   border-bottom: 1px solid #e2e5e7;
   border-right: 1px solid #e2e5e7;
 }
-.entry-content th:last-child {
+.entry-content th:last-child,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container th:last-child,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout th:last-child {
   border-right: 0;
 }
-.entry-content blockquote {
+.entry-content blockquote,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container blockquote,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout blockquote {
   margin: 0 0 1.5em 0.75em;
   padding: 0 0 0 0.75em;
   border-left: 3px solid #69a197;
   font-style: italic;
   color: #a0a7af;
 }
-.entry-content dd {
+.entry-content dd,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container dd,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout dd {
   margin-left: 0;
   font-size: 0.9em;
   color: #787878;
   margin-bottom: 1.5em;
 }
-.entry-content img {
+.entry-content img,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container img,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout img {
   margin: 0 0 1.5em 0;
   max-width: 100%;
   height: auto;
 }
-.entry-content {
+.entry-content,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout {
   /*
   image alignment on a screen this size may be
   a bit difficult. It's set to start aligning
@@ -1137,11 +2389,23 @@ article .hero--image img {
 .entry-content .size-full,
 .entry-content .size-large,
 .entry-content .size-medium,
-.entry-content .size-thumbnail {
+.entry-content .size-thumbnail,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-auto,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-full,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-large,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-medium,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .size-thumbnail,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-auto,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-full,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-large,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-medium,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout .size-thumbnail {
   max-width: 100%;
   height: auto;
 }
-.entry-content pre {
+.entry-content pre,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container pre,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout pre {
   background: #000;
   color: #f5f6f7;
   font-size: 0.9em;
@@ -1150,7 +2414,7 @@ article .hero--image img {
   border-radius: 3px;
 }
 
-/* end .entry-content */
+/* end content area */
 .wp-caption {
   max-width: 100%;
   background: #eee;
@@ -1844,6 +3108,9 @@ FOOTER STYLES
   -webkit-box-align: end;
   -ms-flex-align: end;
   align-items: flex-end;
+}
+.footer__logo img {
+  max-width: 120px;
 }
 .footer__logo #client_logo {
   margin-top: 2em;
@@ -2652,6 +3919,13 @@ Content Section block
 }
 
 /* Text-image block: Content full width = stacked column inside the same container (header, body+CTAs, image group) */
+.c-text-image__content .c-content-group {
+  margin-bottom: 6em;
+}
+.c-text-image__content .c-content-group__visual {
+  margin-top: -3em;
+}
+
 .c-waveband__content--full .row,
 .c-text-image__content--full .row {
   -webkit-box-orient: vertical;
@@ -5318,6 +6592,8 @@ POSTS & CONTENT STYLES
   z-index: 1;
   width: 100vw;
   margin-top: -3.25rem;
+  /* Pull following content up by half the nav overlap (hero position unchanged). */
+  margin-bottom: -1.625rem;
   margin-left: -webkit-calc(50% - 50vw);
   margin-left: calc(50% - 50vw);
   margin-right: -webkit-calc(50% - 50vw);
@@ -5361,6 +6637,7 @@ POSTS & CONTENT STYLES
 @media only screen and (min-width: 64em) {
   .hero__container--company {
     margin-top: -4.75rem;
+    margin-bottom: -2.375rem;
   }
   .hero__container--company-inner {
     min-height: -webkit-calc(var(--company-hero-below-nav) + 4.75rem);
@@ -5430,7 +6707,7 @@ POSTS & CONTENT STYLES
 .hero__title--company {
   margin: 0;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(2.75rem, 6.5vw, 6rem);
+  font-size: clamp(2.75rem, 5.5vw, 6rem);
   font-weight: 900;
   line-height: 1;
   color: #fff;
@@ -5441,7 +6718,7 @@ POSTS & CONTENT STYLES
 .hero__container--company .hero__industry--company {
   margin: 0;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(1.75rem, 3.89vw, 3.5rem);
+  font-size: clamp(1.75rem, 3.29vw, 3.5rem);
   font-weight: 900;
   line-height: 0.8928571429;
   letter-spacing: 0;
@@ -5526,6 +6803,53 @@ POSTS & CONTENT STYLES
     max-width: 10rem;
   }
 }
+/* Company single — logo + tagline intro below hero. */
+.c-companyIntro {
+  padding: 1em 0 1.25em;
+}
+
+.c-companyIntro__grid {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c-companyIntro__logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c-companyIntro__logoImg {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 8rem;
+  height: auto;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.c-companyIntro__text {
+  text-align: left;
+}
+
+.c-companyIntro__heading {
+  margin: 0;
+  max-width: none;
+}
+
+@media (max-width: 767px) {
+  .c-companyIntro__logo {
+    margin-bottom: 1em;
+  }
+}
 /* Gallery block — Figma Gallery (715:891)
    Layer order (rear → front): gradient slab, then photos.
    Top row sits above gradient start (61px @ 1440); bottom row on gradient. */
@@ -5595,7 +6919,11 @@ POSTS & CONTENT STYLES
 }
 
 .entry-content .c-gallery img,
-.entry-content img.c-gallery__img {
+.entry-content img.c-gallery__img,
+.editor-styles-wrapper .block-editor-block-list__layout .c-gallery img,
+.editor-styles-wrapper .block-editor-block-list__layout img.c-gallery__img,
+.editor-styles-wrapper .is-root-container .c-gallery img,
+.editor-styles-wrapper .is-root-container img.c-gallery__img {
   margin-bottom: 0;
 }
 
@@ -5735,10 +7063,15 @@ POSTS & CONTENT STYLES
   height: 100%;
 }
 
-.c-quote__text,
 .entry-content .c-quote .c-quote__text,
 .entry-content .c-quote .c-quote__text p,
-.entry-content .c-quote .c-quote__text blockquote {
+.entry-content .c-quote .c-quote__text blockquote,
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote .c-quote__text,
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote .c-quote__text p,
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote .c-quote__text blockquote,
+.editor-styles-wrapper .is-root-container .c-quote .c-quote__text,
+.editor-styles-wrapper .is-root-container .c-quote .c-quote__text p,
+.editor-styles-wrapper .is-root-container .c-quote .c-quote__text blockquote {
   margin: 0;
   border: 0;
   border-left: 0;
@@ -5752,7 +7085,8 @@ POSTS & CONTENT STYLES
 }
 
 .entry-content .c-quote--standalone .c-quote__text,
-.c-quote--standalone .c-quote__text {
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote--standalone .c-quote__text,
+.editor-styles-wrapper .is-root-container .c-quote--standalone .c-quote__text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5775,7 +7109,8 @@ POSTS & CONTENT STYLES
 }
 
 .entry-content .c-quote--standalone .c-quote__text p,
-.c-quote--standalone .c-quote__text p {
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote--standalone .c-quote__text p,
+.editor-styles-wrapper .is-root-container .c-quote--standalone .c-quote__text p {
   font-size: 2rem;
   padding: 0;
 }
@@ -7703,6 +9038,1405 @@ a.c-peopleBio__email:hover, a.c-peopleBio__email:focus-visible {
     margin-top: 1.5em;
   }
 }
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+/* =========================
+   Blog index — Stories (reference comp)
+========================= */
+/* Ref: flat header (no drop shadow) on stories index */
+body.client-stories-index .header {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* Blog hero uses absolutely positioned layers; inner needs height so content below doesn’t slide under the header */
+body.client-stories-index .hero__container--blog .hero__container--inner {
+  position: relative;
+  min-height: clamp(160px, 26vw, 300px);
+}
+
+.c-storiesPage {
+  background-color: #f9f8f0;
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1.75rem, 4vw, 3rem);
+  margin-top: clamp(0.75rem, 2vw, 1.5rem);
+  margin-bottom: 0;
+}
+
+.c-storiesFeatured {
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+.c-storiesFeatured__inner {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  row-gap: 1.5rem;
+}
+@media only screen and (min-width: 64em) {
+  .c-storiesFeatured__inner {
+    row-gap: 1.75rem;
+  }
+}
+
+.c-storiesFeatured__content {
+  padding-bottom: 0;
+  max-width: none;
+}
+
+.c-storiesFeatured__title {
+  margin: 0 0 1rem;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(1.85rem, 4.2vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+  color: #5c6d3d;
+}
+
+.c-storiesFeatured__titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+.c-storiesFeatured__titleLink:hover, .c-storiesFeatured__titleLink:focus-visible {
+  opacity: 0.88;
+}
+
+.c-storiesFeatured__mediaLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.c-storiesFeatured__mediaLink .c-storiesFeatured__img {
+  display: block;
+}
+
+.c-storiesFeatured__meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  margin: 0 0 1rem;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #74864a;
+}
+
+.c-storiesFeatured__meta-item {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.c-storiesFeatured__meta-icon {
+  color: #74864a;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+.c-storiesFeatured__meta-gap {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background: rgba(116, 134, 74, 0.35);
+  margin: 0 0.1rem;
+}
+
+.c-storiesFeatured__authorLink {
+  color: #74864a;
+  text-decoration: none;
+  font-weight: 600;
+}
+.c-storiesFeatured__authorLink:hover, .c-storiesFeatured__authorLink:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.c-storiesFeatured__chips {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.125rem;
+}
+
+.c-storiesFeatured__chips .c-chip {
+  border: 1px solid #74864a;
+  background: transparent;
+  color: #5c6d3d;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.3;
+}
+.c-storiesFeatured__chips .c-chip:hover, .c-storiesFeatured__chips .c-chip:focus-visible {
+  background: rgba(116, 134, 74, 0.08);
+}
+
+.c-storiesFeatured__excerpt {
+  margin: 0 0 1.35rem;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #3a3d35;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 40em;
+}
+
+/* Ref: gold button, white label, modest corner radius (not full pill) */
+.c-storiesFeatured__cta {
+  display: inline-block;
+  text-align: center;
+  padding: 12px 28px;
+  border-radius: 10px;
+  background-color: #f2c94c;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  -webkit-transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.c-storiesFeatured__cta:hover, .c-storiesFeatured__cta:focus-visible {
+  background-color: rgb(239.2375, 189.525, 37.9625);
+  color: #fff;
+}
+.c-storiesFeatured__cta:focus-visible {
+  outline: 2px solid #5c6d3d;
+  outline-offset: 3px;
+}
+
+.c-storiesFeatured__figure {
+  position: relative;
+  overflow: visible;
+  padding: 12px 14px 16px 10px;
+}
+
+.c-storiesFeatured__media {
+  position: relative;
+  z-index: 0;
+  margin: 0 auto;
+  max-width: 100%;
+  overflow: visible;
+}
+.c-storiesFeatured__media::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -8px;
+  right: -16px;
+  bottom: -16px;
+  left: 18%;
+  background: #4d5c32;
+  border-radius: 16px;
+}
+
+.c-storiesFeatured__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  -webkit-box-shadow: 0 12px 40px rgba(41, 52, 28, 0.15);
+  box-shadow: 0 12px 40px rgba(41, 52, 28, 0.15);
+}
+
+.c-storiesFeatured--no-image .c-storiesFeatured__content {
+  max-width: 42rem;
+}
+
+/* Ref: “STORIES” stacked above full-width rule; small sans (body), not display font */
+.c-storiesDivider {
+  display: block;
+  margin: 0 0 1.5rem;
+}
+
+.c-storiesDivider__label {
+  display: block;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #5c6d3d;
+  margin-bottom: 0.5rem;
+}
+
+.c-storiesDivider__line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(92, 109, 61, 0.45);
+  border: 0;
+}
+
+.c-storiesIndex {
+  padding-bottom: clamp(20px, 3vw, 40px);
+}
+.c-storiesIndex .c-posts__grid {
+  margin-top: 0;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
+  row-gap: 2em;
+}
+@media only screen and (min-width: 48em) {
+  .c-storiesIndex .c-posts__grid {
+    -webkit-column-gap: 24px;
+    -moz-column-gap: 24px;
+    column-gap: 24px;
+    row-gap: 48px;
+  }
+}
+@media only screen and (min-width: 64em) {
+  .c-storiesIndex .c-posts__grid {
+    -webkit-column-gap: 28px;
+    -moz-column-gap: 28px;
+    column-gap: 28px;
+    row-gap: 56px;
+  }
+}
+.c-storiesIndex {
+  /* Ref: no card panel — cream page shows through; image is its own rounded block */
+}
+.c-storiesIndex .c-postCard {
+  height: auto;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+  border: none;
+}
+.c-storiesIndex .c-postCard__link {
+  height: auto;
+  min-height: 0;
+}
+.c-storiesIndex .c-postCard__mediaLink {
+  text-decoration: none;
+  color: inherit;
+}
+.c-storiesIndex .c-postCard__titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+.c-storiesIndex .c-postCard__titleLink:hover, .c-storiesIndex .c-postCard__titleLink:focus-visible {
+  opacity: 0.88;
+}
+.c-storiesIndex .c-postCard__authorLink {
+  color: inherit;
+  text-decoration: none;
+}
+.c-storiesIndex .c-postCard__authorLink:hover, .c-storiesIndex .c-postCard__authorLink:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.c-storiesIndex .c-postCard__media {
+  overflow: hidden;
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+.c-storiesIndex .c-postCard__media img,
+.c-storiesIndex .c-postCard__img {
+  border-radius: 14px !important;
+}
+.c-storiesIndex .c-postCard__body {
+  -webkit-box-flex: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  padding: 0 2px 8px;
+  background: transparent;
+}
+.c-storiesIndex .c-postCard__title {
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #5c6d3d;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.2;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.c-storiesIndex .c-postCard__meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 0.65rem;
+  -moz-column-gap: 0.65rem;
+  column-gap: 0.65rem;
+  row-gap: 0.25rem;
+  margin: 0 0 10px;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+  color: #74864a;
+  opacity: 1;
+}
+.c-storiesIndex .c-postCard__meta-item {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+.c-storiesIndex .c-postCard__meta-icon {
+  color: #74864a;
+  font-size: 0.72rem;
+  opacity: 0.92;
+}
+.c-storiesIndex .c-postCard__chips {
+  gap: 8px;
+  margin: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+.c-storiesIndex .c-chip,
+.c-storiesIndex a.c-chip {
+  border: 1px solid #74864a;
+  background: transparent;
+  color: #5c6d3d;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.3;
+}
+.c-storiesIndex .c-chip:hover, .c-storiesIndex .c-chip:focus-visible,
+.c-storiesIndex a.c-chip:hover,
+.c-storiesIndex a.c-chip:focus-visible {
+  background: rgba(116, 134, 74, 0.08);
+}
+
+/* Sidebar sits beside the grid only (below featured); top-align with first row of cards. */
+.c-storiesIndexLayout--with-sidebar {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+@media only screen and (min-width: 64em) {
+  .c-storiesIndexLayout--with-sidebar.c-storiesIndexLayout--sidebar-left {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+}
+
+/* Sidebar on blog index: keep 2-up grid at large breakpoints (sidebar replaces third column). */
+@media only screen and (min-width: 64em) {
+  .c-storiesIndex--with-sidebar .c-posts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.c-storiesIndex__empty {
+  margin: 1rem 0 2rem;
+  color: #74864a;
+}
+
+/**
+ * Single post hero: visual styles live in _base.scss (title size, chips, content padding).
+ * This file only adds: header transparent over hero, and related-posts section styles.
+ */
+/* Header when single hero is shown (transparent, no shadow, light nav) */
+.header.header--hero-transparent {
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #f9f9f9;
+}
+.header.header--hero-transparent .nav a,
+.header.header--hero-transparent .header-nav a {
+  color: #f9f9f9;
+}
+.header.header--hero-transparent #mobile-nav {
+  color: #f9f9f9;
+}
+
+/* Related posts section: heading is above bg in DOM — keep it on top and centered */
+.c-posts--related {
+  position: relative;
+}
+
+.c-posts--related .c-posts__heading--related {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
+  text-align: center !important;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #e8eaed;
+}
+
+/* Related posts: background fills full section height (no gap at bottom) */
+.c-posts--related .c-posts__bg {
+  height: 100%;
+  min-height: 100%;
+  max-height: none;
+}
+
+/* Related posts: no bottom wave — background sits flat against footer */
+.c-posts--related .c-posts__bg .c-posts__wave--bottom {
+  display: none !important;
+}
+
+/* When no background image is set in Post Settings: solid $primary-500 behind gradient overlay */
+.c-posts--related .c-posts__bgSolid--related {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #16324f;
+  pointer-events: none;
+}
+
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+@media only screen and (min-width: 48em) {
+  .c-card-block__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-3 .c-card-block__card:nth-child(3) {
+    grid-column: 1/-1;
+    justify-self: center;
+    max-width: 420px;
+  }
+  .c-card-block__grid--count-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-5 .c-card-block__card:nth-child(5) {
+    grid-column: 1/-1;
+    justify-self: center;
+    max-width: 420px;
+  }
+  .c-card-block__card-media {
+    max-width: 200px;
+  }
+  /* Slider: two columns (left: headline + body + list, right: image) */
+  .c-slider--table_of_contents .c-slider__content {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  .c-slider--table_of_contents .c-slider__col-left {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 33.333%;
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+  .c-slider--table_of_contents .c-slider__headline {
+    text-align: left;
+  }
+  .c-slider--table_of_contents .c-slider__list-inner {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-column-count: unset;
+    -moz-column-count: unset;
+    column-count: unset;
+    -webkit-column-gap: unset;
+    -moz-column-gap: unset;
+    column-gap: unset;
+    gap: 0.5rem;
+  }
+  .c-slider--table_of_contents .c-slider__list-inner > li {
+    margin-bottom: 0;
+  }
+  .c-slider--table_of_contents .c-slider__panel {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    min-width: 0;
+  }
+  /* Horizontal slider: show arrows on desktop */
+  .c-slider--horizontal .c-slider__arrow {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .c-slider--horizontal .c-slider__panel {
+    padding: 0 3.5rem 2.5rem;
+  }
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  /*********************
+  HERO STYLES
+  *********************/
+  .hero__container--landing .rectangle {
+    display: none;
+  }
+  .hero__content--text {
+    z-index: 2;
+  }
+  .hero__container {
+    position: relative;
+    top: -76px;
+  }
+  .hero__container h1 {
+    position: relative;
+    z-index: 2;
+  }
+  .hero__container--landing h1.hero__title--landing {
+    font-size: 4.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .hero__container--landing h1.hero__title--landing span {
+    display: block;
+    color: #f5f6f6;
+    font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 0.4em;
+    line-height: 1.1;
+  }
+  .hero__container--landing h3 {
+    margin-top: 0;
+  }
+  .hero__container--landing h3 ul {
+    font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+  .hero__container--landing h3 ul li {
+    display: inline-block;
+    color: #69a197;
+    font-weight: 800;
+  }
+  .hero__container--landing h3 ul li:nth-child(1):after, .hero__container--landing h3 ul li:nth-child(2):after {
+    content: " • ";
+    color: #a2adb9;
+  }
+  .hero__container--landing p {
+    font-size: 1.3em;
+  }
+  .hero__container--inner {
+    max-width: 1920px;
+    margin: auto;
+    position: relative;
+    margin-bottom: -120px;
+  }
+  .hero__container--landing-internal .hero__container--inner {
+    margin-bottom: 0;
+  }
+  .hero__container p {
+    color: #f9f9f9;
+  }
+  .hero__content--image {
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+  }
+  .hero__content--text {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 7%;
+    padding-right: 5%;
+  }
+  .hero__post--text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .hero__post--text h1 {
+    font-size: 3.5em;
+  }
+  /*********************
+  POSTS & CONTENT STYLES
+  *********************/
+  /* entry content */
+  .entry-content,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout {
+    /* at this larger size, we can start to align images */
+  }
+  .entry-content .alignleft, .entry-content img.alignleft,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .alignleft,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container img.alignleft,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout .alignleft,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout img.alignleft {
+    margin-right: 1.5em;
+    display: inline;
+    float: left;
+  }
+  .entry-content .alignright, .entry-content img.alignright,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .alignright,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container img.alignright,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout .alignright,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout img.alignright {
+    margin-left: 1.5em;
+    display: inline;
+    float: right;
+  }
+  .entry-content .aligncenter, .entry-content img.aligncenter,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .aligncenter,
+  .editor-styles-wrapper .block-editor-block-list__layout.is-root-container img.aligncenter,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout .aligncenter,
+  .editor-styles-wrapper .is-root-container.block-editor-block-list__layout img.aligncenter {
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    clear: both;
+    text-align: center;
+  }
+  /* end content area */
+  /* At medium widths, allow 2-up where appropriate */
+  .c-cardrepeater--count-2 .c-cardrepeater__grid,
+  .c-cardrepeater--count-3 .c-cardrepeater__grid,
+  .c-cardrepeater--count-4 .c-cardrepeater__grid,
+  .c-cardrepeater--count-many .c-cardrepeater__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .c-posts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .c-posts__grid--count-1 {
+    grid-template-columns: minmax(0, 400px);
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .c-posts__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 400px));
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .c-posts__blob {
+    width: 1000px;
+    height: 480px;
+  }
+  /*********************
+  FOOTER STYLES
+  *********************/
+  .footer__curve-inner {
+    width: 100%;
+  }
+  .footer__curve-inner .footer__curve-inner-bg {
+    fill: #f9f9f9;
+  }
+}
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+@media only screen and (min-width: 64em) {
+  /*********************
+  GENERAL STYLES
+  *********************/
+  /*********************
+  LAYOUT & GRID STYLES
+  *********************/
+  .wrap {
+    width: 96%;
+  }
+  /* Move to 3-up for 3 cards and for "many" (5+) */
+  .c-cardrepeater--count-3 .c-cardrepeater__grid,
+  .c-cardrepeater--count-many .c-cardrepeater__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  /* 4 cards can still be 2-up here (keeps cards comfortable),
+     the full 4-up happens at 75em. */
+  .c-cardrepeater--count-4 .c-cardrepeater__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .c-posts__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+  }
+  .c-posts__grid--count-1 {
+    grid-template-columns: minmax(0, 400px);
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .c-posts__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 400px));
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .c-card-block__grid--count-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-3 .c-card-block__card:nth-child(3) {
+    grid-column: 1/-1;
+    justify-self: center;
+    max-width: 544px;
+  }
+  .c-card-block__grid--count-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .c-card-block__grid--count-5 .c-card-block__card:nth-child(5) {
+    grid-column: 1/-1;
+    justify-self: center;
+    max-width: 544px;
+  }
+  .c-posts__blob {
+    width: 1200px;
+    height: 520px;
+  }
+  .c-posts__blob--deep {
+    left: 18%;
+    width: 900px;
+    height: 420px;
+  }
+  /*********************
+  HEADER STYLES
+  *********************/
+  /*********************
+  NAVIGATION STYLES
+  *********************/
+  #mobile-nav {
+    display: none;
+  }
+  .nav {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: auto;
+    opacity: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    border: 0;
+  }
+  .nav ul {
+    background: rgba(247, 248, 248, 0.95);
+    margin-top: 0;
+  }
+  .nav li {
+    border-bottom: 0;
+  }
+  .nav li {
+    /*
+    plan your menus and drop-downs wisely.
+    */
+  }
+  .nav li ul.sub-menu,
+  .nav li ul.children {
+    margin-top: 0;
+    border: 0px solid #ccc;
+    border-top: 0;
+    position: absolute;
+    visibility: hidden;
+    z-index: 8999;
+    border-radius: 0.5em;
+  }
+  .nav li ul.sub-menu li a,
+  .nav li ul.children li a {
+    padding-left: 10px;
+    border-right: 0;
+    display: block;
+    width: 180px;
+    border-bottom: 1px solid #ccc;
+  }
+  .nav li ul.sub-menu li:last-child a,
+  .nav li ul.children li:last-child a {
+    border-bottom: 0;
+    border-radius: 0 0 0.5em 0.5em;
+  }
+  .nav li ul.sub-menu li,
+  .nav li ul.children li {
+    /*
+    if you need to go deeper, go nuts
+    just remember deeper menus suck
+    for usability. k, bai.
+    */
+  }
+  .nav li ul.sub-menu li ul,
+  .nav li ul.children li ul {
+    top: 0;
+    left: 100%;
+  }
+  .nav li ul.sub-menu,
+  .nav li ul.children {
+    /* highlight sub-menu current page */
+  }
+  .nav li {
+    /* showing sub-menus */
+  }
+  .nav li:hover > ul {
+    top: auto;
+    visibility: visible;
+  }
+  .nav {
+    /* highlight current page */
+  }
+  .header-nav {
+    -webkit-box-ordinal-group: unset;
+    -ms-flex-order: unset;
+    order: unset;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    min-width: 0;
+    width: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    justify-self: unset;
+  }
+  .header-nav a {
+    text-align: left;
+    margin-left: 1em;
+  }
+  .header-nav__wrapper {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: auto;
+  }
+  #inner-header {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-column-gap: 1em;
+    -moz-column-gap: 1em;
+    column-gap: 1em;
+  }
+  .header-logo {
+    -webkit-box-ordinal-group: unset;
+    -ms-flex-order: unset;
+    order: unset;
+    justify-self: start;
+  }
+  .header-toolbar {
+    grid-column: 2;
+    justify-self: end;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    gap: 48px;
+    width: auto;
+    max-width: 100%;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+    -webkit-box-ordinal-group: unset;
+    -ms-flex-order: unset;
+    order: unset;
+    min-width: 0;
+  }
+  #mobile-nav {
+    -webkit-box-ordinal-group: unset;
+    -ms-flex-order: unset;
+    order: unset;
+  }
+  .header-widget-area {
+    -webkit-box-ordinal-group: unset;
+    -ms-flex-order: unset;
+    order: unset;
+    justify-self: unset;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    margin: 0;
+  }
+  .header-widget-area .widget {
+    margin: 0;
+  }
+  .header-widget-area .widget input[type=search] {
+    margin-bottom: 0;
+    border-radius: 0.5em;
+    border: 0px;
+    -webkit-box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.1);
+  }
+  /* .menu is clearfixed inside mixins.scss */
+  .menu ul li {
+    text-align: left;
+  }
+  .menu ul li a:hover, .menu ul li a:focus {
+    color: #070a0c;
+    -webkit-transition: 600ms;
+    transition: 600ms;
+  }
+  .menu ul li a:active {
+    color: #0c1723;
+  }
+  .menu ul li {
+    /*
+    plan your menus and drop-downs wisely.
+    */
+  }
+  .menu ul li ul.sub-menu,
+  .menu ul li ul.children {
+    margin-top: 0;
+    border: 1px solid #ccc;
+    border-top: 0;
+    position: absolute;
+    visibility: hidden;
+    z-index: 8999;
+  }
+  .menu ul li ul.sub-menu li a,
+  .menu ul li ul.children li a {
+    padding-left: 10px;
+    border-right: 0;
+    display: block;
+    width: 180px;
+    border-bottom: 1px solid #ccc;
+  }
+  .menu ul li ul.sub-menu li:last-child a,
+  .menu ul li ul.children li:last-child a {
+    border-bottom: 0;
+  }
+  .menu ul li ul.sub-menu li,
+  .menu ul li ul.children li {
+    /*
+    if you need to go deeper, go nuts
+    just remember deeper menus suck
+    for usability. k, bai.
+    */
+  }
+  .menu ul li ul.sub-menu li ul,
+  .menu ul li ul.children li ul {
+    top: 0;
+    left: 100%;
+  }
+  .menu ul li ul.sub-menu,
+  .menu ul li ul.children {
+    /* highlight sub-menu current page */
+  }
+  .menu ul li {
+    /* showing sub-menus */
+  }
+  .menu ul li:hover > ul {
+    top: auto;
+    visibility: visible;
+  }
+  .menu ul {
+    /* end .menu ul li */
+    /* highlight current page */
+  }
+  .menu ul {
+    /* end current highlighters */
+  }
+  .menu {
+    /* end .menu ul */
+  } /* end .menu */
+  /*********************
+  HERO STYLES
+  *********************/
+  .hero__content--text {
+    z-index: 2;
+  }
+  .hero__container {
+    position: relative;
+    top: -76px;
+  }
+  .hero__container h1 {
+    position: relative;
+    z-index: 2;
+  }
+  .hero__container--landing {
+    top: 0;
+  }
+  .hero__container--landing .hero__container--inner {
+    min-height: clamp(28rem, 90vh, 62rem);
+  }
+  .hero__container--landing .hero__content--landing {
+    padding-left: clamp(2.5rem, 4.5vw, 4.5rem);
+  }
+  .hero__container--landing .hero__content {
+    height: auto;
+    min-height: 0;
+  }
+  .hero__container--inner {
+    max-width: 1920px;
+    margin: auto;
+    position: relative;
+    margin-bottom: 0;
+  }
+  .hero__container p {
+    color: #f9f9f9;
+  }
+  .hero__content--image {
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+  }
+  .hero__content--text {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 7%;
+    padding-right: 5%;
+  }
+  .hero__content--small {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: end;
+    margin-bottom: 3vh;
+    min-height: 255px;
+  }
+  .hero__post--text {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .hero__post--text h1 {
+    font-size: 3.5em;
+  }
+  .hero__title--initiative {
+    font-size: 6.5em;
+  }
+  .hero__title--medium {
+    font-size: 6.5em;
+  }
+  .hero__title--small {
+    font-size: 6.5em;
+  }
+  /***************
+  CONTENT BLOCKS
+  *****************/
+  .c-content-group {
+    margin-bottom: 1em;
+  }
+  .c-content-group .c-content-group__content {
+    padding-right: 2em;
+  }
+  .c-content-group .c-image-grid {
+    display: grid;
+    margin: 0;
+  }
+  .c-content-group .c-image-grid li {
+    margin-left: 1.25em;
+  }
+  .c-content-group .c-image-grid__item {
+    margin: 0;
+  }
+  .c-content-group .c-image-grid__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 0;
+  }
+  .c-content-group .c-image-grid--one {
+    padding: 0;
+  }
+  .c-content-group .c-image-grid--one li {
+    margin: 0;
+  }
+  .c-content-group .c-image-grid--one li img {
+    margin: 0;
+  }
+  .c-content-group {
+    /* --- 2 images: 50/50 --- */
+  }
+  .c-content-group .c-image-grid--two {
+    grid-template-columns: 1fr 1fr;
+  }
+  .c-content-group .c-image-grid--two .c-image-grid__item--1 {
+    grid-column: 1;
+  }
+  .c-content-group .c-image-grid--two .c-image-grid__item--2 {
+    grid-column: 2;
+  }
+  .c-content-group {
+    /* --- 3 images: big left, two stacked right --- */
+  }
+  .c-content-group .c-image-grid--three {
+    grid-template-columns: 2fr 1fr;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: start;
+    grid-template-areas: "big right";
+  }
+  .c-content-group .c-image-grid--three .c-image-grid__item--1 {
+    grid-area: big;
+    align-self: start;
+  }
+  .c-content-group .c-image-grid--three .c-image-grid__item--2, .c-content-group .c-image-grid--three .c-image-grid__item--3 {
+    grid-area: right;
+    align-self: start;
+  }
+  .c-content-group .c-image-grid__right {
+    margin: 0;
+    display: grid;
+    -ms-flex-line-pack: start;
+    align-content: start;
+    gap: 1.25em;
+  }
+  .c-content-group--middle .c-content-group__content {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .c-content-group--bottom .c-content-group__content {
+    margin-top: auto;
+  }
+  .c-content-group--bottom .c-content-group__content > :last-child {
+    margin-bottom: 0;
+  }
+  .c-content-group--reverse {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+  .c-content-group--reverse .c-content-group__content {
+    padding-right: 0em;
+    padding-left: 2em;
+  }
+  .c-content-group--reverse .c-content-group__image {
+    padding-right: 0em;
+    padding-left: 6em;
+  }
+  /*********************
+  SIDEBARS & ASIDES
+  *********************/
+  .sidebar {
+    /* margin-top: 2.2em; */
+  }
+  .widgettitle {
+    border-bottom: 2px solid #444;
+    margin-bottom: 0.75em;
+  }
+  .widget {
+    padding: 0 10px;
+    margin: 2.2em 0;
+  }
+  .widget ul li {
+    margin-bottom: 0.75em;
+  }
+  .widget ul li {
+    /* deep nesting */
+  }
+  .widget ul li ul {
+    margin-top: 0.75em;
+    padding-left: 1em;
+  }
+  /* links widget */
+  /* meta widget */
+  /* pages widget */
+  /* recent-posts widget */
+  /* archives widget */
+  /* tag-cloud widget */
+  /* calendar widget */
+  /* category widget */
+  /* recent-comments widget */
+  /* search widget */
+  /* text widget */
+  /*********************
+  FOOTER STYLES
+  *********************/
+  /*
+  you'll probably need to do quite a bit
+  of overriding here if you styled them for
+  mobile. Make sure to double check these!
+  */
+  #inner-footer {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+  #inner-footer .footer__right {
+    text-align: right;
+    -ms-flex-line-pack: end;
+    align-content: flex-end;
+  }
+  #inner-footer .footer__contact--left {
+    text-align: left;
+  }
+  #inner-footer .footer__contact-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    gap: 0.75em;
+  }
+  #inner-footer .footer__contact-info .contact-info__item:nth-child(2)::before {
+    content: "•";
+    margin-right: 0.75em;
+  }
+  #inner-footer .footer__contact-info a.contact-info__item {
+    color: #e8eaed;
+    text-decoration: none;
+  }
+  #inner-footer .footer__contact-info a.contact-info__item:hover, #inner-footer .footer__contact-info a.contact-info__item:focus {
+    color: #e8eaed;
+    opacity: 0.85;
+  }
+  .footer__logo #snell_logo {
+    margin-top: 0em;
+    margin-left: 1em;
+  }
+  .footer-nav {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+}
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
 @media only screen and (min-width: 75em) {
   .wrap {
     width: 1040px;
@@ -7803,6 +10537,89 @@ a.c-peopleBio__email:hover, a.c-peopleBio__email:focus-visible {
   }
 }
 /******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+@media only screen and (min-width: 1240px) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+
+  Stylesheet: Super Large Monitor Stylesheet
+
+  You can add some advanced styles here if you like. This kicks in
+  on larger screens.
+
+  ******************************************************************/
+  .wrap {
+    width: 1240px;
+  }
+  .c-cardrepeater__grid {
+    gap: 1.5rem;
+  }
+  .c-stepcard__head {
+    padding: 0.65rem 0.9rem;
+  }
+  .c-stepcard__body {
+    padding: 0.9rem;
+    font-size: 1rem;
+  }
+  .c-stepcard__icon {
+    width: 24px;
+    height: 24px;
+  }
+  .c-stepcard__icon .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+  }
+}
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+@media only screen and (min-width: 1440px) {
+  /******************************************************************
+  Site Name: 
+  Author: 
+
+  Stylesheet: Super Large Monitor Stylesheet
+
+  You can add some advanced styles here if you like. This kicks in
+  on larger screens.
+
+  ******************************************************************/
+  #inner-header {
+    padding-right: 0;
+  }
+}
+/******************************************************************
+Component-layer styles (colocated rules + responsive tweaks)
+
+Put **new** UI blocks here as `_your-component.scss`, then add:
+
+  @use "your-component" as *;
+
+below. Use `@use "../globals" as *;` at the top of each partial for
+tokens, variables, and mixins (including `mq-48` … `mq-1440` in
+`partials/_mixins.scss`).
+
+This file loads **after** legacy `breakpoints/*.scss` so migrated
+selectors can override until you delete the old rules.
+
+******************************************************************/
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+/******************************************************************
 Client / project skin (imported last in style.scss)
 
 Keep the starter neutral; add per-site overrides here so diffs stay
@@ -7824,171 +10641,48 @@ This file is intentionally minimal.
   color: inherit;
 }
 
-/* Wrap the entire post style inside the TinyMCE selector, as suggested
-here http://codex.wordpress.org/Function_Reference/add_editor_style */
-body#tinymce.wp-editor {
-  width: 731px;
+/******************************************************************
+Block editor canvas — layout fixes on top of shared theme-styles.
+
+Full-bleed blocks use 100vw on the front end; constrain them inside the editor iframe.
+******************************************************************/
+.editor-styles-wrapper {
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 100%;
   line-height: 1.5;
   color: #606469;
   -webkit-font-smoothing: antialiased;
-  /*********************
-  LINK STYLES
-  *********************/
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
-body#tinymce.wp-editor a, body#tinymce.wp-editor a:visited {
-  color: #a6644a;
-  /* on hover */
-}
-body#tinymce.wp-editor a:hover, body#tinymce.wp-editor a:focus, body#tinymce.wp-editor a:visited:hover, body#tinymce.wp-editor a:visited:focus {
-  color: rgb(134.2525, 80.875, 59.8475);
-}
-body#tinymce.wp-editor a, body#tinymce.wp-editor a:visited {
-  /* on click */
-}
-body#tinymce.wp-editor a:link, body#tinymce.wp-editor a:visited:link {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
-}
-body#tinymce.wp-editor {
-  /******************************************************************
-  H1, H2, H3, H4, H5 STYLES
-  ******************************************************************/
-}
-body#tinymce.wp-editor h1, body#tinymce.wp-editor .h1, body#tinymce.wp-editor h2, body#tinymce.wp-editor .h2, body#tinymce.wp-editor h3, body#tinymce.wp-editor .h3, body#tinymce.wp-editor h4, body#tinymce.wp-editor .h4, body#tinymce.wp-editor h5, body#tinymce.wp-editor .h5 {
-  text-rendering: optimizelegibility;
-  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-body#tinymce.wp-editor h1 a, body#tinymce.wp-editor .h1 a, body#tinymce.wp-editor h2 a, body#tinymce.wp-editor .h2 a, body#tinymce.wp-editor h3 a, body#tinymce.wp-editor .h3 a, body#tinymce.wp-editor h4 a, body#tinymce.wp-editor .h4 a, body#tinymce.wp-editor h5 a, body#tinymce.wp-editor .h5 a {
-  text-decoration: none;
-}
-body#tinymce.wp-editor h1, body#tinymce.wp-editor .h1 {
-  font-size: 2.5em;
-  line-height: 1.333em;
-}
-body#tinymce.wp-editor h2, body#tinymce.wp-editor .h2 {
-  font-size: 1.75em;
-  line-height: 1.4em;
-  margin-bottom: 0.375em;
-}
-body#tinymce.wp-editor h3, body#tinymce.wp-editor .h3 {
-  font-size: 1.125em;
-}
-body#tinymce.wp-editor h4, body#tinymce.wp-editor .h4 {
-  font-size: 1.1em;
-  font-weight: 400;
-}
-body#tinymce.wp-editor h5, body#tinymce.wp-editor .h5 {
-  font-size: 0.846em;
-  line-height: 2.09em;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-body#tinymce.wp-editor {
-  padding: 1.5em 1.5em 0;
-}
-body#tinymce.wp-editor p {
-  margin: 0 0 1.5em;
-}
-body#tinymce.wp-editor table {
+
+/* Neutralize viewport breakout inside the editor iframe. */
+.editor-styles-wrapper .c-quote--standalone,
+.editor-styles-wrapper .c-quoteContact,
+.editor-styles-wrapper .c-contactForm__hero,
+.editor-styles-wrapper .c-peopleBio__hero,
+.editor-styles-wrapper .c-peopleHighlight .c-peopleBio__hero,
+.editor-styles-wrapper .c-gallery,
+.editor-styles-wrapper .hero__container--single,
+.editor-styles-wrapper .c-textImage,
+.editor-styles-wrapper .c-waveband,
+.editor-styles-wrapper .c-heroMedium,
+.editor-styles-wrapper .c-heroLarge,
+.editor-styles-wrapper .c-heroSmall {
   width: 100%;
-  border: 1px solid #e2e5e7;
-  margin-bottom: 1.5em;
-}
-body#tinymce.wp-editor table caption {
-  margin: 0 0 7px;
-  font-size: 0.75em;
-  color: #a0a7af;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-body#tinymce.wp-editor tr {
-  border-bottom: 1px solid #e2e5e7;
-}
-body#tinymce.wp-editor tr:nth-child(even) {
-  background-color: #f5f6f7;
-}
-body#tinymce.wp-editor td {
-  padding: 7px;
-  border-right: 1px solid #e2e5e7;
-}
-body#tinymce.wp-editor td:last-child {
-  border-right: 0;
-}
-body#tinymce.wp-editor th {
-  background-color: #f5f6f7;
-  border-bottom: 1px solid #e2e5e7;
-  border-right: 1px solid #e2e5e7;
-}
-body#tinymce.wp-editor th:last-child {
-  border-right: 0;
-}
-body#tinymce.wp-editor blockquote {
-  margin: 0 0 1.5em 0.75em;
-  padding: 0 0 0 0.75em;
-  border-left: 3px solid #69a197;
-  font-style: italic;
-  color: #a0a7af;
-}
-body#tinymce.wp-editor dd {
+  max-width: 100%;
   margin-left: 0;
-  font-size: 0.9em;
-  color: #787878;
-  margin-bottom: 1.5em;
+  margin-right: 0;
 }
-body#tinymce.wp-editor img {
-  margin: 0 0 1.5em 0;
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container,
+.editor-styles-wrapper .is-root-container.block-editor-block-list__layout {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ACF block placeholders */
+.editor-styles-wrapper .block-placeholder {
   max-width: 100%;
-  height: auto;
-}
-body#tinymce.wp-editor img.wp-more-tag {
-  height: 20px;
-}
-body#tinymce.wp-editor .size-auto,
-body#tinymce.wp-editor .size-full,
-body#tinymce.wp-editor .size-large,
-body#tinymce.wp-editor .size-medium,
-body#tinymce.wp-editor .size-thumbnail {
-  max-width: 100%;
-  height: auto;
-}
-body#tinymce.wp-editor pre {
-  background: #000;
-  color: #f5f6f7;
-  font-size: 0.9em;
-  padding: 1.5em;
-  margin: 0 0 1.5em;
-  border-radius: 3px;
-}
-body#tinymce.wp-editor .mce-content-body img.mce-wp-more {
-  height: 20px !important;
-}
-body#tinymce.wp-editor {
-  /*********************
-  LARGER MOBILE DEVICES
-  This is for devices like the Galaxy Note or something that's
-  larger than an iPhone but smaller than a tablet. Let's call them
-  tweeners.
-  *********************/
-}
-@media only screen and (min-width: 481px) {
-  body#tinymce.wp-editor {
-    /* at this larger size, we can start to align images */
-  }
-  body#tinymce.wp-editor .alignleft, body#tinymce.wp-editor img.alignleft {
-    margin-right: 1.5em;
-    display: inline;
-    float: left;
-  }
-  body#tinymce.wp-editor .alignright, body#tinymce.wp-editor img.alignright {
-    margin-left: 1.5em;
-    display: inline;
-    float: right;
-  }
-  body#tinymce.wp-editor .aligncenter, body#tinymce.wp-editor img.aligncenter {
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
-    clear: both;
-  }
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }

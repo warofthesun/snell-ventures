@@ -1,4 +1,5 @@
 @use "../globals" as *;
+@use "../partials/content-area" as content-area;
 
 @media only screen and (min-width: 48em) {
   .c-card-block__grid--count-2 {
@@ -207,7 +208,7 @@
   *********************/
 
   /* entry content */
-  .entry-content {
+  @include content-area.root {
 
 
   	/* at this larger size, we can start to align images */
@@ -229,7 +230,7 @@
 		text-align: center;
   	}
 
-  } /* end .entry-content */
+  } /* end content area */
 
   
 /* At medium widths, allow 2-up where appropriate */

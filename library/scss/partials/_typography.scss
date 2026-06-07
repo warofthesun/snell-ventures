@@ -145,6 +145,10 @@ h2, .h2 {
 	&.light {
 		color: $primary-300;
 	}
+
+  &.medium {
+    font-weight: $font-weight-medium;
+  }
 }
 
 h3, .h3 {
@@ -155,6 +159,9 @@ h3, .h3 {
 	&.light {
 		color: $primary-300;
 	}
+  &.medium {
+    font-weight: $font-weight-medium;
+  }
 }
 
 h4, .h4 {

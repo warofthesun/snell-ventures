@@ -1,0 +1,50 @@
+/******************************************************************
+Block editor canvas — layout fixes on top of shared theme-styles.
+
+Full-bleed blocks use 100vw on the front end; constrain them inside the editor iframe.
+******************************************************************/
+
+@use "../globals" as *;
+
+.editor-styles-wrapper {
+	font-family: $body-font;
+	font-size: 100%;
+	line-height: 1.5;
+	color: $text-color;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
+}
+
+/* Neutralize viewport breakout inside the editor iframe. */
+.editor-styles-wrapper {
+	.c-quote--standalone,
+	.c-quoteContact,
+	.c-contactForm__hero,
+	.c-peopleBio__hero,
+	.c-peopleHighlight .c-peopleBio__hero,
+	.c-gallery,
+	.hero__container--single,
+	.c-textImage,
+	.c-waveband,
+	.c-heroMedium,
+	.c-heroLarge,
+	.c-heroSmall {
+		width: 100%;
+		max-width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.block-editor-block-list__layout.is-root-container,
+	.is-root-container.block-editor-block-list__layout {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+/* ACF block placeholders */
+.editor-styles-wrapper .block-placeholder {
+	max-width: 100%;
+	box-sizing: border-box;
+}

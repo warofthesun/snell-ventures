@@ -1,0 +1,23 @@
+/******************************************************************
+Shared front-end + block editor styles.
+
+Imported by style.scss and editor-style.scss so both stay in sync.
+Add new breakpoints, components, and modules here — not in one file only.
+******************************************************************/
+
+@use "globals" as *;
+@use "partials/flexboxgrid";
+@use "modules/alerts";
+@use "modules/buttons";
+@use "modules/forms";
+@use "modules/gradients";
+@use "breakpoints/base";
+@use "breakpoints/blog-stories-index" as *;
+@use "breakpoints/hero-single" as *;
+@use "breakpoints/48em" as *;
+@use "breakpoints/64em" as *;
+@use "breakpoints/75em" as *;
+@use "breakpoints/1240up" as *;
+@use "breakpoints/1440up" as *;
+@use "components" as *;
+@use "partials/client" as *;
