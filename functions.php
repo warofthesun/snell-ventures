@@ -613,7 +613,7 @@ function client_render_blog_post_card( $p, $args = array() ) {
  * - Blog index: hero off; stories layout in index.php (featured post + grid) replaces the old title band.
  * - Archive: hero shown automatically with archive title and description.
  *
- * @return array{ show: bool, type: string, data: array } 'show', 'type' (landing|medium|initiative|post|blog|archive|single), 'data' (headline, paragraph, image_id, ctas, title, etc.).
+ * @return array{ show: bool, type: string, data: array } 'show', 'type' (landing|medium|medium_page|company|post|blog|archive|single), 'data' (headline, paragraph, image_id, ctas, title, etc.).
  */
 function client_get_hero_config() {
   static $config = null;
@@ -683,7 +683,7 @@ function client_get_hero_config() {
     return $config;
   }
 
-  // Singular post/CPT only (not pages): hero type "single" for single.php; pages use landing/initiative below
+  // Singular post/CPT only (not pages): hero type "single" for single.php; pages use landing/medium/small below
   if ( is_singular() && ! is_page() ) {
     $post = get_queried_object();
     if ( ! $post || ! isset( $post->ID ) ) {
@@ -794,43 +794,32 @@ function client_get_hero_config() {
         $image_id = (int) $hero_img;
       }
     }
-    // Initiative hero: use initiative_hero_options group; background = page featured image unless "use solid color" is on
-    if ( $hero_style === 'initiative' ) {
-      $init = get_field( 'initiative_hero_options', $post->ID );
-      if ( ! is_array( $init ) ) {
-        $init = array();
-      }
-      $use_solid_color = ! empty( $init['use_solid_color'] );
-      $logo_id = 0;
-      if ( ! empty( $init['logo'] ) ) {
-        $logo_id = is_array( $init['logo'] ) && ! empty( $init['logo']['ID'] ) ? (int) $init['logo']['ID'] : (int) $init['logo'];
-      }
-      $headline_text = isset( $init['headline_text'] ) ? $init['headline_text'] : '';
-      if ( is_array( $headline_text ) ) {
-        // Clone with display "group" returns array; WYSIWYG is under cloned field key or name
-        $headline_text = isset( $headline_text['field_68225159eee20'] ) ? $headline_text['field_68225159eee20'] : ( isset( $headline_text['hero_headline'] ) ? $headline_text['hero_headline'] : '' );
-        if ( is_array( $headline_text ) ) {
-          $headline_text = trim( implode( ' ', array_filter( $headline_text, 'is_string' ) ) );
-        }
-      }
-      $headline_text = is_string( $headline_text ) ? $headline_text : '';
+
+    // Medium page hero (company-style): featured image, headline, subhead; no stats.
+    if ( $hero_style === 'medium_page' ) {
+      $page_title    = get_the_title( $post->ID );
+      $headline_raw  = function_exists( 'get_field' ) ? get_field( 'hero_headline', $post->ID ) : '';
+      $headline_raw  = is_string( $headline_raw ) ? trim( $headline_raw ) : '';
+      $headline_text = $headline_raw !== '' ? $headline_raw : $page_title;
+
+      $subhead_text = function_exists( 'get_field' ) ? get_field( 'hero_paragraph', $post->ID ) : '';
+      $subhead_text = is_string( $subhead_text ) ? trim( $subhead_text ) : '';
+
       $config = array(
         'show' => true,
-        'type' => 'initiative',
+        'type' => 'company',
         'data' => array(
-          'background_type'   => $use_solid_color ? 'color' : 'image',
-          'background_image'   => $use_solid_color ? 0 : $image_id,
-          'background_color'  => isset( $init['background_color'] ) ? $init['background_color'] : '#238c55',
-          'headline_type'      => isset( $init['headline_type'] ) ? $init['headline_type'] : 'text',
-          'logo_id'            => $logo_id,
-          'headline_text'      => $headline_text,
-          'gradient_overlay'   => isset( $init['gradient_overlay'] ) ? (bool) $init['gradient_overlay'] : true,
+          'image_id'         => $image_id,
+          'background_color' => '#142e48',
+          'title'            => $headline_text,
+          'subhead'          => $subhead_text,
+          'stats'            => array(),
         ),
       );
       return $config;
     }
 
-    // Medium hero: solid color or featured image bg + headline only.
+    // Large hero: solid color or featured image bg + headline only.
     if ( $hero_style === 'medium' ) {
       $medium = get_field( 'medium_hero_options', $post->ID );
       if ( ! is_array( $medium ) ) {

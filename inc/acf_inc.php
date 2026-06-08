@@ -1,5 +1,40 @@
 <?php 
 // ACF Helpers and filters
+
+/**
+ * Keep Hero Options field group aligned with acf-json when the DB copy is stale.
+ * Fixes incorrect dropdown labels and seamless clone fields that ignore conditional logic.
+ */
+function client_fix_hero_options_field_group( $group ) {
+	if ( ! is_array( $group ) || ( $group['key'] ?? '' ) !== 'group_68260ada5ea86' ) {
+		return $group;
+	}
+
+	$json_path = get_template_directory() . '/acf-json/group_68260ada5ea86.json';
+	if ( ! file_exists( $json_path ) ) {
+		return $group;
+	}
+
+	$json = json_decode( (string) file_get_contents( $json_path ), true );
+	if ( ! is_array( $json ) || empty( $json['fields'] ) ) {
+		return $group;
+	}
+
+	$json_mtime = (int) filemtime( $json_path );
+	$db_post    = function_exists( 'acf_get_field_group_post' ) ? acf_get_field_group_post( 'group_68260ada5ea86' ) : null;
+	$db_mtime   = is_object( $db_post ) ? (int) strtotime( (string) $db_post->post_modified_gmt . ' GMT' ) : 0;
+
+	if ( $json_mtime <= $db_mtime ) {
+		return $group;
+	}
+
+	$group['fields']   = $json['fields'];
+	$group['modified'] = $json['modified'] ?? $json_mtime;
+
+	return $group;
+}
+add_filter( 'acf/load_field_group/key=group_68260ada5ea86', 'client_fix_hero_options_field_group', 30 );
+
 add_filter('acf/load_field/name=post_type', function ($field) {
   $field['choices'] = [];
 

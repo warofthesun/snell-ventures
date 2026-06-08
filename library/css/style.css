@@ -6493,17 +6493,6 @@ POSTS & CONTENT STYLES
 .hero__content--text {
   z-index: 2;
 }
-.hero__container--initiative .hero__container--inner {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-height: 70vh;
-  margin-bottom: 0;
-}
 .hero__container--medium .hero__container--inner {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6528,26 +6517,6 @@ POSTS & CONTENT STYLES
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
-.hero__content--initiative {
-  position: absolute;
-  inset: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  text-align: center;
-  z-index: 2;
-  padding: 2rem 7%;
 }
 .hero__content--medium {
   position: absolute;
@@ -6580,10 +6549,6 @@ POSTS & CONTENT STYLES
   margin-bottom: 3vh;
   min-height: 255px;
 }
-.hero__headline--initiative {
-  max-width: 100%;
-  text-align: center;
-}
 .hero__headline--medium {
   max-width: 100%;
   text-align: center;
@@ -6593,26 +6558,11 @@ POSTS & CONTENT STYLES
   max-width: 100%;
   text-align: center;
 }
-.hero__logo {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-.hero__title--initiative {
-  color: #f9f9f9;
-  margin: 0;
-  font-size: 2.5rem;
-  text-shadow: 0 0 20px rgba(15, 21, 20, 0.7);
-}
 .hero__title--medium {
   color: #f9f9f9;
   margin: 0;
   font-size: 2.5rem;
   text-shadow: 0 0 20px rgba(15, 21, 20, 0.7);
-}
-.hero__title--initiative.dark {
-  color: #0f1514;
-  text-shadow: none;
 }
 .hero__title--medium.dark {
   color: #0f1514;
@@ -6662,15 +6612,6 @@ POSTS & CONTENT STYLES
 .hero__featured-post {
   position: absolute;
   display: none;
-}
-
-/* Initiative hero: ensure background image displays when no .hero wrapper (partial outputs container only) */
-.hero__container--initiative .hero__content--bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /* Hero Medium: ensure background image displays when no .hero wrapper */
@@ -11039,9 +10980,6 @@ Add new breakpoints, components, and modules here — not in one file only.
   }
   .hero__post--text h1 {
     font-size: 3.5em;
-  }
-  .hero__title--initiative {
-    font-size: 6.5em;
   }
   .hero__title--medium {
     font-size: 6.5em;

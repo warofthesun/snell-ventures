@@ -2931,15 +2931,6 @@ POSTS & CONTENT STYLES
 		z-index: 2;
 	}
 
-	&__container--initiative {
-		.hero__container--inner {
-			display: flex;
-			flex-direction: column;
-			min-height: 70vh;
-			margin-bottom: 0;
-		}
-	}
-
 	&__container--medium {
 		.hero__container--inner {
 			display: flex;
@@ -2949,7 +2940,7 @@ POSTS & CONTENT STYLES
 		}
 	}
 
-	// Small hero: half the vertical height of initiative/medium.
+	// Small hero: half the vertical height of medium.
 	&__container--small {
 		.hero__container--inner {
 			min-height: 35vh;
@@ -2969,18 +2960,6 @@ POSTS & CONTENT STYLES
 		background-repeat: no-repeat;
 	}
 
-	&__content--initiative {
-		position: absolute;
-		inset: 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		z-index: 2;
-		padding: 2rem 7%;
-	}
-
 	&__content--medium {
 		position: absolute;
 		inset: 0;
@@ -2991,7 +2970,7 @@ POSTS & CONTENT STYLES
 		pointer-events: none;
 	}
 
-	// Hero Small uses its own content modifier (so we don't rely on initiative/medium classes).
+	// Hero Small uses its own content modifier (so we don't rely on medium classes).
 	&__content--small {
 		position: absolute;
 		inset: 0;
@@ -3006,11 +2985,6 @@ POSTS & CONTENT STYLES
 		min-height: 255px;
 	}
 
-	&__headline--initiative {
-		max-width: 100%;
-		text-align: center;
-	}
-
 	&__headline--medium {
 		max-width: 100%;
 		text-align: center;
@@ -3023,19 +2997,6 @@ POSTS & CONTENT STYLES
 		text-align: center;
 	}
 
-	&__logo {
-		max-width: 100%;
-		height: auto;
-		display: block;
-	}
-
-	&__title--initiative {
-		color: $primary-10;
-		margin: 0;
-		font-size: 2.5rem;
-		text-shadow: 0 0 20px rgba($secondary-900, 0.7);
-	}
-
 	&__title--medium {
 		color: $primary-10;
 		margin: 0;
@@ -3044,11 +3005,6 @@ POSTS & CONTENT STYLES
 	}
 
 	// Dark text override for small hero when requested.
-	&__title--initiative.dark {
-		color: $secondary-900;
-		text-shadow: none;
-	}
-
 	&__title--medium.dark {
 		color: $secondary-900;
 		text-shadow: none;
@@ -3101,15 +3057,6 @@ POSTS & CONTENT STYLES
 		position:absolute;
 		display: none;
 	}
-}
-
-/* Initiative hero: ensure background image displays when no .hero wrapper (partial outputs container only) */
-.hero__container--initiative .hero__content--bg {
-	position: absolute;
-	inset: 0;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
 }
 
 /* Hero Medium: ensure background image displays when no .hero wrapper */

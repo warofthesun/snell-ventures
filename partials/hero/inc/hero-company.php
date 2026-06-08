@@ -1,6 +1,9 @@
 <?php
 /**
- * Single Company hero — Figma Hero/Companies/Post Type/Single (435:1631).
+ * Company-style hero — Figma Hero/Companies/Post Type/Single (435:1631).
+ *
+ * Single Company CPT: title, industry taxonomy, optional sidebar stats.
+ * Pages (Hero Style “Medium - Image, headline, and subhead”): headline, subhead, no stats.
  *
  * @var array $d Hero data from `client_get_hero_config()['data']`.
  */
@@ -18,50 +21,51 @@ if ( $bg_style === '' && ! empty( $d['background_color'] ) ) {
 	$bg_style = 'background-color: ' . esc_attr( $d['background_color'] ) . ';';
 }
 
-$title         = isset( $d['title'] ) ? (string) $d['title'] : '';
-$industry      = isset( $d['industry'] ) ? (string) $d['industry'] : '';
-$years_biz     = isset( $d['years_in_business'] ) ? $d['years_in_business'] : '';
-$years_stew    = isset( $d['years_in_stewardship'] ) ? $d['years_in_stewardship'] : '';
-$total_emp     = isset( $d['total_employees'] ) ? $d['total_employees'] : '';
+$title = isset( $d['title'] ) ? trim( (string) $d['title'] ) : '';
 
-$client_company_stat_has_value = static function ( $value ) {
-	if ( $value === null || $value === '' || $value === false ) {
-		return false;
-	}
-	if ( is_string( $value ) && trim( $value ) === '' ) {
-		return false;
-	}
-	return is_numeric( $value );
-};
+$subhead = '';
+if ( isset( $d['subhead'] ) && trim( (string) $d['subhead'] ) !== '' ) {
+	$subhead = trim( (string) $d['subhead'] );
+} elseif ( ! empty( $d['industry'] ) ) {
+	$subhead = trim( (string) $d['industry'] );
+}
 
 $stats = array();
-$stat_defs = array(
-	array(
-		'value' => $years_biz,
-		'lines' => array(
-			__( 'Total Years', 'client_theme' ),
-			__( 'in Business', 'client_theme' ),
-		),
-	),
-	array(
-		'value' => $years_stew,
-		'lines' => array(
-			__( 'Years in Our', 'client_theme' ),
-			__( 'Stewardship', 'client_theme' ),
-		),
-	),
-	array(
-		'value' => $total_emp,
-		'lines' => array(
-			__( 'Total', 'client_theme' ),
-			__( 'Employees', 'client_theme' ),
-		),
-	),
-);
+if ( array_key_exists( 'stats', $d ) && is_array( $d['stats'] ) ) {
+	$stats = $d['stats'];
+} else {
+	$years_biz  = isset( $d['years_in_business'] ) ? $d['years_in_business'] : '';
+	$years_stew = isset( $d['years_in_stewardship'] ) ? $d['years_in_stewardship'] : '';
+	$total_emp  = isset( $d['total_employees'] ) ? $d['total_employees'] : '';
 
-foreach ( $stat_defs as $stat_def ) {
-	if ( $client_company_stat_has_value( $stat_def['value'] ) ) {
-		$stats[] = $stat_def;
+	$stat_defs = array(
+		array(
+			'value' => $years_biz,
+			'lines' => array(
+				__( 'Total Years', 'client_theme' ),
+				__( 'in Business', 'client_theme' ),
+			),
+		),
+		array(
+			'value' => $years_stew,
+			'lines' => array(
+				__( 'Years in Our', 'client_theme' ),
+				__( 'Stewardship', 'client_theme' ),
+			),
+		),
+		array(
+			'value' => $total_emp,
+			'lines' => array(
+				__( 'Total', 'client_theme' ),
+				__( 'Employees', 'client_theme' ),
+			),
+		),
+	);
+
+	foreach ( $stat_defs as $stat_def ) {
+		if ( function_exists( 'client_company_stat_has_value' ) && client_company_stat_has_value( $stat_def['value'] ) ) {
+			$stats[] = $stat_def;
+		}
 	}
 }
 
@@ -75,10 +79,10 @@ $has_stat = ! empty( $stats );
 
 		<div class="hero__content hero__content--company-text">
 			<?php if ( $title !== '' ) : ?>
-				<h1 class="hero__title hero__title--company"><?php echo esc_html( $title ); ?></h1>
+				<h1 class="hero__title hero__title--company"><?php echo wp_kses_post( $title ); ?></h1>
 			<?php endif; ?>
-			<?php if ( $industry !== '' ) : ?>
-				<p class="hero__industry hero__industry--company"><?php echo esc_html( $industry ); ?></p>
+			<?php if ( $subhead !== '' ) : ?>
+				<p class="hero__industry hero__industry--company"><?php echo esc_html( $subhead ); ?></p>
 			<?php endif; ?>
 		</div>
 
