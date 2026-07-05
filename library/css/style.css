@@ -3110,7 +3110,7 @@ FOOTER STYLES
 *********************/
 .footer {
   clear: both;
-  background-color: #0c1723;
+  background-color: #12273d;
 }
 .footer__logo {
   display: -webkit-box;
@@ -3339,7 +3339,7 @@ Buttons and such
 .c-button-pair .c-button-pair__button:nth-child(2) {
   margin-left: 1em;
 }
-/* Button Grid block: centered container, optional background + shadow, flex grid */
+/* Button Grid block: centered container, no background */
 .c-button-grid {
   --button-grid-gap: 16px;
   max-width: var(--button-grid-max-w, 600px);
@@ -3347,11 +3347,6 @@ Buttons and such
   margin-right: auto;
   padding: clamp(20px, 2.5vw, 32px);
   border-radius: 1em;
-  background: var(--button-grid-bg, #fcfce0);
-  -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-.c-button-grid.c-button-grid--no-bg {
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -4463,7 +4458,7 @@ Content Section block
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  background-color: #a2adb9;
+  background-color: #e8eaed;
 }
 
 .c-stepcard__head {
@@ -4525,7 +4520,6 @@ Content Section block
    ========================= */
 .c-card-block {
   padding: 0 1rem 2rem;
-  border-radius: 1rem;
   margin-bottom: 1.5em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4539,14 +4533,12 @@ Content Section block
 .c-card-block__body {
   position: relative;
   background-color: #142e48;
-  border-radius: 0.75em;
   padding: 1em;
 }
 
 .c-card-block__headline {
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
-  text-transform: uppercase;
   letter-spacing: 0.02em;
   color: #fff;
   text-align: center;
@@ -4554,8 +4546,6 @@ Content Section block
   padding: 0.75rem 1.25rem;
   padding-bottom: 0;
   background-color: #142e48;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
   display: block;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -4580,8 +4570,7 @@ Content Section block
 
 /* Two-column layouts for count-2–5 live in breakpoint files; mobile = 1 column */
 .c-card-block__card {
-  background-color: #a2adb9;
-  border-radius: 0.75rem;
+  background-color: #e8eaed;
   overflow: hidden;
 }
 
@@ -4613,7 +4602,6 @@ Content Section block
 .c-card-block__card-title {
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.5rem;
-  text-transform: uppercase;
   letter-spacing: 0.02em;
   font-weight: 400;
   -ms-flex-negative: 0;
@@ -4647,7 +4635,6 @@ Content Section block
   align-items: flex-start;
   gap: 1rem;
   background-color: rgba(247, 248, 248, 0.95);
-  border-radius: 0.5em;
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -4685,17 +4672,13 @@ Content Section block
   flex-shrink: 0;
   width: 100%;
   max-width: 200px;
-  -ms-flex-item-align: start;
-  align-self: flex-start;
+  -ms-flex-item-align: center;
+  align-self: center;
 }
 .c-card-block__card-media img {
   display: block;
   width: 100%;
   height: auto;
-  border-top-right-radius: 0.35rem;
-  border-bottom-right-radius: 0.35rem;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
   -o-object-fit: cover;
   object-fit: cover;
   margin-bottom: 0;
@@ -4844,6 +4827,12 @@ Content Section block
   gap: 1rem;
   padding: 1em;
 }
+.c-slider__content .c-headline-group__preheader {
+  color: #69a197;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
 
 .c-slider__col-left {
   display: -webkit-box;
@@ -4860,7 +4849,7 @@ Content Section block
 .c-slider__headline {
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.02em;
   color: #0c1723;
   text-align: center;
@@ -4966,22 +4955,32 @@ Content Section block
   transition: background-color 0.2s;
 }
 
+.c-slider__list-btn .c-slider__list-icon svg,
 .c-slider__list-btn .c-slider__list-icon i,
 .c-slider__list-btn .c-slider__list-icon .fa {
   font-size: 0.75rem;
-  color: #142e48;
+  width: 0.75rem;
+  height: 0.75rem;
+  color: #69a197;
+  fill: #69a197;
   opacity: 0.7;
-  -webkit-transition: color 0.2s, opacity 0.2s;
-  transition: color 0.2s, opacity 0.2s;
+  -webkit-transition: color 0.2s, fill 0.2s, opacity 0.2s;
+  transition: color 0.2s, fill 0.2s, opacity 0.2s;
+}
+
+.c-slider__list-btn .c-slider__list-icon svg path {
+  fill: #69a197;
 }
 
 .c-slider__list-btn--active .c-slider__list-icon {
   background-color: #2d4761;
 }
 
+.c-slider__list-btn--active .c-slider__list-icon svg,
 .c-slider__list-btn--active .c-slider__list-icon i,
 .c-slider__list-btn--active .c-slider__list-icon .fa {
-  color: #0c1723;
+  color: #69a197;
+  fill: #69a197;
   opacity: 1;
 }
 
@@ -5392,7 +5391,6 @@ Content Section block
   --posts-bg-max-h: 800px;
   position: relative;
   overflow: hidden;
-  padding: clamp(48px, 6vw, 96px) 0;
 }
 .c-posts .c-button-pair {
   display: -webkit-box;
@@ -5427,6 +5425,92 @@ Content Section block
   background-size: cover;
   background-position: center;
   z-index: 0;
+}
+
+/* Flat footer-navy overlay (Posts Grid + Related Posts) */
+.c-posts__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: #12273d;
+  pointer-events: none;
+}
+
+.c-posts--has-bg .c-posts__bg,
+.c-posts--related .c-posts__bg {
+  background-color: #12273d;
+  height: 100%;
+  min-height: 100%;
+  max-height: none;
+}
+
+.c-posts--has-bg {
+  padding-block: 2em;
+}
+
+/* Top accent angle — solid color only (Contact Form layer stack). */
+.c-posts--has-accent {
+  overflow: hidden;
+}
+.c-posts--has-accent .c-posts__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.c-posts--has-accent .c-posts__stage .c-posts__angle,
+.c-posts--has-accent .c-posts__stage .c-posts__solid {
+  position: absolute;
+  inset: 0;
+}
+.c-posts--has-accent .c-posts__angle {
+  z-index: 0;
+}
+.c-posts--has-accent .c-posts__angleSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.c-posts--has-accent .c-posts__solid {
+  z-index: 1;
+}
+.c-posts--has-accent .c-posts__solidSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+.c-posts--has-accent .c-posts__solidPath {
+  fill: #12273d;
+}
+.c-posts--has-accent .c-posts__solidPath--mobile {
+  display: none;
+}
+.c-posts--has-accent .c-posts__inner {
+  z-index: 2;
+}
+@media (max-width: 767px) {
+  .c-posts--has-accent .c-posts__solidPath--desktop {
+    display: none;
+  }
+  .c-posts--has-accent .c-posts__solidPath--mobile {
+    display: inline;
+  }
+}
+
+.c-posts--has-bg.c-posts--no-mb {
+  margin-bottom: 0;
+  -webkit-margin-after: 0;
+  margin-block-end: 0;
+}
+
+.c-posts--has-bg .c-posts__bg:has(.c-posts__bgImage) .c-posts__overlay,
+.c-posts--related .c-posts__bg:has(.c-posts__bgImage) .c-posts__overlay {
+  background-color: rgba(18, 39, 61, 0.7);
 }
 
 /* =========================
@@ -5578,9 +5662,8 @@ Grid (mobile)
 Card
 ========================= */
 .c-postCard {
-  border-radius: 1em;
   overflow: hidden;
-  background: rgba(33, 65, 45, 0.55);
+  background: rgba(15, 21, 20, 0.55);
   backdrop-filter: blur(4px);
   -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
@@ -5681,7 +5764,7 @@ Card
   line-height: 1.2;
   margin: 0 0 10px;
   color: #fff;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.02em;
 }
 
@@ -5742,7 +5825,6 @@ a.c-chip:focus-visible {
   padding: 10px 12px;
   margin-top: auto;
   text-decoration: none;
-  border-radius: 0.75em;
   background-color: #b86f52;
   font-size: 1.1em;
   color: #fff !important;
@@ -6010,7 +6092,7 @@ HEADER STYLES
   box-shadow: none;
   /* Logo uses secondary logo image as-is; only nav links forced light for contrast on hero */
 }
-.header.header--hero-transparent .nav.top-nav a {
+.header.header--hero-transparent .nav.top-nav li:not(.navigation-button) > a {
   -webkit-filter: brightness(0) invert(1);
   filter: brightness(0) invert(1);
 }
@@ -7358,6 +7440,30 @@ POSTS & CONTENT STYLES
   inset: 0;
 }
 
+/* Standalone quote with Remove background: Yes — plain text, no decorative shapes. */
+.c-quote--no-bg .c-quote__inner {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+.c-quote--no-bg.c-quote--standalone .c-quote__text {
+  min-height: 0;
+  padding-top: 1.25em;
+  padding-bottom: 1.25em;
+}
+
+.entry-content .c-quote.c-quote--no-bg .c-quote__text,
+.entry-content .c-quote.c-quote--no-bg .c-quote__text p,
+.entry-content .c-quote.c-quote--no-bg .c-quote__text blockquote,
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote.c-quote--no-bg .c-quote__text,
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote.c-quote--no-bg .c-quote__text p,
+.editor-styles-wrapper .block-editor-block-list__layout .c-quote.c-quote--no-bg .c-quote__text blockquote,
+.editor-styles-wrapper .is-root-container .c-quote.c-quote--no-bg .c-quote__text,
+.editor-styles-wrapper .is-root-container .c-quote.c-quote--no-bg .c-quote__text p,
+.editor-styles-wrapper .is-root-container .c-quote.c-quote--no-bg .c-quote__text blockquote {
+  color: #0c1723;
+  text-shadow: none;
+}
+
 /* Contact Form block — Figma Contact Form/Block (206:439) */
 .c-contactForm {
   position: relative;
@@ -7813,13 +7919,21 @@ POSTS & CONTENT STYLES
 .hero__container--single .hero__content--single-bg {
   position: absolute;
   inset: 0;
+  z-index: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+.hero__container--single .hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(7, 10, 12, 0.7);
+  pointer-events: none;
+}
 .hero__container--single .hero__content--single {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7845,7 +7959,7 @@ POSTS & CONTENT STYLES
   font-weight: 700;
   line-height: 1.1;
   margin: 0 0 0.5rem;
-  text-transform: uppercase;
+  text-transform: none;
   text-shadow: 0 0 20px rgba(15, 21, 20, 0.5);
 }
 .hero__container--single .hero__meta--single {
@@ -8960,6 +9074,7 @@ a.c-peopleList__dialogSocialLink:hover, a.c-peopleList__dialogSocialLink:hover:v
   -o-object-position: center bottom;
   object-position: center bottom;
   border-radius: inherit;
+  margin-bottom: 0;
 }
 
 .c-peopleBio__intro {
@@ -9806,7 +9921,6 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 }
 
 .c-storiesPage {
-  background-color: #f9f8f0;
   padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1.75rem, 4vw, 3rem);
   margin-top: clamp(0.75rem, 2vw, 1.5rem);
   margin-bottom: 0;
@@ -9842,9 +9956,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   font-size: clamp(1.85rem, 4.2vw, 3.1rem);
   font-weight: 700;
   line-height: 1.08;
-  text-transform: uppercase;
   letter-spacing: 0.035em;
-  color: #5c6d3d;
 }
 
 .c-storiesFeatured__titleLink {
@@ -9880,7 +9992,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #74864a;
+  color: #69a197;
 }
 
 .c-storiesFeatured__meta-item {
@@ -9894,7 +10006,6 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 }
 
 .c-storiesFeatured__meta-icon {
-  color: #74864a;
   font-size: 1rem;
   opacity: 0.95;
 }
@@ -9903,12 +10014,12 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   display: inline-block;
   width: 1px;
   height: 1em;
-  background: rgba(116, 134, 74, 0.35);
+  background: rgba(105, 161, 151, 0.35);
   margin: 0 0.1rem;
 }
 
 .c-storiesFeatured__authorLink {
-  color: #74864a;
+  color: #69a197;
   text-decoration: none;
   font-weight: 600;
 }
@@ -9928,9 +10039,9 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 }
 
 .c-storiesFeatured__chips .c-chip {
-  border: 1px solid #74864a;
+  border: 1px solid #69a197;
   background: transparent;
-  color: #5c6d3d;
+  color: #507a73;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 600;
   font-size: 0.6875rem;
@@ -9944,7 +10055,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   line-height: 1.3;
 }
 .c-storiesFeatured__chips .c-chip:hover, .c-storiesFeatured__chips .c-chip:focus-visible {
-  background: rgba(116, 134, 74, 0.08);
+  background: rgba(105, 161, 151, 0.08);
 }
 
 .c-storiesFeatured__excerpt {
@@ -9956,29 +10067,27 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   max-width: 40em;
 }
 
-/* Ref: gold button, white label, modest corner radius (not full pill) */
 .c-storiesFeatured__cta {
   display: inline-block;
   text-align: center;
   padding: 12px 28px;
-  border-radius: 10px;
-  background-color: #f2c94c;
+  border-radius: 0px;
+  background-color: #b86f52;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 0.9375rem;
-  text-transform: uppercase;
   letter-spacing: 0.07em;
   color: #fff;
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 500;
   -webkit-transition: background-color 0.2s ease, color 0.2s ease;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 .c-storiesFeatured__cta:hover, .c-storiesFeatured__cta:focus-visible {
-  background-color: rgb(239.2375, 189.525, 37.9625);
+  background-color: rgb(159.6704918033, 92.2950819672, 65.5295081967);
   color: #fff;
 }
 .c-storiesFeatured__cta:focus-visible {
-  outline: 2px solid #5c6d3d;
+  outline: 2px solid #507a73;
   outline-offset: 3px;
 }
 
@@ -10003,15 +10112,15 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   right: -16px;
   bottom: -16px;
   left: 18%;
-  background: #4d5c32;
-  border-radius: 16px;
+  background: #507a73;
+  border-radius: 0px;
 }
 
 .c-storiesFeatured__img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 16px;
+  border-radius: 0px;
   -o-object-fit: cover;
   object-fit: cover;
   aspect-ratio: 4/3;
@@ -10036,7 +10145,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #5c6d3d;
+  color: #507a73;
   margin-bottom: 0.5rem;
 }
 
@@ -10044,7 +10153,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   display: block;
   width: 100%;
   height: 1px;
-  background: rgba(92, 109, 61, 0.45);
+  background: rgba(80, 122, 115, 0.45);
   border: 0;
 }
 
@@ -10077,9 +10186,6 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
     row-gap: 56px;
   }
 }
-.c-storiesIndex {
-  /* Ref: no card panel — cream page shows through; image is its own rounded block */
-}
 .c-storiesIndex .c-postCard {
   height: auto;
   background: transparent;
@@ -10106,7 +10212,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   opacity: 0.88;
 }
 .c-storiesIndex .c-postCard__authorLink {
-  color: inherit;
+  color: #69a197;
   text-decoration: none;
 }
 .c-storiesIndex .c-postCard__authorLink:hover, .c-storiesIndex .c-postCard__authorLink:focus-visible {
@@ -10115,12 +10221,12 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 }
 .c-storiesIndex .c-postCard__media {
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: 8px;
   margin-bottom: 12px;
 }
 .c-storiesIndex .c-postCard__media img,
 .c-storiesIndex .c-postCard__img {
-  border-radius: 14px !important;
+  border-radius: 8px !important;
 }
 .c-storiesIndex .c-postCard__body {
   -webkit-box-flex: 0;
@@ -10131,13 +10237,13 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 }
 .c-storiesIndex .c-postCard__title {
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color: #5c6d3d;
   font-weight: 700;
   font-size: clamp(1rem, 1.5vw, 1.125rem);
   line-height: 1.2;
   letter-spacing: 0.025em;
-  text-transform: uppercase;
   margin: 0 0 8px;
+  color: #16324f;
+  text-transform: none !important;
 }
 .c-storiesIndex .c-postCard__meta {
   display: -webkit-box;
@@ -10158,8 +10264,8 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.055em;
-  color: #74864a;
   opacity: 1;
+  color: #69a197;
 }
 .c-storiesIndex .c-postCard__meta-item {
   display: -webkit-inline-box;
@@ -10171,7 +10277,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   gap: 0.3rem;
 }
 .c-storiesIndex .c-postCard__meta-icon {
-  color: #74864a;
+  color: #69a197;
   font-size: 0.72rem;
   opacity: 0.92;
 }
@@ -10183,9 +10289,9 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 }
 .c-storiesIndex .c-chip,
 .c-storiesIndex a.c-chip {
-  border: 1px solid #74864a;
+  border: 1px solid #69a197;
   background: transparent;
-  color: #5c6d3d;
+  color: #69a197;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 600;
   font-size: 0.625rem;
@@ -10200,7 +10306,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 .c-storiesIndex .c-chip:hover, .c-storiesIndex .c-chip:focus-visible,
 .c-storiesIndex a.c-chip:hover,
 .c-storiesIndex a.c-chip:focus-visible {
-  background: rgba(116, 134, 74, 0.08);
+  background: rgba(105, 161, 151, 0.08);
 }
 
 /* Sidebar sits beside the grid only (below featured); top-align with first row of cards. */
@@ -10227,7 +10333,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 
 .c-storiesIndex__empty {
   margin: 1rem 0 2rem;
-  color: #74864a;
+  color: #69a197;
 }
 
 /**
@@ -10241,17 +10347,25 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   box-shadow: none;
   color: #f9f9f9;
 }
-.header.header--hero-transparent .nav a,
-.header.header--hero-transparent .header-nav a {
+.header.header--hero-transparent .nav li:not(.navigation-button) a,
+.header.header--hero-transparent .header-nav li:not(.navigation-button) a {
   color: #f9f9f9;
 }
 .header.header--hero-transparent #mobile-nav {
   color: #f9f9f9;
 }
+.header.header--hero-transparent {
+  /* Keep CTA button styling consistent with other pages */
+}
+.header.header--hero-transparent .navigation-button a {
+  -webkit-filter: none;
+  filter: none;
+}
 
 /* Related posts section: heading is above bg in DOM — keep it on top and centered */
 .c-posts--related {
   position: relative;
+  padding-block: 2em;
 }
 
 .c-posts--related .c-posts__heading--related {
@@ -10261,7 +10375,7 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
   width: 100%;
   max-width: 100%;
   margin: 0 auto 1.5rem;
-  padding-top: 2rem;
+  padding-top: 0;
   padding-bottom: 0.5rem;
   text-align: center !important;
   -webkit-box-sizing: border-box;
@@ -10270,26 +10384,6 @@ body.client-stories-index .hero__container--blog .hero__container--inner {
 }
 
 /* Related posts: background fills full section height (no gap at bottom) */
-.c-posts--related .c-posts__bg {
-  height: 100%;
-  min-height: 100%;
-  max-height: none;
-}
-
-/* Related posts: no bottom wave — background sits flat against footer */
-.c-posts--related .c-posts__bg .c-posts__wave--bottom {
-  display: none !important;
-}
-
-/* When no background image is set in Post Settings: solid $primary-500 behind gradient overlay */
-.c-posts--related .c-posts__bgSolid--related {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-color: #16324f;
-  pointer-events: none;
-}
-
 /******************************************************************
 Shared front-end + block editor styles.
 
@@ -11212,7 +11306,6 @@ Add new breakpoints, components, and modules here — not in one file only.
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .c-posts {
-    padding: 96px 0;
     padding-bottom: 1.25em;
   }
   .c-posts--no-events {

@@ -20,6 +20,7 @@ $no_img_mod = $has_img ? '' : ' hero__container--single-no-image';
 <div class="hero__container hero__container--single<?php echo esc_attr( $no_img_mod ); ?>">
 	<div class="hero__container--single-inner">
 		<div class="hero__content hero__content--single-bg" style="<?php echo esc_attr( $bg_style ); ?>"></div>
+		<div class="hero__overlay" aria-hidden="true"></div>
 		<div class="hero__content hero__content--single">
 			<div class="hero__headline hero__headline--single">
 				<h1 class="hero__title hero__title--single entry-title single-title" itemprop="headline"><?php echo esc_html( $d_single['title'] ); ?></h1>

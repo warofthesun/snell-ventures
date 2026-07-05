@@ -5,6 +5,10 @@
  * @param array $block The block settings and attributes.
  */
 
+if ( function_exists( 'client_block_inserter_preview' ) && client_block_inserter_preview( $block, 'headline-group' ) ) {
+	return;
+}
+
 $preheader       = get_field( 'preheader' );
 $headline        = get_field( 'headline' );
 $headline_size   = get_field( 'headline_size' );

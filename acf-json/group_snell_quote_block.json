@@ -116,6 +116,27 @@
                     "parent_repeater": "field_snell_quote_items"
                 }
             ]
+        },
+        {
+            "key": "field_snell_quote_remove_background",
+            "label": "Remove background",
+            "name": "remove_background",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "When Yes, the decorative background is removed and quote text displays on the page background.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "Yes",
+            "ui_off_text": "No",
+            "ui": 1
         }
     ],
     "location": [
@@ -137,5 +158,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1780544400
+    "modified": 1780610600
 }

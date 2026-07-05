@@ -125,7 +125,7 @@ Buttons and such
 	}
 }
 
-/* Button Grid block: centered container, optional background + shadow, flex grid */
+/* Button Grid block: centered container, no background */
 .c-button-grid {
 	--button-grid-gap: 16px;
 	max-width: var(--button-grid-max-w, 600px);
@@ -133,13 +133,8 @@ Buttons and such
 	margin-right: auto;
 	padding: clamp(20px, 2.5vw, 32px);
 	@include border-radius-lg;
-	background: var(--button-grid-bg, #fcfce0);
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-
-	&.c-button-grid--no-bg {
-		background: transparent;
-		box-shadow: none;
-	}
+	background: transparent;
+	box-shadow: none;
 }
 
 .c-button-grid__list {
@@ -1148,7 +1143,7 @@ border: $spacing-xs solid $white;
 	border-radius: 6px;
 	overflow: hidden;
 	border: 1px solid rgba(0, 0, 0, 0.08);
-	@include color_surface__card_primary;
+	background-color: $primary-100;
   }
   
   .c-stepcard__head {
@@ -1202,7 +1197,6 @@ border: $spacing-xs solid $white;
    ========================= */
 .c-card-block {
 	padding: 0 1rem 2rem;
-	border-radius: 1rem;
 	margin-bottom: $spacing-xl;
 	display:flex;
 	flex-direction: column;
@@ -1211,14 +1205,12 @@ border: $spacing-xs solid $white;
 .c-card-block__body {
 	position: relative;
 	@include color_surface__dark_primary;
-	@include border-radius-md;
 	padding: $spacing-md;
 }
 
 .c-card-block__headline {
 	font-family: $header-font;
 	font-size: clamp(1.25rem, 3vw, 1.75rem);
-	text-transform: uppercase;
 	letter-spacing: 0.02em;
 	color: $white;
 	text-align: center;
@@ -1226,8 +1218,6 @@ border: $spacing-xs solid $white;
 	padding: 0.75rem 1.25rem;
 	padding-bottom: 0;
 	@include color_surface__dark_primary;
-	border-top-left-radius: $radius-sm;
-	border-top-right-radius: $radius-sm;
 	display: block;
 	box-sizing: border-box;
 	margin-left: auto;
@@ -1250,8 +1240,7 @@ border: $spacing-xs solid $white;
 /* Two-column layouts for count-2–5 live in breakpoint files; mobile = 1 column */
 
 .c-card-block__card {
-	@include color_surface__card_primary;
-	border-radius: 0.75rem;
+	background-color: $primary-100;
 	overflow: hidden;
 }
 
@@ -1272,7 +1261,6 @@ border: $spacing-xs solid $white;
 .c-card-block__card-title {
 	font-family: $header-font;
 	font-size: 1.5rem;
-	text-transform: uppercase;
 	letter-spacing: 0.02em;
 	font-weight: 400;
 	flex-shrink: 0;
@@ -1296,7 +1284,6 @@ border: $spacing-xs solid $white;
 	align-items: flex-start;
 	gap: 1rem;
 	@include surface_primary__content-95;
-	@include border-radius-sm;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -1331,16 +1318,12 @@ border: $spacing-xs solid $white;
 	flex-shrink: 0;
 	width: 100%;
 	max-width: 200px;
-	align-self: flex-start;
+	align-self: center;
 
 	img {
 		display: block;
 		width: 100%;
 		height: auto;
-		border-top-right-radius: 0.35rem;
-		border-bottom-right-radius: 0.35rem;
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
 		object-fit: cover;
 		margin-bottom: 0;
 	}
@@ -1473,6 +1456,13 @@ border: $spacing-xs solid $white;
 	flex-direction: column;
 	gap: 1rem;
 	padding: $spacing-md;
+
+	.c-headline-group__preheader {
+		color: $secondary-500;
+		margin-bottom: 0;
+		text-transform: uppercase;
+		font-size: 1rem;
+	}
 }
 
 .c-slider__col-left {
@@ -1486,7 +1476,7 @@ border: $spacing-xs solid $white;
 .c-slider__headline {
 	font-family: $header-font;
 	font-size: clamp(1.25rem, 3vw, 1.75rem);
-	text-transform: uppercase;
+	text-transform: none;
 	letter-spacing: 0.02em;
 	color: $primary-800;
 	text-align: center;
@@ -1574,21 +1564,31 @@ border: $spacing-xs solid $white;
 	transition: background-color 0.2s;
 }
 
+.c-slider__list-btn .c-slider__list-icon svg,
 .c-slider__list-btn .c-slider__list-icon i,
 .c-slider__list-btn .c-slider__list-icon .fa {
 	font-size: 0.75rem;
-	color: $primary-600;
+	width: 0.75rem;
+	height: 0.75rem;
+	color: $secondary-500;
+	fill: $secondary-500;
 	opacity: 0.7;
-	transition: color 0.2s, opacity 0.2s;
+	transition: color 0.2s, fill 0.2s, opacity 0.2s;
+}
+
+.c-slider__list-btn .c-slider__list-icon svg path {
+	fill: $secondary-500;
 }
 
 .c-slider__list-btn--active .c-slider__list-icon {
 	background-color: $primary-400;
 }
 
+.c-slider__list-btn--active .c-slider__list-icon svg,
 .c-slider__list-btn--active .c-slider__list-icon i,
 .c-slider__list-btn--active .c-slider__list-icon .fa {
-	color: $primary-800;
+	color: $secondary-500;
+	fill: $secondary-500;
 	opacity: 1;
 }
 
@@ -1929,7 +1929,6 @@ border: $spacing-xs solid $white;
 		--posts-bg-max-h: 800px;
 		position: relative;
 		overflow: hidden;
-		padding: clamp(48px, 6vw, 96px) 0;
 
 		.c-button-pair {
 			display: flex;
@@ -1960,6 +1959,99 @@ border: $spacing-xs solid $white;
 	background-size: cover;
 	background-position: center;
 	z-index: 0;
+  }
+
+  /* Flat footer-navy overlay (Posts Grid + Related Posts) */
+  .c-posts__overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	background-color: $primary-700;
+	pointer-events: none;
+  }
+
+  .c-posts--has-bg .c-posts__bg,
+  .c-posts--related .c-posts__bg {
+	background-color: $primary-700;
+	height: 100%;
+	min-height: 100%;
+	max-height: none;
+  }
+
+  .c-posts--has-bg {
+	padding-block: $spacing-xxl;
+  }
+
+  /* Top accent angle — solid color only (Contact Form layer stack). */
+  .c-posts--has-accent {
+	overflow: hidden;
+
+	.c-posts__stage {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		pointer-events: none;
+		box-sizing: border-box;
+	}
+
+	.c-posts__stage .c-posts__angle,
+	.c-posts__stage .c-posts__solid {
+		position: absolute;
+		inset: 0;
+	}
+
+	.c-posts__angle {
+		z-index: 0;
+	}
+
+	.c-posts__angleSvg {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.c-posts__solid {
+		z-index: 1;
+	}
+
+	.c-posts__solidSvg {
+		display: block;
+		width: 100%;
+		height: 100%;
+		transform: scaleX(-1);
+	}
+
+	.c-posts__solidPath {
+		fill: $primary-700;
+	}
+
+	.c-posts__solidPath--mobile {
+		display: none;
+	}
+
+	.c-posts__inner {
+		z-index: 2;
+	}
+
+	@media (max-width: 767px) {
+		.c-posts__solidPath--desktop {
+			display: none;
+		}
+
+		.c-posts__solidPath--mobile {
+			display: inline;
+		}
+	}
+  }
+
+  .c-posts--has-bg.c-posts--no-mb {
+	margin-bottom: 0;
+	margin-block-end: 0;
+  }
+
+  .c-posts--has-bg .c-posts__bg:has(.c-posts__bgImage) .c-posts__overlay,
+  .c-posts--related .c-posts__bg:has(.c-posts__bgImage) .c-posts__overlay {
+	background-color: rgba($primary-700, 0.7);
   }
   
   /* =========================
@@ -2084,9 +2176,8 @@ border: $spacing-xs solid $white;
   ========================= */
   
   .c-postCard {
-	@include border-radius-lg;
 	overflow: hidden;
-	background: rgba(33, 65, 45, 0.55);
+	background: rgba($secondary-900, 0.55);
 	backdrop-filter: blur(4px);
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 	height: 100%;
@@ -2161,7 +2252,7 @@ border: $spacing-xs solid $white;
 	line-height: 1.2;
 	margin: 0 0 10px;
 	color: #fff;
-	text-transform: uppercase;
+	text-transform: none;
 	letter-spacing: 0.02em;
   }
 
@@ -2221,7 +2312,6 @@ border: $spacing-xs solid $white;
 	padding: 10px 12px;
 	margin-top: auto;
 	text-decoration: none;
-	@include border-radius-md;
 	@include color_surface__button_primary--default;
 	font-size: 1.1em;
 	@include color_text__label_primary--default;
@@ -2452,7 +2542,7 @@ HEADER STYLES
 		box-shadow: none;
 
 		/* Logo uses secondary logo image as-is; only nav links forced light for contrast on hero */
-		.nav.top-nav a {
+		.nav.top-nav li:not(.navigation-button) > a {
 			filter: brightness(0) invert(1);
 		}
 	}
@@ -3720,6 +3810,29 @@ POSTS & CONTENT STYLES
 	inset: 0;
 }
 
+/* Standalone quote with Remove background: Yes — plain text, no decorative shapes. */
+.c-quote--no-bg {
+	.c-quote__inner {
+		padding-top: $spacing-xl;
+		padding-bottom: $spacing-xl;
+	}
+
+	&.c-quote--standalone .c-quote__text {
+		min-height: 0;
+		padding-top: $spacing-lg;
+		padding-bottom: $spacing-lg;
+	}
+}
+
+@include content-area.nested {
+	.c-quote.c-quote--no-bg .c-quote__text,
+	.c-quote.c-quote--no-bg .c-quote__text p,
+	.c-quote.c-quote--no-bg .c-quote__text blockquote {
+		color: $primary-800;
+		text-shadow: none;
+	}
+}
+
 /* Contact Form block — Figma Contact Form/Block (206:439) */
 .c-contactForm {
 	position: relative;
@@ -4148,14 +4261,23 @@ POSTS & CONTENT STYLES
 	.hero__content--single-bg {
 		position: absolute;
 		inset: 0;
+		z-index: 0;
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
 	}
 
+	.hero__overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background: $overlay-dark;
+		pointer-events: none;
+	}
+
 	.hero__content--single {
 		position: relative;
-		z-index: 1;
+		z-index: 2;
 		display: flex;
 		align-items: flex-end;
 		min-height: 70vh;
@@ -4178,7 +4300,7 @@ POSTS & CONTENT STYLES
 		font-weight: 700;
 		line-height: 1.1;
 		margin: 0 0 0.5rem;
-		text-transform: uppercase;
+		text-transform: none;
 		text-shadow: 0 0 20px rgba($secondary-900, 0.5);
 	}
 
@@ -5165,6 +5287,7 @@ a.c-peopleList__dialogSocialLink {
 		object-fit: contain;
 		object-position: center bottom;
 		border-radius: inherit;
+		margin-bottom: 0;
 	}
 }
 

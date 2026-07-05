@@ -21,7 +21,6 @@ $slider_type    = get_field( 'slider_type' ) ?: 'table_of_contents';
 $headline       = get_field( 'headline' );
 $headline_size  = get_field( 'headline_size' ) ?: 'h2';
 $preheader      = get_field( 'preheader' ); // Same preheader pattern as headline-group: output as <h5 class="c-headline-group__preheader">
-$on_dark        = (bool) get_field( 'on_dark_background' );
 $body           = get_field( 'body' );
 $autoplay      = (bool) get_field( 'autoplay' );
 if ( $slider_type === 'slideshow' ) {
@@ -111,12 +110,11 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 		<div class="c-slider__col-left">
 			<?php
 			if ( $preheader ) {
-				echo '<h5 class="c-headline-group__preheader' . ( $on_dark ? ' light' : '' ) . '">' . esc_html( $preheader ) . '</h5>';
+				echo '<h5 class="c-headline-group__preheader">' . esc_html( $preheader ) . '</h5>';
 			}
 			if ( (string) $headline !== '' ) {
 				$headline_parsed = function_exists( 'client_headline_tag_and_class' ) ? client_headline_tag_and_class( $headline_size, 'c-slider__headline' ) : array( 'tag' => 'h2', 'class' => 'c-slider__headline' );
-				$headline_class   = trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) );
-				echo '<' . esc_attr( $headline_parsed['tag'] ) . ' class="' . esc_attr( $headline_class ) . '">' . esc_html( $headline ) . '</' . esc_attr( $headline_parsed['tag'] ) . '>';
+				echo '<' . esc_attr( $headline_parsed['tag'] ) . ' class="' . esc_attr( $headline_parsed['class'] ) . '">' . esc_html( $headline ) . '</' . esc_attr( $headline_parsed['tag'] ) . '>';
 			}
 			?>
 			<?php if ( $body !== '' ) : ?>
@@ -168,12 +166,11 @@ $has_header = ( (string) $preheader !== '' || (string) $headline !== '' || (stri
 	<div class="c-slider__content c-slider__content--centered">
 		<?php
 if ( $preheader ) {
-		echo '<h5 class="c-headline-group__preheader' . ( $on_dark ? ' light' : '' ) . '">' . esc_html( $preheader ) . '</h5>';
+		echo '<h5 class="c-headline-group__preheader">' . esc_html( $preheader ) . '</h5>';
 	}
 		if ( (string) $headline !== '' ) {
 			$headline_parsed = function_exists( 'client_headline_tag_and_class' ) ? client_headline_tag_and_class( $headline_size, 'c-slider__headline' ) : array( 'tag' => 'h2', 'class' => 'c-slider__headline' );
-			$headline_class   = trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) );
-			echo '<' . esc_attr( $headline_parsed['tag'] ) . ' class="' . esc_attr( $headline_class ) . '">' . esc_html( $headline ) . '</' . esc_attr( $headline_parsed['tag'] ) . '>';
+			echo '<' . esc_attr( $headline_parsed['tag'] ) . ' class="' . esc_attr( $headline_parsed['class'] ) . '">' . esc_html( $headline ) . '</' . esc_attr( $headline_parsed['tag'] ) . '>';
 		}
 		?>
 		<?php if ( $body !== '' ) : ?>
@@ -224,12 +221,11 @@ if ( $preheader ) {
 	<div class="c-slider__content c-slider__content--centered">
 		<?php
 if ( $preheader ) {
-		echo '<h5 class="c-headline-group__preheader' . ( $on_dark ? ' light' : '' ) . '">' . esc_html( $preheader ) . '</h5>';
+		echo '<h5 class="c-headline-group__preheader">' . esc_html( $preheader ) . '</h5>';
 	}
 		if ( (string) $headline !== '' ) {
 			$headline_parsed = function_exists( 'client_headline_tag_and_class' ) ? client_headline_tag_and_class( $headline_size, 'c-slider__headline' ) : array( 'tag' => 'h2', 'class' => 'c-slider__headline' );
-			$headline_class   = trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) );
-			echo '<' . esc_attr( $headline_parsed['tag'] ) . ' class="' . esc_attr( $headline_class ) . '">' . esc_html( $headline ) . '</' . esc_attr( $headline_parsed['tag'] ) . '>';
+			echo '<' . esc_attr( $headline_parsed['tag'] ) . ' class="' . esc_attr( $headline_parsed['class'] ) . '">' . esc_html( $headline ) . '</' . esc_attr( $headline_parsed['tag'] ) . '>';
 		}
 		?>
 		<?php if ( $body !== '' ) : ?>

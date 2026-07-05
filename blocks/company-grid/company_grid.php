@@ -10,6 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( function_exists( 'client_block_inserter_preview' ) && client_block_inserter_preview( $block, 'company-grid' ) ) {
+	return;
+}
+
 $block_id = ! empty( $block['anchor'] ) ? $block['anchor'] : 'company-grid-' . $block['id'];
 $classes  = array( 'c-companyGrid' );
 if ( ! empty( $block['className'] ) ) {

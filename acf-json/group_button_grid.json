@@ -3,35 +3,6 @@
     "title": "Button Grid Block",
     "fields": [
         {
-            "key": "field_bg_bg_style",
-            "label": "Block background",
-            "name": "background_style",
-            "type": "select",
-            "instructions": "None = no background, no shadow. Color = background + drop shadow.",
-            "required": 0,
-            "choices": {
-                "none": "None",
-                "color": "Color"
-            },
-            "default_value": "color",
-            "return_format": "value",
-            "ui": 1,
-            "wrapper": { "width": "", "class": "", "id": "" }
-        },
-        {
-            "key": "field_bg_bg_color",
-            "label": "Block background color",
-            "name": "background_color",
-            "type": "color_picker",
-            "required": 0,
-            "conditional_logic": [
-                [ { "field": "field_bg_bg_style", "operator": "==", "value": "color" } ]
-            ],
-            "default_value": "#fcfce0",
-            "return_format": "string",
-            "wrapper": { "width": "", "class": "", "id": "" }
-        },
-        {
             "key": "field_bg_buttons_per_row",
             "label": "Buttons per row",
             "name": "buttons_per_row",
@@ -133,5 +104,5 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "active": true,
-    "modified": 1773000000
+    "modified": 1772728320
 }

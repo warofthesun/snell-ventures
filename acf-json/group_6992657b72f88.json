@@ -97,13 +97,6 @@
                 "operator": "==",
                 "value": "client\/text-image"
             }
-        ],
-        [
-            {
-                "param": "block",
-                "operator": "==",
-                "value": "client\/slider"
-            }
         ]
     ],
     "menu_order": 0,
@@ -116,5 +109,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1780531200
+    "modified": 1780613300
 }

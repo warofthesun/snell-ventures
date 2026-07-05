@@ -7,6 +7,7 @@
  *   @type string $variant     standalone|compact
  *   @type string $layout      standalone|compact|combined — combined uses Figma Group 27 (718:591) quote shapes.
  *   @type bool   $embed       Legacy: compact layout inside another block (no outer breakout).
+ *   @type bool   $remove_background  Standalone only: hide decorative shapes and use plain text styling.
  *   @type string $section_id  Optional id attribute.
  * }
  */
@@ -22,6 +23,7 @@ $variant     = isset( $args['variant'] ) ? (string) $args['variant'] : 'standalo
 $layout      = isset( $args['layout'] ) ? (string) $args['layout'] : '';
 $embed       = ! empty( $args['embed'] );
 $section_id  = isset( $args['section_id'] ) ? (string) $args['section_id'] : '';
+$remove_background = ! empty( $args['remove_background'] );
 
 if ( $layout === '' ) {
 	$layout = $embed ? 'compact' : $variant;
@@ -50,6 +52,9 @@ if ( $layout === 'combined' ) {
 if ( $is_slideshow ) {
 	$classes[] = 'c-quote--slideshow';
 }
+if ( $remove_background ) {
+	$classes[] = 'c-quote--no-bg';
+}
 
 $tag     = ( $embed || $layout === 'compact' || $layout === 'combined' ) ? 'div' : 'section';
 $grad_id = 'quoteBlockGrad-' . ( $section_id !== '' ? sanitize_html_class( $section_id ) : wp_unique_id() );
@@ -67,6 +72,7 @@ $grad_id = 'quoteBlockGrad-' . ( $section_id !== '' ? sanitize_html_class( $sect
 	<?php if ( $layout === 'compact' ) : ?>
 		<div class="c-quote__ratio" aria-hidden="true"></div>
 	<?php endif; ?>
+	<?php if ( ! $remove_background ) : ?>
 	<div class="c-quote__shapes" aria-hidden="true">
 		<?php if ( $layout === 'combined' ) : ?>
 			<svg class="c-quote__slab" viewBox="0 0 1439.5 988" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
@@ -96,6 +102,7 @@ $grad_id = 'quoteBlockGrad-' . ( $section_id !== '' ? sanitize_html_class( $sect
 			</svg>
 		<?php endif; ?>
 	</div>
+	<?php endif; ?>
 
 	<div class="c-quote__inner wrap">
 		<div class="c-quote__stage" <?php echo $is_slideshow ? 'aria-live="polite"' : ''; ?> role="group" aria-label="<?php esc_attr_e( 'Quote', 'client_theme' ); ?>">

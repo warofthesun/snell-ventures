@@ -9,6 +9,12 @@
  * - Body (WYSIWYG)    : body   (text-only)
  */
 
+$block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
+
+if ( function_exists( 'client_block_inserter_preview' ) && client_block_inserter_preview( $block, 'card-repeater' ) ) {
+	return;
+}
+
 // Optional block wrapper alignment support (if used as an ACF Block template)
 $align = !empty($block['align']) ? 'align' . $block['align'] : '';
 
@@ -35,8 +41,6 @@ $is_editor_context =
   (function_exists('wp_doing_ajax') && wp_doing_ajax()) ||
   (defined('REST_REQUEST') && REST_REQUEST);
 
-$block_data = (!empty($block) && is_array($block) && !empty($block['data']) && is_array($block['data'])) ? $block['data'] : [];
-
 // Helper: normalize dashicon string into a class
 // Accepts: "admin-site" OR "dashicons-admin-site"
 $dashicon_class = function ($icon_string) {
@@ -51,33 +55,6 @@ $dashicon_class = function ($icon_string) {
   // Otherwise assume it's the slug
   return 'dashicons dashicons-' . $icon_string;
 };
-
-// Inserter-only preview image
-// Show the preview image ONLY when the inserter sets `inserter_preview` via block.json -> example.
-$is_inserter_preview =
-  !empty($block['mode']) &&
-  $block['mode'] === 'preview' &&
-  !empty($block_data['inserter_preview']);
-
-if ($is_inserter_preview) {
-  // If you later re-enable variations, you can pass preview_variant to switch files.
-  $variant = !empty($block_data['preview_variant'])
-    ? sanitize_key($block_data['preview_variant'])
-    : 'default';
-
-  $map = [
-    'default' => 'preview.png',
-    //'three'   => 'preview--three.png',
-    //'four'    => 'preview--four.png',
-    //'many'    => 'preview--many.png',
-  ];
-
-  $file = $map[$variant] ?? $map['default'];
-  $src  = get_template_directory_uri() . '/blocks/card-repeater/' . $file;
-
-  echo '<img src="' . esc_url($src) . '" style="width:100%;height:auto;display:block;" alt="">';
-  return;
-}
 
 // Editor empty state (friendly message when inserted but no rows yet)
 // IMPORTANT: do NOT gate this by $block['mode'] — the block is inserted in preview mode.

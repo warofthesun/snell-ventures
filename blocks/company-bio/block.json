@@ -14,5 +14,11 @@
     "align": ["wide", "full"],
     "anchor": true
   },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": { "inserter_preview": true }
+    }
+  },
   "textdomain": "client_theme"
 }

@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( function_exists( 'client_block_inserter_preview' ) && client_block_inserter_preview( $block, 'quote' ) ) {
+	return;
+}
+
 require_once get_theme_file_path( 'blocks/partials/quote-resolve.php' );
 
 $block_id = ! empty( $block['anchor'] ) ? $block['anchor'] : 'quote-' . $block['id'];
@@ -32,8 +36,9 @@ get_template_part(
 	'blocks/partials/quote-render',
 	null,
 	array(
-		'slides'     => $slides,
-		'variant'    => 'standalone',
-		'section_id' => $block_id,
+		'slides'             => $slides,
+		'variant'            => 'standalone',
+		'section_id'         => $block_id,
+		'remove_background'  => function_exists( 'get_field' ) ? (bool) get_field( 'remove_background' ) : false,
 	)
 );

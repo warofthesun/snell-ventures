@@ -15,12 +15,10 @@
         "anchor": true
     },
     "example": {
-    "attributes": {
-      "mode": "preview",
-      "data": {
-        "is_preview": true
-      }
+        "attributes": {
+            "mode": "preview",
+            "data": { "inserter_preview": true }
+        }
     }
-  }
 }
 

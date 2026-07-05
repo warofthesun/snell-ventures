@@ -38,11 +38,11 @@
                 "id": ""
             },
             "choices": {
-                "gallery": "Image gallery",
+                "image": "Image",
                 "slideshow": "Slideshow",
                 "video": "Video Embed"
             },
-            "default_value": "gallery",
+            "default_value": "image",
             "return_format": "value",
             "allow_null": 0,
             "multiple": 0,
@@ -53,10 +53,10 @@
         },
         {
             "key": "field_6990ba750ab46",
-            "label": "Image(s)",
-            "name": "images",
+            "label": "Image",
+            "name": "image",
             "aria-label": "",
-            "type": "gallery",
+            "type": "image",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -64,7 +64,7 @@
                     {
                         "field": "field_6990ba_media_type",
                         "operator": "==",
-                        "value": "gallery"
+                        "value": "image"
                     }
                 ]
             ],
@@ -75,8 +75,6 @@
             },
             "return_format": "array",
             "library": "all",
-            "min": "",
-            "max": 3,
             "min_width": "",
             "min_height": "",
             "min_size": "",
@@ -84,7 +82,7 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "",
-            "insert": "append",
+            "allow_in_bindings": 0,
             "preview_size": "medium"
         },
         {
@@ -164,15 +162,7 @@
             "type": "button_group",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_6991ee_content_full",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -196,15 +186,7 @@
             "type": "button_group",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_6991ee_content_full",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -241,5 +223,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771202256
+    "modified": 1772730000
 }

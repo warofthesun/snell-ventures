@@ -13,5 +13,11 @@
     "mode": "preview",
     "renderTemplate": "people_highlight.php"
   },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": { "inserter_preview": true }
+    }
+  },
   "textdomain": "client_theme"
 }

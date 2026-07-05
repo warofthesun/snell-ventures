@@ -10,6 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( function_exists( 'client_block_inserter_preview' ) && client_block_inserter_preview( $block, 'gallery' ) ) {
+	return;
+}
+
 if ( ! function_exists( 'snell_gallery_row_sizes' ) ) {
 	/**
 	 * Items per row for n images. Prefers rows of 3; last row is never a lone image when n > 1.

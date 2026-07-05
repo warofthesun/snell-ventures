@@ -3,7 +3,7 @@
 <?php if ( client_get_hero_config()['show'] ) { include get_template_directory() . '/partials/hero/hero.php'; } ?>
 
 <?php
-// Events Calendar (when page template is used for events index): Intro heading and body from Theme Settings > Events.
+// Events Calendar (when page template is used for events index): Intro heading and body from Site Settings.
 if ( is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) && function_exists( 'client_get_events_option' ) ) {
 	$intro_heading = client_get_events_option( 'events_intro_heading' );
 	$intro_body    = client_get_events_option( 'events_intro_body' );

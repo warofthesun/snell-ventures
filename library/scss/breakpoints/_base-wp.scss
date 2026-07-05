@@ -1088,7 +1088,7 @@ FOOTER STYLES
 
 .footer {
 	clear: both;
-	@include color_surface__darkest_primary;
+	background-color: $primary-700;
 
 	&__logo {
 		display: flex;

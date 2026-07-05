@@ -1,7 +1,7 @@
 {
   "name": "client/text-image",
   "title": "Text + Image",
-  "description": "Header, body copy, CTAs, and image gallery, slideshow, or video",
+  "description": "Header, body copy, CTAs, and image, slideshow, or video",
   "style": ["file:../library/css/style.css"],
   "category": "theme-blocks",
   "icon": "screenoptions",
@@ -10,7 +10,6 @@
     "mode": "preview",
     "renderTemplate": "text_image.php"
   },
-  "usesContext": ["client/insideContainer"],
   "supports": {
     "jsx": true,
     "anchor": true,
@@ -19,9 +18,7 @@
   "example": {
     "attributes": {
       "mode": "preview",
-      "data": {
-        "is_preview": true
-      }
+      "data": { "inserter_preview": true }
     }
   }
 }

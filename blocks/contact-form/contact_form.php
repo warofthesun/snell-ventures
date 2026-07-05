@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( function_exists( 'client_block_inserter_preview' ) && client_block_inserter_preview( $block, 'contact-form' ) ) {
+	return;
+}
+
 $block_id = ! empty( $block['anchor'] ) ? $block['anchor'] : 'contact-form-' . $block['id'];
 $headline = function_exists( 'get_field' ) ? (string) get_field( 'headline' ) : '';
 $intro    = function_exists( 'get_field' ) ? (string) get_field( 'intro' ) : '';

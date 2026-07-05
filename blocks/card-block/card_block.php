@@ -6,6 +6,11 @@
  */
 
 $block_id   = !empty($block['anchor']) ? $block['anchor'] : 'card-block-' . $block['id'];
+
+if ( function_exists( 'client_block_inserter_preview' ) && client_block_inserter_preview( $block, 'card-block' ) ) {
+	return;
+}
+
 $headline   = get_field('section_headline');
 $cards      = get_field('cards');
 $card_count = is_array($cards) ? count($cards) : 0;
@@ -20,17 +25,7 @@ if ($card_count >= 1 && $card_count <= 5) {
   $grid_class = ' c-card-block__grid--count-' . $card_count;
 }
 
-$is_preview = !empty($block['data']['is_preview']);
-if ($is_preview) {
-  ?>
-  <div class="c-card-block alignfull" style="padding:2em;background:#e8f0e4;">
-    <p style="margin:0;"><strong>Card Block</strong> — Add a section headline and cards in the sidebar.</p>
-  </div>
-  <?php
-  return;
-}
 ?>
-
 <section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>">
   <?php if ($headline !== ''): ?>
     <h2 class="c-card-block__headline"><?= esc_html($headline); ?></h2>

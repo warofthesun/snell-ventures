@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( function_exists( 'client_block_inserter_preview' ) && client_block_inserter_preview( $block, 'people-highlight' ) ) {
+	return;
+}
+
 $block_id = ! empty( $block['anchor'] ) ? $block['anchor'] : 'people-highlight-' . $block['id'];
 $classes  = array( 'c-peopleHighlight' );
 if ( ! empty( $block['className'] ) ) {

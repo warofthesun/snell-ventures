@@ -25,7 +25,7 @@
         },
         {
             "key": "field_69ac51d510833",
-            "label": "Subheader Optional",
+            "label": "Subheader (Optional)",
             "name": "preheader",
             "aria-label": "",
             "type": "text",
@@ -71,27 +71,6 @@
             "allow_null": 0,
             "allow_in_bindings": 0,
             "layout": "horizontal"
-        },
-        {
-            "key": "field_6992657b_on_dark_bg",
-            "label": "On a dark background",
-            "name": "on_dark_background",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "When checked, adds the class \"light\" to the header and subheader for use on dark backgrounds.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "allow_in_bindings": 0
         },
         {
             "key": "field_699273428bd0c",
@@ -237,5 +216,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1780531200
+    "modified": 1783281855
 }

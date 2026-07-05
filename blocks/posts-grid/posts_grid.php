@@ -5,24 +5,50 @@
 
 $block_id = !empty($block['anchor']) ? $block['anchor'] : 'posts-grid-' . $block['id'];
 
-$remove_bottom_margin = (bool) get_field('remove_bottom_margin');
+if ( function_exists( 'client_block_inserter_preview' ) && client_block_inserter_preview( $block, 'posts-grid' ) ) {
+	return;
+}
+
 $classes = ['c-posts'];
 if (!empty($block['className'])) $classes[] = $block['className'];
-if ($remove_bottom_margin) $classes[] = 'c-posts--no-mb';
-
-$theme_variant = get_field('color_palette') ?: 'green-gold';
-$classes[] = 'c-posts--' . sanitize_html_class($theme_variant);
 
 $post_type     = get_field('post_type') ?: 'post';
 $per_page      = (int) (get_field('posts_per_page') ?: 6);
+$background    = get_field('background');
 $bg_image      = get_field('background_image');
-$bg_max_height = (int) (get_field('max_bg_height') ?: 800);
 
 $heading   = get_field('section_heading');
 
+if ( ! $background ) {
+	$background = ( ! empty( $bg_image ) && is_array( $bg_image ) ) ? 'image' : 'none';
+}
+if ( ! in_array( $background, array( 'none', 'image', 'solid_color' ), true ) ) {
+	$background = 'none';
+}
+
+$has_bg = ( $background === 'image' || $background === 'solid_color' );
+$show_accent_angle = true;
+if ( $background === 'solid_color' ) {
+	$accent_field = get_field( 'show_accent_angle' );
+	if ( in_array( $accent_field, array( false, 0, '0' ), true ) ) {
+		$show_accent_angle = false;
+	}
+}
+if ( $has_bg ) {
+	$classes[] = 'c-posts--has-bg';
+	if ( $background === 'image' ) {
+		$classes[] = 'c-posts--bg-image';
+	} elseif ( $background === 'solid_color' ) {
+		$classes[] = 'c-posts--bg-solid';
+		if ( $show_accent_angle ) {
+			$classes[] = 'c-posts--has-accent';
+		}
+	}
+}
+
 $bg_url = '';
-if (!empty($bg_image) && is_array($bg_image)) {
-  $bg_url = esc_url($bg_image['sizes']['large'] ?? $bg_image['url']);
+if ( $background === 'image' && ! empty( $bg_image ) && is_array( $bg_image ) ) {
+	$bg_url = esc_url( $bg_image['sizes']['large'] ?? $bg_image['url'] );
 }
 
 // Hard cap logic (max 6 total cards)
@@ -139,9 +165,6 @@ if ( $post_type === 'tribe_events' ) {
 }
 $has_more_posts = count($count_query->posts) > $cap;
 
-$display_count = count($posts_to_render);
-$effective_bg_max_h = ($display_count >= 1 && $display_count <= 3) ? 600 : $bg_max_height;
-
 $no_events_message = '';
 if ( $post_type === 'tribe_events' && empty( $posts_to_render ) && function_exists( 'get_field' ) ) {
   $no_events_message = get_field( 'no_upcoming_events_message', 'post-settings' );
@@ -152,110 +175,38 @@ if ( $show_no_events ) {
 }
 ?>
 
-<section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>  alignfull" style="--posts-bg-max-h: <?= esc_attr($effective_bg_max_h); ?>px;">
-  <?php if ( ! $show_no_events ) : ?>
-  <!-- Background art layer (decorative only) -->
+<section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr(implode(' ', $classes)); ?>  alignfull">
+  <?php if ( ! $show_no_events && $has_bg ) :
+    if ( $background === 'solid_color' && $show_accent_angle ) :
+      $posts_grad_id = wp_unique_id( 'posts-grid-grad-' );
+  ?>
+  <div class="c-posts__stage" aria-hidden="true">
+    <div class="c-posts__angle" aria-hidden="true">
+      <svg class="c-posts__angleSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1438 420" preserveAspectRatio="none" focusable="false">
+        <defs>
+          <linearGradient id="<?php echo esc_attr( $posts_grad_id ); ?>" gradientUnits="userSpaceOnUse" x1="719" y1="0" x2="851" y2="502">
+            <stop offset="0%" stop-color="#12273d"/>
+            <stop offset="100%" stop-color="#507a73"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#<?php echo esc_attr( $posts_grad_id ); ?>)" d="M0 100.5L1438 0V420H0V239.5Z"/>
+      </svg>
+    </div>
+    <div class="c-posts__solid" aria-hidden="true">
+      <svg class="c-posts__solidSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1438 1013" preserveAspectRatio="none" focusable="false">
+        <path class="c-posts__solidPath c-posts__solidPath--desktop" d="M0 305.5L1438 0V1013H0V305.5Z"/>
+        <path class="c-posts__solidPath c-posts__solidPath--mobile" d="M0 0H1438V1013H0V0Z"/>
+      </svg>
+    </div>
+  </div>
+  <?php elseif ( $background === 'image' || $background === 'solid_color' ) : ?>
   <div class="c-posts__bg" aria-hidden="true">
-  <?php if ($bg_url): ?>
-    <div class="c-posts__bgImage" style="background-image:url('<?= $bg_url; ?>')"></div>
+    <?php if ( $background === 'image' && $bg_url ) : ?>
+      <div class="c-posts__bgImage" style="background-image:url('<?php echo $bg_url; ?>')"></div>
+    <?php endif; ?>
+    <div class="c-posts__overlay" aria-hidden="true"></div>
+  </div>
   <?php endif; ?>
-
-    <svg class="c-posts__overlaySvg c-posts__overlaySvg--front" viewBox="0 0 1440 1200" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <linearGradient id="gradientFront" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="rgba(185,220,105,0.70)" />
-        <stop offset="55%" stop-color="rgba(39,140,85,0.55)" />
-        <stop offset="100%" stop-color="rgba(20,110,60,0.25)" />
-      </linearGradient>
-
-      <!-- Blur for soft edge -->
-      <filter id="softBlurFront" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur class="js-blurFront" in="SourceGraphic" stdDeviation="12" />
-      </filter>
-
-      <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
-        <!-- base noise -->
-        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="noise"/>
-        <!-- make it subtle: convert to low-alpha gray -->
-        <feColorMatrix in="noise" type="matrix"
-          values="
-            1 0 0 0 0
-            0 1 0 0 0
-            0 0 1 0 0
-            0 0 0 0.06 0" result="grainAlpha"/>
-        <!-- blend grain over the source -->
-        <feBlend in="SourceGraphic" in2="grainAlpha" mode="multiply"/>
-      </filter>
-    </defs>
-
-    <!-- Soft halo (edge feather) -->
-    <path
-      d="M 0 300
-        C 200 100, 1200 800, 1440 300
-        L 1500 1200
-        L -50 1200 Z"
-      fill="url(#gradientFront)" opacity="0.55" filter="url(#softBlurFront)"
-    />
-
-    <!-- Crisp core -->
-    <g filter="url(#grain)">
-      <path
-        d="M 0 300
-          C 200 100, 1200 800, 1440 300
-          L 1500 1200
-          L -50 1200 Z"
-        fill="url(#gradientFront)" opacity="0.85"
-      />
-    </g>
-  </svg>
-
-  <svg class="c-posts__overlaySvg c-posts__overlaySvg--back" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <radialGradient id="gradientBack" cx="75%" cy="20%" r="85%">
-        <stop offset="0%" stop-color="rgba(236,186,39,0.75)" />
-        <stop offset="100%" stop-color="rgba(105,143,61,0.70)" />
-      </radialGradient>
-      <!-- Blur for soft edge -->
-      <filter id="softBlurBack" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur class="js-blurBack" in="SourceGraphic" stdDeviation="8" />
-      </filter>
-
-      <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
-        <!-- base noise -->
-        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="noise"/>
-        <!-- make it subtle: convert to low-alpha gray -->
-        <feColorMatrix in="noise" type="matrix"
-          values="
-            1 0 0 0 0
-            0 1 0 0 0
-            0 0 1 0 0
-            0 0 0 0.06 0" result="grainAlpha"/>
-        <!-- blend grain over the source -->
-        <feBlend in="SourceGraphic" in2="grainAlpha" mode="multiply"/>
-      </filter>
-    </defs>
-
-    <path
-      d="M 0 300
-         C 0 300, 200 100, 700 300
-         C 700 300, 1180 500, 1500 400
-         L 1500 0
-         L -50 0 Z"
-      fill="url(#gradientBack)"  opacity="0.55" filter="url(#softBlurBack)"
-    />
-    <g filter="url(#grain)">
-      <path
-        d="M 0 300
-          C 0 300, 200 100, 700 300
-          C 700 300, 1180 500, 1500 400
-          L 1500 0
-          L -50 0 Z"
-        fill="url(#gradientBack)"  opacity="0.85"
-      />
-    </g>
-  </svg>
-
-</div>
   <?php endif; ?>
 
   <!-- Foreground content -->

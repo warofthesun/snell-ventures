@@ -45,6 +45,33 @@ function client_register_acf_blocks() {
 add_action( 'init', 'client_register_acf_blocks' );
 
 /**
+ * Render block inserter hover preview when block.json example sets inserter_preview.
+ *
+ * @param array  $block        ACF block settings.
+ * @param string $block_folder Blocks subdirectory name (e.g. card-block).
+ * @return bool True when preview.png was output and the template should return.
+ */
+function client_block_inserter_preview( $block, $block_folder ) {
+	$block_data = ( ! empty( $block ) && is_array( $block ) && ! empty( $block['data'] ) && is_array( $block['data'] ) ) ? $block['data'] : array();
+
+	// Set only in block.json example attributes — not on saved blocks.
+	if ( empty( $block_data['inserter_preview'] ) ) {
+		return false;
+	}
+
+	$folder = sanitize_file_name( $block_folder );
+	$path   = get_template_directory() . '/blocks/' . $folder . '/preview.png';
+	if ( ! is_readable( $path ) ) {
+		return false;
+	}
+
+	$url = get_template_directory_uri() . '/blocks/' . $folder . '/preview.png';
+	$url = add_query_arg( 'v', (string) filemtime( $path ), $url );
+	echo '<img src="' . esc_url( $url ) . '" style="width:100%;height:auto;display:block;" alt="">';
+	return true;
+}
+
+/**
  * Parse headline_size (from ACF field_6992657b77c7f) into tag and class for output.
  * When "Hero" is selected (value contains "hero"), returns h2 with class "hero" plus any block class.
  *
@@ -157,6 +184,42 @@ function client_acf_image_src_text_image( $img ) {
 		return $img['url'];
 	}
 	return '';
+}
+
+/**
+ * Text + Image block: resolve the selected single image (supports legacy gallery field data).
+ *
+ * @return array|null ACF image array or null.
+ */
+function client_text_image_get_image() {
+	$img = get_field( 'image' );
+	if ( ! $img ) {
+		$legacy = get_field( 'images' );
+		if ( is_array( $legacy ) ) {
+			if ( isset( $legacy['ID'] ) || isset( $legacy['id'] ) || ! empty( $legacy['url'] ) ) {
+				$img = $legacy;
+			} elseif ( ! empty( $legacy[0] ) ) {
+				$img = is_array( $legacy[0] ) ? $legacy[0] : array( 'ID' => (int) $legacy[0] );
+			}
+		} elseif ( is_numeric( $legacy ) ) {
+			$img = (int) $legacy;
+		}
+	}
+	if ( is_numeric( $img ) ) {
+		$id = (int) $img;
+		if ( function_exists( 'acf_get_attachment' ) ) {
+			$img = acf_get_attachment( $id );
+		} else {
+			$img = array( 'ID' => $id );
+		}
+	}
+	if ( ! is_array( $img ) ) {
+		return null;
+	}
+	if ( empty( $img['ID'] ) && empty( $img['id'] ) && empty( $img['url'] ) ) {
+		return null;
+	}
+	return $img;
 }
 
 /**
@@ -623,7 +686,7 @@ function client_get_hero_config() {
 
   $default = array( 'show' => false, 'type' => 'landing', 'data' => array() );
 
-  // Events archive: same hero as Hero Medium; options from Theme Settings > Events (no wave, gradient or solid, headline only)
+  // Events archive: same hero as Hero Medium; options from Site Settings (no wave, gradient or solid, headline only)
   if ( is_post_type_archive( 'tribe_events' ) && ! is_singular( 'tribe_events' ) ) {
     $use_solid = function_exists( 'get_field' ) ? (bool) client_get_events_option( 'events_hero_use_solid_color' ) : false;
     $bg_color  = function_exists( 'get_field' ) ? client_get_events_option( 'events_hero_background_color' ) : '';
@@ -1277,7 +1340,7 @@ duplicate one of the lines in the array and name it according to your
 new image size.
 */
 
-/* Google Maps API key: env var > ACF Theme Settings > wp option. Restrict key by HTTP referrer in Google Cloud Console. */
+/* Google Maps API key: env var > ACF Site Settings > wp option. Restrict key by HTTP referrer in Google Cloud Console. */
 function client_google_maps_api_key() {
 	if ( defined( 'GOOGLE_MAPS_API_KEY' ) && GOOGLE_MAPS_API_KEY !== '' ) {
 		return GOOGLE_MAPS_API_KEY;
@@ -1500,22 +1563,17 @@ function client_enqueue_tribe_events_overrides() {
 add_action( 'wp_enqueue_scripts', 'client_enqueue_tribe_events_overrides', 100 );
 
 /**
- * Get an Events page option (Theme Settings > Events). Tries 'option' then sub-page slug.
+ * Get an Events page option. Stored in the main options record.
  */
 function client_get_events_option( $field_name ) {
 	if ( ! function_exists( 'get_field' ) ) {
 		return null;
 	}
-	$val = get_field( $field_name, 'option' );
-	if ( $val !== null && $val !== false && $val !== '' ) {
-		return $val;
-	}
-	$val = get_field( $field_name, 'theme-events-settings' );
-	return $val;
+	return get_field( $field_name, 'option' );
 }
 
 /**
- * Prepend Hero Medium (Events archive) and intro HTML before the calendar view (Theme Settings > Events).
+ * Prepend Hero Medium (Events archive) and intro HTML before the calendar view.
  * When "Default Page Template" is used, hero and intro are already output in archive.php – do not duplicate.
  */
 function client_events_hero_and_intro_before_html( $before ) {
@@ -1678,38 +1736,6 @@ function my_acf_settings_dir( $dir ) {
 // 4. Include ACF
 include_once( get_stylesheet_directory() . '/inc/acf/acf.php' );
 
-// Turn on ACF Options Page
-if( function_exists('acf_add_options_page') ) {
-
-	acf_add_options_page(array(
-		'page_title' 	=> 'Theme General Settings',
-		'menu_title'	=> 'Theme Settings',
-		'menu_slug' 	=> 'theme-general-settings',
-		'capability'	=> 'edit_posts',
-		'redirect'		=> false
-	));
-
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Theme Header Settings',
-		'menu_title'	=> 'Header',
-		'parent_slug'	=> 'theme-general-settings',
-	));
-
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Theme Footer Settings',
-		'menu_title'	=> 'Footer',
-		'parent_slug'	=> 'theme-general-settings',
-	));
-
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Events Page Settings',
-		'menu_title'	=> 'Events',
-		'menu_slug'     => 'theme-events-settings',
-		'parent_slug'	=> 'theme-general-settings',
-	));
-
-}
-
 /**
  * Register Post Settings as a sub-page of Site Settings.
  * Must run after ACF registers UI options pages (acf/init priority 6) so parent "site-settings" exists.
@@ -1734,107 +1760,6 @@ function client_register_post_settings_options_page() {
 	) );
 }
 add_action( 'acf/init', 'client_register_post_settings_options_page', 10 );
-
-/**
- * Register ACF field group for Events page (hero + intro) in Theme Settings > Events.
- */
-function client_register_acf_events_settings() {
-	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-		return;
-	}
-	acf_add_local_field_group( array(
-		'key'                   => 'group_client_events_settings',
-		'title'                 => 'Events Page Hero & Intro',
-		'fields'                => array(
-			array(
-				'key'   => 'field_client_events_hero_tab',
-				'label' => 'Hero',
-				'name'  => '',
-				'type'  => 'tab',
-			),
-			array(
-				'key'           => 'field_client_events_use_solid_color',
-				'label'         => 'Background',
-				'name'          => 'events_hero_use_solid_color',
-				'type'          => 'true_false',
-				'instructions'  => 'Use a solid color (no overlay). Leave off to use a background image with gradient overlay.',
-				'ui'            => 1,
-				'default_value' => 0,
-			),
-			array(
-				'key'               => 'field_client_events_hero_bg_color',
-				'label'             => 'Background color',
-				'name'              => 'events_hero_background_color',
-				'type'              => 'color_picker',
-				'default_value'     => '#64748b',
-				'conditional_logic' => array(
-					array(
-						array(
-							'field'    => 'field_client_events_use_solid_color',
-							'operator' => '==',
-							'value'    => '1',
-						),
-					),
-				),
-			),
-			array(
-				'key'               => 'field_client_events_hero_bg_image',
-				'label'             => 'Background image',
-				'name'              => 'events_hero_background_image',
-				'type'              => 'image',
-				'return_format'     => 'id',
-				'preview_size'      => 'medium',
-				'conditional_logic' => array(
-					array(
-						array(
-							'field'    => 'field_client_events_use_solid_color',
-							'operator' => '!=',
-							'value'    => '1',
-						),
-					),
-				),
-			),
-			array(
-				'key'   => 'field_client_events_hero_headline',
-				'label' => 'Hero headline',
-				'name'  => 'events_hero_headline_text',
-				'type'  => 'text',
-				'instructions' => 'Text shown over the hero (e.g. "Events").',
-			),
-			array(
-				'key'   => 'field_client_events_intro_tab',
-				'label' => 'Intro (above calendar)',
-				'name'  => '',
-				'type'  => 'tab',
-			),
-			array(
-				'key'   => 'field_client_events_intro_heading',
-				'label' => 'Intro heading',
-				'name'  => 'events_intro_heading',
-				'type'  => 'text',
-			),
-			array(
-				'key'   => 'field_client_events_intro_body',
-				'label' => 'Intro body',
-				'name'  => 'events_intro_body',
-				'type'  => 'wysiwyg',
-				'tabs'  => 'all',
-				'toolbar' => 'full',
-				'media_upload' => 1,
-			),
-		),
-		'location' => array(
-			array(
-				array(
-					'param'    => 'options_page',
-					'operator' => '==',
-					'value'    => 'theme-events-settings',
-				),
-			),
-		),
-	) );
-}
-add_action( 'acf/init', 'client_register_acf_events_settings' );
 
   /* Add a custom block category for client ACF Blocks. */
   add_filter('block_categories_all', function ($categories, $editor_context) {
