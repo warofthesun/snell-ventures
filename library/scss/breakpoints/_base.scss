@@ -561,8 +561,6 @@ Content Section block
 		margin-bottom: 2px;
 		width: 100%;
 		font-family: $header-font;
-		font-size: $font-size-xxxxl;
-		font-weight: $font-weight-medium;
 		line-height: 1;
 		color: $primary-600;
 
@@ -3988,11 +3986,173 @@ POSTS & CONTENT STYLES
 	.wpcf7-form-control.wpcf7-submit {
 		margin-top: $spacing-md;
 	}
+
+	/* Gravity Forms in Contact Form block — headers/labels on dark panel */
+	.gform_wrapper,
+	.gform-theme,
+	.gform-theme--framework {
+		--gf-ctrl-label-color-primary: #{$white};
+		--gf-ctrl-desc-color: #{$primary-200};
+		--gf-ctrl-border-color: #{$white};
+		--gf-ctrl-bg-color: #{$white};
+		--gf-ctrl-color: #{$primary-700};
+		--gf-ctrl-radius: #{$radius-sm};
+		--gf-color-primary: #{$accent-500};
+		--gf-ctrl-btn-bg-color-primary: #{$accent-500};
+		--gf-ctrl-btn-color-primary: #{$white};
+	}
+
+	.gform_heading,
+	.gform_title,
+	.gform_description,
+	.gsection_title,
+	.gfield_label,
+	.gform-field-label,
+	.gfield_checkbox label,
+	.gfield_radio label,
+	.gform_required_legend,
+	legend {
+		color: $white;
+	}
+
+	.gform_description,
+	.gfield_description,
+	.gform-field-description {
+		color: $primary-200;
+	}
+
+	.gform_wrapper {
+		margin: 0;
+		color: $white;
+	}
+
+	.gform_fields {
+		row-gap: $spacing-md;
+	}
+
+	.gfield {
+		margin-bottom: $spacing-md;
+	}
+
+	.gfield_label,
+	.gform-field-label {
+		display: block;
+		margin-bottom: $spacing-xs;
+		font-family: $body-font;
+		font-size: $font-size-md;
+		font-weight: $font-weight-semibold;
+		line-height: normal;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="number"],
+	input[type="password"],
+	select,
+	textarea {
+		width: 100%;
+		box-sizing: border-box;
+		border: 0;
+		border-radius: $radius-sm;
+		background: $white;
+		color: $primary-700;
+	}
+
+	textarea {
+		min-height: 8rem;
+	}
+
+	.gform_button,
+	input[type="submit"] {
+		margin-top: $spacing-md;
+	}
 }
 
 .c-contactForm__placeholder {
 	margin: 0;
 	color: rgba($white, 0.85);
+}
+
+/******************************************************************
+Gravity Forms — default embeds assume a light background.
+Contact Form block (.c-contactForm) overrides labels/headers for dark panels.
+Orbital token defaults also come from gform_default_styles (inc/gravity-forms.php).
+******************************************************************/
+.gform-theme--framework,
+.gform-theme,
+.gform_wrapper {
+	--gf-ctrl-label-color-primary: #{$primary-700};
+	--gf-ctrl-desc-color: #{$primary-300};
+	--gf-ctrl-border-color: #{$grey-200};
+	--gf-ctrl-bg-color: #{$white};
+	--gf-ctrl-color: #{$primary-700};
+	--gf-ctrl-radius: #{$radius-sm};
+	--gf-color-primary: #{$accent-500};
+	--gf-ctrl-btn-bg-color-primary: #{$accent-500};
+	--gf-ctrl-btn-color-primary: #{$white};
+}
+
+.gform_wrapper {
+	.gform_heading,
+	.gform_title,
+	.gsection_title,
+	.gfield_label,
+	.gform-field-label,
+	.gfield_checkbox label,
+	.gfield_radio label,
+	legend {
+		color: $primary-700;
+	}
+
+	.gform_description,
+	.gfield_description,
+	.gform-field-description {
+		color: $primary-300;
+	}
+
+	.gfield_label,
+	.gform-field-label {
+		font-family: $body-font;
+		font-size: $font-size-md;
+		font-weight: $font-weight-semibold;
+		line-height: normal;
+	}
+
+	.gform_button,
+	input[type="submit"] {
+		font-family: $body-font;
+	}
+}
+
+/* Contact Form block: headers/labels on dark panel (wins over light defaults above) */
+.c-contactForm .gform_wrapper,
+.c-contactForm .gform-theme,
+.c-contactForm .gform-theme--framework {
+	--gf-ctrl-label-color-primary: #{$white};
+	--gf-ctrl-desc-color: #{$primary-200};
+	--gf-ctrl-border-color: #{$white};
+}
+
+.c-contactForm .gform_wrapper {
+	.gform_heading,
+	.gform_title,
+	.gsection_title,
+	.gfield_label,
+	.gform-field-label,
+	.gfield_checkbox label,
+	.gfield_radio label,
+	.gform_required_legend,
+	legend {
+		color: $white;
+	}
+
+	.gform_description,
+	.gfield_description,
+	.gform-field-description {
+		color: $primary-200;
+	}
 }
 
 .c-contactForm--embed {

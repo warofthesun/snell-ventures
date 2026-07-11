@@ -14,10 +14,10 @@ $headline        = get_field( 'headline' );
 $headline_size   = get_field( 'headline_size' );
 $on_dark         = (bool) get_field( 'on_dark_background' );
 $headline_parsed = function_exists( 'client_headline_tag_and_class' )
-	? client_headline_tag_and_class( $headline_size, 'c-headline-group__header h1 medium' )
+	? client_headline_tag_and_class( $headline_size, 'c-headline-group__header' )
 	: array(
 		'tag'   => 'h1',
-		'class' => 'c-headline-group__header h1 medium',
+		'class' => 'c-headline-group__header',
 	);
 $body = get_field( 'body_copy' );
 
@@ -40,7 +40,15 @@ if ( $on_dark ) {
 	$wrapper_classes[] = 'c-headline-group--on-dark';
 }
 
-$header_class    = trim( $headline_parsed['class'] . ( $on_dark ? ' light' : '' ) );
+$is_hero_size = is_string( $headline_size ) && strpos( $headline_size, 'hero' ) !== false;
+$header_class = $headline_parsed['class'];
+if ( ! $is_hero_size ) {
+	$size_class   = in_array( $headline_parsed['tag'], array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true )
+		? $headline_parsed['tag']
+		: 'h1';
+	$header_class = trim( $header_class . ' ' . $size_class . ' medium' );
+}
+$header_class    = trim( $header_class . ( $on_dark ? ' light' : '' ) );
 $subheader_class = trim( 'c-headline-group__subheader h4 bold' . ( $on_dark ? ' light' : '' ) );
 ?>
 

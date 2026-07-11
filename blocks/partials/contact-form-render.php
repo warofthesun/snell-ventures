@@ -78,14 +78,18 @@ $snell_render_contact_form = static function ( $form_id, $uses_gf, $plugin_label
 	}
 
 	if ( $uses_gf ) {
+		if ( function_exists( 'client_render_gravity_form' ) ) {
+			client_render_gravity_form( $form_id, 'dark' );
+			return;
+		}
 		if ( function_exists( 'gravity_form' ) ) {
-			gravity_form( $form_id, false, false, false, null, true );
+			gravity_form( $form_id, false, false, false, null, true, 0, true, 'orbital', null );
 			return;
 		}
 		if ( shortcode_exists( 'gravityform' ) ) {
 			echo do_shortcode(
 				sprintf(
-					'[gravityform id="%d" title="false" description="false" ajax="true"]',
+					'[gravityform id="%d" title="false" description="false" ajax="true" theme="orbital"]',
 					absint( $form_id )
 				)
 			);

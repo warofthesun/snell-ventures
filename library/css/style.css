@@ -3829,8 +3829,6 @@ Content Section block
   margin-bottom: 2px;
   width: 100%;
   font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 4.1em;
-  font-weight: 500;
   line-height: 1;
   color: #142e48;
 }
@@ -7621,10 +7619,157 @@ POSTS & CONTENT STYLES
 .c-contactForm__formWrap .wpcf7-form-control.wpcf7-submit {
   margin-top: 1em;
 }
+.c-contactForm__formWrap {
+  /* Gravity Forms in Contact Form block — headers/labels on dark panel */
+}
+.c-contactForm__formWrap .gform_wrapper,
+.c-contactForm__formWrap .gform-theme,
+.c-contactForm__formWrap .gform-theme--framework {
+  --gf-ctrl-label-color-primary: #fff;
+  --gf-ctrl-desc-color: #a2adb9;
+  --gf-ctrl-border-color: #fff;
+  --gf-ctrl-bg-color: #fff;
+  --gf-ctrl-color: #12273d;
+  --gf-ctrl-radius: 0.5em;
+  --gf-color-primary: #b86f52;
+  --gf-ctrl-btn-bg-color-primary: #b86f52;
+  --gf-ctrl-btn-color-primary: #fff;
+}
+.c-contactForm__formWrap .gform_heading,
+.c-contactForm__formWrap .gform_title,
+.c-contactForm__formWrap .gform_description,
+.c-contactForm__formWrap .gsection_title,
+.c-contactForm__formWrap .gfield_label,
+.c-contactForm__formWrap .gform-field-label,
+.c-contactForm__formWrap .gfield_checkbox label,
+.c-contactForm__formWrap .gfield_radio label,
+.c-contactForm__formWrap .gform_required_legend,
+.c-contactForm__formWrap legend {
+  color: #fff;
+}
+.c-contactForm__formWrap .gform_description,
+.c-contactForm__formWrap .gfield_description,
+.c-contactForm__formWrap .gform-field-description {
+  color: #a2adb9;
+}
+.c-contactForm__formWrap .gform_wrapper {
+  margin: 0;
+  color: #fff;
+}
+.c-contactForm__formWrap .gform_fields {
+  row-gap: 1em;
+}
+.c-contactForm__formWrap .gfield {
+  margin-bottom: 1em;
+}
+.c-contactForm__formWrap .gfield_label,
+.c-contactForm__formWrap .gform-field-label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+  line-height: normal;
+}
+.c-contactForm__formWrap input[type=text],
+.c-contactForm__formWrap input[type=email],
+.c-contactForm__formWrap input[type=tel],
+.c-contactForm__formWrap input[type=url],
+.c-contactForm__formWrap input[type=number],
+.c-contactForm__formWrap input[type=password],
+.c-contactForm__formWrap select,
+.c-contactForm__formWrap textarea {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 0.5em;
+  background: #fff;
+  color: #12273d;
+}
+.c-contactForm__formWrap textarea {
+  min-height: 8rem;
+}
+.c-contactForm__formWrap .gform_button,
+.c-contactForm__formWrap input[type=submit] {
+  margin-top: 1em;
+}
 
 .c-contactForm__placeholder {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
+}
+
+/******************************************************************
+Gravity Forms — default embeds assume a light background.
+Contact Form block (.c-contactForm) overrides labels/headers for dark panels.
+Orbital token defaults also come from gform_default_styles (inc/gravity-forms.php).
+******************************************************************/
+.gform-theme--framework,
+.gform-theme,
+.gform_wrapper {
+  --gf-ctrl-label-color-primary: #12273d;
+  --gf-ctrl-desc-color: #50657b;
+  --gf-ctrl-border-color: #c6cacf;
+  --gf-ctrl-bg-color: #fff;
+  --gf-ctrl-color: #12273d;
+  --gf-ctrl-radius: 0.5em;
+  --gf-color-primary: #b86f52;
+  --gf-ctrl-btn-bg-color-primary: #b86f52;
+  --gf-ctrl-btn-color-primary: #fff;
+}
+
+.gform_wrapper .gform_heading,
+.gform_wrapper .gform_title,
+.gform_wrapper .gsection_title,
+.gform_wrapper .gfield_label,
+.gform_wrapper .gform-field-label,
+.gform_wrapper .gfield_checkbox label,
+.gform_wrapper .gfield_radio label,
+.gform_wrapper legend {
+  color: #12273d;
+}
+.gform_wrapper .gform_description,
+.gform_wrapper .gfield_description,
+.gform_wrapper .gform-field-description {
+  color: #50657b;
+}
+.gform_wrapper .gfield_label,
+.gform_wrapper .gform-field-label {
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+  line-height: normal;
+}
+.gform_wrapper .gform_button,
+.gform_wrapper input[type=submit] {
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Contact Form block: headers/labels on dark panel (wins over light defaults above) */
+.c-contactForm .gform_wrapper,
+.c-contactForm .gform-theme,
+.c-contactForm .gform-theme--framework {
+  --gf-ctrl-label-color-primary: #fff;
+  --gf-ctrl-desc-color: #a2adb9;
+  --gf-ctrl-border-color: #fff;
+}
+
+.c-contactForm .gform_wrapper .gform_heading,
+.c-contactForm .gform_wrapper .gform_title,
+.c-contactForm .gform_wrapper .gsection_title,
+.c-contactForm .gform_wrapper .gfield_label,
+.c-contactForm .gform_wrapper .gform-field-label,
+.c-contactForm .gform_wrapper .gfield_checkbox label,
+.c-contactForm .gform_wrapper .gfield_radio label,
+.c-contactForm .gform_wrapper .gform_required_legend,
+.c-contactForm .gform_wrapper legend {
+  color: #fff;
+}
+.c-contactForm .gform_wrapper .gform_description,
+.c-contactForm .gform_wrapper .gfield_description,
+.c-contactForm .gform_wrapper .gform-field-description {
+  color: #a2adb9;
 }
 
 .c-contactForm--embed {

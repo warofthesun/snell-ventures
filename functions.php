@@ -1246,6 +1246,7 @@ function client_setup() {
   require_once( 'library/custom-post-type.php' );
 
   require_once get_template_directory() . '/inc/acf_inc.php';
+  require_once get_template_directory() . '/inc/gravity-forms.php';
 
   // launching operation cleanup
   add_action( 'init', 'client_head_cleanup' );
