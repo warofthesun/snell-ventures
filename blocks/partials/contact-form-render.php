@@ -8,6 +8,7 @@
  *   @type string $headline
  *   @type string $intro
  *   @type int    $form_id
+ *   @type string $form_plugin contact_form_7|gravity_forms
  *   @type bool   $show_accent_angle
  *   @type bool   $embed
  *   @type string $context     standalone|embed|combined
@@ -22,10 +23,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 $headline          = isset( $args['headline'] ) ? (string) $args['headline'] : '';
 $intro             = isset( $args['intro'] ) ? (string) $args['intro'] : '';
 $form_id           = isset( $args['form_id'] ) ? (int) $args['form_id'] : 0;
+$form_plugin       = isset( $args['form_plugin'] ) ? (string) $args['form_plugin'] : '';
 $show_accent_angle = array_key_exists( 'show_accent_angle', $args ) ? (bool) $args['show_accent_angle'] : true;
 $embed             = ! empty( $args['embed'] );
 $context           = isset( $args['context'] ) ? (string) $args['context'] : '';
 $section_id        = isset( $args['section_id'] ) ? (string) $args['section_id'] : '';
+
+if ( $form_plugin === '' ) {
+	$form_plugin = function_exists( 'client_get_form_plugin' ) ? client_get_form_plugin() : 'contact_form_7';
+}
+
+$uses_gf      = ( $form_plugin === 'gravity_forms' );
+$plugin_label = $uses_gf
+	? __( 'Gravity Forms', 'client_theme' )
+	: __( 'Contact Form 7', 'client_theme' );
 
 if ( $context === '' ) {
 	$context = $embed ? 'embed' : 'standalone';
@@ -41,6 +52,60 @@ if ( $context === 'embed' ) {
 if ( $context === 'combined' ) {
 	$classes[] = 'c-contactForm--combined';
 }
+
+/**
+ * Output the selected form shortcode / markup.
+ *
+ * @param int    $form_id Form ID.
+ * @param bool   $uses_gf Whether Gravity Forms is active for this block.
+ * @param string $plugin_label Human-readable plugin name for admin placeholder.
+ */
+$snell_render_contact_form = static function ( $form_id, $uses_gf, $plugin_label ) {
+	if ( $form_id <= 0 ) {
+		if ( is_admin() ) {
+			printf(
+				'<p class="c-contactForm__placeholder">%s</p>',
+				esc_html(
+					sprintf(
+						/* translators: %s: form plugin name (Contact Form 7 or Gravity Forms) */
+						__( 'Select a %s form.', 'client_theme' ),
+						$plugin_label
+					)
+				)
+			);
+		}
+		return;
+	}
+
+	if ( $uses_gf ) {
+		if ( function_exists( 'gravity_form' ) ) {
+			gravity_form( $form_id, false, false, false, null, true );
+			return;
+		}
+		if ( shortcode_exists( 'gravityform' ) ) {
+			echo do_shortcode(
+				sprintf(
+					'[gravityform id="%d" title="false" description="false" ajax="true"]',
+					absint( $form_id )
+				)
+			);
+			return;
+		}
+		if ( is_admin() ) {
+			echo '<p class="c-contactForm__placeholder">' . esc_html__( 'Gravity Forms is not active.', 'client_theme' ) . '</p>';
+		}
+		return;
+	}
+
+	if ( function_exists( 'wpcf7_contact_form' ) ) {
+		echo do_shortcode( '[contact-form-7 id="' . absint( $form_id ) . '"]' );
+		return;
+	}
+
+	if ( is_admin() ) {
+		echo '<p class="c-contactForm__placeholder">' . esc_html__( 'Contact Form 7 is not active.', 'client_theme' ) . '</p>';
+	}
+};
 
 /**
  * Decorative surfaces — same stacking model as People Highlight (.c-peopleBio__angle / __solid).
@@ -104,11 +169,7 @@ $use_hero        = ( $context === 'standalone' || $context === 'combined' );
 				<?php endif; ?>
 
 				<div class="c-contactForm__formWrap">
-					<?php if ( $form_id > 0 && function_exists( 'wpcf7_contact_form' ) ) : ?>
-						<?php echo do_shortcode( '[contact-form-7 id="' . absint( $form_id ) . '"]' ); ?>
-					<?php elseif ( is_admin() ) : ?>
-						<p class="c-contactForm__placeholder"><?php esc_html_e( 'Select a Contact Form 7 form.', 'client_theme' ); ?></p>
-					<?php endif; ?>
+					<?php $snell_render_contact_form( $form_id, $uses_gf, $plugin_label ); ?>
 				</div>
 			</div>
 		</div>
@@ -126,11 +187,7 @@ $use_hero        = ( $context === 'standalone' || $context === 'combined' );
 			<?php endif; ?>
 
 			<div class="c-contactForm__formWrap">
-				<?php if ( $form_id > 0 && function_exists( 'wpcf7_contact_form' ) ) : ?>
-					<?php echo do_shortcode( '[contact-form-7 id="' . absint( $form_id ) . '"]' ); ?>
-				<?php elseif ( is_admin() ) : ?>
-					<p class="c-contactForm__placeholder"><?php esc_html_e( 'Select a Contact Form 7 form.', 'client_theme' ); ?></p>
-				<?php endif; ?>
+				<?php $snell_render_contact_form( $form_id, $uses_gf, $plugin_label ); ?>
 			</div>
 		</div>
 	<?php endif; ?>

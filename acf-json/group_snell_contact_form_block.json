@@ -48,7 +48,7 @@
             "name": "cf7_form",
             "aria-label": "",
             "type": "select",
-            "instructions": "Select a Contact Form 7 form. Use theme form classes in CF7 markup: form__fields--two-up, form__label--stacked.",
+            "instructions": "Select a Contact Form 7 form. Use theme form classes in CF7 markup: form__fields--two-up, form__label--stacked. Plugin choice is set under Site Settings → Form Plugin Selection.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -82,6 +82,29 @@
             "message": "<pre>&lt;div class=\"form__fields form__fields--two-up\"&gt;\r\n  &lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;First Name [text* first-name]&lt;/label&gt;&lt;/p&gt;\r\n  &lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;Last Name [text* last-name]&lt;/label&gt;&lt;/p&gt;\r\n  &lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;Email [email* your-email]&lt;/label&gt;&lt;/p&gt;\r\n  &lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;Phone [tel phone]&lt;/label&gt;&lt;/p&gt;\r\n&lt;/div&gt;\r\n&lt;p&gt;&lt;label class=\"form__label--stacked\"&gt;Message [textarea* your-message]&lt;/label&gt;&lt;/p&gt;\r\n[submit \"Submit\"]",
             "new_lines": "wpautop",
             "esc_html": 0
+        },
+        {
+            "key": "field_snell_contact_gf_form",
+            "label": "Gravity Forms form",
+            "name": "gf_form",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Select a Gravity Forms form. Plugin choice is set under Site Settings → Form Plugin Selection.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {},
+            "default_value": "",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "ajax": 0,
+            "placeholder": "Select a form"
         },
         {
             "key": "field_snell_contact_show_accent",
@@ -123,5 +146,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1780540800
+    "modified": 1783800000
 }

@@ -72,3 +72,86 @@ add_filter( 'acf/load_field/name=cf7_form', function ( $field ) {
 
   return $field;
 } );
+
+/**
+ * Site-wide form plugin for the Contact Form block.
+ *
+ * @return string 'contact_form_7' or 'gravity_forms'
+ */
+function client_get_form_plugin() {
+	if ( ! function_exists( 'get_field' ) ) {
+		return 'contact_form_7';
+	}
+
+	$site_settings = get_field( 'site_settings', 'site-settings' );
+	if ( ! is_array( $site_settings ) ) {
+		$site_settings = get_field( 'site_settings', 'option' );
+	}
+
+	$plugin = ( is_array( $site_settings ) && ! empty( $site_settings['form_plugin'] ) )
+		? (string) $site_settings['form_plugin']
+		: 'contact_form_7';
+
+	return in_array( $plugin, array( 'contact_form_7', 'gravity_forms' ), true )
+		? $plugin
+		: 'contact_form_7';
+}
+
+/**
+ * Whether the active form plugin is Gravity Forms.
+ *
+ * @return bool
+ */
+function client_uses_gravity_forms() {
+	return client_get_form_plugin() === 'gravity_forms';
+}
+
+add_filter( 'acf/load_field/name=gf_form', function ( $field ) {
+	$field['choices'] = array();
+
+	if ( class_exists( 'GFAPI' ) ) {
+		$forms = GFAPI::get_forms( true );
+		if ( is_array( $forms ) ) {
+			foreach ( $forms as $form ) {
+				if ( empty( $form['id'] ) ) {
+					continue;
+				}
+				$field['choices'][ (string) $form['id'] ] = ! empty( $form['title'] )
+					? (string) $form['title']
+					: sprintf( __( 'Form %d', 'client_theme' ), (int) $form['id'] );
+			}
+		}
+		return $field;
+	}
+
+	if ( class_exists( 'RGFormsModel' ) ) {
+		$forms = RGFormsModel::get_forms( null, 'title' );
+		if ( is_array( $forms ) ) {
+			foreach ( $forms as $form ) {
+				$id = isset( $form->id ) ? (int) $form->id : 0;
+				if ( $id <= 0 ) {
+					continue;
+				}
+				$field['choices'][ (string) $id ] = ! empty( $form->title )
+					? (string) $form->title
+					: sprintf( __( 'Form %d', 'client_theme' ), $id );
+			}
+		}
+		return $field;
+	}
+
+	$field['instructions'] = __( 'Install and activate Gravity Forms to select a form.', 'client_theme' );
+	return $field;
+} );
+
+add_filter( 'acf/prepare_field/name=cf7_form', function ( $field ) {
+	return client_uses_gravity_forms() ? false : $field;
+} );
+
+add_filter( 'acf/prepare_field/key=field_snell_contact_cf7_reference', function ( $field ) {
+	return client_uses_gravity_forms() ? false : $field;
+} );
+
+add_filter( 'acf/prepare_field/name=gf_form', function ( $field ) {
+	return client_uses_gravity_forms() ? $field : false;
+} );

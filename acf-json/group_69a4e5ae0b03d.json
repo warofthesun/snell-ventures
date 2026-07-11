@@ -295,6 +295,48 @@
                     "rows": "",
                     "placeholder": "",
                     "new_lines": "br"
+                },
+                {
+                    "key": "field_snell_form_plugin_tab",
+                    "label": "Form Plugin Selection",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "top",
+                    "endpoint": 0,
+                    "selected": 0
+                },
+                {
+                    "key": "field_snell_form_plugin",
+                    "label": "Form Plugin",
+                    "name": "form_plugin",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "Choose which form plugin the Contact Form block uses site-wide. Switch plugins only after the selected plugin is installed and activated.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "contact_form_7": "Contact Form 7",
+                        "gravity_forms": "Gravity Forms"
+                    },
+                    "default_value": "contact_form_7",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal"
                 }
             ]
         }
@@ -318,5 +360,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772416884
+    "modified": 1783800000
 }
