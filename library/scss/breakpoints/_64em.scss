@@ -706,8 +706,21 @@
 
   	.footer__right {
   		text-align: right;
-		align-content: flex-end;
+		align-self: flex-start;
+		align-content: flex-start;
   	}
+
+	.footer__right-top {
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: flex-end;
+		gap: calc(#{$spacing-xxl} + #{$spacing-md});
+	}
+
+	.footer__nav {
+		width: auto;
+		flex: 0 1 auto;
+	}
 
   	.footer__contact--left {
   		text-align: left;
@@ -748,8 +761,36 @@
   	}
 
   	&-nav {
-  		justify-content: flex-start;
+  		justify-content: flex-end;
   	}
+
+	.footer__links .footer-nav,
+	.footer__nav .footer-nav {
+		justify-content: flex-end;
+
+		/* Keep footer submenus in document flow (override header .nav hover dropdowns) */
+		> li {
+			ul.sub-menu,
+			ul.children {
+				position: static;
+				visibility: visible;
+				background: transparent;
+				width: auto;
+
+				li a {
+					width: auto;
+					border-bottom: 0;
+					padding-left: 0;
+				}
+			}
+
+			&:hover > ul.sub-menu,
+			&:hover > ul.children {
+				top: auto;
+				visibility: visible;
+			}
+		}
+	}
   }
   .footer__links {
   	ul {

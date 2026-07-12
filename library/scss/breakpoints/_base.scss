@@ -3554,6 +3554,14 @@ POSTS & CONTENT STYLES
 	}
 }
 
+.c-companyIntro__cta {
+	@extend %btn;
+	@extend %btn--primary;
+	@extend %btn--primary--solid;
+	box-shadow: 0 4px 2px rgba($black, 0.15);
+	margin: 0;
+}
+
 /* Gallery block — Figma Gallery (715:891)
    Layer order (rear → front): gradient slab, then photos.
    Top row sits above gradient start (61px @ 1440); bottom row on gradient. */
@@ -6155,12 +6163,40 @@ a.c-peopleBio__email {
 	color: $black;
 }
 
+.c-companyBio__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: $spacing-md;
+	margin-left: $spacing-lg;
+}
+
 .c-companyBio__cta {
 	@extend %btn;
 	@extend %btn--primary;
-	@extend %btn--primary--solid;
+	margin: 0;
 	box-shadow: 0 4px 2px rgba($black, 0.15);
-	margin-left: $spacing-lg;
+
+	&:not(.c-companyBio__cta--website) {
+		@extend %btn--primary--solid;
+	}
+
+	&--website {
+		@extend %btn--primary--outline;
+		background-color: rgba($white, 0.9);
+		border-color: $accent-500;
+		border-width: 2px;
+		color: $primary-600 !important;
+		box-shadow: 0 4px 4px rgba($black, 0.15);
+
+		&:hover,
+		&:focus {
+			background-color: rgba($white, 0.9);
+			border-color: $accent-500;
+			color: $primary-600 !important;
+			opacity: 0.92;
+		}
+	}
 }
 
 @media only screen and (min-width: 64em) {

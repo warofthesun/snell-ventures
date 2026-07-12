@@ -333,6 +333,7 @@ function client_get_company_bio_data( $company_id ) {
 		'tagline'    => '',
 		'synopsis'   => '',
 		'permalink'  => get_permalink( $company_id ) ?: '',
+		'website'    => '',
 		'stats'      => client_get_company_stats( $company_id ),
 		'rep_image'  => array(
 			'id'  => 0,
@@ -355,6 +356,14 @@ function client_get_company_bio_data( $company_id ) {
 		$synopsis = get_field( 'company_synopsis', $company_id );
 		if ( is_string( $synopsis ) && trim( wp_strip_all_tags( $synopsis ) ) !== '' ) {
 			$data['synopsis'] = $synopsis;
+		}
+
+		$website = get_field( 'company_website', $company_id );
+		if ( is_string( $website ) ) {
+			$website = esc_url_raw( trim( $website ) );
+			if ( $website !== '' ) {
+				$data['website'] = $website;
+			}
 		}
 
 		$rep_name = get_field( 'representative_name', $company_id );
@@ -1247,6 +1256,7 @@ function client_setup() {
 
   require_once get_template_directory() . '/inc/acf_inc.php';
   require_once get_template_directory() . '/inc/gravity-forms.php';
+  require_once get_template_directory() . '/inc/font-awesome.php';
 
   // launching operation cleanup
   add_action( 'init', 'client_head_cleanup' );

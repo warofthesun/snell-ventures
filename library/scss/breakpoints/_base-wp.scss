@@ -1102,10 +1102,123 @@ FOOTER STYLES
 		}
 	}
 
-	&-nav {
+	/* Figma Footer Nav/Group (859:825) — right-aligned; sub-items always visible under parents.
+	   Specificity must beat global `.nav { display: none }` (same file order in compiled CSS). */
+	.footer__links .footer-nav,
+	.footer__nav .footer-nav {
 		opacity: 1;
 		display: flex;
-		justify-content: center;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		align-items: flex-start;
+		gap: calc(#{$spacing-xxl} + #{$spacing-md}); // 3em ≈ 48px (Figma gap)
+		height: auto;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		border: 0;
+
+		> li {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			border-bottom: 0;
+			text-align: left;
+			position: relative;
+
+			/* Text links only — leave .navigation-button to %btn padding (match header) */
+			&:not(.navigation-button) > a {
+				display: block;
+				padding: $spacing-xxs 0;
+				font-family: $header-font;
+				font-size: $font-size-default;
+				font-weight: $font-weight-semibold; // Figma bold / 700
+				line-height: normal;
+				text-transform: capitalize;
+				text-decoration: none;
+				color: $primary-10;
+				white-space: nowrap;
+
+				&:hover,
+				&:focus {
+					color: $accent-500;
+					opacity: 1;
+				}
+			}
+
+			/* Always show children; do not use header dropdown hide/hover pattern */
+			ul.sub-menu,
+			ul.children {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				position: static;
+				visibility: visible;
+				z-index: auto;
+				margin: 0;
+				padding: $spacing-xxs 0 0;
+				list-style: none;
+				border: 0;
+				border-radius: 0;
+				background: transparent;
+
+				li {
+					border-bottom: 0;
+					text-align: left;
+
+					a {
+						display: block;
+						width: auto;
+						padding: $spacing-xxs 0;
+						padding-left: 0;
+						border-bottom: 0;
+						font-family: $header-font;
+						font-size: $font-size-default;
+						font-weight: $font-weight-regular;
+						line-height: normal;
+						text-transform: capitalize;
+						text-decoration: none;
+						color: $primary-10;
+						white-space: nowrap;
+
+						&:hover,
+						&:focus {
+							color: $accent-500;
+							opacity: 1;
+						}
+					}
+				}
+			}
+
+			&:hover > ul.sub-menu,
+			&:hover > ul.children {
+				visibility: visible;
+			}
+		}
+
+		/* Match header .navigation-button a (%btn padding + primary button tokens) */
+		> li.navigation-button {
+			align-self: flex-start;
+
+			> a {
+				padding: $spacing-xs $spacing-md;
+				font-family: $header-font;
+				font-size: 1em;
+				font-weight: 400;
+				line-height: normal;
+				text-transform: none;
+				white-space: nowrap;
+			}
+		}
+
+		li.current-menu-item,
+		li.current_page_item,
+		li.current_page_ancestor {
+			&:not(.navigation-button) > a {
+				color: $accent-400; // Match header .nav current highlighter
+			}
+		}
 	}
 }
 
@@ -1136,9 +1249,21 @@ FOOTER STYLES
 #inner-footer {
 	padding-top: $spacing-xxl;
 	.footer__right {
-		.c-button-pair {
-			margin-bottom: $spacing-lg;
-		}
+		align-self: flex-start;
+	}
+
+	.footer__right-top {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		align-content: flex-start;
+		justify-content: flex-start;
+		gap: $spacing-lg;
+		width: 100%;
+	}
+
+	.footer__nav {
+		width: 100%;
 	}
 
 	.footer__contact {
@@ -1204,7 +1329,9 @@ FOOTER STYLES
 	}
 
 	.footer__links {
-		margin-bottom: $spacing-xxl;
+		margin-bottom: 0;
+		width: 100%;
+
 		ul {
 			li {}
 		}
@@ -1218,24 +1345,17 @@ FOOTER STYLES
 	.footer__disclaimer {
 		text-align: center;
 		color: $primary-100;
-		margin: 0 auto $spacing-lg;
-		padding-top: $spacing-xl;
+		margin: $spacing-xl auto 0;
+		padding-top: $spacing-md;
 		max-width: 48em;
 		width: 100%;
 		line-height: 1.5;
 		font-size: 0.9rem;
-
-		&.footer__disclaimer--right {
-			text-align: right;
-			margin-left: auto;
-			margin-right: 0;
-			max-width: 100%;
-		}
 	}
 
 	.footer__copyright {
 		text-align: center;
 		color: $primary-100;
-		margin: 1em 0;
+		margin: $spacing-sm auto $spacing-md;
 		width: 100%;
 	}

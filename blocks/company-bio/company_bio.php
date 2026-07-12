@@ -62,10 +62,11 @@ $heading_id   = 'company-bio-heading-' . $company_id;
 $shape_mirror = ( $image_position === 'left' );
 $grad_id      = 'company-bio-grad-' . ( ! empty( $block['id'] ) ? (string) (int) $block['id'] : wp_unique_id() );
 
-$has_visual = $bio['rep_image']['id'] > 0 || $bio['logo']['id'] > 0;
-$has_header = $bio['name'] !== '' || $bio['tagline'] !== '';
-$has_stats  = ! empty( $bio['stats'] );
-$has_body   = $bio['synopsis'] !== '' || $has_stats || $bio['permalink'] !== '';
+$has_visual  = $bio['rep_image']['id'] > 0 || $bio['logo']['id'] > 0;
+$has_header  = $bio['name'] !== '' || $bio['tagline'] !== '';
+$has_stats   = ! empty( $bio['stats'] );
+$has_actions = $bio['permalink'] !== '' || $bio['website'] !== '';
+$has_body    = $bio['synopsis'] !== '' || $has_stats || $has_actions;
 ?>
 
 <section id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
@@ -165,10 +166,24 @@ $has_body   = $bio['synopsis'] !== '' || $has_stats || $bio['permalink'] !== '';
 							</div>
 						<?php endif; ?>
 
-						<?php if ( $bio['permalink'] !== '' ) : ?>
-							<a href="<?php echo esc_url( $bio['permalink'] ); ?>" class="c-companyBio__cta">
-								<?php esc_html_e( 'Read Their Story', 'client_theme' ); ?>
-							</a>
+						<?php if ( $has_actions ) : ?>
+							<div class="c-companyBio__actions">
+								<?php if ( $bio['permalink'] !== '' ) : ?>
+									<a href="<?php echo esc_url( $bio['permalink'] ); ?>" class="c-companyBio__cta">
+										<?php esc_html_e( 'Read Their Story', 'client_theme' ); ?>
+									</a>
+								<?php endif; ?>
+								<?php if ( $bio['website'] !== '' ) : ?>
+									<a
+										href="<?php echo esc_url( $bio['website'] ); ?>"
+										class="c-companyBio__cta c-companyBio__cta--website"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										<?php esc_html_e( 'Visit Company Website', 'client_theme' ); ?>
+									</a>
+								<?php endif; ?>
+							</div>
 						<?php endif; ?>
 					</div>
 				</div>

@@ -1300,7 +1300,7 @@ Here's a quick video to show how it works:
 http://www.youtube.com/watch?v=hwdVpKiJzac
 
 *********************/
-.c-button-pair .c-button-pair__button, .gallery-item .c-button-pair__button, .c-companyCard__cta, .c-companyBio__cta, input[type=submit],
+.c-button-pair .c-button-pair__button, .c-companyIntro__cta, .gallery-item .c-button-pair__button, .c-companyCard__cta, .c-companyBio__cta, input[type=submit],
 .wpcf7-form-control.wpcf7-submit, input[type=file],
 #wp-submit, .navigation-button a, #mobile-nav {
   display: inline-block;
@@ -1317,32 +1317,32 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   -webkit-transition: background-color 0.14s ease-in-out;
   transition: background-color 0.14s ease-in-out;
 }
-.c-button-pair .c-button-pair__button .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, .c-companyCard__cta .svg-inline--fa, .c-companyBio__cta .svg-inline--fa, input[type=submit] .svg-inline--fa,
+.c-button-pair .c-button-pair__button .svg-inline--fa, .c-companyIntro__cta .svg-inline--fa, .gallery-item .c-button-pair__button .svg-inline--fa, .c-companyCard__cta .svg-inline--fa, .c-companyBio__cta .svg-inline--fa, input[type=submit] .svg-inline--fa,
 .wpcf7-form-control.wpcf7-submit .svg-inline--fa, input[type=file] .svg-inline--fa,
 #wp-submit .svg-inline--fa, .navigation-button a .svg-inline--fa, #mobile-nav .svg-inline--fa {
   font-size: 0.9em;
 }
-.c-button-pair .c-button-pair__button:hover, .gallery-item .c-button-pair__button:hover, .c-companyCard__cta:hover, .c-companyBio__cta:hover, input[type=submit]:hover,
+.c-button-pair .c-button-pair__button:hover, .c-companyIntro__cta:hover, .gallery-item .c-button-pair__button:hover, .c-companyCard__cta:hover, .c-companyBio__cta:hover, input[type=submit]:hover,
 .wpcf7-form-control.wpcf7-submit:hover, input[type=file]:hover,
-#wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus, .gallery-item .c-button-pair__button:focus, .c-companyCard__cta:focus, .c-companyBio__cta:focus, input[type=submit]:focus,
+#wp-submit:hover, .navigation-button a:hover, #mobile-nav:hover, .c-button-pair .c-button-pair__button:focus, .c-companyIntro__cta:focus, .gallery-item .c-button-pair__button:focus, .c-companyCard__cta:focus, .c-companyBio__cta:focus, input[type=submit]:focus,
 .wpcf7-form-control.wpcf7-submit:focus, input[type=file]:focus,
 #wp-submit:focus, .navigation-button a:focus, #mobile-nav:focus {
   color: #fff;
   text-decoration: none;
   outline: none;
 }
-.c-button-pair .c-button-pair__button:active, .gallery-item .c-button-pair__button:active, .c-companyCard__cta:active, .c-companyBio__cta:active, input[type=submit]:active,
+.c-button-pair .c-button-pair__button:active, .c-companyIntro__cta:active, .gallery-item .c-button-pair__button:active, .c-companyCard__cta:active, .c-companyBio__cta:active, input[type=submit]:active,
 .wpcf7-form-control.wpcf7-submit:active, input[type=file]:active,
 #wp-submit:active, .navigation-button a:active, #mobile-nav:active {
   top: 1px;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid, .c-companyCard__cta, .c-companyBio__cta, input[type=submit],
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--solid, .c-companyIntro__cta, .c-companyCard__cta, .c-companyBio__cta:not(.c-companyBio__cta--website), input[type=submit],
 .wpcf7-form-control.wpcf7-submit {
   background-color: #b86f52;
   color: #fff !important;
   border-color: #bf7d63;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline {
+.c-button-pair.c-button-pair--primary .c-button-pair__button.c-button-pair__button--outline, .c-companyBio__cta--website {
   background-color: rgba(255, 255, 255, 0.8);
   color: #16324f;
   border-color: #bf7d63;
@@ -1357,14 +1357,14 @@ http://www.youtube.com/watch?v=hwdVpKiJzac
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-companyCard__cta:hover, .c-companyBio__cta:hover, input[type=submit]:hover,
-.wpcf7-form-control.wpcf7-submit:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus, .c-companyCard__cta:focus, .c-companyBio__cta:focus, input[type=submit]:focus,
+.c-button-pair.c-button-pair--primary .c-button-pair__button:hover, .c-companyIntro__cta:hover, .c-companyCard__cta:hover, .c-companyBio__cta:hover, input[type=submit]:hover,
+.wpcf7-form-control.wpcf7-submit:hover, .c-button-pair.c-button-pair--primary .c-button-pair__button:focus, .c-companyIntro__cta:focus, .c-companyCard__cta:focus, .c-companyBio__cta:focus, input[type=submit]:focus,
 .wpcf7-form-control.wpcf7-submit:focus {
   background-color: rgba(184, 111, 82, 0.5);
   text-decoration: none;
   outline: none;
 }
-.c-button-pair.c-button-pair--primary .c-button-pair__button:active, .c-companyCard__cta:active, .c-companyBio__cta:active, input[type=submit]:active,
+.c-button-pair.c-button-pair--primary .c-button-pair__button:active, .c-companyIntro__cta:active, .c-companyCard__cta:active, .c-companyBio__cta:active, input[type=submit]:active,
 .wpcf7-form-control.wpcf7-submit:active {
   background-color: #8b553f;
 }
@@ -3126,14 +3126,166 @@ FOOTER STYLES
   margin-top: 2em;
   margin-left: auto;
 }
-.footer-nav {
+.footer {
+  /* Figma Footer Nav/Group (859:825) — right-aligned; sub-items always visible under parents.
+     Specificity must beat global `.nav { display: none }` (same file order in compiled CSS). */
+}
+.footer .footer__links .footer-nav,
+.footer .footer__nav .footer-nav {
   opacity: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  gap: -webkit-calc(2em + 1em);
+  gap: calc(2em + 1em);
+  height: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0;
+}
+.footer .footer__links .footer-nav > li,
+.footer .footer__nav .footer-nav > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  border-bottom: 0;
+  text-align: left;
+  position: relative;
+  /* Text links only — leave .navigation-button to %btn padding (match header) */
+}
+.footer .footer__links .footer-nav > li:not(.navigation-button) > a,
+.footer .footer__nav .footer-nav > li:not(.navigation-button) > a {
+  display: block;
+  padding: 0.25em 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: capitalize;
+  text-decoration: none;
+  color: #f9f9f9;
+  white-space: nowrap;
+}
+.footer .footer__links .footer-nav > li:not(.navigation-button) > a:hover, .footer .footer__links .footer-nav > li:not(.navigation-button) > a:focus,
+.footer .footer__nav .footer-nav > li:not(.navigation-button) > a:hover,
+.footer .footer__nav .footer-nav > li:not(.navigation-button) > a:focus {
+  color: #b86f52;
+  opacity: 1;
+}
+.footer .footer__links .footer-nav > li,
+.footer .footer__nav .footer-nav > li {
+  /* Always show children; do not use header dropdown hide/hover pattern */
+}
+.footer .footer__links .footer-nav > li ul.sub-menu,
+.footer .footer__links .footer-nav > li ul.children,
+.footer .footer__nav .footer-nav > li ul.sub-menu,
+.footer .footer__nav .footer-nav > li ul.children {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  position: static;
+  visibility: visible;
+  z-index: auto;
+  margin: 0;
+  padding: 0.25em 0 0;
+  list-style: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.footer .footer__links .footer-nav > li ul.sub-menu li,
+.footer .footer__links .footer-nav > li ul.children li,
+.footer .footer__nav .footer-nav > li ul.sub-menu li,
+.footer .footer__nav .footer-nav > li ul.children li {
+  border-bottom: 0;
+  text-align: left;
+}
+.footer .footer__links .footer-nav > li ul.sub-menu li a,
+.footer .footer__links .footer-nav > li ul.children li a,
+.footer .footer__nav .footer-nav > li ul.sub-menu li a,
+.footer .footer__nav .footer-nav > li ul.children li a {
+  display: block;
+  width: auto;
+  padding: 0.25em 0;
+  padding-left: 0;
+  border-bottom: 0;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+  text-decoration: none;
+  color: #f9f9f9;
+  white-space: nowrap;
+}
+.footer .footer__links .footer-nav > li ul.sub-menu li a:hover, .footer .footer__links .footer-nav > li ul.sub-menu li a:focus,
+.footer .footer__links .footer-nav > li ul.children li a:hover,
+.footer .footer__links .footer-nav > li ul.children li a:focus,
+.footer .footer__nav .footer-nav > li ul.sub-menu li a:hover,
+.footer .footer__nav .footer-nav > li ul.sub-menu li a:focus,
+.footer .footer__nav .footer-nav > li ul.children li a:hover,
+.footer .footer__nav .footer-nav > li ul.children li a:focus {
+  color: #b86f52;
+  opacity: 1;
+}
+.footer .footer__links .footer-nav > li:hover > ul.sub-menu, .footer .footer__links .footer-nav > li:hover > ul.children,
+.footer .footer__nav .footer-nav > li:hover > ul.sub-menu,
+.footer .footer__nav .footer-nav > li:hover > ul.children {
+  visibility: visible;
+}
+.footer .footer__links .footer-nav,
+.footer .footer__nav .footer-nav {
+  /* Match header .navigation-button a (%btn padding + primary button tokens) */
+}
+.footer .footer__links .footer-nav > li.navigation-button,
+.footer .footer__nav .footer-nav > li.navigation-button {
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+.footer .footer__links .footer-nav > li.navigation-button > a,
+.footer .footer__nav .footer-nav > li.navigation-button > a {
+  padding: 0.5em 1em;
+  font-family: "acumin-pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: none;
+  white-space: nowrap;
+}
+.footer .footer__links .footer-nav li.current-menu-item:not(.navigation-button) > a,
+.footer .footer__links .footer-nav li.current_page_item:not(.navigation-button) > a,
+.footer .footer__links .footer-nav li.current_page_ancestor:not(.navigation-button) > a,
+.footer .footer__nav .footer-nav li.current-menu-item:not(.navigation-button) > a,
+.footer .footer__nav .footer-nav li.current_page_item:not(.navigation-button) > a,
+.footer .footer__nav .footer-nav li.current_page_ancestor:not(.navigation-button) > a {
+  color: #bf7d63;
 }
 
 .footer__tagline {
@@ -3160,8 +3312,31 @@ FOOTER STYLES
 #inner-footer {
   padding-top: 2em;
 }
-#inner-footer .footer__right .c-button-pair {
-  margin-bottom: 1.25em;
+#inner-footer .footer__right {
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+#inner-footer .footer__right-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  gap: 1.25em;
+  width: 100%;
+}
+#inner-footer .footer__nav {
+  width: 100%;
 }
 #inner-footer .footer__contact {
   color: #e8eaed;
@@ -3238,7 +3413,8 @@ view.
 }
 
 .footer__links {
-  margin-bottom: 2em;
+  margin-bottom: 0;
+  width: 100%;
 }
 .footer__contact--left {
   text-align: left;
@@ -3248,24 +3424,18 @@ view.
 .footer__disclaimer {
   text-align: center;
   color: #e8eaed;
-  margin: 0 auto 1.25em;
-  padding-top: 1.5em;
+  margin: 1.5em auto 0;
+  padding-top: 1em;
   max-width: 48em;
   width: 100%;
   line-height: 1.5;
   font-size: 0.9rem;
 }
-.footer__disclaimer.footer__disclaimer--right {
-  text-align: right;
-  margin-left: auto;
-  margin-right: 0;
-  max-width: 100%;
-}
 
 .footer__copyright {
   text-align: center;
   color: #e8eaed;
-  margin: 1em 0;
+  margin: 0.75em auto 1em;
   width: 100%;
 }
 
@@ -6297,7 +6467,7 @@ and more scalable.
   text-transform: none;
 }
 .nav li a:hover, .nav li a:focus {
-  color: #070a0c;
+  color: #b86f52;
   -webkit-transition: 600ms;
   transition: 600ms;
 }
@@ -7140,6 +7310,12 @@ POSTS & CONTENT STYLES
 }
 .c-companyIntro__synopsis p + p {
   margin-top: 0.75em;
+}
+
+.c-companyIntro__cta {
+  -webkit-box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
+  margin: 0;
 }
 
 /* Gallery block — Figma Gallery (715:891)
@@ -9998,10 +10174,37 @@ a.c-peopleBio__email:hover, a.c-peopleBio__email:focus-visible {
   color: #000;
 }
 
+.c-companyBio__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 1em;
+  margin-left: 1.25em;
+}
+
 .c-companyBio__cta {
+  margin: 0;
   -webkit-box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
   box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
-  margin-left: 1.25em;
+}
+.c-companyBio__cta--website {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: #b86f52;
+  border-width: 2px;
+  color: #142e48 !important;
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+}
+.c-companyBio__cta--website:hover, .c-companyBio__cta--website:focus {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: #b86f52;
+  color: #142e48 !important;
+  opacity: 0.92;
 }
 
 @media only screen and (min-width: 64em) {
@@ -11074,7 +11277,7 @@ Add new breakpoints, components, and modules here — not in one file only.
     text-align: left;
   }
   .menu ul li a:hover, .menu ul li a:focus {
-    color: #070a0c;
+    color: #b86f52;
     -webkit-transition: 600ms;
     transition: 600ms;
   }
@@ -11381,8 +11584,30 @@ Add new breakpoints, components, and modules here — not in one file only.
   }
   #inner-footer .footer__right {
     text-align: right;
-    -ms-flex-line-pack: end;
-    align-content: flex-end;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+  }
+  #inner-footer .footer__right-top {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    gap: -webkit-calc(2em + 1em);
+    gap: calc(2em + 1em);
+  }
+  #inner-footer .footer__nav {
+    width: auto;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
   }
   #inner-footer .footer__contact--left {
     text-align: left;
@@ -11417,9 +11642,39 @@ Add new breakpoints, components, and modules here — not in one file only.
     margin-left: 1em;
   }
   .footer-nav {
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+  }
+  .footer .footer__links .footer-nav,
+  .footer .footer__nav .footer-nav {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    /* Keep footer submenus in document flow (override header .nav hover dropdowns) */
+  }
+  .footer .footer__links .footer-nav > li ul.sub-menu,
+  .footer .footer__links .footer-nav > li ul.children,
+  .footer .footer__nav .footer-nav > li ul.sub-menu,
+  .footer .footer__nav .footer-nav > li ul.children {
+    position: static;
+    visibility: visible;
+    background: transparent;
+    width: auto;
+  }
+  .footer .footer__links .footer-nav > li ul.sub-menu li a,
+  .footer .footer__links .footer-nav > li ul.children li a,
+  .footer .footer__nav .footer-nav > li ul.sub-menu li a,
+  .footer .footer__nav .footer-nav > li ul.children li a {
+    width: auto;
+    border-bottom: 0;
+    padding-left: 0;
+  }
+  .footer .footer__links .footer-nav > li:hover > ul.sub-menu, .footer .footer__links .footer-nav > li:hover > ul.children,
+  .footer .footer__nav .footer-nav > li:hover > ul.sub-menu,
+  .footer .footer__nav .footer-nav > li:hover > ul.children {
+    top: auto;
+    visibility: visible;
   }
 }
 /******************************************************************

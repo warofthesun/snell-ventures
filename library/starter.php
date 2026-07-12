@@ -124,7 +124,10 @@ function client_scripts_and_styles() {
 	}
 
 	// Font Awesome kit (swap URL per client or disable via filter returning empty string)
-	$fa_kit = apply_filters( 'client_font_awesome_kit_url', 'https://kit.fontawesome.com/059e62f330.js' );
+	$fa_kit_default = function_exists( 'client_default_font_awesome_kit_url' )
+		? client_default_font_awesome_kit_url()
+		: 'https://kit.fontawesome.com/059e62f330.js';
+	$fa_kit         = apply_filters( 'client_font_awesome_kit_url', $fa_kit_default );
 	if ( is_string( $fa_kit ) && $fa_kit !== '' ) {
 		wp_register_script( 'font-awesome-kit', $fa_kit, array(), null, true );
 		wp_enqueue_script( 'font-awesome-kit' );

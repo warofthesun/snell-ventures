@@ -33,8 +33,8 @@
                         "id": ""
                     },
                     "placement": "top",
-                    "endpoint": 1,
-                    "selected": 0
+                    "endpoint": 0,
+                    "selected": 1
                 },
                 {
                     "key": "field_69a4e5c2746bb",
@@ -160,12 +160,12 @@
                         "class": "",
                         "id": ""
                     },
-                    "layout": "table",
+                    "layout": "block",
                     "pagination": 0,
                     "min": 0,
                     "max": 0,
-                    "collapsed": "",
-                    "button_label": "Add Row",
+                    "collapsed": "field_69a4e94b84e82",
+                    "button_label": "Add Social Platform",
                     "rows_per_page": 20,
                     "sub_fields": [
                         {
@@ -174,11 +174,11 @@
                             "name": "social_icon",
                             "aria-label": "",
                             "type": "font-awesome",
-                            "instructions": "",
+                            "instructions": "Pick a Font Awesome Brands icon (Facebook, LinkedIn, Instagram, etc.).",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "",
+                                "width": "30",
                                 "class": "",
                                 "id": ""
                             },
@@ -189,9 +189,9 @@
                             "default_label": "",
                             "default_value": "",
                             "save_format": "element",
-                            "allow_null": 0,
+                            "allow_null": 1,
                             "show_preview": 1,
-                            "enqueue_fa": 0,
+                            "enqueue_fa": 1,
                             "allow_in_bindings": 0,
                             "fa_live_preview": "",
                             "choices": [],
@@ -207,7 +207,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "",
+                                "width": "70",
                                 "class": "",
                                 "id": ""
                             },
@@ -216,46 +216,6 @@
                             "parent_repeater": "field_69a4e93384e81"
                         }
                     ]
-                },
-                {
-                    "key": "field_69a4eee5a554d",
-                    "label": "CTA Buttons",
-                    "name": "",
-                    "aria-label": "",
-                    "type": "tab",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "placement": "top",
-                    "endpoint": 0,
-                    "selected": 0
-                },
-                {
-                    "key": "field_69a4ef15a554e",
-                    "label": "Buttons",
-                    "name": "",
-                    "aria-label": "",
-                    "type": "clone",
-                    "instructions": "Same options as buttons in page content (link, style per button, and button color).",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_69910166eac11"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
                 },
                 {
                     "key": "field_69a4ef47a554f",
@@ -360,5 +320,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1783800000
+    "modified": 1783902000
 }

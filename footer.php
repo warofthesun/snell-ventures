@@ -95,21 +95,6 @@
 			</ul>
 		</nav>
 		<?php endif; ?>
-		<nav role="navigation">
-			<?php wp_nav_menu(array(
-			'container' => 'div',
-			'container_class' => 'footer__links ',
-			'menu' => __( 'Footer Links', 'client_theme' ),   // nav name
-			'menu_class' => 'nav footer-nav ',            // adding custom nav class
-			'theme_location' => 'footer-links',             // where it's located in the theme
-			'before' => '',                                 // before the menu
-			'after' => '',                                  // after the menu
-			'link_before' => '',                            // before each link
-			'link_after' => '',                             // after each link
-			'depth' => 0,                                   // limit the depth of the nav
-			'fallback_cb' => 'client_footer_links_fallback'  // fallback function
-			)); ?>
-		</nav>
 		<?php
 		if ( $has_contact ) :
 			?>
@@ -125,44 +110,46 @@
 		<?php endif; ?>
 	</div>
 	<div class="col-xs-12 col-md-6 footer__right">
-		<?php
-		$cta_buttons   = array();
-		$cta_btn_color = '';
-		if ( function_exists( 'get_field' ) ) {
-			$cta_site_settings = get_field( 'site_settings', 'site-settings' );
-			if ( ! is_array( $cta_site_settings ) ) {
-				$cta_site_settings = get_field( 'site_settings', 'option' );
-			}
-			if ( is_array( $cta_site_settings ) && ! empty( $cta_site_settings['buttons'] ) ) {
-				$cta_buttons = $cta_site_settings['buttons'];
-			}
-			if ( ! empty( $cta_site_settings['button_color'] ) ) {
-				$cta_btn_color = $cta_site_settings['button_color'];
-			}
-		}
-		if ( ! empty( $cta_buttons ) ) {
-			$buttons_data = $cta_buttons;
-			$button_color = $cta_btn_color;
-			include get_template_directory() . '/partials/button_pair.php';
-		}
-
-		$disclaimer_text = '';
-		if ( function_exists( 'get_field' ) ) {
-			$disclaimer_settings = get_field( 'site_settings', 'site-settings' );
-			if ( ! is_array( $disclaimer_settings ) ) {
-				$disclaimer_settings = get_field( 'site_settings', 'option' );
-			}
-			if ( is_array( $disclaimer_settings ) && isset( $disclaimer_settings['disclaimer_text'] ) && $disclaimer_settings['disclaimer_text'] !== '' ) {
-				$disclaimer_text = $disclaimer_settings['disclaimer_text'];
-			}
-		}
-		if ( $disclaimer_text !== '' ) :
-			?>
-		<div class="footer__disclaimer <?php echo $has_contact ? 'footer__disclaimer--right' : ''; ?>">
-			<?php echo nl2br( esc_html( trim( $disclaimer_text ) ) ); ?>
+		<div class="footer__right-top">
+			<nav class="footer__nav" role="navigation" aria-label="<?php esc_attr_e( 'Footer', 'client_theme' ); ?>">
+				<?php
+				wp_nav_menu(
+					array(
+						'container'       => 'div',
+						'container_class' => 'footer__links',
+						'menu'            => __( 'Footer Links', 'client_theme' ),
+						'menu_class'      => 'nav footer-nav',
+						'theme_location'  => 'footer-links',
+						'before'          => '',
+						'after'           => '',
+						'link_before'     => '',
+						'link_after'      => '',
+						'depth'           => 0,
+						'fallback_cb'     => 'client_footer_links_fallback',
+					)
+				);
+				?>
+			</nav>
 		</div>
-		<?php endif; ?>
 	</div>
+
+	<?php
+	$disclaimer_text = '';
+	if ( function_exists( 'get_field' ) ) {
+		$disclaimer_settings = get_field( 'site_settings', 'site-settings' );
+		if ( ! is_array( $disclaimer_settings ) ) {
+			$disclaimer_settings = get_field( 'site_settings', 'option' );
+		}
+		if ( is_array( $disclaimer_settings ) && isset( $disclaimer_settings['disclaimer_text'] ) && $disclaimer_settings['disclaimer_text'] !== '' ) {
+			$disclaimer_text = $disclaimer_settings['disclaimer_text'];
+		}
+	}
+	if ( $disclaimer_text !== '' ) :
+		?>
+	<div class="footer__disclaimer">
+		<?php echo nl2br( esc_html( trim( $disclaimer_text ) ) ); ?>
+	</div>
+	<?php endif; ?>
 
 	<div class="footer__copyright">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>.</div>
 </div>
